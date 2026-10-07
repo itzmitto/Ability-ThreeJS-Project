@@ -56,7 +56,10 @@ export class HeavensVerdictEffect implements ManagedEffect {
   get instanceCount(): number {
     return (
       (this.visuals.storm.root.visible ? this.visuals.storm.clouds.count : 0) +
-      (this.visuals.mist.mesh.visible ? this.visuals.mist.mesh.count : 0)
+      (this.visuals.mist.mesh.visible ? this.visuals.mist.mesh.count : 0) +
+      (this.visuals.water.coronas.visible
+        ? this.visuals.water.coronas.count
+        : 0)
     );
   }
   update(delta: number, _elapsed: number): boolean {

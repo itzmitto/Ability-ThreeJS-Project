@@ -25,6 +25,7 @@ export class ElectricalShockwave {
       float reflection=exp(-pow(across/(0.5+max(0.0,along)*0.06),2.0))*exp(-r*0.065)*smoothstep(-0.3,0.2,along)*(0.12+pow(broken,3.0)*1.6)*uFlash;
       float warning=exp(-pow((r-1.8-0.3*sin(a*5.0+uAge*7.0))/0.035,2.0))*pow(max(0.0,sin(a*3.0+n*3.0)),4.0)*uWarning*0.12;
       float alpha=(ring+skirt+ripples+flare+reflection)*step(0.0,uAge)*(1.0-smoothstep(2.3,4.1,age))+warning;
+      alpha*=1.0-smoothstep(26.0,30.0,max(abs(p.x),abs(p.y)));
       vec3 color=vec3(0.055,0.3,0.75)*(skirt+ripples)+vec3(0.65,0.9,1.0)*(ring+flare)+vec3(0.25,0.58,1.0)*reflection+vec3(0.04,0.28,0.7)*warning*4.0;
       gl_FragColor=vec4(color*(1.0+uFlash*3.0),min(0.92,alpha));}`,
     {

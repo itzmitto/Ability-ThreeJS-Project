@@ -1,6 +1,33 @@
-# Elemental Sandbox — Phase 03
+# Elemental Sandbox — Phase 04
 
-A browser-based Three.js sandbox: a dark water arena, an animated human male in everyday clothes, **Glacial Eruption** on Q and **Tempest Break** on E. The existing architecture, world, controls, character and HUD remain in place. There are no enemies, health/damage systems, NPCs, inventory or quests. All runtime assets are local.
+A browser-based Three.js sandbox: a dark water arena, an animated human male in everyday clothes, **Glacial Eruption** on Q, **Tempest Break** on E and **Heaven's Verdict** on R. The existing architecture, world, controls, character and HUD remain in place. There are no enemies, health/damage systems, NPCs, inventory or quests. All runtime assets are local.
+
+## Phase 04: Heaven's Verdict
+
+Select **R / 3**, aim at the black water, and left-click. **Cooldown: 4 s. Maximum ground range: 45 m. Strike height: 22 m. Total lifetime: 6.2 s.** The existing nullable ground hit is validated and clamped from the player. Sky or nonfinite data reject without consuming cooldown. The player continues moving and animating while casting.
+
+The animated right hand develops palm/wrist electricity, fine forearm/chest arcs and sparks. Electrical pulses ionize the ground target. A localized layered storm grows above it and flashes internally; downward and upward branching leaders search, then one follows the future trunk into connection. At 1.02 s the main channel strikes, with three irregular re-strikes during 240 ms and a 110 ms faint afterimage. Major forks attach to real trunk vertices; smaller forks attach to major branches. White cores, blue-white channels and deep-blue halos render in thick camera-facing ribbons, avoiding unreliable WebGL line widths.
+
+Impact briefly illuminates the character with actual transient 3D lights. The water flares, carries a broken view-aligned reflection, grows organic electric veins, launches a 13.5 m pressure/ripple front, and emits curling ion mist, sparks, droplets and streaks. Smaller sky strikes follow at asymmetric positions. Ion coronas and intermittent node-to-node arcs keep the area electrically alive; hovering motes and storm fringes fade before cleanup. No fullscreen flash, permanent light or skybox is used.
+
+| Lightning detail | LOW | MEDIUM | MAX |
+| --- | --- | --- | --- |
+| Trunk segments | 32 | 48 | 64 |
+| Major / minor / micro branches | 4 / 10 / 8 | 8 / 22 / 18 | 12 / 42 / 36 |
+| Searching leaders | 3 | 6 | 10 |
+| Secondary strikes | 2 | 4 | 7 |
+| Ionized ground nodes | 6 | 10 | 16 |
+| Impact particle budget | 150 | 360 | 840 |
+| Mist / cloud layers | 6 / 3 | 14 / 6 | 24 / 10 |
+| Flash lights | 1 | 2 | 2 |
+| Impact light peak | 650 | 1100 | 1700 |
+| Distortion approximation | Off | Subtle pressure-edge warping | Enhanced pressure-edge warping / richer cloud noise |
+
+These values derive from the existing shared graphics/VFX budget. Switching LOW → MAX during charge or MAX → LOW during the residual field changes active geometry, branch counts, clouds, particles, node coronas and mist. Existing bloom remains authoritative; emissive lightning also has an explicit halo so LOW does not depend on bloom. No global exposure/bloom configuration is changed.
+
+The reusable core is `LightningPath`, `LightningBranchGenerator`, `LightningRenderer`, `LightningMaterials` and `ElectricArcRenderer` under `src/abilities/lightning/`. Bounded typed buffers and scheduled re-strikes replace per-frame reconstruction. Raw emissive shaders prevent unnecessary scene-light-count shader variants; partial buffer uploads send only active segment ranges. A two-bundle pool retains materials and GPU buffers between casts. Expiry removes all roots/lights and unsubscribes; ability/game disposal destroys the cached resources. Pooling adds fixed warmed memory, not rendering work after expiry.
+
+`npm test` runs **17 core tests**. `/phase4-smoke.html` checks model/input/cooldown/targeting, all lightning stages and quality transitions, then 20 lightning casts, 20 and 30 alternating ice/wind/lightning casts, 60 rapid rejected requests, and real-time frame profiles. `/phase4-review.html` provides deterministic stages, ranges, camera angles, seed variation and complete-sequence playback. [Phase 04 validation](docs/phase4-validation.md) contains the full file inventory, observed performance, cleanup counters and mandatory visual-refinement results. These test pages are omitted from production.
 
 ## Phase 03: Tempest Break
 
@@ -25,7 +52,7 @@ All values derive from the central `GraphicsSettings` VFX budget and update acti
 
 Added modules are in `src/abilities/wind/`: `TempestBreak`, `TempestBreakEffect`, `WindResources`, `WindProjectile`, `WindRibbon`, `PressureRingPool`, `WindTrail`, `WaterWake`, `WindImpact`, `WindParticleSystem`, `WindMaterials`, `windConfig` and `resolveWindTarget`. `Game.ts` adds registration/slot assignment only; `HUD.ts` updates the phase caption. Ice, world, model, movement, camera, targeting, renderer and quality implementations are unchanged. Four remaining slots stay EMPTY.
 
-`npm test` now runs 12 core tests. `/phase3-smoke.html` exercises actual model animations, input, casting, cooldown, targeting/range, every wind stage, presets, expiry and stress cleanup. `/phase3-review.html` supports authored stage inspection, close/medium/maximum range, camera angles and live playback; both are development-only. [Phase 03 validation and file inventory](docs/phase3-validation.md) records observed counters and test results.
+`npm test` now runs 17 core tests. `/phase3-smoke.html` exercises actual model animations, input, casting, cooldown, targeting/range, every wind stage, presets, expiry and stress cleanup. `/phase3-review.html` supports authored stage inspection, close/medium/maximum range, camera angles and live playback; both are development-only. [Phase 03 validation and file inventory](docs/phase3-validation.md) records observed counters and test results.
 
 ## Phase 02: human and Glacial Eruption
 
@@ -50,7 +77,7 @@ Settings derive from the shared VFX budget and update active spells when switche
 
 The new spell modules are under `src/abilities/ice/`: `GlacialEruption`, `GlacialEruptionEffect`, `IceResources`, `CrystalGeometry`, `IceMaterial`, `IceSpikeField`, `FrostGroundEffect`, `FrostTrail`, `IceShardEmitter`, `ColdMist`, `FrostParticles`, `ImpactGlow`, `iceConfig`, and `resolveGlacialTarget`. `Game.ts` only registers/assigns the ability and supplies the hand origin/camera feedback. Camera, visual, HUD and effect-manager modules have small extensions; movement/world systems are preserved.
 
-`npm test` runs 12 core tests. `/phase2-smoke.html` checks model loading, animation states, bone attachments, movement/sprint, aiming, mouse casting, cooldown/HUD, live spell presets, eruption growth, expiry and repeated-cast cleanup. After 10 and 20 completed stress casts, and 40 rapid rejected requests, warmed MEDIUM counters returned to **12 scene children, 12 geometries, 20 textures, 25 programs, 25 draw calls**. These include composer buffers, shadow maps and character textures. Stress casts advance the lifecycle clock for fast deterministic cleanup checks; a separate first cast expires in real time. This shows resource stability, not a hardware-independent FPS guarantee.
+`npm test` runs 17 core tests. `/phase2-smoke.html` checks model loading, animation states, bone attachments, movement/sprint, aiming, mouse casting, cooldown/HUD, live spell presets, eruption growth, expiry and repeated-cast cleanup. After 10 and 20 completed stress casts, and 40 rapid rejected requests, warmed MEDIUM counters returned to **12 scene children, 12 geometries, 20 textures, 25 programs, 25 draw calls**. These include composer buffers, shadow maps and character textures. Stress casts advance the lifecycle clock for fast deterministic cleanup checks; a separate first cast expires in real time. This shows resource stability, not a hardware-independent FPS guarantee.
 
 `/phase2-review.html` is a development-only static timeline viewer for visual inspection at 0.15, 0.38, 0.65, 1.15, 2.8 and 4.1 seconds across all qualities. Neither test page is part of the production entry point. Four remaining slots stay EMPTY in Phase 03.
 
@@ -76,7 +103,7 @@ Open the localhost URL printed by Vite. `npm run build` checks TypeScript and cr
 | Left/right drag | Orbit fallback when pointer lock is unavailable |
 | Right button | Closer aim framing while held |
 | Esc | Release mouse to interact with UI |
-| Q / E / R / F / V / X, or 1–6 | Q/1 selects Glacial Eruption; E/2 selects Tempest Break; R/F/V/X are empty |
+| Q / E / R / F / V / X, or 1–6 | Q/1 selects Glacial Eruption; E/2 selects Tempest Break; R/3 selects Heaven's Verdict; F/V/X are empty |
 | P | Toggle performance HUD |
 | F3 | Toggle development diagnostics |
 | T | Toggle the optional ground target marker |
@@ -111,7 +138,7 @@ src/
     Ability.ts                    Ability contract and cast context
     AbilityManager.ts             Selection, assignment, casting, cooldowns
     AbilityRegistry.ts            Registration and ability lifecycle
-    AbilitySlot.ts                Six slot bindings (Q and E equipped)
+    AbilitySlot.ts                Six slot bindings (Q, E and R equipped)
   targeting/
     GroundRaycaster.ts            Stable analytic surface intersection
     TargetingSystem.ts            Crosshair ray, target point and marker
@@ -176,8 +203,8 @@ npm test
 npm run build
 ```
 
-The 12 Node tests use Playwright's runner **without launching/downloading a browser**. They cover movement at 30/60/144 FPS, diagonals, camera-relative direction, sprint, deceleration, turning, ray/range limits, nonfinite input rejection, empty casting, cooldowns, quality notifications, crystal topology, pooling and effect cleanup. Test-only dummy abilities never enter the application.
+The 17 Node tests use Playwright's runner **without launching/downloading a browser**. They cover movement at 30/60/144 FPS, diagonals, camera-relative direction, sprint, deceleration, turning, ray/range limits, nonfinite input rejection, empty casting, cooldowns, quality notifications, crystal topology, pooling and effect cleanup. Test-only dummy abilities never enter the application.
 
 With Vite running, open `/smoke.html` in a WebGL-capable browser. The development-only harness exercises the actual render loop with keyboard and mouse DOM events, camera following, all slots, safe empty casting, all rendering presets, HUD/debug toggles, targeting limits and disposal. It prints a visible pass/fail report after about 10 seconds. It is not part of the production entry point. Native pointer lock should also be checked interactively in a desktop browser; browser embedding may deny it, so dragging is supported as a fallback.
 
-Phase 03 ends with Glacial Eruption on Q, Tempest Break on E, and four empty slots.
+Phase 04 ends with Glacial Eruption on Q, Tempest Break on E, Heaven's Verdict on R, and three empty slots.

@@ -84,6 +84,8 @@ export class LightningRenderer {
     detail = 1,
   ): void {
     const u = this.material.uniforms;
+    u.uViewportHeight.value =
+      typeof window === "undefined" ? 720 : window.innerHeight;
     u.uTime.value = time;
     u.uOpacity.value = opacity;
     u.uReveal.value = reveal;

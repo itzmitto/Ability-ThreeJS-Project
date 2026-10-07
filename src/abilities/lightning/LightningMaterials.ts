@@ -28,15 +28,18 @@ export function electricalMaterial(
 }
 export function createLightningMaterial(): ShaderMaterial {
   return electricalMaterial(
-    `attribute vec3 aStart,aEnd;attribute float aWidth,aReveal,aPhase,aGroup;varying vec2 vUv;varying float vReveal,vPhase,vGroup;
-    uniform float uTime;
+    `attribute vec3 aStart,aEnd;attribute float aWidth,aReveal,aPhase,aGroup;varying vec2 vUv;varying float vReveal,vPhase,vGroup,vWidthPixels;
+    uniform float uTime,uViewportHeight;
     void main(){vUv=uv;vReveal=aReveal;vPhase=aPhase;vGroup=aGroup;
       vec4 a=modelViewMatrix*vec4(aStart,1.0),b=modelViewMatrix*vec4(aEnd,1.0);
       vec2 delta=b.xy-a.xy;vec2 normal=vec2(-delta.y,delta.x)/max(length(delta),0.00001);
       vec4 p=mix(a,b,uv.x);p.xy+=normal*(uv.y-0.5)*aWidth;
+      p.xy+=delta/max(length(delta),0.00001)*(uv.x*2.0-1.0)*aWidth*0.025;
+      vWidthPixels=max(1.0,aWidth*projectionMatrix[1][1]*uViewportHeight*0.5/max(1.0,-p.z));
       gl_Position=projectionMatrix*p;}`,
-    `varying vec2 vUv;varying float vReveal,vPhase,vGroup;uniform float uTime,uOpacity,uReveal,uDetail,uPulse;
-    void main(){float x=abs(vUv.y*2.0-1.0);float core=exp(-x*x*1100.0),hot=exp(-x*x*110.0),halo=pow(max(0.0,1.0-x),3.2);
+    `varying vec2 vUv;varying float vReveal,vPhase,vGroup,vWidthPixels;uniform float uTime,uOpacity,uReveal,uDetail,uPulse;
+    void main(){float x=abs(vUv.y*2.0-1.0);float minimum=min(0.22,0.6/vWidthPixels);
+      float core=exp(-x*x/max(0.00091,minimum*minimum)),hot=exp(-x*x/max(0.0091,minimum*minimum*1.7)),halo=pow(max(0.0,1.0-x),3.2);
       float pattern=fract(sin(floor(uTime*43.0)+vPhase*13.1)*43758.5453);float branch=vGroup<0.5?1.0:mix(0.18,1.0,step(0.18,pattern));
       float reveal=1.0-smoothstep(uReveal,uReveal+0.025,vReveal);
       float endSoft=0.94+0.06*sin(vUv.x*3.14159);
@@ -44,6 +47,7 @@ export function createLightningMaterial(): ShaderMaterial {
       gl_FragColor=vec4(color*uPulse,halo*uOpacity*branch*reveal*endSoft);}`,
     {
       uTime: { value: 0 },
+      uViewportHeight: { value: 720 },
       uOpacity: { value: 0 },
       uReveal: { value: 1.1 },
       uDetail: { value: 1 },

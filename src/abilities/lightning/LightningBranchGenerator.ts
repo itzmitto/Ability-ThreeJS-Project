@@ -49,11 +49,18 @@ export class LightningBranchGenerator {
       az = bz;
     }
     for (let i = 0; i < q.major; i++) {
+      // Bias substantial forks into the lower channel so close gameplay cameras still see
+      // a branching silhouette. Stratified heights/azimuths prevent one-sided outlier casts.
       const node = Math.floor(
-        (0.08 + p.randomValue() * 0.65) * (q.subdivisions - 1),
+        (0.16 +
+          Math.sqrt((i + 0.25 + p.randomValue() * 0.5) / q.major) * 0.68) *
+          (q.subdivisions - 1),
       );
       this.start.fromArray(this.trunks, node * 3);
-      const angle = p.randomValue() * Math.PI * 2,
+      const angle =
+          ((seed % 4096) / 4096) * Math.PI * 2 +
+          i * 2.399963 +
+          (p.randomValue() - 0.5) * 0.7,
         radius = 3 + p.randomValue() * 5.5;
       this.end.set(
         this.start.x + Math.cos(angle) * radius,

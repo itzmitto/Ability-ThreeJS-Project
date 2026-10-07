@@ -1,12 +1,20 @@
-import { Group, Vector3 } from "three";
+import {
+  Group,
+  Vector3,
+  InstancedMesh,
+  InstancedBufferAttribute,
+  Matrix4,
+  PlaneGeometry,
+} from "three";
 import { ElectricArcRenderer } from "./ElectricArcRenderer";
 import { SeededRandom, smooth, VERDICT } from "./verdictConfig";
 import type { LightningQuality } from "./verdictConfig";
+import { electricalMaterial } from "./LightningMaterials";
 
 /** Organic surface conduction and intermittent links between temporary ionized nodes. */
 export class WaterDischarge {
   readonly root = new Group();
-  readonly veins = new ElectricArcRenderer(650);
+  readonly veins = new ElectricArcRenderer(800);
   readonly field = new ElectricArcRenderer(240);
   readonly travel = new ElectricArcRenderer(160);
   readonly nodes = new Float32Array(16 * 3);
@@ -16,8 +24,37 @@ export class WaterDischarge {
   private q!: LightningQuality;
   private seed = 1;
   private bucket = -1;
+  private readonly coronaGeometry = new PlaneGeometry(0.55, 0.55);
+  private readonly coronaMaterial = electricalMaterial(
+    `attribute mat4 instanceMatrix;attribute float aSeed;varying vec2 vUv;varying float vGlow;uniform float uAge;
+    void main(){vUv=uv;float flicker=fract(sin(floor(uAge*12.0)+aSeed*137.0)*43758.5453);
+      vGlow=(0.12+step(0.84,flicker)*0.65)*smoothstep(0.35,0.7,uAge)*(1.0-smoothstep(3.7,4.8,uAge));
+      vec4 p=modelViewMatrix*instanceMatrix*vec4(0.0,0.0,0.0,1.0);p.xy+=position.xy;gl_Position=projectionMatrix*p;}`,
+    `varying vec2 vUv;varying float vGlow;void main(){vec2 p=(vUv-0.5)*2.0;float r=dot(p,p);float core=exp(-r*65.0),halo=exp(-r*4.0)*(1.0-smoothstep(0.5,1.0,r));gl_FragColor=vec4(vec3(0.12,0.43,1.0)*halo+vec3(1.3)*core,(core+halo*0.25)*vGlow);}`,
+    { uAge: { value: 0 } },
+  );
+  readonly coronas: InstancedMesh;
+  private readonly nodeMatrix = new Matrix4();
   constructor() {
-    this.root.add(this.veins.mesh, this.field.mesh, this.travel.mesh);
+    const seeds = new Float32Array(16);
+    for (let i = 0; i < 16; i++) seeds[i] = (i * 0.61803398875) % 1;
+    this.coronaGeometry.setAttribute(
+      "aSeed",
+      new InstancedBufferAttribute(seeds, 1),
+    );
+    this.coronas = new InstancedMesh(
+      this.coronaGeometry,
+      this.coronaMaterial,
+      16,
+    );
+    this.coronas.frustumCulled = false;
+    this.coronas.renderOrder = 3;
+    this.root.add(
+      this.veins.mesh,
+      this.field.mesh,
+      this.travel.mesh,
+      this.coronas,
+    );
   }
   configure(seed: number, q: LightningQuality): void {
     this.seed = seed;
@@ -32,7 +69,15 @@ export class WaterDischarge {
       this.nodes[i * 3] = Math.cos(angle) * r;
       this.nodes[i * 3 + 1] = 0.065;
       this.nodes[i * 3 + 2] = Math.sin(angle) * r;
+      this.nodeMatrix.makeTranslation(
+        this.nodes[i * 3],
+        0.1,
+        this.nodes[i * 3 + 2],
+      );
+      this.coronas.setMatrixAt(i, this.nodeMatrix);
     }
+    this.coronas.count = q.nodes;
+    this.coronas.instanceMatrix.needsUpdate = true;
     for (let i = 0; i < q.nodes; i++) {
       this.start.set(0, 0.065, 0);
       this.end.fromArray(this.nodes, i * 3);
@@ -86,6 +131,8 @@ export class WaterDischarge {
     this.travel.commit();
   }
   update(age: number): void {
+    this.coronaMaterial.uniforms.uAge.value = age;
+    this.coronas.visible = age >= 0.35 && age < 4.8;
     this.travel.update(
       age,
       smooth(0.16, 0.23, age) * (1 - smooth(0.48, 0.63, age)) * 0.6,
@@ -117,20 +164,23 @@ export class WaterDischarge {
           this.end.fromArray(this.nodes, node * 3);
           this.start.y += p.randomValue() * 0.35;
           this.end.y += p.randomValue() * 0.8;
-          p.channel(this.start, this.end, 13, 0.075, 0.22, 0);
+          p.channel(this.start, this.end, 13, 0.13, 0.22, 0);
         }
       }
       this.field.commit();
     }
     this.field.update(
       age,
-      (1 - smooth(3.8, 4.8, age)) * 0.54,
+      (1 - smooth(3.8, 4.8, age)) * 0.64,
       1.1,
-      0.8,
+      1.05,
       this.q.detail,
     );
   }
   dispose(): void {
+    this.coronas.dispose();
+    this.coronaGeometry.dispose();
+    this.coronaMaterial.dispose();
     this.veins.dispose();
     this.field.dispose();
     this.travel.dispose();

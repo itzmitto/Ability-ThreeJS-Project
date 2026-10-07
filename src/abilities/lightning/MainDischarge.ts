@@ -9,10 +9,10 @@ import type { LightningQuality } from "./verdictConfig";
 export class MainDischarge {
   readonly root = new Group();
   readonly main = new LightningRenderer(1400);
-  readonly precursors = new LightningRenderer(260);
+  readonly precursors = new LightningRenderer(320);
   readonly secondary = new LightningRenderer(380);
   private readonly generator = new LightningBranchGenerator();
-  private readonly precursorPath = new LightningPath(260);
+  private readonly precursorPath = new LightningPath(320);
   private readonly secondaryPath = new LightningPath(380);
   private readonly start = new Vector3();
   private readonly end = new Vector3();
@@ -37,7 +37,7 @@ export class MainDischarge {
     path.clear(seed + 710);
     // One searching leader shares the future trunk; it never reaches the surface before connection.
     const source = this.generator.path;
-    for (let i = 0; i < Math.floor(q.subdivisions * 0.76); i++) {
+    for (let i = 0; i < q.subdivisions; i++) {
       const j = i * 10;
       path.segment(
         source.data[j],
@@ -66,6 +66,7 @@ export class MainDischarge {
         upward ? 2 + path.randomValue() * 3 : 6 + path.randomValue() * 5,
         this.start.z * 0.35,
       );
+      const forkStart = path.count;
       path.channel(
         this.start,
         this.end,
@@ -74,6 +75,13 @@ export class MainDischarge {
         0.7,
         1,
       );
+      this.start.fromArray(path.data, (forkStart + 8) * 10 + 3);
+      this.end.set(
+        this.start.x + (path.randomValue() - 0.5) * 2.0,
+        Math.max(0.12, this.start.y + (upward ? 1.2 : -2.0)),
+        this.start.z + (path.randomValue() - 0.5) * 2.0,
+      );
+      path.channel(this.start, this.end, 7, 0.075, 0.3, 2, 0.35, 1);
     }
     this.precursors.upload(path);
     path.clear(seed + 948);
@@ -115,7 +123,8 @@ export class MainDischarge {
     this.precursors.update(
       age,
       leader,
-      smooth(0.65, 0.99, age) * 0.83,
+      smooth(0.65, 0.99, age) * 0.83 +
+        smooth(0.995, VERDICT.strike, age) * 0.22,
       0.8,
       this.q.detail,
     );

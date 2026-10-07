@@ -37,7 +37,12 @@ status.style.cssText = "color:#c1d8ff;font:11px monospace;";
 status.id = "stage-status";
 const stage = (): void => {
   effect?.dispose();
-  const target = new Vector3(0, 0, -range);
+  // Keep the test cast aligned with the camera, as normal crosshair casting would be.
+  const target = new Vector3(
+    -Math.sin(game.camera.yaw) * range,
+    0,
+    -Math.cos(game.camera.yaw) * range,
+  );
   effect = new HeavensVerdictEffect(
     {
       player: game.player,
