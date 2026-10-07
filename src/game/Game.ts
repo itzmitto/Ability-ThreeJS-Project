@@ -14,6 +14,7 @@ import type { AbilityCastContext } from '../abilities/Ability';
 import { EffectManager } from '../effects/EffectManager';
 import { HUD } from '../ui/HUD';
 import { GlacialEruption } from '../abilities/ice/GlacialEruption';
+import { TempestBreak } from '../abilities/wind/TempestBreak';
 
 /** Composition root only: systems own their logic, resources, and subscriptions. */
 export class Game {
@@ -46,6 +47,9 @@ export class Game {
     const glacial = new GlacialEruption();
     this.abilities.registry.register(glacial);
     this.abilities.assignSlot(0, glacial.id);
+    const tempest = new TempestBreak();
+    this.abilities.registry.register(tempest);
+    this.abilities.assignSlot(1, tempest.id);
     this.hud = new HUD(root, this.abilities, this.settings, this.targeting);
     document.addEventListener('visibilitychange', this.visibilityChanged);
   }

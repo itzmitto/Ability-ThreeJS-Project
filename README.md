@@ -1,12 +1,37 @@
-# Elemental Sandbox — Phase 02
+# Elemental Sandbox — Phase 03
 
-A browser-based Three.js sandbox: a dark water arena, an animated human male in everyday clothes, and exactly one ability — **Glacial Eruption** on Q. The phase 1 architecture, world, controls, quality settings and HUD remain in place. There are no enemies, health/damage systems, NPCs, inventory or quests. All runtime assets are local.
+A browser-based Three.js sandbox: a dark water arena, an animated human male in everyday clothes, **Glacial Eruption** on Q and **Tempest Break** on E. The existing architecture, world, controls, character and HUD remain in place. There are no enemies, health/damage systems, NPCs, inventory or quests. All runtime assets are local.
+
+## Phase 03: Tempest Break
+
+Select **E / 2**, aim with the crosshair, and left-click. **Speed: 36 m/s. Maximum range: 40 m from the casting hand. Cooldown: 2 s. Total lifetime: 3–3.53 s**, depending on travel distance. The existing ground hit determines the destination, lifted 0.6 m to skim the surface. Out-of-range hits clamp cleanly; sky aim uses the camera direction at maximum range. Invalid origins and degenerate targets reject safely. No second raycaster or cooldown system is added.
+
+Air ribbons and dust compress around the live animated right hand for 280 ms. Release captures the hand position, then a pressure lens, continuously spiraling ribbons, recycled pressure rings and a tapered wispy wake fly toward the target. A temporary V-shaped water disturbance follows beneath. Arrival compresses the core for 85 ms before a fast 9 m atmospheric front, a 5.5 m tapered vortex, radial mist and drag-limited pale particles burst outward. Four slower surface rings reach toward 11 m and fade. Aerial fallback impacts retain an air shockwave but omit surface rings. Camera feedback is bounded to 60 ms on release and 140 ms at impact. Light is restrained and has no extra shadows.
+
+| Wind layer | LOW | MEDIUM | MAX |
+| --- | --- | --- | --- |
+| Flight ribbons | 2 | 4 | 6 |
+| Recycled pressure-ring slots | 8 | 12 | 20 |
+| Flight / impact particles | 60 / 90 | 140 / 240 | 260 / 480 |
+| Vortex ribbons | 2 | 4 | 7 |
+| Mist billboards | 4 | 10 | 18 |
+| Wispy trail sheets | 1 | 3 | 3 |
+| Air distortion approximation | Off | Subtle warped wisps | Stronger warped wisps / ring edges |
+| Small light intensity | 0 | 3 | 5 |
+
+All values derive from the central `GraphicsSettings` VFX budget and update active spells. Air distortion is a procedural shader approximation, not screen-space refraction: no renderer rewrite or scene-color copy is required. Water interaction uses transparent surface overlays rather than modifying the water simulation. Soft masks, disabled depth writing and deliberate render order avoid rectangular particle edges and opaque intersecting planes.
+
+`EffectManager` owns the spell clock and expiry. The ability uses the existing `ObjectPool` to retain at most three VFX bundles: fixed particle buffers, instanced ribbons/rings/mist, materials and a reusable light. Each completed cast unsubscribes, removes its entire scene group, and resets its light before returning the bundle. Dormant bundles do not render or update. Their GPU resources are destroyed when the ability/game is disposed. This avoids allocating and recompiling the same wind layers on every cast; first use can still compile shaders.
+
+Added modules are in `src/abilities/wind/`: `TempestBreak`, `TempestBreakEffect`, `WindResources`, `WindProjectile`, `WindRibbon`, `PressureRingPool`, `WindTrail`, `WaterWake`, `WindImpact`, `WindParticleSystem`, `WindMaterials`, `windConfig` and `resolveWindTarget`. `Game.ts` adds registration/slot assignment only; `HUD.ts` updates the phase caption. Ice, world, model, movement, camera, targeting, renderer and quality implementations are unchanged. Four remaining slots stay EMPTY.
+
+`npm test` now runs 12 core tests. `/phase3-smoke.html` exercises actual model animations, input, casting, cooldown, targeting/range, every wind stage, presets, expiry and stress cleanup. `/phase3-review.html` supports authored stage inspection, close/medium/maximum range, camera angles and live playback; both are development-only. [Phase 03 validation and file inventory](docs/phase3-validation.md) records observed counters and test results.
 
 ## Phase 02: human and Glacial Eruption
 
 The mannequin is replaced by Microsoft Rocketbox **Male_Adult_04**, a properly skinned adult male in a dark hoodie, trousers and trainers. The library is MIT-licensed; [provenance and conversion notes](public/models/README.md) and [the original license](public/models/ROCKETBOX-LICENSE.txt) ship locally. The roughly 3.8 MB GLB contains reduced-resolution textures and three in-place clips: **Idle**, **Walk**, **Run**. `AnimationMixer` crossfades over 220 ms. Movement works while loading; the visual exposes animated hand and chest positions for future abilities. A load failure is reported rather than silently showing the discarded mannequin.
 
-Glacial Eruption is the only registered spell. Select Q/1 and left-click while aiming at water. **Cooldown: 2.5 seconds. Range: 32 m. Lifetime: 5 seconds.** Valid ground targets outside spell range clamp along the player-to-target direction. Null/sky/nonfinite targets reject without consuming cooldown. The existing crosshair raycaster is used.
+Glacial Eruption remains the first registered spell. Select Q/1 and left-click while aiming at water. **Cooldown: 2.5 seconds. Range: 32 m. Lifetime: 5 seconds.** Valid ground targets outside spell range clamp along the player-to-target direction. Null/sky/nonfinite targets reject without consuming cooldown. The existing crosshair raycaster is used.
 
 Sequence: restrained frost gathers at the right hand; a thin ground trail reaches the target; branching/cellular frost cracks spread; a 6.1 m irregular central crystal and staggered neighbors shoot up, overshoot and settle; instanced chips fly and fall; soft low mist expands; tiny snow drifts and fades. A temporary cyan point light flashes, a local glow overlay illuminates the custom water, and a bounded camera response lasts 160 ms. The formation stays, then sinks/dithers away from 3.5 s. Shards, mist and the light stop before the formation expires. Effects release their materials, unique buffers, instance buffers, subscriptions and root groups. The ability owns shared crystal/plane geometries.
 
@@ -25,9 +50,9 @@ Settings derive from the shared VFX budget and update active spells when switche
 
 The new spell modules are under `src/abilities/ice/`: `GlacialEruption`, `GlacialEruptionEffect`, `IceResources`, `CrystalGeometry`, `IceMaterial`, `IceSpikeField`, `FrostGroundEffect`, `FrostTrail`, `IceShardEmitter`, `ColdMist`, `FrostParticles`, `ImpactGlow`, `iceConfig`, and `resolveGlacialTarget`. `Game.ts` only registers/assigns the ability and supplies the hand origin/camera feedback. Camera, visual, HUD and effect-manager modules have small extensions; movement/world systems are preserved.
 
-`npm test` runs nine core tests. `/phase2-smoke.html` checks model loading, animation states, bone attachments, movement/sprint, aiming, mouse casting, cooldown/HUD, live spell presets, eruption growth, expiry and repeated-cast cleanup. After 10 and 20 completed stress casts, and 40 rapid rejected requests, warmed MEDIUM counters returned to **12 scene children, 12 geometries, 20 textures, 25 programs, 25 draw calls**. These include composer buffers, shadow maps and character textures. Stress casts advance the lifecycle clock for fast deterministic cleanup checks; a separate first cast expires in real time. This shows resource stability, not a hardware-independent FPS guarantee.
+`npm test` runs 12 core tests. `/phase2-smoke.html` checks model loading, animation states, bone attachments, movement/sprint, aiming, mouse casting, cooldown/HUD, live spell presets, eruption growth, expiry and repeated-cast cleanup. After 10 and 20 completed stress casts, and 40 rapid rejected requests, warmed MEDIUM counters returned to **12 scene children, 12 geometries, 20 textures, 25 programs, 25 draw calls**. These include composer buffers, shadow maps and character textures. Stress casts advance the lifecycle clock for fast deterministic cleanup checks; a separate first cast expires in real time. This shows resource stability, not a hardware-independent FPS guarantee.
 
-`/phase2-review.html` is a development-only static timeline viewer for visual inspection at 0.15, 0.38, 0.65, 1.15, 2.8 and 4.1 seconds across all qualities. Neither test page is part of the production entry point. Other five slots stay EMPTY.
+`/phase2-review.html` is a development-only static timeline viewer for visual inspection at 0.15, 0.38, 0.65, 1.15, 2.8 and 4.1 seconds across all qualities. Neither test page is part of the production entry point. Four remaining slots stay EMPTY in Phase 03.
 
 ## Run
 
@@ -51,7 +76,7 @@ Open the localhost URL printed by Vite. `npm run build` checks TypeScript and cr
 | Left/right drag | Orbit fallback when pointer lock is unavailable |
 | Right button | Closer aim framing while held |
 | Esc | Release mouse to interact with UI |
-| Q / E / R / F / V / X, or 1–6 | Q/1 selects Glacial Eruption; other slots are empty |
+| Q / E / R / F / V / X, or 1–6 | Q/1 selects Glacial Eruption; E/2 selects Tempest Break; R/F/V/X are empty |
 | P | Toggle performance HUD |
 | F3 | Toggle development diagnostics |
 | T | Toggle the optional ground target marker |
@@ -86,7 +111,7 @@ src/
     Ability.ts                    Ability contract and cast context
     AbilityManager.ts             Selection, assignment, casting, cooldowns
     AbilityRegistry.ts            Registration and ability lifecycle
-    AbilitySlot.ts                Six slot bindings (Q equipped)
+    AbilitySlot.ts                Six slot bindings (Q and E equipped)
   targeting/
     GroundRaycaster.ts            Stable analytic surface intersection
     TargetingSystem.ts            Crosshair ray, target point and marker
@@ -151,8 +176,8 @@ npm test
 npm run build
 ```
 
-The nine Node tests use Playwright's runner **without launching/downloading a browser**. They cover movement at 30/60/144 FPS, diagonals, camera-relative direction, sprint, deceleration, turning, ray/range limits, nonfinite input rejection, empty casting, cooldowns, quality notifications, crystal topology, pooling and effect cleanup. Test-only dummy abilities never enter the application.
+The 12 Node tests use Playwright's runner **without launching/downloading a browser**. They cover movement at 30/60/144 FPS, diagonals, camera-relative direction, sprint, deceleration, turning, ray/range limits, nonfinite input rejection, empty casting, cooldowns, quality notifications, crystal topology, pooling and effect cleanup. Test-only dummy abilities never enter the application.
 
 With Vite running, open `/smoke.html` in a WebGL-capable browser. The development-only harness exercises the actual render loop with keyboard and mouse DOM events, camera following, all slots, safe empty casting, all rendering presets, HUD/debug toggles, targeting limits and disposal. It prints a visible pass/fail report after about 10 seconds. It is not part of the production entry point. Native pointer lock should also be checked interactively in a desktop browser; browser embedding may deny it, so dragging is supported as a fallback.
 
-Phase 02 ends with one equipped ability on Q and five empty slots.
+Phase 03 ends with Glacial Eruption on Q, Tempest Break on E, and four empty slots.
