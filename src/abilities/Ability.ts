@@ -1,0 +1,36 @@
+import type { Camera, Scene, Vector3 } from 'three';
+import type { Player } from '../player/Player';
+import type { EffectManager } from '../effects/EffectManager';
+import type { GraphicsSettings } from '../quality/GraphicsSettings';
+import type { TargetingSystem } from '../targeting/TargetingSystem';
+
+export interface AbilityCastContext {
+  readonly player: Player;
+  readonly scene: Scene;
+  readonly camera: Camera;
+  /** Snapshot vectors owned by this cast; safe for a long-lived effect to retain. */
+  readonly origin: Vector3;
+  readonly direction: Vector3;
+  readonly playerForward: Vector3;
+  readonly cameraForward: Vector3;
+  readonly targetPoint: Vector3;
+  readonly groundTarget: Vector3 | null;
+  readonly targeting: TargetingSystem;
+  readonly effectManager: EffectManager;
+  readonly quality: GraphicsSettings;
+  readonly time: number;
+}
+export interface Ability {
+  readonly id: string;
+  readonly name: string;
+  readonly element: string;
+  readonly color: string;
+  readonly icon?: string;
+  readonly cooldown: number;
+  select?(): void;
+  deselect?(): void;
+  /** Return false to reject a cast without starting a cooldown. */
+  cast(context: AbilityCastContext): void | boolean;
+  update?(deltaTime: number): void;
+  dispose?(): void;
+}
