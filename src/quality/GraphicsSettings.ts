@@ -13,6 +13,8 @@ export class GraphicsSettings {
   }
   get preset(): QualityPreset { return this.current; }
   get config(): Readonly<QualityConfig> { return QUALITY_PRESETS[this.current]; }
+  /** Read-only lifecycle diagnostic for acceptance tests and development tools. */
+  get subscriberCount(): number { return this.listeners.size; }
   setPreset(preset: QualityPreset): void {
     if (this.current === preset) return;
     this.current = preset;

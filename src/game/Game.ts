@@ -15,6 +15,7 @@ import { EffectManager } from '../effects/EffectManager';
 import { HUD } from '../ui/HUD';
 import { GlacialEruption } from '../abilities/ice/GlacialEruption';
 import { TempestBreak } from '../abilities/wind/TempestBreak';
+import { HeavensVerdict } from '../abilities/lightning/HeavensVerdict';
 
 /** Composition root only: systems own their logic, resources, and subscriptions. */
 export class Game {
@@ -50,6 +51,9 @@ export class Game {
     const tempest = new TempestBreak();
     this.abilities.registry.register(tempest);
     this.abilities.assignSlot(1, tempest.id);
+    const verdict = new HeavensVerdict();
+    this.abilities.registry.register(verdict);
+    this.abilities.assignSlot(2, verdict.id);
     this.hud = new HUD(root, this.abilities, this.settings, this.targeting);
     document.addEventListener('visibilitychange', this.visibilityChanged);
   }

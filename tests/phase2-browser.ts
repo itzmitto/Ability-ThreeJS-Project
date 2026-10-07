@@ -34,7 +34,7 @@ try {
   const beforeDirection = game.targeting.aimDirection.clone();
   renderer.domElement.dispatchEvent(new MouseEvent('mousemove', { bubbles: true, buttons: 2, movementX: 60, movementY: 10 })); await delay(250);
   assert(game.targeting.aimDirection.distanceTo(beforeDirection) > 0.05 && game.targeting.hasGroundTarget, 'Camera orbit and shared ground targeting');
-  key('KeyR', true); await delay(80); key('KeyR', false);
+  key('KeyF', true); await delay(80); key('KeyF', false);
   assert(game.abilities.selectedAbility === undefined && !game.abilities.cast(context()), 'Other slots remain safely empty');
   key('KeyQ', true); await delay(80); key('KeyQ', false);
   assert(game.abilities.selectedAbility?.id === 'glacial-eruption', 'Q still selects Glacial Eruption');
