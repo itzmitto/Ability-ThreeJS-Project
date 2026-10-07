@@ -35,6 +35,8 @@ export class AbilityBar {
       if (ability?.icon && this.icons[index].textContent !== ability.icon) this.icons[index].textContent = ability.icon;
       const remaining = this.abilities.getCooldown(index);
       this.cooldowns[index].textContent = remaining > 0 ? remaining.toFixed(1) : '';
+      button.classList.toggle('on-cooldown', remaining > 0);
+      button.style.setProperty('--cooldown-progress', `${ability && ability.cooldown > 0 ? remaining / ability.cooldown * 100 : 0}%`);
     });
   }
   dispose(): void { this.controller.abort(); this.element.remove(); }

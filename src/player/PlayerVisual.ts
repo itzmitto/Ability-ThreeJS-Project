@@ -1,74 +1,92 @@
-import { CapsuleGeometry, Group, Mesh, MeshStandardMaterial, SphereGeometry } from 'three';
-import type { BufferGeometry } from 'three';
+import { AnimationMixer, Box3, Group, Mesh, MeshStandardMaterial, Object3D, Vector3 } from 'three';
+import type { AnimationAction, Material, Texture } from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
-/** Temporary articulated human, 1.82m tall. Replace this class with a GLTF + AnimationMixer. */
+/** Controller supplies speed; model loading, bones and animation remain here. */
 export class PlayerVisual {
   readonly root = new Group();
-  private readonly body = new Group();
-  private readonly leftArm = new Group();
-  private readonly rightArm = new Group();
-  private readonly leftLeg = new Group();
-  private readonly rightLeg = new Group();
-  private readonly sphere = new SphereGeometry(1, 20, 16);
-  private readonly capsule = new CapsuleGeometry(1, 1, 6, 16);
-  private readonly cloth = new MeshStandardMaterial({ color: '#2c3949', roughness: 0.76, metalness: 0.12 });
-  private readonly trousers = new MeshStandardMaterial({ color: '#141c28', roughness: 0.86 });
-  private readonly skin = new MeshStandardMaterial({ color: '#a7897a', roughness: 0.68 });
-  private readonly hair = new MeshStandardMaterial({ color: '#151719', roughness: 0.9 });
-  private readonly boots = new MeshStandardMaterial({ color: '#101720', roughness: 0.45 });
-  private readonly trim = new MeshStandardMaterial({ color: '#546575', roughness: 0.45, metalness: 0.4 });
-  private blend = 0;
+  readonly ready: Promise<void>;
+  loaded = false;
+  loadError: string | null = null;
+  animationState: 'Idle' | 'Walk' | 'Run' = 'Idle';
+  private mixer?: AnimationMixer;
+  private model?: Group;
+  private actions = new Map<string, AnimationAction>();
+  private disposed = false;
+  private rightHand = new Object3D();
+  private leftHand = new Object3D();
+  private chest = new Object3D();
   constructor() {
-    this.root.add(this.body);
-    // Ellipsoidal anatomy, narrow wrists/ankles, natural shoulder width and tapered limbs.
-    this.part(this.body, this.sphere, this.cloth, [0, 1.27, 0], [0.235, 0.30, 0.135]);
-    this.part(this.body, this.sphere, this.cloth, [0, 1.06, 0], [0.18, 0.20, 0.12]);
-    this.part(this.body, this.sphere, this.trousers, [0, 0.94, 0], [0.19, 0.14, 0.13]);
-    this.part(this.body, this.sphere, this.trim, [0, 1.01, 0], [0.183, 0.025, 0.125]);
-    this.part(this.body, this.capsule, this.skin, [0, 1.56, 0], [0.065, 0.055, 0.065]);
-    this.part(this.body, this.sphere, this.skin, [0, 1.70, -0.01], [0.102, 0.135, 0.10]);
-    this.part(this.body, this.sphere, this.skin, [0, 1.665, -0.043], [0.077, 0.080, 0.081]);
-    this.part(this.body, this.sphere, this.skin, [0, 1.70, -0.108], [0.024, 0.028, 0.026]);
-    this.part(this.body, this.sphere, this.hair, [0, 1.755, 0.007], [0.105, 0.091, 0.101]);
-    for (const side of [-1, 1]) {
-      this.part(this.body, this.sphere, this.skin, [side * 0.103, 1.70, 0], [0.019, 0.031, 0.021]);
-      const arm = side < 0 ? this.leftArm : this.rightArm;
-      arm.position.set(side * 0.245, 1.46, 0);
-      arm.rotation.z = side * 0.075;
-      this.body.add(arm);
-      this.part(arm, this.sphere, this.cloth, [0, -0.04, 0], [0.089, 0.103, 0.09]);
-      this.part(arm, this.capsule, this.cloth, [side * 0.016, -0.18, 0], [0.068, 0.102, 0.067]);
-      this.part(arm, this.sphere, this.cloth, [side * 0.018, -0.32, 0], [0.060, 0.063, 0.058]);
-      const forearm = this.part(arm, this.capsule, this.cloth, [side * 0.022, -0.425, -0.025], [0.048, 0.085, 0.050]);
-      forearm.rotation.x = -0.12;
-      this.part(arm, this.sphere, this.skin, [side * 0.022, -0.58, -0.045], [0.042, 0.076, 0.03]);
-      const leg = side < 0 ? this.leftLeg : this.rightLeg;
-      leg.position.set(side * 0.10, 0.93, 0);
-      this.body.add(leg);
-      this.part(leg, this.capsule, this.trousers, [0, -0.20, 0], [0.086, 0.132, 0.089]);
-      this.part(leg, this.sphere, this.trousers, [0, -0.40, -0.007], [0.071, 0.079, 0.070]);
-      this.part(leg, this.capsule, this.trousers, [0, -0.585, 0.006], [0.060, 0.121, 0.065]);
-      this.part(leg, this.sphere, this.boots, [0, -0.81, -0.048], [0.063, 0.10, 0.13]);
-      this.part(leg, this.sphere, this.boots, [0, -0.885, -0.065], [0.068, 0.038, 0.14]);
+    this.rightHand.position.set(-0.28, 1.0, 0); this.leftHand.position.set(0.28, 1.0, 0);
+    this.chest.position.set(0, 1.3, 0);
+    this.root.add(this.rightHand, this.leftHand, this.chest);
+    this.ready = typeof window === 'undefined' ? Promise.resolve() : this.load();
+  }
+  private async load(): Promise<void> {
+    try {
+      const gltf = await new GLTFLoader().loadAsync(`${import.meta.env.BASE_URL}models/casual-male.glb`);
+      if (this.disposed) { this.releaseModel(gltf.scene); return; }
+      const model = gltf.scene;
+      // Source faces +Z; gameplay forward is -Z.
+      model.rotation.y = Math.PI; model.updateMatrixWorld(true);
+      const box = new Box3().setFromObject(model);
+      model.scale.multiplyScalar(1.82 / box.getSize(new Vector3()).y);
+      model.updateMatrixWorld(true); box.setFromObject(model);
+      const center = box.getCenter(new Vector3());
+      model.position.set(-center.x, -box.min.y + 0.025, -center.z);
+      model.traverse(object => {
+        if (!(object instanceof Mesh)) return;
+        object.castShadow = true; object.receiveShadow = true;
+        for (const material of Array.isArray(object.material) ? object.material : [object.material]) {
+          if (!(material instanceof MeshStandardMaterial)) continue;
+          material.metalness = 0; material.roughness = 0.85;
+          if (material.name.includes('opacity')) { material.alphaTest = 0.45; material.transparent = false; material.depthWrite = true; }
+        }
+      });
+      this.model = model; this.root.add(model);
+      this.rightHand = model.getObjectByName('Bip01_R_Hand') ?? model.getObjectByName('Bip01 R Hand') ?? this.rightHand;
+      this.leftHand = model.getObjectByName('Bip01_L_Hand') ?? model.getObjectByName('Bip01 L Hand') ?? this.leftHand;
+      this.chest = model.getObjectByName('Bip01_Spine2') ?? model.getObjectByName('Bip01 Spine2') ?? this.chest;
+      this.mixer = new AnimationMixer(model);
+      for (const clip of gltf.animations) this.actions.set(clip.name, this.mixer.clipAction(clip));
+      this.actions.get('Idle')?.play(); this.loaded = true;
+    } catch (error) {
+      if (this.disposed) return;
+      this.loadError = error instanceof Error ? error.message : String(error);
+      console.error('Local human character failed to load:', error);
     }
   }
-  private part(parent: Group, geometry: BufferGeometry, material: MeshStandardMaterial, position: [number, number, number], scale: [number, number, number]): Mesh {
-    const mesh = new Mesh(geometry, material);
-    mesh.position.fromArray(position); mesh.scale.fromArray(scale);
-    mesh.castShadow = true; mesh.receiveShadow = true;
-    parent.add(mesh); return mesh;
+  update(_phase: number, speed: number, delta: number): void {
+    if (!this.mixer) return;
+    const next = speed < 0.18 ? 'Idle' : speed > 6 ? 'Run' : 'Walk';
+    if (next !== this.animationState) {
+      const previous = this.actions.get(this.animationState); const action = this.actions.get(next);
+      if (action) { action.reset().setEffectiveWeight(1).play(); previous ? action.crossFadeFrom(previous, 0.22, false) : action.fadeIn(0.22); }
+      this.animationState = next;
+    }
+    const action = this.actions.get(this.animationState);
+    if (action) action.timeScale = next === 'Idle' ? 1 : Math.max(0.65, Math.min(1.6, speed / (next === 'Run' ? 7 : 3.6)));
+    this.mixer.update(delta);
   }
-  update(phase: number, speed: number, delta: number): void {
-    this.blend += (Math.min(speed / 4.8, 1) - this.blend) * (1 - Math.exp(-10 * delta));
-    const stride = Math.sin(phase) * 0.48 * this.blend;
-    this.leftLeg.rotation.x = stride; this.rightLeg.rotation.x = -stride;
-    this.leftArm.rotation.x = -stride * 0.7 - 0.08; this.rightArm.rotation.x = stride * 0.7 - 0.08;
-    this.body.position.y = Math.abs(Math.sin(phase)) * 0.028 * this.blend;
-    this.body.rotation.z = Math.sin(phase) * 0.018 * this.blend;
+  getRightHandWorldPosition(result = new Vector3()): Vector3 { this.root.updateWorldMatrix(true, true); return this.rightHand.getWorldPosition(result); }
+  getLeftHandWorldPosition(result = new Vector3()): Vector3 { this.root.updateWorldMatrix(true, true); return this.leftHand.getWorldPosition(result); }
+  getChestWorldPosition(result = new Vector3()): Vector3 { this.root.updateWorldMatrix(true, true); return this.chest.getWorldPosition(result); }
+  private releaseModel(model: Group): void {
+    const geometries = new Set<Mesh['geometry']>(); const materials = new Set<Material>(); const textures = new Set<Texture>();
+    model.traverse(object => {
+      if (!(object instanceof Mesh)) return;
+      geometries.add(object.geometry);
+      for (const material of Array.isArray(object.material) ? object.material : [object.material]) {
+        materials.add(material);
+        for (const value of Object.values(material)) if (value && typeof value === 'object' && 'isTexture' in value) textures.add(value as Texture);
+      }
+      if ('skeleton' in object) (object as import('three').SkinnedMesh).skeleton.dispose();
+    });
+    geometries.forEach(geometry => geometry.dispose()); materials.forEach(material => material.dispose()); textures.forEach(texture => texture.dispose()); model.removeFromParent();
   }
   dispose(): void {
-    this.sphere.dispose(); this.capsule.dispose();
-    [this.cloth, this.trousers, this.skin, this.hair, this.boots, this.trim].forEach(material => material.dispose());
-    this.root.removeFromParent();
+    this.disposed = true; this.mixer?.stopAllAction();
+    if (this.model) { this.mixer?.uncacheRoot(this.model); this.releaseModel(this.model); }
+    this.actions.clear(); this.root.removeFromParent();
   }
 }

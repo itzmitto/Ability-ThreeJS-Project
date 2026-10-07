@@ -8,6 +8,7 @@ export interface ManagedEffect {
 
 export class EffectManager {
   private readonly effects: ManagedEffect[] = [];
+  get activeCount(): number { return this.effects.length; }
   add(effect: ManagedEffect): void { this.effects.push(effect); }
   update(deltaTime: number, elapsedTime: number): void {
     for (let i = this.effects.length - 1; i >= 0; i--) {

@@ -20,7 +20,8 @@ export class InputManager {
     document.addEventListener('visibilitychange', this.clear, options);
     document.addEventListener('pointerlockchange', () => {
       this.pointerLocked = document.pointerLockElement === canvas;
-      this.clear();
+      if (!this.pointerLocked) this.clear();
+      else { this.deltaX = 0; this.deltaY = 0; }
     }, options);
     document.addEventListener('mousemove', event => {
       if (this.pointerLocked || ((event.buttons === 1 || event.buttons === 2) && event.target === canvas)) {

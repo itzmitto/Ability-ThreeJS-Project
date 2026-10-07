@@ -10,6 +10,9 @@ export class CameraController {
   private readonly focus = new Vector3();
   private readonly offset = new Vector3();
   private distance: number = GAME_CONFIG.camera.distance;
+  private feedbackTime = 0;
+  private feedbackDuration = 0;
+  private feedbackStrength = 0;
   constructor(private readonly input: InputManager, private readonly quality: GraphicsSettings, position: Vector3) {
     this.focus.copy(position).y += GAME_CONFIG.camera.height;
     this.update(0, position, true);
@@ -28,8 +31,18 @@ export class CameraController {
     this.offset.y = Math.max(0.3, this.offset.y);
     this.camera.position.lerp(this.offset, blend);
     this.camera.lookAt(this.focus);
+    if (this.feedbackTime > 0) {
+      this.feedbackTime = Math.max(0, this.feedbackTime - delta);
+      const envelope = this.feedbackTime / this.feedbackDuration;
+      this.camera.rotation.x += Math.sin(this.feedbackTime * 110) * this.feedbackStrength * envelope;
+      this.camera.rotation.y += Math.sin(this.feedbackTime * 87) * this.feedbackStrength * envelope * 0.6;
+    }
     this.camera.updateMatrixWorld();
   }
   private resize = (): void => { this.camera.aspect = window.innerWidth / window.innerHeight; this.camera.updateProjectionMatrix(); };
+  addFeedback = (strength: number, duration: number): void => {
+    this.feedbackStrength = Math.max(this.feedbackTime > 0 ? this.feedbackStrength : 0, Math.min(0.004, strength));
+    this.feedbackDuration = Math.max(0.01, Math.min(0.2, duration)); this.feedbackTime = this.feedbackDuration;
+  };
   dispose(): void { window.removeEventListener('resize', this.resize); }
 }

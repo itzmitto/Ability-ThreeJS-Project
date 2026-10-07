@@ -19,6 +19,8 @@ export interface AbilityCastContext {
   readonly effectManager: EffectManager;
   readonly quality: GraphicsSettings;
   readonly time: number;
+  /** Optional decoupled, bounded camera response supplied by the game. */
+  readonly cameraFeedback?: (strength: number, duration: number) => void;
 }
 export interface Ability {
   readonly id: string;

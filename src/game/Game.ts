@@ -13,6 +13,7 @@ import { AbilityManager } from '../abilities/AbilityManager';
 import type { AbilityCastContext } from '../abilities/Ability';
 import { EffectManager } from '../effects/EffectManager';
 import { HUD } from '../ui/HUD';
+import { GlacialEruption } from '../abilities/ice/GlacialEruption';
 
 /** Composition root only: systems own their logic, resources, and subscriptions. */
 export class Game {
@@ -42,6 +43,9 @@ export class Game {
     this.playerController = new PlayerController(this.player, this.input);
     this.world = new World(this.sceneManager.scene, this.settings);
     this.targeting = new TargetingSystem(this.sceneManager.scene);
+    const glacial = new GlacialEruption();
+    this.abilities.registry.register(glacial);
+    this.abilities.assignSlot(0, glacial.id);
     this.hud = new HUD(root, this.abilities, this.settings, this.targeting);
     document.addEventListener('visibilitychange', this.visibilityChanged);
   }
@@ -74,11 +78,12 @@ export class Game {
   };
   private makeCastContext = (): AbilityCastContext => ({
     player: this.player, scene: this.sceneManager.scene, camera: this.camera.camera,
-    origin: this.player.position.clone().add(new Vector3(0, 1.25, 0)),
+    origin: this.player.visual.getRightHandWorldPosition(),
     direction: this.targeting.aimDirection.clone(), playerForward: this.player.getForward().clone(),
     cameraForward: this.camera.camera.getWorldDirection(new Vector3()), targetPoint: this.targeting.targetPoint.clone(),
     groundTarget: this.targeting.getGroundTarget()?.clone() ?? null,
     targeting: this.targeting, effectManager: this.effects, quality: this.settings, time: this.elapsed,
+    cameraFeedback: this.camera.addFeedback,
   });
   private visibilityChanged = (): void => {
     cancelAnimationFrame(this.raf);
@@ -87,7 +92,7 @@ export class Game {
   dispose(): void {
     this.running = false; cancelAnimationFrame(this.raf);
     document.removeEventListener('visibilitychange', this.visibilityChanged);
-    this.hud.dispose(); this.abilities.dispose(); this.effects.dispose(); this.targeting.dispose();
+    this.hud.dispose(); this.effects.dispose(); this.abilities.dispose(); this.targeting.dispose();
     this.player.dispose(); this.world.dispose(); this.camera.dispose(); this.input.dispose();
     this.renderer.dispose(); this.settings.dispose(); this.sceneManager.dispose();
   }

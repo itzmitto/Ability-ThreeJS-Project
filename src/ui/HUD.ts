@@ -17,7 +17,7 @@ export class HUD {
   private readonly selected = document.createElement('span');
   constructor(root: HTMLElement, private readonly abilities: AbilityManager, private readonly settings: GraphicsSettings, targeting: TargetingSystem) {
     this.element.className = 'hud';
-    this.element.innerHTML = `<header class="brand"><div class="eyebrow"><span class="brand-mark">◇</span> EXPERIMENTAL ARENA <span class="version">/ 001</span></div><h1>ELEMENTAL <span>SANDBOX</span></h1><p>WASD move <b>·</b> Mouse aim <b>·</b> Q/E/R/F/V/X abilities <b>·</b> Click cast</p></header><div class="crosshair" aria-hidden="true"><i></i></div><div class="world-caption"><span class="caption-line"></span>THE STILLWATER<span class="caption-sub">FOUNDATION WORLD</span></div><div class="footer-note">PHASE 01 <span>/</span> NO ABILITIES EQUIPPED</div><div class="debug-hint">F3 DEBUG <span>·</span> P TELEMETRY</div>`;
+    this.element.innerHTML = `<header class="brand"><div class="eyebrow"><span class="brand-mark">◇</span> EXPERIMENTAL ARENA <span class="version">/ 001</span></div><h1>ELEMENTAL <span>SANDBOX</span></h1><p>WASD move <b>·</b> Mouse aim <b>·</b> Q/E/R/F/V/X abilities <b>·</b> Click cast</p></header><div class="crosshair" aria-hidden="true"><i></i></div><div class="world-caption"><span class="caption-line"></span>THE STILLWATER<span class="caption-sub">FOUNDATION WORLD</span></div><div class="footer-note">PHASE 02 <span>/</span> GLACIAL ERUPTION</div><div class="debug-hint">F3 DEBUG <span>·</span> P TELEMETRY</div>`;
     this.abilityBar = new AbilityBar(abilities);
     this.graphics = new GraphicsMenu(settings, this.performance, targeting);
     this.debug.className = 'debug-panel'; this.debug.hidden = true;
