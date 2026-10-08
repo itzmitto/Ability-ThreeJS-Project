@@ -38,11 +38,13 @@ try {
   const direction = game.targeting.aimDirection.clone();
   canvas.dispatchEvent(new MouseEvent('mousemove', { bubbles: true, buttons: 2, movementX: 160, movementY: 80 })); await delay(350);
   assert(game.camera.yaw < -0.2 && game.targeting.aimDirection.distanceTo(direction) > 0.1, 'Mouse rotates camera and changes aim ray');
-  for (const [index, code] of ['KeyQ', 'KeyE', 'KeyR', 'KeyF', 'KeyV', 'KeyX'].entries()) {
+  for (const [index, code] of ['KeyQ', 'KeyE', 'KeyR', 'KeyF', 'KeyV', 'KeyX', 'KeyC', 'KeyB'].entries()) {
     key(code, true); await delay(60); key(code, false); assert(game.abilities.selectedIndex === index, `${code.slice(3)} selects slot ${index + 1}`);
   }
+  const emptyIndex = game.abilities.selectedIndex; const savedAbility = game.abilities.slots[emptyIndex].abilityId; game.abilities.slots[emptyIndex].abilityId = null;
   canvas.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, button: 0 })); await delay(100);
   assert(game.effects.particleCount === 0 && game.abilities.selectedAbility === undefined, 'Empty mouse cast creates no effects and stays safe');
+  game.abilities.slots[emptyIndex].abilityId = savedAbility;
   const triangles: number[] = [];
   for (const preset of ['LOW', 'MEDIUM', 'MAX'] as const) {
     game.settings.setPreset(preset); await delay(650);

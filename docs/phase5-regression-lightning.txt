@@ -1,0 +1,147 @@
+PASS Local human model and Idle render
+PASS W movement and Walk animation
+PASS Shift sprint and Run animation
+PASS Existing mouse camera and ground ray remain operational
+PASS R selects Heaven’s Verdict
+PASS HUD shows lightning name, icon and selected slot
+PASS Normal left mouse input casts lightning
+PASS 4 second cooldown rejects a second cast
+PASS Existing cooldown UI displays progress
+PASS Real-time 6.2 second lifecycle removes lightning/storm/particles
+PASS 3 aliases R
+PASS Invalid/sky target rejects without origin fallback
+PASS KeyQ: existing ability selects and casts
+PASS glacial-eruption: existing VFX still render
+PASS KeyE: existing ability selects and casts
+PASS tempest-break: existing VFX still render
+PASS V/X remain empty
+PASS Exactly four real equipped abilities
+PASS LOW: charge follows animated hand
+PASS LOW: player-to-target pulse and unstable water ionization
+PASS LOW: localized turbulent storm buildup
+PASS Precursor channels search before connection
+PASS LOW: thick bounded branching main bolt
+PASS LOW: cloud / mist / particle counts apply
+PASS Impact flashes 3D light, reflective water and ionized mist
+PASS Comfortable bounded camera impulse fires once
+PASS Secondary strikes occur after main connection
+PASS Both transient lights leave scene before lingering phase
+PASS Live quality changes alter existing cloud and branch detail
+PASS Fixed 6.2 second effect lifetime ends
+PASS Dispose removes full root and unsubscribes exactly once
+PASS MEDIUM: charge follows animated hand
+PASS MEDIUM: player-to-target pulse and unstable water ionization
+PASS MEDIUM: localized turbulent storm buildup
+PASS Precursor channels search before connection
+PASS MEDIUM: thick bounded branching main bolt
+PASS MEDIUM: cloud / mist / particle counts apply
+PASS Impact flashes 3D light, reflective water and ionized mist
+PASS Comfortable bounded camera impulse fires once
+PASS Secondary strikes occur after main connection
+PASS Both transient lights leave scene before lingering phase
+PASS Live quality changes alter existing cloud and branch detail
+PASS Fixed 6.2 second effect lifetime ends
+PASS Dispose removes full root and unsubscribes exactly once
+PASS MAX: charge follows animated hand
+PASS MAX: player-to-target pulse and unstable water ionization
+PASS MAX: localized turbulent storm buildup
+PASS Precursor channels search before connection
+PASS MAX: thick bounded branching main bolt
+PASS MAX: cloud / mist / particle counts apply
+PASS Impact flashes 3D light, reflective water and ionized mist
+PASS Comfortable bounded camera impulse fires once
+PASS Secondary strikes occur after main connection
+PASS Both transient lights leave scene before lingering phase
+PASS Live quality changes alter existing cloud and branch detail
+PASS Fixed 6.2 second effect lifetime ends
+PASS Dispose removes full root and unsubscribes exactly once
+PASS Far targets clamp at 45 metres
+PASS LOW → MAX during charging
+PASS MAX → LOW during lingering field
+PASS Verdict stress cast 1
+PASS Verdict stress cast 2
+PASS Verdict stress cast 3
+PASS Verdict stress cast 4
+PASS Verdict stress cast 5
+PASS Verdict stress cast 6
+PASS Verdict stress cast 7
+PASS Verdict stress cast 8
+PASS Verdict stress cast 9
+PASS Verdict stress cast 10
+PASS 10 verdict casts restore scene/GPU/program/light/subscription baseline
+PASS Verdict stress cast 11
+PASS Verdict stress cast 12
+PASS Verdict stress cast 13
+PASS Verdict stress cast 14
+PASS Verdict stress cast 15
+PASS Verdict stress cast 16
+PASS Verdict stress cast 17
+PASS Verdict stress cast 18
+PASS Verdict stress cast 19
+PASS Verdict stress cast 20
+PASS 20 verdict casts restore scene/GPU/program/light/subscription baseline
+PASS 20-cast alternating sequence 1
+PASS 20-cast alternating sequence 2
+PASS 20-cast alternating sequence 3
+PASS 20-cast alternating sequence 4
+PASS 20-cast alternating sequence 5
+PASS 20-cast alternating sequence 6
+PASS 20-cast alternating sequence 7
+PASS 20-cast alternating sequence 8
+PASS 20-cast alternating sequence 9
+PASS 20-cast alternating sequence 10
+PASS 20-cast alternating sequence 11
+PASS 20-cast alternating sequence 12
+PASS 20-cast alternating sequence 13
+PASS 20-cast alternating sequence 14
+PASS 20-cast alternating sequence 15
+PASS 20-cast alternating sequence 16
+PASS 20-cast alternating sequence 17
+PASS 20-cast alternating sequence 18
+PASS 20-cast alternating sequence 19
+PASS 20-cast alternating sequence 20
+PASS 20 alternating Ice → Wind → Lightning casts restore full baseline
+PASS 30-cast alternating sequence 1
+PASS 30-cast alternating sequence 2
+PASS 30-cast alternating sequence 3
+PASS 30-cast alternating sequence 4
+PASS 30-cast alternating sequence 5
+PASS 30-cast alternating sequence 6
+PASS 30-cast alternating sequence 7
+PASS 30-cast alternating sequence 8
+PASS 30-cast alternating sequence 9
+PASS 30-cast alternating sequence 10
+PASS 30-cast alternating sequence 11
+PASS 30-cast alternating sequence 12
+PASS 30-cast alternating sequence 13
+PASS 30-cast alternating sequence 14
+PASS 30-cast alternating sequence 15
+PASS 30-cast alternating sequence 16
+PASS 30-cast alternating sequence 17
+PASS 30-cast alternating sequence 18
+PASS 30-cast alternating sequence 19
+PASS 30-cast alternating sequence 20
+PASS 30-cast alternating sequence 21
+PASS 30-cast alternating sequence 22
+PASS 30-cast alternating sequence 23
+PASS 30-cast alternating sequence 24
+PASS 30-cast alternating sequence 25
+PASS 30-cast alternating sequence 26
+PASS 30-cast alternating sequence 27
+PASS 30-cast alternating sequence 28
+PASS 30-cast alternating sequence 29
+PASS 30-cast alternating sequence 30
+PASS 30 alternating Ice → Wind → Lightning casts restore full baseline
+PASS Rapid initial cast accepted
+PASS 60 rapid requests rejected during cooldown
+PASS Rapid rejected cast stress returns all counters to baseline
+PASS LOW: real-time cast expires after profiling
+PASS MEDIUM: real-time cast expires after profiling
+PASS MAX: real-time cast expires after profiling
+PASS All quality profiles finish at the original warmed baseline
+
+PROFILES [{"stage":"static main impact","preset":"LOW","calls":21,"triangles":13114,"particles":150,"instances":15,"programs":42},{"stage":"static main impact","preset":"MEDIUM","calls":38,"triangles":39349,"particles":360,"instances":30,"programs":42},{"stage":"static main impact","preset":"MAX","calls":38,"triangles":73865,"particles":840,"instances":50,"programs":42},{"stage":"real-time full cast","preset":"LOW","viewport":[1280,720],"frames":1121,"medianMs":6.1,"p95Ms":6.2,"approxFps":164,"peakCalls":21,"peakParticles":150,"peakTriangles":13114},{"stage":"real-time full cast","preset":"MEDIUM","viewport":[1280,720],"frames":1121,"medianMs":6.1,"p95Ms":6.2,"approxFps":164,"peakCalls":38,"peakParticles":360,"peakTriangles":39349},{"stage":"real-time full cast","preset":"MAX","viewport":[1280,720],"frames":1121,"medianMs":6.1,"p95Ms":6.2,"approxFps":164,"peakCalls":38,"peakParticles":840,"peakTriangles":73865}]
+BASELINE {"children":12,"lights":0,"subscriptions":5,"active":0,"geometries":64,"textures":20,"programs":60,"calls":25}
+FINAL {"children":12,"lights":0,"subscriptions":5,"active":0,"geometries":64,"textures":20,"programs":60,"calls":25}
+ALL PHASE 04 BROWSER CHECKS PASSED
+PASS Full disposal: {"geometries":0,"textures":0} / subscriptions 0

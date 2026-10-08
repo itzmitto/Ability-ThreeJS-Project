@@ -3,6 +3,7 @@ import type { Player } from '../player/Player';
 import type { EffectManager } from '../effects/EffectManager';
 import type { GraphicsSettings } from '../quality/GraphicsSettings';
 import type { TargetingSystem } from '../targeting/TargetingSystem';
+import type { WaterInteractionManager } from '../world/water/WaterInteractionManager';
 
 export interface AbilityCastContext {
   readonly player: Player;
@@ -19,6 +20,7 @@ export interface AbilityCastContext {
   readonly effectManager: EffectManager;
   readonly quality: GraphicsSettings;
   readonly time: number;
+  readonly water?:WaterInteractionManager;
   /** Optional decoupled, bounded camera response supplied by the game. */
   readonly cameraFeedback?: (strength: number, duration: number) => void;
 }

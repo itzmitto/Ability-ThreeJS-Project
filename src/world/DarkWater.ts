@@ -1,73 +1,108 @@
-import { Mesh, PlaneGeometry, ShaderMaterial, Vector3 } from 'three';
-import type { Scene } from 'three';
-import type { GraphicsSettings } from '../quality/GraphicsSettings';
-import { GAME_CONFIG } from '../game/config';
-
+import { Mesh, ShaderMaterial, Vector3, Matrix4 } from "three";
+import type { Camera, Scene, WebGLRenderer } from "three";
+import type { GraphicsSettings } from "../quality/GraphicsSettings";
+import type { Player } from "../player/Player";
+import { GAME_CONFIG } from "../game/config";
+import { WaterInteractionManager } from "./water/WaterInteractionManager";
+import { WaterFootstepInteraction } from "./water/WaterFootstepInteraction";
+import { WaterReflectionSystem } from "./water/WaterReflectionSystem";
+import { WaterLightingResponse } from "./water/WaterLightingResponse";
+import { waterQuality } from "./water/WaterQualityConfig";
+import type { WaterQuality } from "./water/WaterQualityConfig";
+import { waterSurfaceGeometry } from "./water/WaterSurfaceGeometry";
+import { WATER_VERTEX, WATER_FRAGMENT } from "./water/WaterShader";
+import { WaterContactSpray } from "./water/WaterContactSpray";
 export class DarkWater {
-  private readonly material = new ShaderMaterial({
-    uniforms: { uTime: { value: 0 }, uDetail: { value: 2 }, uPlayer: { value: new Vector3() }, uFogDensity: { value: GAME_CONFIG.world.fogDensity } },
-    vertexShader: `
-      uniform float uTime; varying vec3 vWorld;
-      void main() {
-        vec3 p=position;
-        p.z=sin(p.x*0.12+uTime*0.38)*cos(p.y*0.15-uTime*0.26)*0.018;
-        vec4 world=modelMatrix*vec4(p,1.0); vWorld=world.xyz;
-        gl_Position=projectionMatrix*viewMatrix*world;
-      }`,
-    fragmentShader: `
-      uniform float uTime; uniform float uDetail; uniform vec3 uPlayer; uniform float uFogDensity;
-      varying vec3 vWorld;
-      float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
-      float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.0-2.0*f);return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1)),f.x),f.y);}
-      float height(vec2 p){
-        float h=sin(p.x*0.53+p.y*0.37+uTime*0.35)*0.14+sin(p.x*0.24-p.y*0.68-uTime*0.27)*0.10;
-        h+=noise(p*1.25+vec2(uTime*0.045,-uTime*0.035))*0.20;
-        if(uDetail>1.5)h+=noise(p*3.3-vec2(uTime*0.025))*0.055;
-        if(uDetail>2.5)h+=noise(p*8.0+vec2(uTime*0.014))*0.022;
-        return h;
-      }
-      void main(){
-        vec2 p=vWorld.xz;
-        float h=height(p),e=0.10;
-        vec3 normal=normalize(vec3((h-height(p+vec2(e,0)))*1.9,1.0,(h-height(p+vec2(0,e)))*1.9));
-        vec3 view=normalize(cameraPosition-vWorld);
-        vec3 reflected=reflect(-view,normal);
-        float fresnel=pow(1.0-max(dot(normal,view),0.0),4.0);
-        float canopy=pow(max(reflected.y,0.0),0.55);
-        float surfaceNoise=noise(p*0.045+uTime*0.007);
-        vec3 color=vec3(0.002,0.004,0.008);
-        color+=vec3(0.006,0.013,0.024)*canopy*(0.3+0.7*surfaceNoise);
-        color+=vec3(0.006,0.014,0.027)*fresnel;
-        vec3 light=normalize(vec3(-0.3,0.7,-0.9));
-        float spec=pow(max(dot(reflect(-light,normal),view),0.0),uDetail<1.5?45.0:100.0);
-        color+=vec3(0.15,0.24,0.36)*spec*(0.4+0.6*surfaceNoise);
-        float nearGlow=exp(-length(p-uPlayer.xz)*0.075);
-        color+=vec3(0.004,0.012,0.021)*nearGlow*(0.35+0.65*noise(p*0.6));
-        float contact=1.0-exp(-dot(p-uPlayer.xz,p-uPlayer.xz)*3.5)*0.82;
-        color*=contact;
-        float distanceToCamera=length(cameraPosition-vWorld);
-        float fog=1.0-exp(-pow(distanceToCamera*uFogDensity,2.0));
-        color=mix(color,vec3(0.0012,0.0027,0.0058),fog);
-        gl_FragColor=vec4(color,1.0);
-      }`,
+  readonly interactions = new WaterInteractionManager();
+  readonly spray = new WaterContactSpray();
+  readonly footsteps = new WaterFootstepInteraction(
+    this.interactions,
+    this.spray,
+  );
+  readonly reflection = new WaterReflectionSystem();
+  readonly lighting = new WaterLightingResponse();
+  readonly material = new ShaderMaterial({
+    uniforms: {
+      uTime: { value: 0 },
+      uDetail: { value: 2 },
+      uPlayer: { value: new Vector3() },
+      uFogDensity: { value: GAME_CONFIG.world.fogDensity },
+      uRipples: { value: this.interactions.data },
+      uRippleShape: { value: this.interactions.shape },
+      uReflection: { value: this.reflection.texture },
+      uReflectionMatrix: { value: new Matrix4() },
+      uReflect: { value: 0 },
+      uReflectionSize: { value: 384 },
+      uLightPosition: { value: this.lighting.positions },
+      uLightColor: { value: this.lighting.colors },
+      uLightCount: { value: 0 },
+    },
+    vertexShader: WATER_VERTEX,
+    fragmentShader: WATER_FRAGMENT,
   });
-  private readonly mesh = new Mesh(new PlaneGeometry(1, 1), this.material);
+  readonly mesh = new Mesh(
+    waterSurfaceGeometry(GAME_CONFIG.world.size, 96),
+    this.material,
+  );
+  private q!: WaterQuality;
   private readonly unsubscribe: () => void;
-  constructor(scene: Scene, quality: GraphicsSettings) {
+  private segments = 96;
+  constructor(
+    private readonly scene: Scene,
+    quality: GraphicsSettings,
+  ) {
     this.mesh.rotation.x = -Math.PI / 2;
-    scene.add(this.mesh);
-    this.unsubscribe = quality.subscribe(config => {
-      this.mesh.geometry.dispose();
-      this.mesh.geometry = new PlaneGeometry(GAME_CONFIG.world.size, GAME_CONFIG.world.size, config.waterSegments, config.waterSegments);
-      this.material.uniforms.uDetail.value = config.waterDetail;
+    this.mesh.name = "Realistic dark water";
+    scene.add(this.mesh, this.spray.points);
+    this.unsubscribe = quality.subscribe((c) => {
+      this.q = waterQuality(c);
+      this.interactions.setCapacity(this.q.rippleCapacity);
+      this.reflection.configure(this.q);
+      this.material.uniforms.uDetail.value = this.q.detail;
+      this.material.uniforms.uReflectionSize.value = this.q.reflectionSize;
+      if (this.segments !== c.waterSegments) {
+        this.mesh.geometry.dispose();
+        this.mesh.geometry = waterSurfaceGeometry(
+          GAME_CONFIG.world.size,
+          c.waterSegments,
+        );
+        this.segments = c.waterSegments;
+      }
     });
   }
-  update(time: number, playerPosition: Vector3): void {
+  update(time: number, playerPosition: Vector3, player?: Player): void {
+    this.interactions.update(time);
+    if (player) this.footsteps.update(time, player);
+    this.spray.update(time);
     this.material.uniforms.uTime.value = time;
     this.material.uniforms.uPlayer.value.copy(playerPosition);
-    // Recenter an enormous surface so the horizon never exposes an edge.
-    this.mesh.position.x = Math.floor(playerPosition.x / 100) * 100;
-    this.mesh.position.z = Math.floor(playerPosition.z / 100) * 100;
+    this.material.uniforms.uLightCount.value = this.lighting.update(
+      this.scene,
+      this.q.lightCapacity,
+    );
+    this.mesh.position.x = Math.round(playerPosition.x / 2) * 2;
+    this.mesh.position.z = Math.round(playerPosition.z / 2) * 2;
   }
-  dispose(): void { this.unsubscribe(); this.mesh.geometry.dispose(); this.material.dispose(); this.mesh.removeFromParent(); }
+  prepareReflection(renderer: WebGLRenderer, camera: Camera): void {
+    this.material.uniforms.uReflect.value = this.reflection.render(
+      renderer,
+      this.scene,
+      camera,
+      this.mesh,
+      this.q,
+    )
+      ? 1
+      : 0;
+    this.material.uniforms.uReflectionMatrix.value.copy(this.reflection.matrix);
+  }
+  dispose(): void {
+    this.unsubscribe();
+    this.footsteps.dispose();
+    this.spray.dispose();
+    this.interactions.dispose();
+    this.reflection.dispose();
+    this.mesh.geometry.dispose();
+    this.material.dispose();
+    this.mesh.removeFromParent();
+  }
 }

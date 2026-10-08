@@ -1,0 +1,196 @@
+PASS Local human model and Idle
+PASS Idle and camera rotation do not create footsteps
+PASS WASD and Walk
+PASS Movement creates contact ripples at shoes
+PASS Diagonal sprint and more contact disturbances
+PASS Stable logical plane and natural step expiry after stopping
+PASS Mouse aiming and shared ground targeting
+PASS B selects eighth ability
+PASS Original blood icon and readable eighth HUD card
+PASS Left click casts and shared fourteen-second cooldown
+PASS Existing cooldown mask
+PASS 8 aliases B
+PASS Invalid sky target rejects without cooldown
+PASS Maximum range clamps to sixty metres
+PASS glacial-eruption still selects and casts
+PASS glacial-eruption renders with upgraded water
+PASS tempest-break still selects and casts
+PASS tempest-break renders with upgraded water
+PASS heavens-verdict still selects and casts
+PASS heavens-verdict renders with upgraded water
+PASS megiddo still selects and casts
+PASS megiddo renders with upgraded water
+PASS abyssal-flame still selects and casts
+PASS abyssal-flame renders with upgraded water
+PASS worldrend still selects and casts
+PASS worldrend renders with upgraded water
+PASS tempest-cataclysm still selects and casts
+PASS tempest-cataclysm renders with upgraded water
+PASS Exactly eight real abilities
+PASS Debug system
+PASS Performance HUD
+PASS LOW AWAKENING transforms/geometry finite
+PASS Aura follows actual animated right hand
+PASS LOW ASCENSION transforms/geometry finite
+PASS LOW ECLIPSE FORMATION transforms/geometry finite
+PASS LOW → MAX formation preserves timeline
+PASS LOW LANCE FORMATION transforms/geometry finite
+PASS LOW LANCE FORMATION transforms/geometry finite
+PASS LOW BARRAGE transforms/geometry finite
+PASS Visible barrage, first impact and MAX → MEDIUM
+PASS LOW COMPRESSION transforms/geometry finite
+PASS MEDIUM → LOW compression preserves timeline
+PASS LOW EXECUTION transforms/geometry finite
+PASS LOW LIQUID IMPACT transforms/geometry finite
+PASS Curved splash, tidal crest and shared water sources
+PASS LOW LIQUID IMPACT transforms/geometry finite
+PASS LOW AFTERMATH transforms/geometry finite
+PASS LOW → MAX aftermath survives Eclipse removal
+PASS LOW AFTERMATH transforms/geometry finite
+PASS LOW AFTERMATH transforms/geometry finite
+PASS Sixteen-second completion
+PASS Idempotent root/light/water subscription cleanup
+PASS MEDIUM AWAKENING transforms/geometry finite
+PASS Aura follows actual animated right hand
+PASS MEDIUM ASCENSION transforms/geometry finite
+PASS MEDIUM ECLIPSE FORMATION transforms/geometry finite
+PASS LOW → MAX formation preserves timeline
+PASS MEDIUM LANCE FORMATION transforms/geometry finite
+PASS MEDIUM LANCE FORMATION transforms/geometry finite
+PASS MEDIUM BARRAGE transforms/geometry finite
+PASS Visible barrage, first impact and MAX → MEDIUM
+PASS MEDIUM COMPRESSION transforms/geometry finite
+PASS MEDIUM → LOW compression preserves timeline
+PASS MEDIUM EXECUTION transforms/geometry finite
+PASS MEDIUM LIQUID IMPACT transforms/geometry finite
+PASS Curved splash, tidal crest and shared water sources
+PASS MEDIUM LIQUID IMPACT transforms/geometry finite
+PASS MEDIUM AFTERMATH transforms/geometry finite
+PASS LOW → MAX aftermath survives Eclipse removal
+PASS MEDIUM AFTERMATH transforms/geometry finite
+PASS MEDIUM AFTERMATH transforms/geometry finite
+PASS Sixteen-second completion
+PASS Idempotent root/light/water subscription cleanup
+PASS MAX AWAKENING transforms/geometry finite
+PASS Aura follows actual animated right hand
+PASS MAX ASCENSION transforms/geometry finite
+PASS MAX ECLIPSE FORMATION transforms/geometry finite
+PASS LOW → MAX formation preserves timeline
+PASS MAX LANCE FORMATION transforms/geometry finite
+PASS MAX LANCE FORMATION transforms/geometry finite
+PASS MAX BARRAGE transforms/geometry finite
+PASS Visible barrage, first impact and MAX → MEDIUM
+PASS MAX COMPRESSION transforms/geometry finite
+PASS MEDIUM → LOW compression preserves timeline
+PASS MAX EXECUTION transforms/geometry finite
+PASS MAX LIQUID IMPACT transforms/geometry finite
+PASS Curved splash, tidal crest and shared water sources
+PASS MAX LIQUID IMPACT transforms/geometry finite
+PASS MAX AFTERMATH transforms/geometry finite
+PASS LOW → MAX aftermath survives Eclipse removal
+PASS MAX AFTERMATH transforms/geometry finite
+PASS MAX AFTERMATH transforms/geometry finite
+PASS Sixteen-second completion
+PASS Idempotent root/light/water subscription cleanup
+PASS Isolated blood cast 1
+PASS Isolated blood cast 2
+PASS Isolated blood cast 3
+PASS Isolated blood cast 4
+PASS Isolated blood cast 5
+PASS Isolated blood cast 6
+PASS Isolated blood cast 7
+PASS Isolated blood cast 8
+PASS Isolated blood cast 9
+PASS Isolated blood cast 10
+PASS 10 isolated casts restore warmed baseline
+PASS Isolated blood cast 11
+PASS Isolated blood cast 12
+PASS Isolated blood cast 13
+PASS Isolated blood cast 14
+PASS Isolated blood cast 15
+PASS Isolated blood cast 16
+PASS Isolated blood cast 17
+PASS Isolated blood cast 18
+PASS Isolated blood cast 19
+PASS Isolated blood cast 20
+PASS 20 isolated casts restore warmed baseline
+PASS 20 alternating cast 1
+PASS 20 alternating cast 2
+PASS 20 alternating cast 3
+PASS 20 alternating cast 4
+PASS 20 alternating cast 5
+PASS 20 alternating cast 6
+PASS 20 alternating cast 7
+PASS 20 alternating cast 8
+PASS 20 alternating cast 9
+PASS 20 alternating cast 10
+PASS 20 alternating cast 11
+PASS 20 alternating cast 12
+PASS 20 alternating cast 13
+PASS 20 alternating cast 14
+PASS 20 alternating cast 15
+PASS 20 alternating cast 16
+PASS 20 alternating cast 17
+PASS 20 alternating cast 18
+PASS 20 alternating cast 19
+PASS 20 alternating cast 20
+PASS 20 alternating all-eight casts restore warmed baseline
+PASS 40 alternating cast 1
+PASS 40 alternating cast 2
+PASS 40 alternating cast 3
+PASS 40 alternating cast 4
+PASS 40 alternating cast 5
+PASS 40 alternating cast 6
+PASS 40 alternating cast 7
+PASS 40 alternating cast 8
+PASS 40 alternating cast 9
+PASS 40 alternating cast 10
+PASS 40 alternating cast 11
+PASS 40 alternating cast 12
+PASS 40 alternating cast 13
+PASS 40 alternating cast 14
+PASS 40 alternating cast 15
+PASS 40 alternating cast 16
+PASS 40 alternating cast 17
+PASS 40 alternating cast 18
+PASS 40 alternating cast 19
+PASS 40 alternating cast 20
+PASS 40 alternating cast 21
+PASS 40 alternating cast 22
+PASS 40 alternating cast 23
+PASS 40 alternating cast 24
+PASS 40 alternating cast 25
+PASS 40 alternating cast 26
+PASS 40 alternating cast 27
+PASS 40 alternating cast 28
+PASS 40 alternating cast 29
+PASS 40 alternating cast 30
+PASS 40 alternating cast 31
+PASS 40 alternating cast 32
+PASS 40 alternating cast 33
+PASS 40 alternating cast 34
+PASS 40 alternating cast 35
+PASS 40 alternating cast 36
+PASS 40 alternating cast 37
+PASS 40 alternating cast 38
+PASS 40 alternating cast 39
+PASS 40 alternating cast 40
+PASS 40 alternating all-eight casts restore warmed baseline
+PASS 100 rapid cooldown attempts reject without allocations
+PASS Cooldown attempts retain stable resources
+PASS One water owner removal preserves another source
+PASS 300 water disturbances stay bounded
+PASS Water stress sources release independently
+PASS Sprint during execution, live water/ability quality and cleanup
+PASS LOW real-time spell expiry
+PASS MEDIUM real-time spell expiry
+PASS MAX real-time spell expiry
+PASS All real-time profiles restore warmed resource baseline
+PASS Primary game releases water mirror, GPU resources and subscriptions
+PASS Game disposal during LANCE FORMATION releases water and blood resources
+PASS Game disposal during LIQUID IMPACT releases water and blood resources
+PASS Game disposal during AFTERMATH releases water and blood resources
+PROFILES [{"preset":"LOW","viewport":[420,672],"peakCalls":20,"peakTriangles":71920,"peakParticles":240,"peakInstances":256,"stages":[{"stage":"AWAKENING","frames":215,"medianMs":6.1,"p95Ms":6.2},{"stage":"ASCENSION","frames":181,"medianMs":6.1,"p95Ms":6.2},{"stage":"ECLIPSE FORMATION","frames":346,"medianMs":6.1,"p95Ms":6.3},{"stage":"LANCE FORMATION","frames":248,"medianMs":6.1,"p95Ms":6.3},{"stage":"BARRAGE","frames":362,"medianMs":6.1,"p95Ms":6.3},{"stage":"COMPRESSION","frames":165,"medianMs":6.1,"p95Ms":6.2},{"stage":"EXECUTION","frames":148,"medianMs":6.1,"p95Ms":6.3},{"stage":"LIQUID IMPACT","frames":396,"medianMs":6.1,"p95Ms":6.3},{"stage":"AFTERMATH","frames":660,"medianMs":6.1,"p95Ms":6.2}],"resources":{"children":13,"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":248,"textures":9,"programs":205,"calls":8}},{"preset":"MEDIUM","viewport":[420,672],"peakCalls":55,"peakTriangles":278131,"peakParticles":720,"peakInstances":756,"stages":[{"stage":"AWAKENING","frames":214,"medianMs":6.1,"p95Ms":6.3},{"stage":"ASCENSION","frames":182,"medianMs":6.1,"p95Ms":6.4},{"stage":"ECLIPSE FORMATION","frames":346,"medianMs":6.1,"p95Ms":6.3},{"stage":"LANCE FORMATION","frames":247,"medianMs":6.1,"p95Ms":6.4},{"stage":"BARRAGE","frames":363,"medianMs":6.1,"p95Ms":6.4},{"stage":"COMPRESSION","frames":164,"medianMs":6.1,"p95Ms":6.4},{"stage":"EXECUTION","frames":149,"medianMs":6,"p95Ms":6.4},{"stage":"LIQUID IMPACT","frames":395,"medianMs":6.1,"p95Ms":6.4},{"stage":"AFTERMATH","frames":660,"medianMs":6.1,"p95Ms":6.3}],"resources":{"children":13,"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":248,"textures":21,"programs":205,"calls":25}},{"preset":"MAX","viewport":[420,672],"peakCalls":55,"peakTriangles":537707,"peakParticles":1800,"peakInstances":1864,"stages":[{"stage":"AWAKENING","frames":215,"medianMs":6.1,"p95Ms":6.4},{"stage":"ASCENSION","frames":181,"medianMs":6.1,"p95Ms":6.4},{"stage":"ECLIPSE FORMATION","frames":346,"medianMs":6.1,"p95Ms":6.4},{"stage":"LANCE FORMATION","frames":247,"medianMs":6.1,"p95Ms":6.5},{"stage":"BARRAGE","frames":363,"medianMs":6,"p95Ms":6.4},{"stage":"COMPRESSION","frames":164,"medianMs":6.1,"p95Ms":6.4},{"stage":"EXECUTION","frames":149,"medianMs":6.1,"p95Ms":6.4},{"stage":"LIQUID IMPACT","frames":395,"medianMs":6.1,"p95Ms":6.4},{"stage":"AFTERMATH","frames":660,"medianMs":6.1,"p95Ms":6.4}],"resources":{"children":13,"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":248,"textures":21,"programs":205,"calls":31}}]
+BASELINE {"children":13,"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":248,"textures":21,"programs":205,"calls":31}
+FINAL {"children":13,"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":248,"textures":21,"programs":205,"calls":31}
+ALL PHASE 09 BROWSER CHECKS PASSED

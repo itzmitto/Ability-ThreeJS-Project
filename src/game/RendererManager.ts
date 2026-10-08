@@ -10,6 +10,7 @@ import type { GraphicsSettings } from '../quality/GraphicsSettings';
 export class RendererManager {
   readonly renderer: WebGLRenderer;
   readonly composer: EffectComposer;
+  beforeRender?:()=>void;
   private readonly bloom = new UnrealBloomPass(new Vector2(1, 1), 0.18, 0.65, 0.85);
   private readonly vignette = new ShaderPass({
     uniforms: { tDiffuse: { value: null } },
@@ -47,7 +48,7 @@ export class RendererManager {
     this.composer.setPixelRatio(this.renderer.getPixelRatio());
     this.composer.setSize(window.innerWidth, window.innerHeight);
   };
-  render(): void { this.renderer.info.reset(); this.composer.render(); }
+  render(): void { this.renderer.info.reset(); this.beforeRender?.(); this.composer.render(); }
   dispose(): void {
     this.unsubscribe();
     window.removeEventListener('resize', this.resize);

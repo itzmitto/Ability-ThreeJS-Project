@@ -1,0 +1,160 @@
+PASS Local Rocketbox human and Idle
+PASS WASD and Walk
+PASS Sprint and Run
+PASS Camera-relative mouse aiming and existing ground target
+PASS V selects ABYSSAL FLAME
+PASS Existing HUD shows V / ABYSSAL FLAME / ember crest
+PASS Normal left click casts and starts six-second cooldown
+PASS Cooldown rejects repeated cast
+PASS Existing cooldown mask and remaining time
+PASS Real-time 8.6 second effect expires
+PASS 5 aliases V
+PASS Sky failure rejects without cooldown or origin strike
+PASS KeyQ existing spell selects and casts
+PASS glacial-eruption VFX render
+PASS KeyE existing spell selects and casts
+PASS tempest-break VFX render
+PASS KeyR existing spell selects and casts
+PASS heavens-verdict VFX render
+PASS KeyF existing spell selects and casts
+PASS megiddo VFX render
+PASS X remains empty
+PASS Exactly five equipped abilities
+PASS F3 debug works
+PASS LOW charge follows right hand
+PASS LOW ground ignition wave travels
+PASS Kindling and leaking dark smoke precede eruption
+PASS LOW batched main / secondary / pocket flames
+PASS Real red 3D light and reflected fire heat
+PASS Restrained camera feedback
+PASS Inferno persists with smoke and rising ember categories
+PASS LOW → MAX during active lingering fire
+PASS MAX → LOW during late extinguish
+PASS Lights leave before final smoke / afterglow
+PASS Smoke / residual embers outlast flames
+PASS 8.6 second lifetime completes
+PASS Dispose removes root and subscription exactly once
+PASS MEDIUM charge follows right hand
+PASS MEDIUM ground ignition wave travels
+PASS Kindling and leaking dark smoke precede eruption
+PASS MEDIUM batched main / secondary / pocket flames
+PASS Real red 3D light and reflected fire heat
+PASS Restrained camera feedback
+PASS Inferno persists with smoke and rising ember categories
+PASS LOW → MAX during active lingering fire
+PASS MAX → LOW during late extinguish
+PASS Lights leave before final smoke / afterglow
+PASS Smoke / residual embers outlast flames
+PASS 8.6 second lifetime completes
+PASS Dispose removes root and subscription exactly once
+PASS MAX charge follows right hand
+PASS MAX ground ignition wave travels
+PASS Kindling and leaking dark smoke precede eruption
+PASS MAX batched main / secondary / pocket flames
+PASS Real red 3D light and reflected fire heat
+PASS Restrained camera feedback
+PASS Inferno persists with smoke and rising ember categories
+PASS LOW → MAX during active lingering fire
+PASS MAX → LOW during late extinguish
+PASS Lights leave before final smoke / afterglow
+PASS Smoke / residual embers outlast flames
+PASS 8.6 second lifetime completes
+PASS Dispose removes root and subscription exactly once
+PASS 42 metre clamp
+PASS Abyssal stress cast 1
+PASS Abyssal stress cast 2
+PASS Abyssal stress cast 3
+PASS Abyssal stress cast 4
+PASS Abyssal stress cast 5
+PASS Abyssal stress cast 6
+PASS Abyssal stress cast 7
+PASS Abyssal stress cast 8
+PASS Abyssal stress cast 9
+PASS Abyssal stress cast 10
+PASS 10 casts restore scene / GPU / programs / lights / subscriptions
+PASS Abyssal stress cast 11
+PASS Abyssal stress cast 12
+PASS Abyssal stress cast 13
+PASS Abyssal stress cast 14
+PASS Abyssal stress cast 15
+PASS Abyssal stress cast 16
+PASS Abyssal stress cast 17
+PASS Abyssal stress cast 18
+PASS Abyssal stress cast 19
+PASS Abyssal stress cast 20
+PASS 20 casts restore scene / GPU / programs / lights / subscriptions
+PASS 20-cast alternating sequence 1
+PASS 20-cast alternating sequence 2
+PASS 20-cast alternating sequence 3
+PASS 20-cast alternating sequence 4
+PASS 20-cast alternating sequence 5
+PASS 20-cast alternating sequence 6
+PASS 20-cast alternating sequence 7
+PASS 20-cast alternating sequence 8
+PASS 20-cast alternating sequence 9
+PASS 20-cast alternating sequence 10
+PASS 20-cast alternating sequence 11
+PASS 20-cast alternating sequence 12
+PASS 20-cast alternating sequence 13
+PASS 20-cast alternating sequence 14
+PASS 20-cast alternating sequence 15
+PASS 20-cast alternating sequence 16
+PASS 20-cast alternating sequence 17
+PASS 20-cast alternating sequence 18
+PASS 20-cast alternating sequence 19
+PASS 20-cast alternating sequence 20
+PASS 20 Ice → Wind → Lightning → Megiddo → Abyssal casts restore baseline
+PASS 40-cast alternating sequence 1
+PASS 40-cast alternating sequence 2
+PASS 40-cast alternating sequence 3
+PASS 40-cast alternating sequence 4
+PASS 40-cast alternating sequence 5
+PASS 40-cast alternating sequence 6
+PASS 40-cast alternating sequence 7
+PASS 40-cast alternating sequence 8
+PASS 40-cast alternating sequence 9
+PASS 40-cast alternating sequence 10
+PASS 40-cast alternating sequence 11
+PASS 40-cast alternating sequence 12
+PASS 40-cast alternating sequence 13
+PASS 40-cast alternating sequence 14
+PASS 40-cast alternating sequence 15
+PASS 40-cast alternating sequence 16
+PASS 40-cast alternating sequence 17
+PASS 40-cast alternating sequence 18
+PASS 40-cast alternating sequence 19
+PASS 40-cast alternating sequence 20
+PASS 40-cast alternating sequence 21
+PASS 40-cast alternating sequence 22
+PASS 40-cast alternating sequence 23
+PASS 40-cast alternating sequence 24
+PASS 40-cast alternating sequence 25
+PASS 40-cast alternating sequence 26
+PASS 40-cast alternating sequence 27
+PASS 40-cast alternating sequence 28
+PASS 40-cast alternating sequence 29
+PASS 40-cast alternating sequence 30
+PASS 40-cast alternating sequence 31
+PASS 40-cast alternating sequence 32
+PASS 40-cast alternating sequence 33
+PASS 40-cast alternating sequence 34
+PASS 40-cast alternating sequence 35
+PASS 40-cast alternating sequence 36
+PASS 40-cast alternating sequence 37
+PASS 40-cast alternating sequence 38
+PASS 40-cast alternating sequence 39
+PASS 40-cast alternating sequence 40
+PASS 40 Ice → Wind → Lightning → Megiddo → Abyssal casts restore baseline
+PASS Rapid initial cast
+PASS 80 rapid attempts rejected during cooldown
+PASS Rapid rejection stress restores all counters
+PASS LOW real-time profile expires
+PASS MEDIUM real-time profile expires
+PASS MAX real-time profile expires
+PASS All profiles return to warmed baseline
+
+PROFILES [{"stage":"eruption","preset":"LOW","calls":17,"triangles":20986,"particles":127,"instances":68},{"stage":"eruption","preset":"MEDIUM","calls":35,"triangles":65301,"particles":340,"instances":202},{"stage":"eruption","preset":"MAX","calls":35,"triangles":131709,"particles":765,"instances":432},{"stage":"real-time full cast","preset":"LOW","viewport":[1280,720],"frames":1484,"medianMs":6.1,"p95Ms":6.2,"approxFps":164,"peakCalls":18,"peakParticles":127,"peakTriangles":20988,"peakInstances":68,"peakLights":1},{"stage":"real-time full cast","preset":"MEDIUM","viewport":[1280,720],"frames":1484,"medianMs":6.1,"p95Ms":6.2,"approxFps":164,"peakCalls":36,"peakParticles":340,"peakTriangles":65303,"peakInstances":202,"peakLights":2},{"stage":"real-time full cast","preset":"MAX","viewport":[1280,720],"frames":1483,"medianMs":6.1,"p95Ms":6.2,"approxFps":164,"peakCalls":36,"peakParticles":765,"peakTriangles":131711,"peakInstances":432,"peakLights":2}]
+BASELINE {"children":12,"lights":0,"subscriptions":5,"active":0,"geometries":106,"textures":20,"programs":97,"calls":25}
+FINAL {"children":12,"lights":0,"subscriptions":5,"active":0,"geometries":106,"textures":20,"programs":97,"calls":25}
+ALL PHASE 06 BROWSER CHECKS PASSED
+PASS Full disposal: {"geometries":0,"textures":0} / subscriptions 0

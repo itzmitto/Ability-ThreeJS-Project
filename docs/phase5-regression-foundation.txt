@@ -1,0 +1,27 @@
+PASS Render loop and FPS telemetry
+PASS Crosshair ground intersection
+PASS W moves forward through actual keyboard input
+PASS Camera follows moving player
+PASS Diagonal movement
+PASS S moves backward
+PASS A strafes left
+PASS Mouse rotates camera and changes aim ray
+PASS Q selects slot 1
+PASS E selects slot 2
+PASS R selects slot 3
+PASS F selects slot 4
+PASS V selects slot 5
+PASS X selects slot 6
+PASS Empty mouse cast creates no effects and stays safe
+PASS LOW: particles, resolution and shadows applied
+PASS MEDIUM: particles, resolution and shadows applied
+PASS MAX: particles, resolution and shadows applied
+PASS Quality changes real rendered geometry
+PASS Performance HUD toggle
+PASS F3 debug overlay
+PASS Sky aim rejects ground and caps range
+PASS Camera pitch clamp
+PASS Disposal removes canvas and releases geometry
+
+ALL BROWSER CHECKS PASSED
+Triangles LOW / MED / MAX: 11950 / 37033 / 69801

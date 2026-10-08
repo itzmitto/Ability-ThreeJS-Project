@@ -32,7 +32,17 @@ export class AbilityBar {
       button.style.setProperty('--element-color', ability?.color ?? '#8caac4');
       button.setAttribute('aria-label', `${this.abilities.slots[index].key}: ${name}`);
       // Icons are text glyphs; untrusted markup is never inserted into the UI.
-      if (ability?.icon && this.icons[index].textContent !== ability.icon) this.icons[index].textContent = ability.icon;
+      if (ability?.icon === 'blood-eclipse') {
+        if (this.icons[index].dataset.icon !== 'blood-eclipse') {
+          this.icons[index].innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M26 12a10 10 0 1 0-20 0M10 12a6 6 0 0 1 12 0M16 7l2 11-2 9-2-9ZM7 17c-4 5-3 8 0 8s4-3 0-8ZM25 17c-4 5-3 8 0 8s4-3 0-8Z"/></svg>';
+          this.icons[index].dataset.icon = 'blood-eclipse';
+        }
+      } else if (ability?.icon === 'storm-dragon') {
+        if (this.icons[index].dataset.icon !== 'storm-dragon') {
+          this.icons[index].innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="m4 5 7 5 3-6-1 9 5-3 7-6-3 10 6 4-8 2-3 6-5-1 1-4-5-5 2-6Z"/><path d="m17 15 3-1-2 4M5 20l-3 5 9-3M23 23l6 5-2-7"/></svg>';
+          this.icons[index].dataset.icon = 'storm-dragon';
+        }
+      } else if (ability?.icon && this.icons[index].textContent !== ability.icon) this.icons[index].textContent = ability.icon;
       const remaining = this.abilities.getCooldown(index);
       this.cooldowns[index].textContent = remaining > 0 ? remaining.toFixed(1) : '';
       button.classList.toggle('on-cooldown', remaining > 0);

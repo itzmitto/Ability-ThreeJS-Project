@@ -1,0 +1,61 @@
+PASS Local GLB loads, with no remote runtime model
+PASS Idle animation
+PASS Real hand and chest bone attachments
+PASS W movement uses Walk animation
+PASS Shift sprint uses Run animation
+PASS Deceleration returns to Idle
+PASS Camera orbit and shared ground targeting
+PASS X now selects WORLDREND
+PASS Q still selects Glacial Eruption
+PASS Left mouse casts through existing input manager
+PASS 2.5 second cooldown rejects recast
+PASS Eruption emits snow, instanced crystals, mist and shards
+PASS HUD shows cooldown progress
+PASS Real-time effect expires and removes its root
+PASS LOW: crystals grow and settle, rather than teleporting
+PASS LOW: 6 crystals / 20 shards / 80 snow
+PASS Live quality change affects an already active spell
+PASS Temporary point light exists during eruption
+PASS Shards, mist and point light stop after burst
+PASS Five second lifetime ends
+PASS MEDIUM: crystals grow and settle, rather than teleporting
+PASS MEDIUM: 10 crystals / 42 shards / 210 snow
+PASS Live quality change affects an already active spell
+PASS Temporary point light exists during eruption
+PASS Shards, mist and point light stop after burst
+PASS Five second lifetime ends
+PASS MAX: crystals grow and settle, rather than teleporting
+PASS MAX: 16 crystals / 84 shards / 420 snow
+PASS Live quality change affects an already active spell
+PASS Temporary point light exists during eruption
+PASS Shards, mist and point light stop after burst
+PASS Five second lifetime ends
+PASS Warm-up cast
+PASS Repeated cast 1
+PASS Repeated cast 2
+PASS Repeated cast 3
+PASS Repeated cast 4
+PASS Repeated cast 5
+PASS Repeated cast 6
+PASS Repeated cast 7
+PASS Repeated cast 8
+PASS Repeated cast 9
+PASS Repeated cast 10
+PASS 10 casts return scene and GPU memory to baseline
+PASS Repeated cast 11
+PASS Repeated cast 12
+PASS Repeated cast 13
+PASS Repeated cast 14
+PASS Repeated cast 15
+PASS Repeated cast 16
+PASS Repeated cast 17
+PASS Repeated cast 18
+PASS Repeated cast 19
+PASS Repeated cast 20
+PASS 20 casts return scene and GPU memory to baseline
+PASS 40 rapid requests are rejected during cooldown
+PASS Rapid cast stress returns to baseline
+
+BASELINE {"children":12,"geometries":12,"textures":20,"programs":25,"calls":25}
+FINAL {"children":12,"geometries":12,"textures":20,"programs":25,"calls":25}
+ALL PHASE 02 BROWSER CHECKS PASSED

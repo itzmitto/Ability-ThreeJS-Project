@@ -16,10 +16,13 @@ export class PlayerVisual {
   private rightHand = new Object3D();
   private leftHand = new Object3D();
   private chest = new Object3D();
+  private leftFoot = new Object3D();
+  private rightFoot = new Object3D();
   constructor() {
     this.rightHand.position.set(-0.28, 1.0, 0); this.leftHand.position.set(0.28, 1.0, 0);
     this.chest.position.set(0, 1.3, 0);
-    this.root.add(this.rightHand, this.leftHand, this.chest);
+    this.leftFoot.position.set(.1,.025,0); this.rightFoot.position.set(-.1,.025,0);
+    this.root.add(this.rightHand, this.leftHand, this.chest, this.leftFoot, this.rightFoot);
     this.ready = typeof window === 'undefined' ? Promise.resolve() : this.load();
   }
   private async load(): Promise<void> {
@@ -47,6 +50,8 @@ export class PlayerVisual {
       this.rightHand = model.getObjectByName('Bip01_R_Hand') ?? model.getObjectByName('Bip01 R Hand') ?? this.rightHand;
       this.leftHand = model.getObjectByName('Bip01_L_Hand') ?? model.getObjectByName('Bip01 L Hand') ?? this.leftHand;
       this.chest = model.getObjectByName('Bip01_Spine2') ?? model.getObjectByName('Bip01 Spine2') ?? this.chest;
+      this.leftFoot = model.getObjectByName('Bip01_L_Foot') ?? model.getObjectByName('Bip01 L Foot') ?? this.leftFoot;
+      this.rightFoot = model.getObjectByName('Bip01_R_Foot') ?? model.getObjectByName('Bip01 R Foot') ?? this.rightFoot;
       this.mixer = new AnimationMixer(model);
       for (const clip of gltf.animations) this.actions.set(clip.name, this.mixer.clipAction(clip));
       this.actions.get('Idle')?.play(); this.loaded = true;
@@ -71,6 +76,7 @@ export class PlayerVisual {
   getRightHandWorldPosition(result = new Vector3()): Vector3 { this.root.updateWorldMatrix(true, true); return this.rightHand.getWorldPosition(result); }
   getLeftHandWorldPosition(result = new Vector3()): Vector3 { this.root.updateWorldMatrix(true, true); return this.leftHand.getWorldPosition(result); }
   getChestWorldPosition(result = new Vector3()): Vector3 { this.root.updateWorldMatrix(true, true); return this.chest.getWorldPosition(result); }
+  getFootWorldPosition(side: 'left'|'right', result = new Vector3()): Vector3 { this.root.updateWorldMatrix(true,true); return (side==='left'?this.leftFoot:this.rightFoot).getWorldPosition(result); }
   private releaseModel(model: Group): void {
     const geometries = new Set<Mesh['geometry']>(); const materials = new Set<Material>(); const textures = new Set<Texture>();
     model.traverse(object => {

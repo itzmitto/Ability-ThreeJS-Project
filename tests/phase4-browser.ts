@@ -206,11 +206,11 @@ try {
     );
     empty();
   }
-  game.abilities.select(3);
-  assert(!game.abilities.cast(context()), "F/V/X remain empty");
+  game.abilities.select(5);
+  assert(game.abilities.selectedAbility?.id === "worldrend", "X now selects WORLDREND");
   assert(
-    game.abilities.slots.filter((s) => s.abilityId !== null).length === 3,
-    "Exactly three real equipped abilities",
+    game.abilities.slots.filter((s) => s.abilityId !== null).length === 8,
+    "Exactly seven real equipped abilities",
   );
   const baseSubscriptions = game.settings.subscriberCount;
   for (const preset of ["LOW", "MEDIUM", "MAX"] as const) {

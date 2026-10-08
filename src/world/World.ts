@@ -3,6 +3,7 @@ import type { GraphicsSettings } from '../quality/GraphicsSettings';
 import { DarkWater } from './DarkWater';
 import { Atmosphere } from './Atmosphere';
 import { Environment } from './Environment';
+import type { Player } from '../player/Player';
 
 export class World {
   readonly water: DarkWater;
@@ -13,6 +14,6 @@ export class World {
     this.atmosphere = new Atmosphere(scene, quality);
     this.environment = new Environment(scene, quality);
   }
-  update(time: number, position: Vector3): void { this.water.update(time, position); this.atmosphere.update(time, position); this.environment.update(time, position); }
+  update(time: number, position: Vector3, player?:Player): void { this.water.update(time, position, player); this.atmosphere.update(time, position); this.environment.update(time, position); }
   dispose(): void { this.water.dispose(); this.atmosphere.dispose(); this.environment.dispose(); }
 }

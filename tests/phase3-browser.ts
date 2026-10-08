@@ -163,8 +163,8 @@ try {
   await delay(80);
   key("Digit2", false);
   assert(game.abilities.selectedAbility?.id === "tempest-break", "2 aliases E");
-  game.abilities.select(3);
-  assert(!game.abilities.cast(context()), "Remaining slots safely stay empty");
+  game.abilities.select(5);
+  assert(game.abilities.selectedAbility?.id === "worldrend", "X now selects WORLDREND");
   game.abilities.select(1);
   key("F3", true);
   await delay(120);

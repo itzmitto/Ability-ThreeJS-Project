@@ -1,0 +1,168 @@
+PASS Local human and Idle
+PASS WASD / Walk
+PASS Sprint / Run
+PASS Camera mouse aiming and shared ground target
+PASS X selects WORLDREND
+PASS Existing HUD shows WORLDREND
+PASS Left click casts and starts twelve-second cooldown
+PASS Cooldown rejection
+PASS Cooldown progress mask
+PASS Real-time expiry while player moves
+PASS 6 aliases X
+PASS Sky rejection without cooldown
+PASS glacial-eruption selection and cast
+PASS glacial-eruption visual layers render
+PASS tempest-break selection and cast
+PASS tempest-break visual layers render
+PASS heavens-verdict selection and cast
+PASS heavens-verdict visual layers render
+PASS megiddo selection and cast
+PASS megiddo visual layers render
+PASS abyssal-flame selection and cast
+PASS abyssal-flame visual layers render
+PASS Exactly six equipped spells
+PASS F3 debug
+PASS LOW live hand channel
+PASS 3D fractures precede opening
+PASS Recessed layered geometry opens
+PASS LOW → MAX during opening preserves clock
+PASS LOW central quality geometry and particle budget
+PASS Depth quality updates actual shader
+PASS Violet scene light / gravitational water response
+PASS MAX → MEDIUM stable phase without restart
+PASS Camera movement does not billboard the rift
+PASS MAX → LOW during collapse
+PASS Geometric compression into singularity
+PASS Expanding dimensional water shockwave
+PASS MEDIUM → MAX repair / lights expire
+PASS Eleven-second lifetime completes
+PASS Expiry releases scene and subscription once
+PASS MEDIUM live hand channel
+PASS 3D fractures precede opening
+PASS Recessed layered geometry opens
+PASS LOW → MAX during opening preserves clock
+PASS MEDIUM central quality geometry and particle budget
+PASS Depth quality updates actual shader
+PASS Violet scene light / gravitational water response
+PASS MAX → MEDIUM stable phase without restart
+PASS Camera movement does not billboard the rift
+PASS MAX → LOW during collapse
+PASS Geometric compression into singularity
+PASS Expanding dimensional water shockwave
+PASS MEDIUM → MAX repair / lights expire
+PASS Eleven-second lifetime completes
+PASS Expiry releases scene and subscription once
+PASS MAX live hand channel
+PASS 3D fractures precede opening
+PASS Recessed layered geometry opens
+PASS LOW → MAX during opening preserves clock
+PASS MAX central quality geometry and particle budget
+PASS Depth quality updates actual shader
+PASS Violet scene light / gravitational water response
+PASS MAX → MEDIUM stable phase without restart
+PASS Camera movement does not billboard the rift
+PASS MAX → LOW during collapse
+PASS Geometric compression into singularity
+PASS Expanding dimensional water shockwave
+PASS MEDIUM → MAX repair / lights expire
+PASS Eleven-second lifetime completes
+PASS Expiry releases scene and subscription once
+PASS 55 metre range clamp
+PASS WORLDREND stress 1
+PASS WORLDREND stress 2
+PASS WORLDREND stress 3
+PASS WORLDREND stress 4
+PASS WORLDREND stress 5
+PASS WORLDREND stress 6
+PASS WORLDREND stress 7
+PASS WORLDREND stress 8
+PASS WORLDREND stress 9
+PASS WORLDREND stress 10
+PASS 10 casts restore all warmed counters
+PASS WORLDREND stress 11
+PASS WORLDREND stress 12
+PASS WORLDREND stress 13
+PASS WORLDREND stress 14
+PASS WORLDREND stress 15
+PASS WORLDREND stress 16
+PASS WORLDREND stress 17
+PASS WORLDREND stress 18
+PASS WORLDREND stress 19
+PASS WORLDREND stress 20
+PASS 20 casts restore all warmed counters
+PASS 20 alternating cast 1
+PASS 20 alternating cast 2
+PASS 20 alternating cast 3
+PASS 20 alternating cast 4
+PASS 20 alternating cast 5
+PASS 20 alternating cast 6
+PASS 20 alternating cast 7
+PASS 20 alternating cast 8
+PASS 20 alternating cast 9
+PASS 20 alternating cast 10
+PASS 20 alternating cast 11
+PASS 20 alternating cast 12
+PASS 20 alternating cast 13
+PASS 20 alternating cast 14
+PASS 20 alternating cast 15
+PASS 20 alternating cast 16
+PASS 20 alternating cast 17
+PASS 20 alternating cast 18
+PASS 20 alternating cast 19
+PASS 20 alternating cast 20
+PASS 20 alternating all-six casts restore baseline
+PASS 40 alternating cast 1
+PASS 40 alternating cast 2
+PASS 40 alternating cast 3
+PASS 40 alternating cast 4
+PASS 40 alternating cast 5
+PASS 40 alternating cast 6
+PASS 40 alternating cast 7
+PASS 40 alternating cast 8
+PASS 40 alternating cast 9
+PASS 40 alternating cast 10
+PASS 40 alternating cast 11
+PASS 40 alternating cast 12
+PASS 40 alternating cast 13
+PASS 40 alternating cast 14
+PASS 40 alternating cast 15
+PASS 40 alternating cast 16
+PASS 40 alternating cast 17
+PASS 40 alternating cast 18
+PASS 40 alternating cast 19
+PASS 40 alternating cast 20
+PASS 40 alternating cast 21
+PASS 40 alternating cast 22
+PASS 40 alternating cast 23
+PASS 40 alternating cast 24
+PASS 40 alternating cast 25
+PASS 40 alternating cast 26
+PASS 40 alternating cast 27
+PASS 40 alternating cast 28
+PASS 40 alternating cast 29
+PASS 40 alternating cast 30
+PASS 40 alternating cast 31
+PASS 40 alternating cast 32
+PASS 40 alternating cast 33
+PASS 40 alternating cast 34
+PASS 40 alternating cast 35
+PASS 40 alternating cast 36
+PASS 40 alternating cast 37
+PASS 40 alternating cast 38
+PASS 40 alternating cast 39
+PASS 40 alternating cast 40
+PASS 40 alternating all-six casts restore baseline
+PASS Rapid initial cast
+PASS 100 rejected cooldown requests
+PASS Rapid stress stable
+PASS LOW real-time expiry
+PASS MEDIUM real-time expiry
+PASS MAX real-time expiry
+PASS All quality profiles return to baseline
+PASS Active disposal after movement and quality change returns baseline
+
+PROFILES [{"stage":"stable","preset":"LOW","calls":16,"triangles":23034,"particles":150,"instances":106,"geometry":60,"programs":43},{"stage":"implosion","preset":"LOW","calls":16,"triangles":22710,"particles":150,"instances":106},{"stage":"stable","preset":"MEDIUM","calls":34,"triangles":50613,"particles":480,"instances":262,"geometry":63,"programs":57},{"stage":"implosion","preset":"MEDIUM","calls":31,"triangles":45749,"particles":480,"instances":262},{"stage":"stable","preset":"MAX","calls":32,"triangles":83725,"particles":1100,"instances":540,"geometry":63,"programs":57},{"stage":"implosion","preset":"MAX","calls":30,"triangles":77065,"particles":1100,"instances":540},{"stage":"real-time full cast","preset":"LOW","viewport":[1280,720],"frames":1896,"medianMs":6.1,"p95Ms":6.2,"approxFps":164,"peakCalls":17,"peakParticles":150,"peakTriangles":23214,"peakInstances":106,"stableFrameMs":{"frames":412,"median":6.1,"p95":6.2},"implosionFrameMs":{"frames":157,"median":6.1,"p95":6.2},"memory":{"geometries":133,"textures":8},"programs":143},{"stage":"real-time full cast","preset":"MEDIUM","viewport":[1280,720],"frames":1896,"medianMs":6.1,"p95Ms":6.2,"approxFps":164,"peakCalls":35,"peakParticles":480,"peakTriangles":50793,"peakInstances":262,"stableFrameMs":{"frames":412,"median":6.1,"p95":6.2},"implosionFrameMs":{"frames":157,"median":6.1,"p95":6.2},"memory":{"geometries":134,"textures":20},"programs":143},{"stage":"real-time full cast","preset":"MAX","viewport":[1280,720],"frames":1895,"medianMs":6.1,"p95Ms":6.2,"approxFps":164,"peakCalls":35,"peakParticles":1100,"peakTriangles":87829,"peakInstances":540,"stableFrameMs":{"frames":412,"median":6.1,"p95":6.2},"implosionFrameMs":{"frames":157,"median":6.1,"p95":6.2},"memory":{"geometries":134,"textures":20},"programs":143}]
+BASELINE {"children":12,"lights":0,"subscriptions":5,"active":0,"geometries":134,"textures":20,"programs":143,"calls":25}
+FINAL {"children":12,"lights":0,"subscriptions":5,"active":0,"geometries":134,"textures":20,"programs":143,"calls":25}
+ALL PHASE 07 BROWSER CHECKS PASSED
+PASS Full disposal: {"geometries":0,"textures":0} / subscriptions 0

@@ -1,0 +1,154 @@
+PASS Local Rocketbox / Idle
+PASS WASD / Walk
+PASS Shift / Run
+PASS Existing mouse aim and ground targeting
+PASS C selects seventh spell
+PASS Original dragon icon and seventh HUD card
+PASS Left click and 25-second shared cooldown
+PASS HUD cooldown mask
+PASS 7 aliases C
+PASS Invalid sky cast rejects without cooldown
+PASS glacial-eruption still selects and casts
+PASS glacial-eruption layers render
+PASS tempest-break still selects and casts
+PASS tempest-break layers render
+PASS heavens-verdict still selects and casts
+PASS heavens-verdict layers render
+PASS megiddo still selects and casts
+PASS megiddo layers render
+PASS abyssal-flame still selects and casts
+PASS abyssal-flame layers render
+PASS worldrend still selects and casts
+PASS worldrend layers render
+PASS Exactly seven real abilities
+PASS F3 debug
+PASS Performance HUD retained
+PASS LOW → MAX emergence does not reset time
+PASS Flight → hover without teleport
+PASS LOW charging retains jaw anatomy
+PASS Breath attached to animated mouth / normalized direction
+PASS Six-layer breath, water eruption and dome render
+PASS Tornadoes visible in all presets
+PASS Dragon dissolves before lingering storm
+PASS LOW transforms and geometry remain finite
+PASS 18-second completion
+PASS Root / lights / quality subscription released once
+PASS LOW → MAX emergence does not reset time
+PASS Flight → hover without teleport
+PASS LOW charging retains jaw anatomy
+PASS Breath attached to animated mouth / normalized direction
+PASS Six-layer breath, water eruption and dome render
+PASS Tornadoes visible in all presets
+PASS Dragon dissolves before lingering storm
+PASS MEDIUM transforms and geometry remain finite
+PASS 18-second completion
+PASS Root / lights / quality subscription released once
+PASS LOW → MAX emergence does not reset time
+PASS Flight → hover without teleport
+PASS LOW charging retains jaw anatomy
+PASS Breath attached to animated mouth / normalized direction
+PASS Six-layer breath, water eruption and dome render
+PASS Tornadoes visible in all presets
+PASS Dragon dissolves before lingering storm
+PASS MAX transforms and geometry remain finite
+PASS 18-second completion
+PASS Root / lights / quality subscription released once
+PASS 70-metre range clamp
+PASS Isolated dragon cast 1
+PASS Isolated dragon cast 2
+PASS Isolated dragon cast 3
+PASS Isolated dragon cast 4
+PASS Isolated dragon cast 5
+PASS Isolated dragon cast 6
+PASS Isolated dragon cast 7
+PASS Isolated dragon cast 8
+PASS Isolated dragon cast 9
+PASS Isolated dragon cast 10
+PASS 10 isolated casts restore warmed counters
+PASS Isolated dragon cast 11
+PASS Isolated dragon cast 12
+PASS Isolated dragon cast 13
+PASS Isolated dragon cast 14
+PASS Isolated dragon cast 15
+PASS Isolated dragon cast 16
+PASS Isolated dragon cast 17
+PASS Isolated dragon cast 18
+PASS Isolated dragon cast 19
+PASS Isolated dragon cast 20
+PASS 20 isolated casts restore warmed counters
+PASS 20 alternating cast 1
+PASS 20 alternating cast 2
+PASS 20 alternating cast 3
+PASS 20 alternating cast 4
+PASS 20 alternating cast 5
+PASS 20 alternating cast 6
+PASS 20 alternating cast 7
+PASS 20 alternating cast 8
+PASS 20 alternating cast 9
+PASS 20 alternating cast 10
+PASS 20 alternating cast 11
+PASS 20 alternating cast 12
+PASS 20 alternating cast 13
+PASS 20 alternating cast 14
+PASS 20 alternating cast 15
+PASS 20 alternating cast 16
+PASS 20 alternating cast 17
+PASS 20 alternating cast 18
+PASS 20 alternating cast 19
+PASS 20 alternating cast 20
+PASS 20 alternating all-seven casts restore warmed counters
+PASS 40 alternating cast 1
+PASS 40 alternating cast 2
+PASS 40 alternating cast 3
+PASS 40 alternating cast 4
+PASS 40 alternating cast 5
+PASS 40 alternating cast 6
+PASS 40 alternating cast 7
+PASS 40 alternating cast 8
+PASS 40 alternating cast 9
+PASS 40 alternating cast 10
+PASS 40 alternating cast 11
+PASS 40 alternating cast 12
+PASS 40 alternating cast 13
+PASS 40 alternating cast 14
+PASS 40 alternating cast 15
+PASS 40 alternating cast 16
+PASS 40 alternating cast 17
+PASS 40 alternating cast 18
+PASS 40 alternating cast 19
+PASS 40 alternating cast 20
+PASS 40 alternating cast 21
+PASS 40 alternating cast 22
+PASS 40 alternating cast 23
+PASS 40 alternating cast 24
+PASS 40 alternating cast 25
+PASS 40 alternating cast 26
+PASS 40 alternating cast 27
+PASS 40 alternating cast 28
+PASS 40 alternating cast 29
+PASS 40 alternating cast 30
+PASS 40 alternating cast 31
+PASS 40 alternating cast 32
+PASS 40 alternating cast 33
+PASS 40 alternating cast 34
+PASS 40 alternating cast 35
+PASS 40 alternating cast 36
+PASS 40 alternating cast 37
+PASS 40 alternating cast 38
+PASS 40 alternating cast 39
+PASS 40 alternating cast 40
+PASS 40 alternating all-seven casts restore warmed counters
+PASS 100 cooldown-rejected requests stay bounded
+PASS Moving cast, active breath quality changes and cleanup
+PASS LOW real-time expiry
+PASS MEDIUM real-time expiry
+PASS MAX real-time expiry
+PASS All real-time profiles restore warmed baseline
+PASS Active ultimate disposal restores scene and GPU cache
+
+PROFILES [{"preset":"LOW","viewport":[1280,720],"peakCalls":80,"peakTriangles":51026,"peakParticles":720,"peakInstances":104,"stages":[{"stage":"gathering","frames":362,"medianMs":6.1,"p95Ms":6.1},{"stage":"emergence","frames":379,"medianMs":6.1,"p95Ms":6.2},{"stage":"flight","frames":412,"medianMs":6.1,"p95Ms":6.2},{"stage":"charge","frames":297,"medianMs":6.1,"p95Ms":6.1},{"stage":"breath","frames":263,"medianMs":6.1,"p95Ms":6.2},{"stage":"cataclysm","frames":594,"medianMs":6.1,"p95Ms":6.1},{"stage":"aftermath","frames":741,"medianMs":6.1,"p95Ms":6.2}],"resources":{"children":12,"objects":103,"lights":0,"subscriptions":5,"active":0,"geometries":206,"textures":8,"programs":174,"calls":8}},{"preset":"MEDIUM","viewport":[1280,720],"peakCalls":98,"peakTriangles":94521,"peakParticles":2020,"peakInstances":248,"stages":[{"stage":"gathering","frames":362,"medianMs":6.1,"p95Ms":6.2},{"stage":"emergence","frames":379,"medianMs":6.1,"p95Ms":6.2},{"stage":"flight","frames":412,"medianMs":6.1,"p95Ms":6.1},{"stage":"charge","frames":297,"medianMs":6.1,"p95Ms":6.2},{"stage":"breath","frames":263,"medianMs":6.1,"p95Ms":6.2},{"stage":"cataclysm","frames":594,"medianMs":6.1,"p95Ms":6.2},{"stage":"aftermath","frames":741,"medianMs":6.1,"p95Ms":6.2}],"resources":{"children":12,"objects":103,"lights":0,"subscriptions":5,"active":0,"geometries":206,"textures":20,"programs":174,"calls":25}},{"preset":"MAX","viewport":[1280,720],"peakCalls":98,"peakTriangles":149373,"peakParticles":4100,"peakInstances":476,"stages":[{"stage":"gathering","frames":362,"medianMs":6.1,"p95Ms":6.2},{"stage":"emergence","frames":379,"medianMs":6.1,"p95Ms":6.2},{"stage":"flight","frames":412,"medianMs":6.1,"p95Ms":6.2},{"stage":"charge","frames":297,"medianMs":6.1,"p95Ms":6.1},{"stage":"breath","frames":264,"medianMs":6.1,"p95Ms":6.1},{"stage":"cataclysm","frames":593,"medianMs":6.1,"p95Ms":6.2},{"stage":"aftermath","frames":741,"medianMs":6.1,"p95Ms":6.2}],"resources":{"children":12,"objects":103,"lights":0,"subscriptions":5,"active":0,"geometries":206,"textures":20,"programs":174,"calls":25}}]
+BASELINE {"children":12,"objects":103,"lights":0,"subscriptions":5,"active":0,"geometries":206,"textures":20,"programs":174,"calls":25}
+FINAL {"children":12,"objects":103,"lights":0,"subscriptions":5,"active":0,"geometries":206,"textures":20,"programs":174,"calls":25}
+ALL PHASE 08 BROWSER CHECKS PASSED
+PASS Full game disposal begins during active dragon breath
+PASS Full disposal {"geometries":0,"textures":0} subscriptions 0

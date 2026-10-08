@@ -16,6 +16,11 @@ import { HUD } from '../ui/HUD';
 import { GlacialEruption } from '../abilities/ice/GlacialEruption';
 import { TempestBreak } from '../abilities/wind/TempestBreak';
 import { HeavensVerdict } from '../abilities/lightning/HeavensVerdict';
+import { Megiddo } from '../abilities/light/Megiddo';
+import { AbyssalFlame } from '../abilities/fire/AbyssalFlame';
+import { Worldrend } from '../abilities/void/Worldrend';
+import { TempestCataclysm } from '../abilities/stormDragon/TempestCataclysm';
+import { SanguineEclipse } from '../abilities/blood/SanguineEclipse';
 
 /** Composition root only: systems own their logic, resources, and subscriptions. */
 export class Game {
@@ -44,6 +49,7 @@ export class Game {
     this.renderer = new RendererManager(root, this.sceneManager.scene, this.camera.camera, this.settings, canvas);
     this.playerController = new PlayerController(this.player, this.input);
     this.world = new World(this.sceneManager.scene, this.settings);
+    this.renderer.beforeRender=()=>this.world.water.prepareReflection(this.renderer.renderer,this.camera.camera);
     this.targeting = new TargetingSystem(this.sceneManager.scene);
     const glacial = new GlacialEruption();
     this.abilities.registry.register(glacial);
@@ -54,6 +60,21 @@ export class Game {
     const verdict = new HeavensVerdict();
     this.abilities.registry.register(verdict);
     this.abilities.assignSlot(2, verdict.id);
+    const megiddo = new Megiddo();
+    this.abilities.registry.register(megiddo);
+    this.abilities.assignSlot(3, megiddo.id);
+    const abyssal = new AbyssalFlame();
+    this.abilities.registry.register(abyssal);
+    this.abilities.assignSlot(4, abyssal.id);
+    const worldrend = new Worldrend();
+    this.abilities.registry.register(worldrend);
+    this.abilities.assignSlot(5, worldrend.id);
+    const cataclysm = new TempestCataclysm();
+    this.abilities.registry.register(cataclysm);
+    this.abilities.assignSlot(6, cataclysm.id);
+    const sanguine = new SanguineEclipse();
+    this.abilities.registry.register(sanguine);
+    this.abilities.assignSlot(7, sanguine.id);
     this.hud = new HUD(root, this.abilities, this.settings, this.targeting);
     document.addEventListener('visibilitychange', this.visibilityChanged);
   }
@@ -69,7 +90,7 @@ export class Game {
     this.abilities.update(delta);
     this.abilities.handleInput(this.input, this.makeCastContext);
     this.effects.update(delta, this.elapsed);
-    this.world.update(this.elapsed, this.player.position);
+    this.world.update(this.elapsed, this.player.position, this.player);
     if (this.input.wasPressed('F3')) this.hud.toggleDebug();
     if (this.input.wasPressed('KeyP')) { this.hud.performance.toggle(); this.hud.graphics.syncPerformance(this.hud.performance.visible); }
     if (this.input.wasPressed('KeyT')) { this.targeting.markerEnabled = !this.targeting.markerEnabled; this.hud.graphics.syncGroundMarker(this.targeting.markerEnabled); }
@@ -80,7 +101,7 @@ export class Game {
       this.uiElapsed = 0;
     }
     this.renderer.render();
-    if (this.performance.sample(rawDelta, this.renderer.renderer, this.world.atmosphere.count + this.effects.particleCount, this.effects.instanceCount)) this.hud.performance.update(this.performance.stats);
+    if (this.performance.sample(rawDelta, this.renderer.renderer, this.world.atmosphere.count + this.world.water.spray.count + this.effects.particleCount, this.effects.instanceCount)) this.hud.performance.update(this.performance.stats);
     this.input.endFrame();
     this.raf = requestAnimationFrame(this.frame);
   };
@@ -92,6 +113,7 @@ export class Game {
     groundTarget: this.targeting.getGroundTarget()?.clone() ?? null,
     targeting: this.targeting, effectManager: this.effects, quality: this.settings, time: this.elapsed,
     cameraFeedback: this.camera.addFeedback,
+    water: this.world.water.interactions,
   });
   private visibilityChanged = (): void => {
     cancelAnimationFrame(this.raf);

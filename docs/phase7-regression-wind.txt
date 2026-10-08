@@ -1,0 +1,99 @@
+PASS Local Rocketbox human and Idle still work
+PASS WASD still drives Walk
+PASS Sprint still drives Run
+PASS Camera mouse aiming and shared targeting preserved
+PASS E selects Tempest Break
+PASS HUD has E / Tempest Break
+PASS Left click starts wind cast
+PASS Two-second cooldown rejects recast
+PASS Existing HUD displays wind cooldown
+PASS Real-time wind completes and leaves no scene root
+PASS 1 / Q preserves Glacial Eruption casting
+PASS Ice still emits crystals and frost
+PASS 2 aliases E
+PASS X now selects WORLDREND
+PASS F3 debug works
+PASS Performance HUD preserved
+PASS LOW: charge follows real hand
+PASS LOW: projectile visibly travels at 36 m/s
+PASS LOW: moving water wake and tapered trail
+PASS Pressure core compresses before detonation
+PASS LOW: configured ribbons/rings/vortex/particles
+PASS Impact shockwave, vortex, water rings and mist render
+PASS Live preset change affects existing wind effect
+PASS Temporary light expires
+PASS Cleanup removes all child VFX and resets light
+PASS MEDIUM: charge follows real hand
+PASS MEDIUM: projectile visibly travels at 36 m/s
+PASS MEDIUM: moving water wake and tapered trail
+PASS Pressure core compresses before detonation
+PASS MEDIUM: configured ribbons/rings/vortex/particles
+PASS Impact shockwave, vortex, water rings and mist render
+PASS Live preset change affects existing wind effect
+PASS Temporary light expires
+PASS Cleanup removes all child VFX and resets light
+PASS MAX: charge follows real hand
+PASS MAX: projectile visibly travels at 36 m/s
+PASS MAX: moving water wake and tapered trail
+PASS Pressure core compresses before detonation
+PASS MAX: configured ribbons/rings/vortex/particles
+PASS Impact shockwave, vortex, water rings and mist render
+PASS Live preset change affects existing wind effect
+PASS Temporary light expires
+PASS Cleanup removes all child VFX and resets light
+PASS 5m / sky false: finite capped target and 3–4 second lifetime
+PASS 18m / sky false: finite capped target and 3–4 second lifetime
+PASS 100m / sky false: finite capped target and 3–4 second lifetime
+PASS 40m / sky true: finite capped target and 3–4 second lifetime
+PASS Wind stress cast 1
+PASS Wind stress cast 2
+PASS Wind stress cast 3
+PASS Wind stress cast 4
+PASS Wind stress cast 5
+PASS Wind stress cast 6
+PASS Wind stress cast 7
+PASS Wind stress cast 8
+PASS Wind stress cast 9
+PASS Wind stress cast 10
+PASS 10 wind casts return scene / GPU / programs / calls to warmed baseline
+PASS Wind stress cast 11
+PASS Wind stress cast 12
+PASS Wind stress cast 13
+PASS Wind stress cast 14
+PASS Wind stress cast 15
+PASS Wind stress cast 16
+PASS Wind stress cast 17
+PASS Wind stress cast 18
+PASS Wind stress cast 19
+PASS Wind stress cast 20
+PASS 20 wind casts return scene / GPU / programs / calls to warmed baseline
+PASS Alternating ice/wind cast 1
+PASS Alternating ice/wind cast 2
+PASS Alternating ice/wind cast 3
+PASS Alternating ice/wind cast 4
+PASS Alternating ice/wind cast 5
+PASS Alternating ice/wind cast 6
+PASS Alternating ice/wind cast 7
+PASS Alternating ice/wind cast 8
+PASS Alternating ice/wind cast 9
+PASS Alternating ice/wind cast 10
+PASS Alternating ice/wind cast 11
+PASS Alternating ice/wind cast 12
+PASS Alternating ice/wind cast 13
+PASS Alternating ice/wind cast 14
+PASS Alternating ice/wind cast 15
+PASS Alternating ice/wind cast 16
+PASS Alternating ice/wind cast 17
+PASS Alternating ice/wind cast 18
+PASS Alternating ice/wind cast 19
+PASS Alternating ice/wind cast 20
+PASS 20 alternating casts return to warmed baseline
+PASS Rapid cast initial accepted
+PASS 40 rapid requests rejected during cooldown
+PASS Rapid stress returns to baseline
+
+QUALITY [{"preset":"LOW","children":13,"geometries":30,"textures":8,"programs":43,"calls":15,"active":0,"particles":150,"instances":7},{"preset":"MEDIUM","children":13,"geometries":30,"textures":20,"programs":43,"calls":32,"active":0,"particles":380,"instances":17},{"preset":"MAX","children":13,"geometries":30,"textures":20,"programs":43,"calls":32,"active":0,"particles":740,"instances":28}]
+BASELINE {"children":12,"geometries":30,"textures":20,"programs":46,"calls":25,"active":0}
+FINAL {"children":12,"geometries":30,"textures":20,"programs":46,"calls":25,"active":0}
+ALL PHASE 03 BROWSER CHECKS PASSED
+PASS Full Game disposal releases pooled geometry and textures: {"geometries":0,"textures":0}
