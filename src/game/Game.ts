@@ -21,6 +21,7 @@ import { AbyssalFlame } from '../abilities/fire/AbyssalFlame';
 import { Worldrend } from '../abilities/void/Worldrend';
 import { TempestCataclysm } from '../abilities/stormDragon/TempestCataclysm';
 import { SpectralBreak } from '../abilities/spectral/SpectralBreak';
+import { KrakenCrown } from '../abilities/kraken/KrakenCrown';
 import { ChronoFracture } from '../abilities/chrono/ChronoFracture';
 import { ShadowColossus } from '../abilities/shadowColossus/ShadowColossus';
 import { SeraphicDeluge } from '../abilities/seraphicDeluge/SeraphicDeluge';
@@ -131,6 +132,9 @@ export class Game {
     const chronoFracture = new ChronoFracture();
     this.abilities.registry.register(chronoFracture);
     this.abilities.assignSlot(21, chronoFracture.id);
+    const krakenCrown = new KrakenCrown();
+    this.abilities.registry.register(krakenCrown);
+    this.abilities.assignSlot(22, krakenCrown.id);
     this.hud = new HUD(root, this.abilities, this.settings, this.targeting);
     document.addEventListener('visibilitychange', this.visibilityChanged);
   }

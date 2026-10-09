@@ -54,3 +54,6 @@
 
 /* Phase 18: twenty-two cards fit the existing eleven-column desktop rows. */
 @media(min-width:851px) and (max-width:1300px){.ability-bar{display:grid;grid-template-columns:repeat(8,74px);gap:5px}.ability-slot{width:74px}.selection-label{bottom:367px}}
+
+/* Phase 19: twenty-three cards; 12 columns above laptop widths, eight below. */
+@media(min-width:1301px){.ability-bar{display:grid;grid-template-columns:repeat(12,74px);gap:5px}.ability-slot{width:74px}.selection-label{bottom:263px}}

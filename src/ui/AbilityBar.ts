@@ -32,7 +32,12 @@ export class AbilityBar {
       button.style.setProperty('--element-color', ability?.color ?? '#8caac4');
       button.setAttribute('aria-label', `${this.abilities.slots[index].key}: ${name}`);
       // Icons are text glyphs; untrusted markup is never inserted into the UI.
-      if (ability?.icon === 'chrono-fracture') {
+      if (ability?.icon === 'kraken-crown') {
+        if (this.icons[index].dataset.icon !== ability.icon) {
+          this.icons[index].innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><ellipse stroke="#397886" cx="16" cy="27" rx="12" ry="3"/><path stroke="#97b4c8" d="M8 27C-1 15 3 4 8 5c6 2 1 9-1 6-2-3 4-3 4 4l1 11M14 26c-5-10-4-23 2-24 7-1 7 10 3 10-4-1 0-6 2-3m-2 3-1 14m4 1c7-6 9-19 4-19-6-1-6 7-2 6 2-1-1-4-2-1-2 3-2 8-1 14"/><path stroke="#56d3bc" d="m5 16 1 2m1 3 1 2m6-12 1 2m0 3 1 2m10-2-1 2m-1 3-1 2"/></svg>';
+          this.icons[index].dataset.icon = ability.icon;
+        }
+      } else if (ability?.icon === 'chrono-fracture') {
         if (this.icons[index].dataset.icon !== ability.icon) {
           this.icons[index].innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path stroke="#dfc281" d="M26 9A12 12 0 1 0 25 25M16 6v3M6 16h3m7 7v3M23 16h3M16 16V9m0 7-6 4"/><path stroke="#91dcef" d="m25 3-5 9 7 4-6 7 3 6M16 13l2 3-2 2-2-2Z"/></svg>';
           this.icons[index].dataset.icon = ability.icon;
