@@ -66,3 +66,13 @@
 @media(min-width:851px) and (max-width:1300px){.ability-bar{grid-template-columns:repeat(9,74px)}}
 @media(min-width:481px) and (max-width:850px){.ability-bar{grid-template-columns:repeat(7,64px)}.ability-slot{width:64px}}
 @media(max-width:480px){.selection-label{bottom:680px}}
+/* Preserve the cards while keeping a large equipped catalogue below the player. */
+.hud.has-many-abilities .ability-bar{display:grid;grid-template-columns:repeat(13,74px);gap:4px;bottom:36px}
+.hud.has-many-abilities .ability-slot{width:74px;height:64px;padding:5px 6px}
+.hud.has-many-abilities .slot-icon{height:23px;font-size:19px}
+.hud.has-many-abilities .slot-icon svg{width:20px;height:20px}
+.hud.has-many-abilities .slot-name{font-size:7px;letter-spacing:.65px;line-height:1.15}
+.hud.has-many-abilities .slot-cooldown{top:22px;font-size:15px}
+.hud.has-many-abilities .selection-label{bottom:179px}
+@media(max-width:1100px){.hud.has-many-abilities .ability-bar{grid-template-columns:repeat(9,70px);bottom:28px}.hud.has-many-abilities .ability-slot{width:70px}.hud.has-many-abilities .selection-label{bottom:240px}}
+@media(max-width:750px){.hud.has-many-abilities .ability-bar{grid-template-columns:repeat(6,64px)}.hud.has-many-abilities .ability-slot{width:64px}.hud.has-many-abilities .selection-label{bottom:377px}}

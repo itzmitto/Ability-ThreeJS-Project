@@ -1,0 +1,13 @@
+PASS Local human model loaded
+PASS Exactly 25 registered abilities
+PASS KRAKEN CROWN: shortcut Shift+3
+PASS KRAKEN CROWN: HUD selection
+PASS KRAKEN CROWN: click cast / cooldown
+PASS KRAKEN CROWN: cooldown rejects another cast
+PASS KRAKEN CROWN: finite geometry / bounded instances
+PASS KRAKEN CROWN: natural completion
+PASS KRAKEN CROWN: scene/light/subscription/water cleanup
+PASS KRAKEN CROWN: WebGL error state
+PASS KRAKEN CROWN: measurement recorded
+PASS AUDIT ALL CHECKS PASSED
+DATA [{"id":"kraken-crown","quality":"MAX","viewport":[1280,720],"calls":57,"triangles":254387,"peakInstances":1030,"peakParticles":950,"raf":{"medianMs":6.099999904632568,"p95Ms":6.3999998569488525,"maxMs":8.399999856948853},"update":{"medianMs":0,"p95Ms":0,"maxMs":0},"renderSubmit":{"medianMs":0.3000001907348633,"p95Ms":0.5,"maxMs":0.8999998569488525},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":9,"textures":21,"programs":19},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":9,"textures":21,"programs":22}}]

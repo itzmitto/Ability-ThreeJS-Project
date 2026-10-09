@@ -17,6 +17,7 @@ export class HUD {
   private readonly selected = document.createElement('span');
   constructor(root: HTMLElement, private readonly abilities: AbilityManager, private readonly settings: GraphicsSettings, targeting: TargetingSystem) {
     this.element.className = 'hud';
+    this.element.classList.toggle('has-many-abilities', abilities.slots.length > 16);
     this.element.innerHTML = `<header class="brand"><div class="eyebrow"><span class="brand-mark">◇</span> EXPERIMENTAL ARENA <span class="version">/ 001</span></div><h1>ELEMENTAL <span>SANDBOX</span></h1><p>WASD move <b>·</b> Mouse aim <b>·</b> Q/E/R/F/V/X/C/B/N/G/H/J/K/L/M/U/I/O/Y/Z + Shift+1/2/3/4/5 abilities <b>·</b> Click cast</p></header><div class="crosshair" aria-hidden="true"><i></i></div><div class="world-caption"><span class="caption-line"></span>THE STILLWATER<span class="caption-sub">FOUNDATION WORLD</span></div><div class="footer-note">PHASE 21 <span>/</span> ICE + AIR + STORM + LIGHT + FIRE + VOID + TRUE DRAGON + BLOOD + SPECTRAL + EARTH + WATER + GLASS + GRAVITY + NATURE + CRYO + THUNDER + SOLAR + ARSENAL + PRISM + DELUGE + SHADOW + TIME + KRAKEN + RAVENSTORM + DRAGONFIRE</div><div class="debug-hint">F3 DEBUG <span>·</span> P TELEMETRY</div>`;
     this.abilityBar = new AbilityBar(abilities);
     this.graphics = new GraphicsMenu(settings, this.performance, targeting);
@@ -40,4 +41,3 @@ export class HUD {
   }
   dispose(): void { this.abilityBar.dispose(); this.graphics.dispose(); this.element.remove(); }
 }
-

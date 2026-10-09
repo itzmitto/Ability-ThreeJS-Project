@@ -1,4 +1,4 @@
-import { AdditiveBlending, BufferGeometry, Color, DoubleSide, Float32BufferAttribute, InstancedMesh, Object3D, PlaneGeometry, ShaderMaterial, Vector3 } from 'three';
+import { NormalBlending, AdditiveBlending, BufferGeometry, Color, DoubleSide, Float32BufferAttribute, InstancedMesh, Object3D, PlaneGeometry, ShaderMaterial, Vector3 } from 'three';
 import type { AbilityCastContext } from '../Ability';
 import { VisualOwner, gridGeometry } from './ElementalVisuals';
 import { clamp01, ease, hash } from './PackVisuals';
@@ -29,7 +29,7 @@ export class AstralParticles{
   private readonly dummy=new Object3D();
   private readonly unit=new Vector3();
   constructor(owner:VisualOwner,maximum:number,color:string,readonly kind:'snow'|'solar'|'electric',readonly mist=false){
-    this.material=owner.material(new ShaderMaterial({transparent:true,depthWrite:false,side:DoubleSide,blending:mist?undefined:AdditiveBlending,
+    this.material=owner.material(new ShaderMaterial({transparent:true,depthWrite:false,side:DoubleSide,blending:mist?NormalBlending:AdditiveBlending,
       uniforms:{uFade:{value:1},uColor:{value:new Color(color)},uSnow:{value:kind==='snow'&&!mist?1:0}},
       vertexShader:'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*instanceMatrix*vec4(position,1.);}',
       fragmentShader:`varying vec2 vUv;uniform float uFade,uSnow;uniform vec3 uColor;void main(){vec2 p=vUv*2.-1.;float r=length(p);float a=pow(max(0.,1.-r*r),2.);if(uSnow>.5){float angle=atan(p.y,p.x);float branch=pow(max(0.,cos(angle*6.)),18.);a*=.2+branch*.8;}if(a<.01)discard;gl_FragColor=vec4(uColor,a*uFade);}` }));

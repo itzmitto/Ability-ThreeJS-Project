@@ -1,4 +1,5 @@
-import { AdditiveBlending, BufferGeometry, Color, DoubleSide, Float32BufferAttribute, Group, InstancedMesh, Mesh, MeshBasicMaterial, Object3D, PlaneGeometry, PointLight, ShaderMaterial, TorusGeometry, Vector3 } from 'three';
+import { NORMAL_TRANSFORM_GLSL } from '../../effects/NormalTransform';
+import { NormalBlending, AdditiveBlending, BufferGeometry, Color, DoubleSide, Float32BufferAttribute, Group, InstancedMesh, Mesh, MeshBasicMaterial, Object3D, PlaneGeometry, PointLight, ShaderMaterial, TorusGeometry, Vector3 } from 'three';
 import type { AbilityCastContext } from '../Ability';
 import { VisualOwner, clamp01, ease, hash } from './ElementalVisuals';
 
@@ -15,17 +16,19 @@ export function crescentGeometry(segments = 36): BufferGeometry {
 }
 export function shardGeometry(): BufferGeometry {
   const g = new BufferGeometry(); g.setAttribute('position', new Float32BufferAttribute([0,1.8,0, -.4,.15,-.2, .27,.05,-.3, .42,-.2,.12, -.2,-.1,.35, .02,-1,0],3));
-  g.setIndex([0,2,1,0,3,2,0,4,3,0,1,4,5,1,2,5,2,3,5,3,4,5,4,1]); g.computeVertexNormals(); return g;
+  g.setIndex([0,2,1,0,3,2,0,4,3,0,1,4,5,1,2,5,2,3,5,3,4,5,4,1]);
+  // Independent face vertices retain hard shard edges instead of averaging into a smooth pebble.
+  const faceted = g.toNonIndexed(); g.dispose(); faceted.computeVertexNormals(); return faceted;
 }
 /** Shared small-object shading; separate instances preserve each spell's palette and ownership. */
 export function packMaterial(color: string, glass = false): ShaderMaterial {
   return new ShaderMaterial({ transparent: true, depthWrite: !glass, side: DoubleSide,
     uniforms: { uColor: { value: new Color(color) }, uTime: { value: 0 }, uFade: { value: 1 }, uEnergy: { value: .25 }, uGlass: { value: glass ? 1 : 0 } },
-    vertexShader: `varying vec3 vLocal,vWorld,vNormal;void main(){vLocal=position;vec4 p=vec4(position,1.);vec3 n=normal;
+    vertexShader: `${NORMAL_TRANSFORM_GLSL}varying vec3 vLocal,vWorld,vNormal;void main(){vLocal=position;vec4 p=vec4(position,1.);vec3 n=normal;
       #ifdef USE_INSTANCING
-      p=instanceMatrix*p;n=mat3(instanceMatrix)*n;
+      p=instanceMatrix*p;n=normalForTransform(instanceMatrix,n);
       #endif
-      vec4 w=modelMatrix*p;vWorld=w.xyz;vNormal=normalize(mat3(modelMatrix)*n);gl_Position=projectionMatrix*viewMatrix*w;}`,
+      vec4 w=modelMatrix*p;vWorld=w.xyz;vNormal=normalize(normalForTransform(modelMatrix,n));gl_Position=projectionMatrix*viewMatrix*w;}`,
     fragmentShader: `varying vec3 vLocal,vWorld,vNormal;uniform vec3 uColor;uniform float uTime,uFade,uEnergy,uGlass;
       void main(){vec3 n=normalize(vNormal),eye=normalize(cameraPosition-vWorld);float fres=pow(1.-abs(dot(n,eye)),3.);float light=.25+.75*abs(dot(n,normalize(vec3(-.5,.8,.3))));float spec=pow(max(0.,dot(reflect(-normalize(vec3(-.5,.8,.3)),n),eye)),48.);float vein=pow(max(0.,sin(vLocal.y*19.+vLocal.x*11.+sin(vLocal.z*13.)*2.)),14.);vec3 col=uColor*light*(.65+sin(vLocal.x*23.+vLocal.y*31.)*.12);col+=uColor*vein*uEnergy+vec3(.74,.84,.9)*spec*(.1+uGlass*.9);col+=fres*mix(uColor,vec3(.8,.94,1.),uGlass)*(.2+uEnergy*.25);vec3 prism=.5+.5*cos(vec3(0.,2.,4.)+dot(n,eye)*13.+uTime*.3);col+=prism*spec*uGlass*.18;gl_FragColor=vec4(col,uFade*mix(1.,.38+fres*.4+spec*.2,uGlass));}` });
 }
@@ -35,7 +38,7 @@ export class PackParticles {
   readonly material: ShaderMaterial;
   private readonly dummy = new Object3D();
   constructor(owner: VisualOwner, maximum: number, color: string, readonly style: 'sand' | 'gravity' | 'spore', readonly dust = false) {
-    this.material = owner.material(new ShaderMaterial({ transparent: true, depthWrite: false, side: DoubleSide, blending: dust ? undefined : AdditiveBlending,
+    this.material = owner.material(new ShaderMaterial({ transparent: true, depthWrite: false, side: DoubleSide, blending: dust ? NormalBlending : AdditiveBlending,
       uniforms: { uColor: { value: new Color(color) }, uFade: { value: 1 } },
       vertexShader: 'varying vec2 vUv;void main(){vUv=uv;gl_Position=projectionMatrix*modelViewMatrix*instanceMatrix*vec4(position,1.);}',
       fragmentShader: 'varying vec2 vUv;uniform vec3 uColor;uniform float uFade;void main(){float a=pow(max(0.,1.-dot(vUv*2.-1.,vUv*2.-1.)),2.);if(a<.01)discard;gl_FragColor=vec4(uColor,a*uFade);}' }));

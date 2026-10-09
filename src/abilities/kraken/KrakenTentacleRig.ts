@@ -25,7 +25,10 @@ export class KrakenTentacleRig {
   private readonly pose:KrakenPose={lean:0,curl:0,wave:0,twist:0,flash:0,squash:1};
   private readonly tip={x:0,y:0};
   private readonly up=new Vector3(0,1,0);
+  private readonly unitStrikeReach:number;
   constructor(owner:VisualOwner,entry:number){
+    tentacleTip(1,Math.PI,0,0,0,1,this.tip);
+    this.unitStrikeReach=this.tip.x;
     this.material=owner.material(createKrakenMaterial());
     this.geometry=Object.values(KRAKEN_QUALITY).map(q=>[0,1].map(v=>owner.geometry(createTentacleGeometry({rings:q.rings,sides:q.sides,seed:3.7+v*17.3,taper:v?.0175:.05,swell:v?1.12:1.3}))));
     for(let v=0;v<2;v++){
@@ -56,8 +59,7 @@ export class KrakenTentacleRig {
         const emerge=clamp01((t-r.birth)/.84),retract=ease((t-8.65-seed*.18)/1.6);
         strikeBeat(t,r.birth,!!v,seed,this.beat);solveKrakenPose(t,r.birth,seed,this.beat,this.pose);
         // Compensate the 12-step integral's tiny circular-arc error so tips meet center.
-        tentacleTip(1,Math.PI,0,0,0,1,this.tip);
-        const length=(r.radius/this.tip.x)*(1-retract*.965);
+        const length=(r.radius/this.unitStrikeReach)*(1-retract*.965);
         const phase=seed*Math.PI*2-t*1.3, freq=1.2+seed*.5;
         const p=this.pose;
         this.transform.position.set(Math.cos(r.angle)*r.radius,.035,Math.sin(r.angle)*r.radius);

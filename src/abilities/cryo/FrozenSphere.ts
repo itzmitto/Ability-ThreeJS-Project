@@ -17,7 +17,7 @@ export class FrozenSphere{
     this.bodyMaterial=owner.material(cryoMaterial(0));this.shardMaterial=owner.material(cryoMaterial(1));this.ringMaterial=owner.material(cryoMaterial(2));
     this.geometries=[1,2,3].map(detail=>{const g=owner.geometry(new IcosahedronGeometry(1,detail)),p=g.getAttribute('position');for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i),z=p.getZ(i),r=1+.065*Math.sin(x*13.+y*7.)*Math.cos(z*11.-y*5.);p.setXYZ(i,x*r,y*r,z*r);}g.computeVertexNormals();return g;});
     for(let i=0;i<3;i++){const m=new Mesh(this.geometries[1],i===0?this.bodyMaterial:this.shardMaterial);m.scale.setScalar(1+i*.065);this.shells.push(m);this.root.add(m);}
-    const ring=owner.geometry(brokenRingGeometry(1.4,84));for(let i=0;i<5;i++){const m=new Mesh(ring,this.ringMaterial);m.rotation.set(i*.64,.3+i*.7,i*.44);m.scale.setScalar(1+i*.07);this.rings.push(m);this.root.add(m);}owner.root.add(this.root);
+    const ring=owner.geometry(brokenRingGeometry(1.4,84,.022));for(let i=0;i<5;i++){const m=new Mesh(ring,this.ringMaterial);m.rotation.set(i*.64,.3+i*.7,i*.44);m.scale.setScalar(1+i*.07);this.rings.push(m);this.root.add(m);}owner.root.add(this.root);
     this.shards=new InstancedMesh(owner.geometry(shardGeometry()),this.shardMaterial,120);this.shards.frustumCulled=false;owner.root.add(this.shards);
   }
   update(t:number,rings:number,shards:number,detail:number,layers:number,fade:number):void{

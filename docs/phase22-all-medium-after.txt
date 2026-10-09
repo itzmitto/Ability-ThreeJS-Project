@@ -1,0 +1,229 @@
+PASS Local human model loaded
+PASS Exactly 25 registered abilities
+PASS GLACIAL ERUPTION: shortcut Q
+PASS GLACIAL ERUPTION: HUD selection
+PASS GLACIAL ERUPTION: click cast / cooldown
+PASS GLACIAL ERUPTION: cooldown rejects another cast
+PASS GLACIAL ERUPTION: finite geometry / bounded instances
+PASS GLACIAL ERUPTION: natural completion
+PASS GLACIAL ERUPTION: scene/light/subscription/water cleanup
+PASS GLACIAL ERUPTION: WebGL error state
+PASS GLACIAL ERUPTION: measurement recorded
+PASS TEMPEST BREAK: shortcut E
+PASS TEMPEST BREAK: HUD selection
+PASS TEMPEST BREAK: click cast / cooldown
+PASS TEMPEST BREAK: cooldown rejects another cast
+PASS TEMPEST BREAK: finite geometry / bounded instances
+PASS TEMPEST BREAK: natural completion
+PASS TEMPEST BREAK: scene/light/subscription/water cleanup
+PASS TEMPEST BREAK: WebGL error state
+PASS TEMPEST BREAK: measurement recorded
+PASS HEAVEN'S VERDICT: shortcut R
+PASS HEAVEN'S VERDICT: HUD selection
+PASS HEAVEN'S VERDICT: click cast / cooldown
+PASS HEAVEN'S VERDICT: cooldown rejects another cast
+PASS HEAVEN'S VERDICT: finite geometry / bounded instances
+PASS HEAVEN'S VERDICT: natural completion
+PASS HEAVEN'S VERDICT: scene/light/subscription/water cleanup
+PASS HEAVEN'S VERDICT: WebGL error state
+PASS HEAVEN'S VERDICT: measurement recorded
+PASS MEGIDDO: shortcut F
+PASS MEGIDDO: HUD selection
+PASS MEGIDDO: click cast / cooldown
+PASS MEGIDDO: cooldown rejects another cast
+PASS MEGIDDO: finite geometry / bounded instances
+PASS MEGIDDO: natural completion
+PASS MEGIDDO: scene/light/subscription/water cleanup
+PASS MEGIDDO: WebGL error state
+PASS MEGIDDO: measurement recorded
+PASS ABYSSAL FLAME: shortcut V
+PASS ABYSSAL FLAME: HUD selection
+PASS ABYSSAL FLAME: click cast / cooldown
+PASS ABYSSAL FLAME: cooldown rejects another cast
+PASS ABYSSAL FLAME: finite geometry / bounded instances
+PASS ABYSSAL FLAME: natural completion
+PASS ABYSSAL FLAME: scene/light/subscription/water cleanup
+PASS ABYSSAL FLAME: WebGL error state
+PASS ABYSSAL FLAME: measurement recorded
+PASS WORLDREND: shortcut X
+PASS WORLDREND: HUD selection
+PASS WORLDREND: click cast / cooldown
+PASS WORLDREND: cooldown rejects another cast
+PASS WORLDREND: finite geometry / bounded instances
+PASS WORLDREND: natural completion
+PASS WORLDREND: scene/light/subscription/water cleanup
+PASS WORLDREND: WebGL error state
+PASS WORLDREND: measurement recorded
+PASS TEMPEST CATACLYSM: shortcut C
+PASS TEMPEST CATACLYSM: HUD selection
+PASS TEMPEST CATACLYSM: click cast / cooldown
+PASS TEMPEST CATACLYSM: cooldown rejects another cast
+PASS TEMPEST CATACLYSM: finite geometry / bounded instances
+PASS TEMPEST CATACLYSM: natural completion
+PASS TEMPEST CATACLYSM: scene/light/subscription/water cleanup
+PASS TEMPEST CATACLYSM: WebGL error state
+PASS TEMPEST CATACLYSM: measurement recorded
+PASS SANGUINE ECLIPSE: shortcut B
+PASS SANGUINE ECLIPSE: HUD selection
+PASS SANGUINE ECLIPSE: click cast / cooldown
+PASS SANGUINE ECLIPSE: cooldown rejects another cast
+PASS SANGUINE ECLIPSE: finite geometry / bounded instances
+PASS SANGUINE ECLIPSE: natural completion
+PASS SANGUINE ECLIPSE: scene/light/subscription/water cleanup
+PASS SANGUINE ECLIPSE: WebGL error state
+PASS SANGUINE ECLIPSE: measurement recorded
+PASS SPECTRAL BREAK: shortcut N
+PASS SPECTRAL BREAK: HUD selection
+PASS SPECTRAL BREAK: click cast / cooldown
+PASS SPECTRAL BREAK: cooldown rejects another cast
+PASS SPECTRAL BREAK: finite geometry / bounded instances
+PASS SPECTRAL BREAK: natural completion
+PASS SPECTRAL BREAK: scene/light/subscription/water cleanup
+PASS SPECTRAL BREAK: WebGL error state
+PASS SPECTRAL BREAK: measurement recorded
+PASS EARTHBREAKER: shortcut G
+PASS EARTHBREAKER: HUD selection
+PASS EARTHBREAKER: click cast / cooldown
+PASS EARTHBREAKER: cooldown rejects another cast
+PASS EARTHBREAKER: finite geometry / bounded instances
+PASS EARTHBREAKER: natural completion
+PASS EARTHBREAKER: scene/light/subscription/water cleanup
+PASS EARTHBREAKER: WebGL error state
+PASS EARTHBREAKER: measurement recorded
+PASS TIDAL SOVEREIGN: shortcut H
+PASS TIDAL SOVEREIGN: HUD selection
+PASS TIDAL SOVEREIGN: click cast / cooldown
+PASS TIDAL SOVEREIGN: cooldown rejects another cast
+PASS TIDAL SOVEREIGN: finite geometry / bounded instances
+PASS TIDAL SOVEREIGN: natural completion
+PASS TIDAL SOVEREIGN: scene/light/subscription/water cleanup
+PASS TIDAL SOVEREIGN: WebGL error state
+PASS TIDAL SOVEREIGN: measurement recorded
+PASS GLASS TEMPEST: shortcut J
+PASS GLASS TEMPEST: HUD selection
+PASS GLASS TEMPEST: click cast / cooldown
+PASS GLASS TEMPEST: cooldown rejects another cast
+PASS GLASS TEMPEST: finite geometry / bounded instances
+PASS GLASS TEMPEST: natural completion
+PASS GLASS TEMPEST: scene/light/subscription/water cleanup
+PASS GLASS TEMPEST: WebGL error state
+PASS GLASS TEMPEST: measurement recorded
+PASS GRAVITY CRUSH: shortcut K
+PASS GRAVITY CRUSH: HUD selection
+PASS GRAVITY CRUSH: click cast / cooldown
+PASS GRAVITY CRUSH: cooldown rejects another cast
+PASS GRAVITY CRUSH: finite geometry / bounded instances
+PASS GRAVITY CRUSH: natural completion
+PASS GRAVITY CRUSH: scene/light/subscription/water cleanup
+PASS GRAVITY CRUSH: WebGL error state
+PASS GRAVITY CRUSH: measurement recorded
+PASS WORLDROOT: shortcut L
+PASS WORLDROOT: HUD selection
+PASS WORLDROOT: click cast / cooldown
+PASS WORLDROOT: cooldown rejects another cast
+PASS WORLDROOT: finite geometry / bounded instances
+PASS WORLDROOT: natural completion
+PASS WORLDROOT: scene/light/subscription/water cleanup
+PASS WORLDROOT: WebGL error state
+PASS WORLDROOT: measurement recorded
+PASS CRYO COLLAPSE: shortcut M
+PASS CRYO COLLAPSE: HUD selection
+PASS CRYO COLLAPSE: click cast / cooldown
+PASS CRYO COLLAPSE: cooldown rejects another cast
+PASS CRYO COLLAPSE: finite geometry / bounded instances
+PASS CRYO COLLAPSE: natural completion
+PASS CRYO COLLAPSE: scene/light/subscription/water cleanup
+PASS CRYO COLLAPSE: WebGL error state
+PASS CRYO COLLAPSE: measurement recorded
+PASS THUNDERLANCE: shortcut U
+PASS THUNDERLANCE: HUD selection
+PASS THUNDERLANCE: click cast / cooldown
+PASS THUNDERLANCE: cooldown rejects another cast
+PASS THUNDERLANCE: finite geometry / bounded instances
+PASS THUNDERLANCE: natural completion
+PASS THUNDERLANCE: scene/light/subscription/water cleanup
+PASS THUNDERLANCE: WebGL error state
+PASS THUNDERLANCE: measurement recorded
+PASS SOLAR NOVA: shortcut I
+PASS SOLAR NOVA: HUD selection
+PASS SOLAR NOVA: click cast / cooldown
+PASS SOLAR NOVA: cooldown rejects another cast
+PASS SOLAR NOVA: finite geometry / bounded instances
+PASS SOLAR NOVA: natural completion
+PASS SOLAR NOVA: scene/light/subscription/water cleanup
+PASS SOLAR NOVA: WebGL error state
+PASS SOLAR NOVA: measurement recorded
+PASS HEAVENLY ARSENAL: shortcut O
+PASS HEAVENLY ARSENAL: HUD selection
+PASS HEAVENLY ARSENAL: click cast / cooldown
+PASS HEAVENLY ARSENAL: cooldown rejects another cast
+PASS HEAVENLY ARSENAL: finite geometry / bounded instances
+PASS HEAVENLY ARSENAL: natural completion
+PASS HEAVENLY ARSENAL: scene/light/subscription/water cleanup
+PASS HEAVENLY ARSENAL: WebGL error state
+PASS HEAVENLY ARSENAL: measurement recorded
+PASS PRISMATIC CATHEDRAL: shortcut Y
+PASS PRISMATIC CATHEDRAL: HUD selection
+PASS PRISMATIC CATHEDRAL: click cast / cooldown
+PASS PRISMATIC CATHEDRAL: cooldown rejects another cast
+PASS PRISMATIC CATHEDRAL: finite geometry / bounded instances
+PASS PRISMATIC CATHEDRAL: natural completion
+PASS PRISMATIC CATHEDRAL: scene/light/subscription/water cleanup
+PASS PRISMATIC CATHEDRAL: WebGL error state
+PASS PRISMATIC CATHEDRAL: measurement recorded
+PASS SERAPHIC DELUGE: shortcut Z
+PASS SERAPHIC DELUGE: HUD selection
+PASS SERAPHIC DELUGE: click cast / cooldown
+PASS SERAPHIC DELUGE: cooldown rejects another cast
+PASS SERAPHIC DELUGE: finite geometry / bounded instances
+PASS SERAPHIC DELUGE: natural completion
+PASS SERAPHIC DELUGE: scene/light/subscription/water cleanup
+PASS SERAPHIC DELUGE: WebGL error state
+PASS SERAPHIC DELUGE: measurement recorded
+PASS SHADOW COLOSSUS: shortcut Shift+1
+PASS SHADOW COLOSSUS: HUD selection
+PASS SHADOW COLOSSUS: click cast / cooldown
+PASS SHADOW COLOSSUS: cooldown rejects another cast
+PASS SHADOW COLOSSUS: finite geometry / bounded instances
+PASS SHADOW COLOSSUS: natural completion
+PASS SHADOW COLOSSUS: scene/light/subscription/water cleanup
+PASS SHADOW COLOSSUS: WebGL error state
+PASS SHADOW COLOSSUS: measurement recorded
+PASS CHRONO FRACTURE: shortcut Shift+2
+PASS CHRONO FRACTURE: HUD selection
+PASS CHRONO FRACTURE: click cast / cooldown
+PASS CHRONO FRACTURE: cooldown rejects another cast
+PASS CHRONO FRACTURE: finite geometry / bounded instances
+PASS CHRONO FRACTURE: natural completion
+PASS CHRONO FRACTURE: scene/light/subscription/water cleanup
+PASS CHRONO FRACTURE: WebGL error state
+PASS CHRONO FRACTURE: measurement recorded
+PASS KRAKEN CROWN: shortcut Shift+3
+PASS KRAKEN CROWN: HUD selection
+PASS KRAKEN CROWN: click cast / cooldown
+PASS KRAKEN CROWN: cooldown rejects another cast
+PASS KRAKEN CROWN: finite geometry / bounded instances
+PASS KRAKEN CROWN: natural completion
+PASS KRAKEN CROWN: scene/light/subscription/water cleanup
+PASS KRAKEN CROWN: WebGL error state
+PASS KRAKEN CROWN: measurement recorded
+PASS PRISM RAVENSTORM: shortcut Shift+4
+PASS PRISM RAVENSTORM: HUD selection
+PASS PRISM RAVENSTORM: click cast / cooldown
+PASS PRISM RAVENSTORM: cooldown rejects another cast
+PASS PRISM RAVENSTORM: finite geometry / bounded instances
+PASS PRISM RAVENSTORM: natural completion
+PASS PRISM RAVENSTORM: scene/light/subscription/water cleanup
+PASS PRISM RAVENSTORM: WebGL error state
+PASS PRISM RAVENSTORM: measurement recorded
+PASS DRAGONFIRE: shortcut Shift+5
+PASS DRAGONFIRE: HUD selection
+PASS DRAGONFIRE: click cast / cooldown
+PASS DRAGONFIRE: cooldown rejects another cast
+PASS DRAGONFIRE: finite geometry / bounded instances
+PASS DRAGONFIRE: natural completion
+PASS DRAGONFIRE: scene/light/subscription/water cleanup
+PASS DRAGONFIRE: WebGL error state
+PASS DRAGONFIRE: measurement recorded
+PASS AUDIT ALL CHECKS PASSED
+DATA [{"id":"glacial-eruption","quality":"MEDIUM","viewport":[1280,720],"calls":45,"triangles":50739,"peakInstances":64,"peakParticles":210,"raf":{"medianMs":6.1000001430511475,"p95Ms":8.100000143051147,"maxMs":17.700000047683716},"update":{"medianMs":0,"p95Ms":0.10000014305114746,"maxMs":0.6000001430511475},"renderSubmit":{"medianMs":0.39999985694885254,"p95Ms":6.5,"maxMs":13.5},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":9,"textures":21,"programs":19},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":11,"textures":21,"programs":22}},{"id":"tempest-break","quality":"MEDIUM","viewport":[1280,720],"calls":45,"triangles":48911,"peakInstances":33,"peakParticles":380,"raf":{"medianMs":6.099999904632568,"p95Ms":7.599999904632568,"maxMs":8},"update":{"medianMs":0,"p95Ms":0.10000014305114746,"maxMs":0.20000004768371582},"renderSubmit":{"medianMs":0.40000009536743164,"p95Ms":6.400000095367432,"maxMs":7},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":11,"textures":21,"programs":22},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":21,"textures":21,"programs":31}},{"id":"heavens-verdict","quality":"MEDIUM","viewport":[1280,720],"calls":53,"triangles":50791,"peakInstances":30,"peakParticles":360,"raf":{"medianMs":6.099999904632568,"p95Ms":6.700000047683716,"maxMs":7.700000047683716},"update":{"medianMs":0,"p95Ms":0.2999999523162842,"maxMs":0.40000009536743164},"renderSubmit":{"medianMs":0.39999985694885254,"p95Ms":3.9000000953674316,"maxMs":5.5},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":21,"textures":21,"programs":31},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":38,"textures":21,"programs":42}},{"id":"megiddo","quality":"MEDIUM","viewport":[1280,720],"calls":53,"triangles":47663,"peakInstances":73,"peakParticles":400,"raf":{"medianMs":6.099999904632568,"p95Ms":6.800000190734863,"maxMs":10.299999952316284},"update":{"medianMs":0,"p95Ms":0.09999990463256836,"maxMs":0.10000014305114746},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":4.799999952316284,"maxMs":6.8999998569488525},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":38,"textures":21,"programs":42},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":49,"textures":21,"programs":50}},{"id":"abyssal-flame","quality":"MEDIUM","viewport":[1280,720],"calls":51,"triangles":103471,"peakInstances":202,"peakParticles":340,"raf":{"medianMs":6.099999904632568,"p95Ms":6.5,"maxMs":11.599999904632568},"update":{"medianMs":0,"p95Ms":0.09999990463256836,"maxMs":0.20000004768371582},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":0.5999999046325684,"maxMs":8.099999904632568},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":49,"textures":21,"programs":50},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":59,"textures":21,"programs":57}},{"id":"worldrend","quality":"MEDIUM","viewport":[1280,720],"calls":51,"triangles":74455,"peakInstances":262,"peakParticles":480,"raf":{"medianMs":6.099999904632568,"p95Ms":6.599999904632568,"maxMs":7.1000001430511475},"update":{"medianMs":0,"p95Ms":0.09999990463256836,"maxMs":0.10000014305114746},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":4.599999904632568,"maxMs":5.700000047683716},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":59,"textures":21,"programs":57},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":69,"textures":21,"programs":67}},{"id":"tempest-cataclysm","quality":"MEDIUM","viewport":[1280,720],"calls":177,"triangles":161759,"peakInstances":248,"peakParticles":2020,"raf":{"medianMs":6.099999904632568,"p95Ms":6.6000001430511475,"maxMs":15.300000190734863},"update":{"medianMs":0.20000004768371582,"p95Ms":0.2999999523162842,"maxMs":0.40000009536743164},"renderSubmit":{"medianMs":0.40000009536743164,"p95Ms":1,"maxMs":11.900000095367432},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":69,"textures":21,"programs":67},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":136,"textures":21,"programs":85}},{"id":"sanguine-eclipse","quality":"MEDIUM","viewport":[1280,720],"calls":51,"triangles":259347,"peakInstances":756,"peakParticles":720,"raf":{"medianMs":6.099999904632568,"p95Ms":6.599999904632568,"maxMs":11.200000047683716},"update":{"medianMs":0.09999990463256836,"p95Ms":0.20000004768371582,"maxMs":0.20000004768371582},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":0.5999999046325684,"maxMs":6.299999952316284},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":136,"textures":21,"programs":85},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":155,"textures":21,"programs":99}},{"id":"spectral-break","quality":"MEDIUM","viewport":[1280,720],"calls":69,"triangles":296655,"peakInstances":764,"peakParticles":720,"raf":{"medianMs":6.099999904632568,"p95Ms":6.5,"maxMs":10.5},"update":{"medianMs":0,"p95Ms":0.10000014305114746,"maxMs":0.2999999523162842},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":0.5999999046325684,"maxMs":9.700000047683716},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":155,"textures":21,"programs":99},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109}},{"id":"earthbreaker","quality":"MEDIUM","viewport":[1280,720],"calls":79,"triangles":70067,"peakInstances":379,"peakParticles":319,"raf":{"medianMs":6.099999904632568,"p95Ms":6.5,"maxMs":6.700000047683716},"update":{"medianMs":0.20000004768371582,"p95Ms":0.3000001907348633,"maxMs":0.40000009536743164},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":0.6000001430511475,"maxMs":5.200000047683716},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109}},{"id":"tidal-sovereign","quality":"MEDIUM","viewport":[1280,720],"calls":83,"triangles":95047,"peakInstances":330,"peakParticles":330,"raf":{"medianMs":6.099999904632568,"p95Ms":6.5,"maxMs":7.299999952316284},"update":{"medianMs":0.19999980926513672,"p95Ms":0.20000004768371582,"maxMs":0.2999999523162842},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":0.7000000476837158,"maxMs":5.900000095367432},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109}},{"id":"glass-tempest","quality":"MEDIUM","viewport":[1280,720],"calls":63,"triangles":99987,"peakInstances":445,"peakParticles":305,"raf":{"medianMs":6.099999904632568,"p95Ms":6.599999904632568,"maxMs":11.200000047683716},"update":{"medianMs":0.20000004768371582,"p95Ms":0.2999999523162842,"maxMs":0.3000001907348633},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":0.6000001430511475,"maxMs":5.400000095367432},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109}},{"id":"gravity-crush","quality":"MEDIUM","viewport":[1280,720],"calls":51,"triangles":106983,"peakInstances":188,"peakParticles":140,"raf":{"medianMs":6.099999904632568,"p95Ms":6.5,"maxMs":7.700000047683716},"update":{"medianMs":0.10000014305114746,"p95Ms":0.20000004768371582,"maxMs":0.2999999523162842},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":0.5,"maxMs":6.799999952316284},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109}},{"id":"worldroot","quality":"MEDIUM","viewport":[1280,720],"calls":77,"triangles":91715,"peakInstances":250,"peakParticles":155,"raf":{"medianMs":6.099999904632568,"p95Ms":6.6000001430511475,"maxMs":8.299999952316284},"update":{"medianMs":0.10000014305114746,"p95Ms":0.2999999523162842,"maxMs":0.2999999523162842},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":0.5999999046325684,"maxMs":5.5},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109}},{"id":"cryo-collapse","quality":"MEDIUM","viewport":[1280,720],"calls":47,"triangles":75727,"peakInstances":273,"peakParticles":218,"raf":{"medianMs":6.099999904632568,"p95Ms":7.400000095367432,"maxMs":9.700000047683716},"update":{"medianMs":0.10000014305114746,"p95Ms":0.20000004768371582,"maxMs":0.3000001907348633},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":0.6000001430511475,"maxMs":8.299999952316284},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109}},{"id":"thunderlance","quality":"MEDIUM","viewport":[1280,720],"calls":67,"triangles":64359,"peakInstances":220,"peakParticles":220,"raf":{"medianMs":6.099999904632568,"p95Ms":6.599999904632568,"maxMs":7.799999952316284},"update":{"medianMs":0.20000004768371582,"p95Ms":0.2999999523162842,"maxMs":0.40000009536743164},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":4.200000047683716,"maxMs":6.400000095367432},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109}},{"id":"solar-nova","quality":"MEDIUM","viewport":[1280,720],"calls":57,"triangles":81135,"peakInstances":386,"peakParticles":300,"raf":{"medianMs":6.099999904632568,"p95Ms":6.5,"maxMs":7.300000190734863},"update":{"medianMs":0.10000014305114746,"p95Ms":0.2999999523162842,"maxMs":0.2999999523162842},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":2.200000047683716,"maxMs":6},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109}},{"id":"heavenly-arsenal","quality":"MEDIUM","viewport":[1280,720],"calls":61,"triangles":86527,"peakInstances":493,"peakParticles":305,"raf":{"medianMs":6.099999904632568,"p95Ms":6.5,"maxMs":10.700000047683716},"update":{"medianMs":0.20000004768371582,"p95Ms":0.40000009536743164,"maxMs":0.40000009536743164},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":2,"maxMs":5},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109}},{"id":"prismatic-cathedral","quality":"MEDIUM","viewport":[1280,720],"calls":65,"triangles":92787,"peakInstances":297,"peakParticles":215,"raf":{"medianMs":6.099999904632568,"p95Ms":6.5,"maxMs":9.599999904632568},"update":{"medianMs":0.09999990463256836,"p95Ms":0.20000004768371582,"maxMs":0.2999999523162842},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":0.5,"maxMs":7.799999952316284},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109}},{"id":"seraphic-deluge","quality":"MEDIUM","viewport":[1280,720],"calls":75,"triangles":148967,"peakInstances":1042,"peakParticles":338,"raf":{"medianMs":6.099999904632568,"p95Ms":6.5,"maxMs":9.399999856948853},"update":{"medianMs":0.2999999523162842,"p95Ms":0.5,"maxMs":0.6000001430511475},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":0.5999999046325684,"maxMs":4.799999952316284},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109}},{"id":"shadow-colossus","quality":"MEDIUM","viewport":[1280,720],"calls":135,"triangles":124039,"peakInstances":251,"peakParticles":244,"raf":{"medianMs":6,"p95Ms":6.599999904632568,"maxMs":7.3999998569488525},"update":{"medianMs":0.20000004768371582,"p95Ms":0.3000001907348633,"maxMs":0.40000009536743164},"renderSubmit":{"medianMs":0.39999985694885254,"p95Ms":0.7000000476837158,"maxMs":6.200000047683716},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109}},{"id":"chrono-fracture","quality":"MEDIUM","viewport":[1280,720],"calls":73,"triangles":103127,"peakInstances":523,"peakParticles":240,"raf":{"medianMs":6.099999904632568,"p95Ms":6.5,"maxMs":8.099999904632568},"update":{"medianMs":0.3000001907348633,"p95Ms":0.7000000476837158,"maxMs":0.8000001907348633},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":0.6000001430511475,"maxMs":5.700000047683716},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109}},{"id":"kraken-crown","quality":"MEDIUM","viewport":[1280,720],"calls":57,"triangles":135139,"peakInstances":515,"peakParticles":466,"raf":{"medianMs":6.099999904632568,"p95Ms":6.5,"maxMs":7.099999904632568},"update":{"medianMs":0.20000004768371582,"p95Ms":0.3000001907348633,"maxMs":0.5},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":0.5999999046325684,"maxMs":4.799999952316284},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109}},{"id":"prism-ravenstorm","quality":"MEDIUM","viewport":[1280,720],"calls":49,"triangles":72419,"peakInstances":471,"peakParticles":380,"raf":{"medianMs":6,"p95Ms":6.5,"maxMs":6.5},"update":{"medianMs":0.20000004768371582,"p95Ms":0.3000001907348633,"maxMs":0.5},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":0.40000009536743164,"maxMs":0.6999998092651367},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109}},{"id":"dragonfire","quality":"MEDIUM","viewport":[1280,720],"calls":51,"triangles":61643,"peakInstances":265,"peakParticles":182,"raf":{"medianMs":6.099999904632568,"p95Ms":6.700000047683716,"maxMs":10},"update":{"medianMs":0.09999990463256836,"p95Ms":0.20000004768371582,"maxMs":0.2999999523162842},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":0.40000009536743164,"maxMs":0.5999999046325684},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":171,"textures":21,"programs":109}}]

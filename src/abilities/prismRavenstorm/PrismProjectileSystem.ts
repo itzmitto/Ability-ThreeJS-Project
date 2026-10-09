@@ -6,6 +6,10 @@ import type { RavenstormBudget } from './PrismRavenstormConfig';
 import { prismBoltGeometry } from './PrismCrystalGeometry';
 import { prismBoltMaterial } from './PrismCrystalMaterials';
 export interface PrismShot { birth:number; duration:number; released:boolean; hit:boolean; final:boolean; pattern:number; seed:number; hue:number; scale:number; start:Vector3; end:Vector3; side:Vector3; arc:number; }
+/** A tip-anchored crystal must clear the hand before its full tail can unfold. */
+export function prismLaunchScale(desired:number,travelled:number,length:number):number {
+  return Math.min(desired,(Math.max(0,travelled)+.65)/Math.max(.01,length));
+}
 /** Authored firing windows and fixed per-cast shot records. Launch positions are captured from the animated hand. */
 export class PrismProjectileSystem {
   readonly shots:PrismShot[]=[];
@@ -13,6 +17,7 @@ export class PrismProjectileSystem {
   readonly material;
   readonly counts=new Uint16Array(5);
   private readonly front=new Float32Array(5);
+  private readonly lengths=new Float32Array(5);
   private readonly attributes:InstancedBufferAttribute[]=[];
   private readonly transform=new Object3D();
   private readonly axis=new Vector3(0,1,0);
@@ -24,7 +29,7 @@ export class PrismProjectileSystem {
   constructor(owner:VisualOwner,readonly budget:RavenstormBudget){
     this.material=owner.material(prismBoltMaterial());
     for(let v=0;v<budget.variants;v++){
-      const g=owner.geometry(prismBoltGeometry(v,Math.ceil(budget.shots/budget.variants)));this.attributes.push(g.getAttribute('aBolt') as InstancedBufferAttribute);g.computeBoundingBox();this.front[v]=g.boundingBox!.max.y;
+      const g=owner.geometry(prismBoltGeometry(v,Math.ceil(budget.shots/budget.variants)));this.attributes.push(g.getAttribute('aBolt') as InstancedBufferAttribute);g.computeBoundingBox();this.front[v]=g.boundingBox!.max.y;this.lengths[v]=g.boundingBox!.max.y-g.boundingBox!.min.y;
       const m=new InstancedMesh(g,this.material,Math.ceil(budget.shots/budget.variants));m.instanceMatrix.setUsage(DynamicDrawUsage);m.frustumCulled=false;owner.root.add(m);this.meshes.push(m);
     }
     const opening=Math.floor(budget.shots*.1),variation=Math.floor(budget.shots*.2),main=budget.shots-opening-variation-budget.final;
@@ -58,7 +63,7 @@ export class PrismProjectileSystem {
       const n=this.counts[v]++,p=age<0?0:age/s.duration;
       this.sample(s,p,this.tip);this.sample(s,Math.min(1,p+.025),this.next);this.forward.copy(this.next).sub(this.tip);
       if(this.forward.lengthSq()<.000001)this.forward.copy(s.end).sub(s.start);this.forward.normalize();
-      const scale=s.scale*(age<0?ease((age+.2)/.2):1);
+      const scale=prismLaunchScale(s.scale*(age<0?ease((age+.2)/.2):1),this.tip.distanceTo(s.start),this.lengths[v]);
       d.position.copy(this.tip).addScaledVector(this.forward,-this.front[v]*scale);d.quaternion.setFromUnitVectors(this.axis,this.forward);d.rotateY(s.seed*6.283+t*(age<0?2.8:s.final?1.7:2.2));
       d.scale.setScalar(Math.max(.001,scale));d.updateMatrix();this.meshes[v].setMatrixAt(n,d.matrix);
       this.attributes[v].setXYZW(n,(1-ease((t-7.4)/.6))*(age<0?.75:1),s.final?2.4:1,s.hue,s.seed);

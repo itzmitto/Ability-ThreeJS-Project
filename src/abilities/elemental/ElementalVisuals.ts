@@ -1,4 +1,4 @@
-import { AdditiveBlending, BufferGeometry, Color, DoubleSide, Float32BufferAttribute, Group, InstancedMesh, Mesh, MeshBasicMaterial, Object3D, PlaneGeometry, Quaternion, ShaderMaterial, Vector3 } from 'three';
+import { NormalBlending, AdditiveBlending, BufferGeometry, Color, DoubleSide, Float32BufferAttribute, Group, InstancedMesh, Mesh, MeshBasicMaterial, Object3D, PlaneGeometry, Quaternion, ShaderMaterial, Vector3 } from 'three';
 import type { AbilityCastContext } from '../Ability';
 
 export const clamp01 = (v: number): number => Math.max(0, Math.min(1, v));
@@ -36,7 +36,7 @@ export class ElementParticles {
   private readonly dummy = new Object3D();
   private readonly inverse = new Quaternion();
   constructor(owner: VisualOwner, readonly maximum: number, readonly water: boolean, readonly dust = false) {
-    this.material = owner.material(new ShaderMaterial({ transparent: true, depthWrite: false, side: DoubleSide, blending: dust ? undefined : AdditiveBlending,
+    this.material = owner.material(new ShaderMaterial({ transparent: true, depthWrite: false, side: DoubleSide, blending: dust ? NormalBlending : AdditiveBlending,
       uniforms: { uOpacity: { value: 1 }, uColor: { value: new Color(dust ? '#272622' : water ? '#b7f5ff' : '#ffbc50') } },
       vertexShader: 'varying vec2 vUv; void main(){vUv=uv; gl_Position=projectionMatrix*modelViewMatrix*instanceMatrix*vec4(position,1.);}',
       fragmentShader: 'varying vec2 vUv; uniform vec3 uColor; uniform float uOpacity; void main(){vec2 p=vUv*2.-1.;float a=pow(max(0.,1.-dot(p,p)),2.); if(a<.01)discard;gl_FragColor=vec4(uColor,a*uOpacity);}' }));

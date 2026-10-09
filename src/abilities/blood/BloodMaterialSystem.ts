@@ -1,10 +1,11 @@
 import { DoubleSide, ShaderMaterial } from "three";
 import { BLOOD_SURFACE } from "./BloodSurfaceShader";
-export const BLOOD_VERTEX = `varying vec3 vWorld;varying vec3 vNormal;varying vec3 vLocal;void main(){vec4 local=vec4(position,1.0);vec3 n=normal;
+import { NORMAL_TRANSFORM_GLSL } from '../../effects/NormalTransform';
+export const BLOOD_VERTEX = `${NORMAL_TRANSFORM_GLSL}varying vec3 vWorld;varying vec3 vNormal;varying vec3 vLocal;void main(){vec4 local=vec4(position,1.0);vec3 n=normal;
 #ifdef USE_INSTANCING
-local=instanceMatrix*local;n=mat3(instanceMatrix)*n;
+local=instanceMatrix*local;n=normalForTransform(instanceMatrix,n);
 #endif
-vec4 world=modelMatrix*local;vWorld=world.xyz;vLocal=position;vNormal=mat3(modelMatrix)*n;gl_Position=projectionMatrix*viewMatrix*world;}`;
+vec4 world=modelMatrix*local;vWorld=world.xyz;vLocal=position;vNormal=normalForTransform(modelMatrix,n);gl_Position=projectionMatrix*viewMatrix*world;}`;
 export function bloodMaterial(
   vertexShader = BLOOD_VERTEX,
   transparent = false,

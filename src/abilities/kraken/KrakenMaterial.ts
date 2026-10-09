@@ -303,6 +303,8 @@ const KRAKEN_FRAGMENT = /* glsl */ `
 export function createKrakenMaterial() {
   const material = new ShaderMaterial({
     transparent: true,
+    // Closed, depth-writing flesh needs one double-sided pass, not two blended passes.
+    forceSinglePass: true,
     // Opaque flesh: it must occlude itself, and the arms cross heavily over the
     // middle when they land on top of each other.
     depthWrite: true,

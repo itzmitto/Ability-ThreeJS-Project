@@ -25,7 +25,7 @@ test('Spectral ground and sky targeting cap at 85 m, snapshot vectors and reject
 });
 test('N/9 preserves eight mappings and shared cooldown rejects 100 requests without extra effects', () => {
   const c = context(), a = new SpectralBreak(), m = new AbilityManager(); m.registry.register(a); m.assignSlot(8, a.id); m.select(8);
-  expect(m.slots.map(s => s.code)).toEqual(['KeyQ', 'KeyE', 'KeyR', 'KeyF', 'KeyV', 'KeyX', 'KeyC', 'KeyB', 'KeyN']); expect(m.cast(c)).toBe(true); expect(m.getCooldown(8)).toBe(10);
+  expect(m.slots.slice(0, 9).map(s => s.code)).toEqual(['KeyQ', 'KeyE', 'KeyR', 'KeyF', 'KeyV', 'KeyX', 'KeyC', 'KeyB', 'KeyN']); expect(m.cast(c)).toBe(true); expect(m.getCooldown(8)).toBe(10);
   for (let i = 0; i < 100; i++)expect(m.cast(c)).toBe(false); expect(c.effectManager.activeCount).toBe(1);
   c.effectManager.update(9.1, 0); m.update(10.1); expect(m.cast(c)).toBe(true); cleanup(c); m.dispose();
 });
