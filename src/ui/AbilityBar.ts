@@ -32,7 +32,12 @@ export class AbilityBar {
       button.style.setProperty('--element-color', ability?.color ?? '#8caac4');
       button.setAttribute('aria-label', `${this.abilities.slots[index].key}: ${name}`);
       // Icons are text glyphs; untrusted markup is never inserted into the UI.
-      if (ability?.icon === 'kraken-crown') {
+      if (ability?.icon === 'prism-ravenstorm') {
+        if (this.icons[index].dataset.icon !== ability.icon) {
+          this.icons[index].innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path stroke="#edf7ff" d="m4 26 4-8 4 4ZM11 17l6-10 3 4-6 8Z"/><path stroke="#bcaceb" d="m19 21 9-4-3 6-7 1Zm-7-9 1-8 4-2-2 9Z"/><path stroke="#80ddcd" d="m21 10 7-8-3 10-4 2Z"/><path stroke="#f0b4bd" d="m3 28 9-2m-7-11 3-4M17 28l7 1"/></svg>';
+          this.icons[index].dataset.icon = ability.icon;
+        }
+      } else if (ability?.icon === 'kraken-crown') {
         if (this.icons[index].dataset.icon !== ability.icon) {
           this.icons[index].innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><ellipse stroke="#397886" cx="16" cy="27" rx="12" ry="3"/><path stroke="#97b4c8" d="M8 27C-1 15 3 4 8 5c6 2 1 9-1 6-2-3 4-3 4 4l1 11M14 26c-5-10-4-23 2-24 7-1 7 10 3 10-4-1 0-6 2-3m-2 3-1 14m4 1c7-6 9-19 4-19-6-1-6 7-2 6 2-1-1-4-2-1-2 3-2 8-1 14"/><path stroke="#56d3bc" d="m5 16 1 2m1 3 1 2m6-12 1 2m0 3 1 2m10-2-1 2m-1 3-1 2"/></svg>';
           this.icons[index].dataset.icon = ability.icon;
