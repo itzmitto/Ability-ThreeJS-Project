@@ -28,7 +28,7 @@ export class HeavenlyArsenalEffect extends PackEffect{
   get instanceCount():number{return this.particleCount+this.formation.mesh.count+(this.formation.halo.visible?this.formation.halo.count:0)+this.trails.mesh.count+this.impact.small.count+this.impact.rays.count+2;}
   update(delta:number,_elapsed:number):boolean{
     if(!this.tick(delta,HEAVENLY_ARSENAL.lifetime))return false;const t=this.age,q=ARSENAL_QUALITY[this.context.quality.preset],s=arsenalTimeline(t);
-    this.formation.update(t,q.swords,q.detail,q.residual,s.fade);this.trails.update(t,this.formation,q.swords,q.trails,q.residual,s.fade,this.context);this.execution.update(t,q.detail,q.rings,s.fade);this.impact.update(t,this.formation,q.swords,q.residual,q.detail,s.fade);this.aftermath.update(t,this.formation,q.swords,q.particles,q.fragments,s.fade,this.context);
+    this.formation.update(t,q.swords,q.detail,q.residual,s.fade);this.trails.update(t,this.formation,q.swords,q.trails,q.residual,s.fade);this.execution.update(t,q.detail,q.rings,s.fade);this.impact.update(t,this.formation,q.swords,q.residual,q.detail,s.fade);this.aftermath.update(t,this.formation,q.swords,q.particles,q.fragments,s.fade,this.context);
     this.sigil.rotation.z=t*.55;
     const maxRipples=q.detail===1?6:q.detail===2?14:24;
     for(let i=0;i<q.swords;i++)if(this.formation.newlyImpacted(i,t,q.swords,q.residual)&&i%q.waterStride===0&&this.waterEmitted<maxRipples){const k=i*14;this.point.copy(this.target);this.point.x+=this.formation.state[k+3];this.point.z+=this.formation.state[k+5];this.context.water?.addRipple({position:this.point,strength:.22,duration:.65,waveSpeed:7,wavelength:.35,radius:.4},this);this.waterEmitted++;}

@@ -21,6 +21,7 @@ import { AbyssalFlame } from '../abilities/fire/AbyssalFlame';
 import { Worldrend } from '../abilities/void/Worldrend';
 import { TempestCataclysm } from '../abilities/stormDragon/TempestCataclysm';
 import { SpectralBreak } from '../abilities/spectral/SpectralBreak';
+import { HeavenlyArsenal } from '../abilities/heavenlyArsenal/HeavenlyArsenal';
 import { CryoCollapse } from '../abilities/cryo/CryoCollapse';
 import { Thunderlance } from '../abilities/thunderlance/Thunderlance';
 import { SolarNova } from '../abilities/solar/SolarNova';
@@ -111,6 +112,9 @@ export class Game {
     const solar = new SolarNova();
     this.abilities.registry.register(solar);
     this.abilities.assignSlot(16, solar.id);
+    const heavenlyArsenal = new HeavenlyArsenal();
+    this.abilities.registry.register(heavenlyArsenal);
+    this.abilities.assignSlot(17, heavenlyArsenal.id);
     this.hud = new HUD(root, this.abilities, this.settings, this.targeting);
     document.addEventListener('visibilitychange', this.visibilityChanged);
   }

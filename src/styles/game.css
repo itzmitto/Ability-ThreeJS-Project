@@ -36,3 +36,6 @@
 @media(min-width:1151px) and (max-width:1600px){.ability-bar{display:grid;grid-template-columns:repeat(9,74px);gap:5px}.ability-slot{width:74px}.selection-label{bottom:263px}}
 @media(min-width:851px) and (max-width:1150px){.selection-label{bottom:335px}}
 @media(max-width:480px){.selection-label{bottom:500px}}
+
+/* Phase 14: eighteen cards fill the existing two-row desktop arrangement. */
+@media(min-width:1601px) and (max-width:1750px){.ability-slot{width:80px}.ability-bar{gap:6px}}

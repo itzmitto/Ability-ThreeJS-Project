@@ -32,7 +32,12 @@ export class AbilityBar {
       button.style.setProperty('--element-color', ability?.color ?? '#8caac4');
       button.setAttribute('aria-label', `${this.abilities.slots[index].key}: ${name}`);
       // Icons are text glyphs; untrusted markup is never inserted into the UI.
-      if (ability?.icon === 'cryo-collapse' || ability?.icon === 'thunderlance' || ability?.icon === 'solar-nova') {
+      if (ability?.icon === 'heavenly-arsenal') {
+        if (this.icons[index].dataset.icon !== ability.icon) {
+          this.icons[index].innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path stroke="#fff7d8" d="m16 2 2 11 10 3-10 2-2 12-2-12-10-2 10-3ZM16 7v18M9 16h14"/><path stroke="#e4c76e" d="m6 5 1 5 4 1-4 1-1 4-1-4-3-1 3-1Zm20 16 1 4 3 1-3 1-1 3-1-3-3-1 3-1Z"/></svg>';
+          this.icons[index].dataset.icon = ability.icon;
+        }
+      } else if (ability?.icon === 'cryo-collapse' || ability?.icon === 'thunderlance' || ability?.icon === 'solar-nova') {
         if (this.icons[index].dataset.icon !== ability.icon) {
           const symbols = {
             'cryo-collapse': '<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="8"/><path d="M16 3v26M5 9l22 14M5 23 27 9m-14-5 3 3 3-3M4 12l4-1-1-4m17 1-1 4 4 1M3 17c-1 8 25 10 26-1"/></svg>',

@@ -22,7 +22,6 @@ export class SwordFormation{
   private readonly end=new Vector3();
   private readonly tangent=new Vector3();
   private readonly up=new Vector3(0,1,0);
-  private readonly bend=new Vector3();
   constructor(owner:VisualOwner,context:AbilityCastContext,target:Vector3){
     const forward=new Vector3().subVectors(target,context.player.position);forward.y=0;if(forward.lengthSq()<.001)forward.copy(context.playerForward).setY(0);if(forward.lengthSq()<.001)forward.set(0,0,-1);forward.normalize();const right=new Vector3(forward.z,0,-forward.x);
     const g=owner.geometry(celestialSwordGeometry(84));this.life=g.getAttribute('aLife') as InstancedBufferAttribute;this.variant=g.getAttribute('aVariant') as InstancedBufferAttribute;this.life.setUsage(DynamicDrawUsage);this.material=owner.material(celestialSwordMaterial());this.haloMaterial=owner.material(celestialSwordMaterial(true));this.mesh=new InstancedMesh(g,this.material,84);this.halo=new InstancedMesh(g,this.haloMaterial,84);

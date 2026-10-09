@@ -1,5 +1,4 @@
 import {InstancedMesh,Object3D,ShaderMaterial,Vector3,PlaneGeometry,DoubleSide,AdditiveBlending} from 'three';
-import type {AbilityCastContext} from '../Ability';
 import type {VisualOwner} from '../elemental/ElementalVisuals';
 import {clamp01,ease} from '../elemental/ElementalVisuals';
 import type {SwordFormation} from './SwordFormation';
@@ -18,13 +17,12 @@ export class SwordTrails{
       fragmentShader:`varying vec2 vUv;uniform float uTime,uFade;void main(){float x=abs(vUv.x*2.-1.),core=exp(-x*x*85.),halo=pow(max(0.,1.-x),2.5),tail=pow(vUv.y,.7);vec3 col=vec3(1.,.98,.86)*core+vec3(.77,.51,.12)*halo;gl_FragColor=vec4(col,halo*tail*uFade*.6);}` }));
     this.mesh=new InstancedMesh(owner.geometry(new PlaneGeometry(1,1)),this.material,255);this.mesh.frustumCulled=false;owner.root.add(this.mesh);
   }
-  update(t:number,formation:SwordFormation,count:number,layers:number,residual:number,fade:number,context:AbilityCastContext):void{
+  update(t:number,formation:SwordFormation,count:number,layers:number,residual:number,fade:number):void{
     this.material.uniforms.uTime.value=t;this.material.uniforms.uFade.value=fade;let n=0;const s=formation.state,d=this.dummy;
     for(let i=0;i<count-residual;i++){const k=i*14,launch=s[k+7],duration=s[k+8],age=t-launch;if(age<0||age>duration+.24)continue;
       const p=clamp01(age/duration),old=clamp01((age-.22)/duration);formation.sample(i,p*p*(2-p),this.b);formation.sample(i,old*old*(2-old),this.a);this.direction.subVectors(this.b,this.a);const length=this.direction.length();if(length<.02)continue;this.direction.divideScalar(length);
       for(let j=0;j<layers;j++){d.position.copy(this.a).lerp(this.b,.5);d.quaternion.setFromUnitVectors(this.up,this.direction);d.rotateY(j*Math.PI/layers);const width=(j===0?.4:.62)*s[k+9]*(1-ease((age-duration)/.24));d.scale.set(width,length,1);d.updateMatrix();this.mesh.setMatrixAt(n++,d.matrix);}
     }
-    // Flight particles remain attached to the captured trajectories, never the moving player.
-    void context;this.mesh.count=n;this.mesh.visible=n>0;this.mesh.instanceMatrix.needsUpdate=true;
+    this.mesh.count=n;this.mesh.visible=n>0;this.mesh.instanceMatrix.needsUpdate=true;
   }
 }
