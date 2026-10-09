@@ -32,7 +32,17 @@ export class AbilityBar {
       button.style.setProperty('--element-color', ability?.color ?? '#8caac4');
       button.setAttribute('aria-label', `${this.abilities.slots[index].key}: ${name}`);
       // Icons are text glyphs; untrusted markup is never inserted into the UI.
-      if (ability?.icon === 'heavenly-arsenal') {
+      if (ability?.icon === 'seraphic-deluge') {
+        if (this.icons[index].dataset.icon !== ability.icon) {
+          this.icons[index].innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path stroke="#e9ca75" d="M3 9c2-5 24-5 26 0M3 26c5 4 21 4 26 0"/><path stroke="#fff5da" d="m8 7 1 6-1 11-1-11ZM16 3l1 8-1 16-1-16ZM24 7l1 6-1 11-1-11ZM5 13h6m2-2h6m2 2h6"/><path stroke="#dbc078" d="m4 17 1 5m23-5-1 5"/></svg>';
+          this.icons[index].dataset.icon = ability.icon;
+        }
+      } else if (ability?.icon === 'prismatic-cathedral') {
+        if (this.icons[index].dataset.icon !== ability.icon) {
+          this.icons[index].innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path stroke="#eaf7ff" d="m16 2 5 10-2 17h-6l-2-17ZM16 2v27"/><path stroke="#8ddfed" d="m5 13 5 7-1 9H5L3 20Zm22-2 3 9-3 9h-4l-1-9Z"/><path stroke="#db9de8" d="m7 5 1 3 3 1-3 1-1 3-1-3-3-1 3-1M25 4l1 3 3 1-3 1-1 3-1-3-3-1 3-1"/><path stroke="#eee2aa" d="M11 12l5 5 5-5"/></svg>';
+          this.icons[index].dataset.icon = ability.icon;
+        }
+      } else if (ability?.icon === 'heavenly-arsenal') {
         if (this.icons[index].dataset.icon !== ability.icon) {
           this.icons[index].innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path stroke="#fff7d8" d="m16 2 2 11 10 3-10 2-2 12-2-12-10-2 10-3ZM16 7v18M9 16h14"/><path stroke="#e4c76e" d="m6 5 1 5 4 1-4 1-1 4-1-4-3-1 3-1Zm20 16 1 4 3 1-3 1-1 3-1-3-3-1 3-1Z"/></svg>';
           this.icons[index].dataset.icon = ability.icon;

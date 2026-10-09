@@ -21,6 +21,8 @@ import { AbyssalFlame } from '../abilities/fire/AbyssalFlame';
 import { Worldrend } from '../abilities/void/Worldrend';
 import { TempestCataclysm } from '../abilities/stormDragon/TempestCataclysm';
 import { SpectralBreak } from '../abilities/spectral/SpectralBreak';
+import { SeraphicDeluge } from '../abilities/seraphicDeluge/SeraphicDeluge';
+import { PrismaticCathedral } from '../abilities/prismaticCathedral/PrismaticCathedral';
 import { HeavenlyArsenal } from '../abilities/heavenlyArsenal/HeavenlyArsenal';
 import { CryoCollapse } from '../abilities/cryo/CryoCollapse';
 import { Thunderlance } from '../abilities/thunderlance/Thunderlance';
@@ -115,6 +117,12 @@ export class Game {
     const heavenlyArsenal = new HeavenlyArsenal();
     this.abilities.registry.register(heavenlyArsenal);
     this.abilities.assignSlot(17, heavenlyArsenal.id);
+    const prismaticCathedral = new PrismaticCathedral();
+    this.abilities.registry.register(prismaticCathedral);
+    this.abilities.assignSlot(18, prismaticCathedral.id);
+    const seraphicDeluge = new SeraphicDeluge();
+    this.abilities.registry.register(seraphicDeluge);
+    this.abilities.assignSlot(19, seraphicDeluge.id);
     this.hud = new HUD(root, this.abilities, this.settings, this.targeting);
     document.addEventListener('visibilitychange', this.visibilityChanged);
   }
