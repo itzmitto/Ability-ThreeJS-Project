@@ -21,6 +21,7 @@ import { AbyssalFlame } from '../abilities/fire/AbyssalFlame';
 import { Worldrend } from '../abilities/void/Worldrend';
 import { TempestCataclysm } from '../abilities/stormDragon/TempestCataclysm';
 import { SpectralBreak } from '../abilities/spectral/SpectralBreak';
+import { Dragonfire } from '../abilities/dragonfire/Dragonfire';
 import { PrismRavenstorm } from '../abilities/prismRavenstorm/PrismRavenstorm';
 import { KrakenCrown } from '../abilities/kraken/KrakenCrown';
 import { ChronoFracture } from '../abilities/chrono/ChronoFracture';
@@ -139,6 +140,9 @@ export class Game {
     const prismRavenstorm = new PrismRavenstorm();
     this.abilities.registry.register(prismRavenstorm);
     this.abilities.assignSlot(23, prismRavenstorm.id);
+    const dragonfire = new Dragonfire();
+    this.abilities.registry.register(dragonfire);
+    this.abilities.assignSlot(24, dragonfire.id);
     this.hud = new HUD(root, this.abilities, this.settings, this.targeting);
     document.addEventListener('visibilitychange', this.visibilityChanged);
   }

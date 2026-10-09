@@ -60,3 +60,9 @@
 
 /* Phase 20: the existing 12x2 grid holds all 24 cards; keep its label above tall cards. */
 @media(min-width:2200px){.selection-label{bottom:304px}}
+
+/* Phase 21: 25 cards retain three laptop rows; larger desktops use two rows. */
+@media(min-width:1301px){.ability-bar{grid-template-columns:repeat(13,74px)}}
+@media(min-width:851px) and (max-width:1300px){.ability-bar{grid-template-columns:repeat(9,74px)}}
+@media(min-width:481px) and (max-width:850px){.ability-bar{grid-template-columns:repeat(7,64px)}.ability-slot{width:64px}}
+@media(max-width:480px){.selection-label{bottom:680px}}

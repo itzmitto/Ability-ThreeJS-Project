@@ -32,7 +32,12 @@ export class AbilityBar {
       button.style.setProperty('--element-color', ability?.color ?? '#8caac4');
       button.setAttribute('aria-label', `${this.abilities.slots[index].key}: ${name}`);
       // Icons are text glyphs; untrusted markup is never inserted into the UI.
-      if (ability?.icon === 'prism-ravenstorm') {
+      if (ability?.icon === 'dragonfire') {
+        if (this.icons[index].dataset.icon !== ability.icon) {
+          this.icons[index].innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path stroke="#eb6a2f" d="M9 28C-1 23 5 15 8 12c-1 6 6 3 4-3l4-7c1 9 10 11 8 19 6-3 2-8 3-11 6 11 3 17-4 19"/><path stroke="#ffd67a" d="M14 28c-5-4 0-8 2-13 0 5 6 6 4 11m-8 3h10"/></svg>';
+          this.icons[index].dataset.icon = ability.icon;
+        }
+      } else if (ability?.icon === 'prism-ravenstorm') {
         if (this.icons[index].dataset.icon !== ability.icon) {
           this.icons[index].innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path stroke="#edf7ff" d="m4 26 4-8 4 4ZM11 17l6-10 3 4-6 8Z"/><path stroke="#bcaceb" d="m19 21 9-4-3 6-7 1Zm-7-9 1-8 4-2-2 9Z"/><path stroke="#80ddcd" d="m21 10 7-8-3 10-4 2Z"/><path stroke="#f0b4bd" d="m3 28 9-2m-7-11 3-4M17 28l7 1"/></svg>';
           this.icons[index].dataset.icon = ability.icon;
