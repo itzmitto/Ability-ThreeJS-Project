@@ -14,3 +14,25 @@
 @media(max-height:650px){.world-caption{display:none}.ability-bar{bottom:28px}.selection-label{bottom:130px}.input-hint{top:132px}.footer-note,.debug-hint{bottom:12px}}
 
 .ability-slot .slot-name{max-width:100%;text-align:center;line-height:1.3;font-size:7px;letter-spacing:1px;white-space:normal}.ability-slot .slot-icon{font-size:25px}.ability-slot.on-cooldown:before{content:"";position:absolute;inset:auto 0 0;height:var(--cooldown-progress);background:#87d7ed18;pointer-events:none}.ability-slot.on-cooldown .slot-icon{opacity:.18}.slot-cooldown{font-variant-numeric:tabular-nums;text-shadow:0 0 10px #72d6ec66}
+
+/* Nine cards keep desktop dimensions; narrower viewports wrap instead of compressing text. */
+@media(max-width:850px){.ability-bar{display:grid;grid-template-columns:repeat(5,70px);gap:6px;bottom:38px}.selection-label{bottom:233px}.footer-note{max-width:60vw;font-size:6px;letter-spacing:.6px}.ability-slot{height:86px}.slot-icon{height:35px}}
+@media(max-width:430px){.ability-bar{grid-template-columns:repeat(5,64px);gap:4px}.ability-slot{width:64px}.brand p{max-width:200px}.brand h1{font-size:18px}.brand{left:16px}.performance-panel{right:12px;width:138px}.graphics-controls{right:12px}.world-caption{display:none}}
+
+/* Phase 11: eleven cards fit desktop; compact view keeps the existing grid. */
+@media(min-width:1001px) and (max-width:1200px){.ability-slot{width:78px}.ability-bar{gap:6px}}
+@media(max-width:850px){.ability-bar{grid-template-columns:repeat(6,70px)}}
+@media(max-width:480px){.ability-bar{grid-template-columns:repeat(4,70px);gap:4px}.selection-label{bottom:318px}}
+@media(max-width:430px){.ability-bar{grid-template-columns:repeat(4,64px)}}
+
+/* Phase 12: preserve fourteen cards with a compact desktop row or two rows. */
+@media(min-width:1151px) and (max-width:1450px){.ability-slot{width:74px}.ability-bar{gap:5px}}
+@media(min-width:851px) and (max-width:1150px){.ability-bar{display:grid;grid-template-columns:repeat(7,70px);gap:6px}.ability-slot{width:70px;height:88px}.selection-label{bottom:240px}}
+@media(min-width:481px) and (max-width:850px){.selection-label{bottom:325px}}
+@media(max-width:480px){.selection-label{bottom:410px}}
+.slot-name{text-align:center;line-height:1.4;letter-spacing:1px;font-size:7px;max-width:100%}
+
+/* Phase 13: seventeen slots; a second desktop row leaves original card styling intact. */
+@media(min-width:1151px) and (max-width:1600px){.ability-bar{display:grid;grid-template-columns:repeat(9,74px);gap:5px}.ability-slot{width:74px}.selection-label{bottom:263px}}
+@media(min-width:851px) and (max-width:1150px){.selection-label{bottom:335px}}
+@media(max-width:480px){.selection-label{bottom:500px}}

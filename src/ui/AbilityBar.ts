@@ -12,7 +12,7 @@ export class AbilityBar {
     for (const [index, slot] of abilities.slots.entries()) {
       const button = document.createElement('button');
       button.className = 'ability-slot'; button.type = 'button';
-      button.innerHTML = `<span class="slot-key">${slot.key}<span>${slot.number}</span></span><span class="slot-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 7 25 16 16 25 7 16Z"/><path d="M16 12v8M12 16h8"/></svg></span><span class="slot-name">EMPTY</span><span class="slot-cooldown"></span>`;
+      button.innerHTML = `<span class="slot-key">${slot.key}<span>${slot.number ?? ''}</span></span><span class="slot-icon"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 7 25 16 16 25 7 16Z"/><path d="M16 12v8M12 16h8"/></svg></span><span class="slot-name">EMPTY</span><span class="slot-cooldown"></span>`;
       button.addEventListener('click', () => { abilities.select(index); button.blur(); this.update(); }, { signal: this.controller.signal });
       this.buttons.push(button);
       this.labels.push(button.querySelector<HTMLElement>('.slot-name')!);
@@ -32,7 +32,39 @@ export class AbilityBar {
       button.style.setProperty('--element-color', ability?.color ?? '#8caac4');
       button.setAttribute('aria-label', `${this.abilities.slots[index].key}: ${name}`);
       // Icons are text glyphs; untrusted markup is never inserted into the UI.
-      if (ability?.icon === 'blood-eclipse') {
+      if (ability?.icon === 'cryo-collapse' || ability?.icon === 'thunderlance' || ability?.icon === 'solar-nova') {
+        if (this.icons[index].dataset.icon !== ability.icon) {
+          const symbols = {
+            'cryo-collapse': '<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="8"/><path d="M16 3v26M5 9l22 14M5 23 27 9m-14-5 3 3 3-3M4 12l4-1-1-4m17 1-1 4 4 1M3 17c-1 8 25 10 26-1"/></svg>',
+            'thunderlance': '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="m5 28 13-15-3-1L28 3l-6 14-2-3-13 15M6 5l5 3-3 4 5 3M20 23l4-3 4 3-2 5"/></svg>',
+            'solar-nova': '<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="6"/><path d="m16 2 1 7M16 23v7M2 16l7-1m14 1h7M6 6l5 5m10 10 5 5M6 26l5-5M21 11l5-5M9 3l2 4m14 5 4-2M3 23l4-2m14 4 2 4"/></svg>',
+          };
+          this.icons[index].innerHTML = symbols[ability.icon];
+          this.icons[index].dataset.icon = ability.icon;
+        }
+      } else if (ability?.icon === 'glass-tempest' || ability?.icon === 'gravity-crush' || ability?.icon === 'worldroot') {
+        if (this.icons[index].dataset.icon !== ability.icon) {
+          const symbols = {
+            'glass-tempest': '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="m7 25 2-12 11-9-4 11ZM16 15l10-6-5 15-5 5ZM3 17l3-3M23 5l4-2M25 27l4 2"/></svg>',
+            'gravity-crush': '<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="4"/><ellipse cx="16" cy="16" rx="13" ry="6" transform="rotate(-30 16 16)"/><ellipse cx="16" cy="16" rx="6" ry="13" transform="rotate(-30 16 16)"/><path d="m3 6 5 2-2-5m23 23-5-2 2 5"/></svg>',
+            'worldroot': '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 29V15M16 23l-7-5-3-7m10 10 7-5 4-9M16 17C7 16 7 6 7 4c9 0 12 5 9 13Zm1-3c0-7 5-10 11-10 0 6-3 10-11 10ZM9 18l-4 2m18-4 5 2M16 27l-5 3m5-4 5 4"/></svg>',
+          };
+          this.icons[index].innerHTML = symbols[ability.icon];
+          this.icons[index].dataset.icon = ability.icon;
+        }
+      } else if (ability?.icon === 'earthbreaker' || ability?.icon === 'tidal-sovereign') {
+        if (this.icons[index].dataset.icon !== ability.icon) {
+          this.icons[index].innerHTML = ability.icon === 'earthbreaker'
+            ? '<svg viewBox="0 0 32 32" aria-hidden="true"><path stroke="#edb655" d="m7 23-3-9 7-9 10 2 7 10-5 10-12 1Z"/><path stroke="#ffdc8f" d="m11 5 4 10-5 5 4 8m1-13 7-4m-7 4 6 5 7-3m-7 3 2 7"/></svg>'
+            : '<svg viewBox="0 0 32 32" aria-hidden="true"><path stroke="#65daed" d="M3 25c5 2 9-1 10-6 2-8 11-11 15-6-7-2-10 4-6 7 3 2 5 1 7 0M3 28h26"/><path stroke="#cafaff" d="M5 20c4-1 6-4 8-8 3-6 8-8 13-6M7 11l-2-3m22 1 2-2"/></svg>';
+          this.icons[index].dataset.icon = ability.icon;
+        }
+      } else if (ability?.icon === 'spectral-break') {
+        if (this.icons[index].dataset.icon !== 'spectral-break') {
+          this.icons[index].innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path stroke="#aafaff" d="m16 3 2 10 11 3-11 3-2 10-2-10-11-3 11-3Z"/><path stroke="#6c8aff" d="m3 6 8 6M21 20l8 6M5 25l6-5"/><path stroke="#df70ef" d="m22 5-3 5M10 22l-3 6"/></svg>';
+          this.icons[index].dataset.icon = 'spectral-break';
+        }
+      } else if (ability?.icon === 'blood-eclipse') {
         if (this.icons[index].dataset.icon !== 'blood-eclipse') {
           this.icons[index].innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M26 12a10 10 0 1 0-20 0M10 12a6 6 0 0 1 12 0M16 7l2 11-2 9-2-9ZM7 17c-4 5-3 8 0 8s4-3 0-8ZM25 17c-4 5-3 8 0 8s4-3 0-8Z"/></svg>';
           this.icons[index].dataset.icon = 'blood-eclipse';

@@ -1,0 +1,200 @@
+PASS Local Rocketbox model and Idle
+PASS N selects ninth spell
+PASS Original spectral SVG icon
+PASS Left click casts, charge runs and ten-second cooldown
+PASS 9 aliases N
+PASS Walking during charge
+PASS Sprint during release
+PASS Camera moves during sustained beam
+PASS F3 debug
+PASS Telemetry preserved
+PASS Exactly nine registered spells
+PASS Forward sky aiming and 85 m clamp
+PASS MAX CHARGE finite geometry/transforms
+PASS Charge anchored to actual animated hand
+PASS MAX COMPRESSION finite geometry/transforms
+PASS Live quality preserves age and target
+PASS MAX RELEASE finite geometry/transforms
+PASS MAX TRAVELING FRONT finite geometry/transforms
+PASS MAX TRAVELING FRONT finite geometry/transforms
+PASS MAX SUSTAINED BEAM finite geometry/transforms
+PASS Live quality preserves age and target
+PASS MAX SUSTAINED BEAM finite geometry/transforms
+PASS MAX OVERLOAD finite geometry/transforms
+PASS MAX PRISMATIC IMPACT finite geometry/transforms
+PASS Live quality preserves age and target
+PASS MAX COLLAPSE finite geometry/transforms
+PASS MAX AFTERMATH finite geometry/transforms
+PASS Live quality preserves age and target
+PASS MAX FADE finite geometry/transforms
+PASS Nine-second completion
+PASS Idempotent root/light/subscription cleanup
+PASS MEDIUM CHARGE finite geometry/transforms
+PASS Charge anchored to actual animated hand
+PASS MEDIUM COMPRESSION finite geometry/transforms
+PASS Live quality preserves age and target
+PASS MEDIUM RELEASE finite geometry/transforms
+PASS MEDIUM TRAVELING FRONT finite geometry/transforms
+PASS MEDIUM TRAVELING FRONT finite geometry/transforms
+PASS MEDIUM SUSTAINED BEAM finite geometry/transforms
+PASS Live quality preserves age and target
+PASS MEDIUM SUSTAINED BEAM finite geometry/transforms
+PASS MEDIUM OVERLOAD finite geometry/transforms
+PASS MEDIUM PRISMATIC IMPACT finite geometry/transforms
+PASS Live quality preserves age and target
+PASS MEDIUM COLLAPSE finite geometry/transforms
+PASS MEDIUM AFTERMATH finite geometry/transforms
+PASS Live quality preserves age and target
+PASS MEDIUM FADE finite geometry/transforms
+PASS Nine-second completion
+PASS Idempotent root/light/subscription cleanup
+PASS LOW CHARGE finite geometry/transforms
+PASS Charge anchored to actual animated hand
+PASS LOW COMPRESSION finite geometry/transforms
+PASS Live quality preserves age and target
+PASS LOW RELEASE finite geometry/transforms
+PASS LOW TRAVELING FRONT finite geometry/transforms
+PASS LOW TRAVELING FRONT finite geometry/transforms
+PASS LOW SUSTAINED BEAM finite geometry/transforms
+PASS Live quality preserves age and target
+PASS LOW SUSTAINED BEAM finite geometry/transforms
+PASS LOW OVERLOAD finite geometry/transforms
+PASS LOW PRISMATIC IMPACT finite geometry/transforms
+PASS Live quality preserves age and target
+PASS LOW COLLAPSE finite geometry/transforms
+PASS LOW AFTERMATH finite geometry/transforms
+PASS Live quality preserves age and target
+PASS LOW FADE finite geometry/transforms
+PASS Nine-second completion
+PASS Idempotent root/light/subscription cleanup
+PASS Warm glacial-eruption LOW
+PASS Warm tempest-break LOW
+PASS Warm heavens-verdict LOW
+PASS Warm megiddo LOW
+PASS Warm abyssal-flame LOW
+PASS Warm worldrend LOW
+PASS Warm tempest-cataclysm LOW
+PASS Warm sanguine-eclipse LOW
+PASS Warm spectral-break LOW
+PASS Warm glacial-eruption MEDIUM
+PASS Warm tempest-break MEDIUM
+PASS Warm heavens-verdict MEDIUM
+PASS Warm megiddo MEDIUM
+PASS Warm abyssal-flame MEDIUM
+PASS Warm worldrend MEDIUM
+PASS Warm tempest-cataclysm MEDIUM
+PASS Warm sanguine-eclipse MEDIUM
+PASS Warm spectral-break MEDIUM
+PASS Warm glacial-eruption MAX
+PASS Warm tempest-break MAX
+PASS Warm heavens-verdict MAX
+PASS Warm megiddo MAX
+PASS Warm abyssal-flame MAX
+PASS Warm worldrend MAX
+PASS Warm tempest-cataclysm MAX
+PASS Warm sanguine-eclipse MAX
+PASS Warm spectral-break MAX
+PASS Isolated spectral cast 1
+PASS Isolated spectral cast 2
+PASS Isolated spectral cast 3
+PASS Isolated spectral cast 4
+PASS Isolated spectral cast 5
+PASS Isolated spectral cast 6
+PASS Isolated spectral cast 7
+PASS Isolated spectral cast 8
+PASS Isolated spectral cast 9
+PASS Isolated spectral cast 10
+PASS Isolated spectral cast 11
+PASS Isolated spectral cast 12
+PASS Isolated spectral cast 13
+PASS Isolated spectral cast 14
+PASS Isolated spectral cast 15
+PASS Isolated spectral cast 16
+PASS Isolated spectral cast 17
+PASS Isolated spectral cast 18
+PASS Isolated spectral cast 19
+PASS Isolated spectral cast 20
+PASS 20 isolated casts restore warmed cache baseline
+PASS 20 alternating cast 1 glacial-eruption
+PASS 20 alternating cast 2 tempest-break
+PASS 20 alternating cast 3 heavens-verdict
+PASS 20 alternating cast 4 megiddo
+PASS 20 alternating cast 5 abyssal-flame
+PASS 20 alternating cast 6 worldrend
+PASS 20 alternating cast 7 tempest-cataclysm
+PASS 20 alternating cast 8 sanguine-eclipse
+PASS 20 alternating cast 9 spectral-break
+PASS 20 alternating cast 10 glacial-eruption
+PASS 20 alternating cast 11 tempest-break
+PASS 20 alternating cast 12 heavens-verdict
+PASS 20 alternating cast 13 megiddo
+PASS 20 alternating cast 14 abyssal-flame
+PASS 20 alternating cast 15 worldrend
+PASS 20 alternating cast 16 tempest-cataclysm
+PASS 20 alternating cast 17 sanguine-eclipse
+PASS 20 alternating cast 18 spectral-break
+PASS 20 alternating cast 19 glacial-eruption
+PASS 20 alternating cast 20 tempest-break
+PASS 20 alternating all-nine casts restore warmed cache baseline
+PASS 40 alternating cast 1 glacial-eruption
+PASS 40 alternating cast 2 tempest-break
+PASS 40 alternating cast 3 heavens-verdict
+PASS 40 alternating cast 4 megiddo
+PASS 40 alternating cast 5 abyssal-flame
+PASS 40 alternating cast 6 worldrend
+PASS 40 alternating cast 7 tempest-cataclysm
+PASS 40 alternating cast 8 sanguine-eclipse
+PASS 40 alternating cast 9 spectral-break
+PASS 40 alternating cast 10 glacial-eruption
+PASS 40 alternating cast 11 tempest-break
+PASS 40 alternating cast 12 heavens-verdict
+PASS 40 alternating cast 13 megiddo
+PASS 40 alternating cast 14 abyssal-flame
+PASS 40 alternating cast 15 worldrend
+PASS 40 alternating cast 16 tempest-cataclysm
+PASS 40 alternating cast 17 sanguine-eclipse
+PASS 40 alternating cast 18 spectral-break
+PASS 40 alternating cast 19 glacial-eruption
+PASS 40 alternating cast 20 tempest-break
+PASS 40 alternating cast 21 heavens-verdict
+PASS 40 alternating cast 22 megiddo
+PASS 40 alternating cast 23 abyssal-flame
+PASS 40 alternating cast 24 worldrend
+PASS 40 alternating cast 25 tempest-cataclysm
+PASS 40 alternating cast 26 sanguine-eclipse
+PASS 40 alternating cast 27 spectral-break
+PASS 40 alternating cast 28 glacial-eruption
+PASS 40 alternating cast 29 tempest-break
+PASS 40 alternating cast 30 heavens-verdict
+PASS 40 alternating cast 31 megiddo
+PASS 40 alternating cast 32 abyssal-flame
+PASS 40 alternating cast 33 worldrend
+PASS 40 alternating cast 34 tempest-cataclysm
+PASS 40 alternating cast 35 sanguine-eclipse
+PASS 40 alternating cast 36 spectral-break
+PASS 40 alternating cast 37 glacial-eruption
+PASS 40 alternating cast 38 tempest-break
+PASS 40 alternating cast 39 heavens-verdict
+PASS 40 alternating cast 40 megiddo
+PASS 40 alternating all-nine casts restore warmed cache baseline
+PASS Cooldown stress initial cast
+PASS 100 cooldown attempts reject without allocation
+PASS Cooldown stress restores baseline
+PASS Blood, fire and spectral coexist
+PASS Concurrent spells expire independently
+PASS Spectral disposal preserves other water owner
+PASS LOW real-time cast
+PASS LOW real-time expiry
+PASS MEDIUM real-time cast
+PASS MEDIUM real-time expiry
+PASS MAX real-time cast
+PASS MAX real-time expiry
+PASS Full game disposal releases GPU geometry/textures/subscriptions
+PASS Active game disposal during CHARGE
+PASS Active game disposal during SUSTAINED BEAM
+PASS Active game disposal during PRISMATIC IMPACT
+PASS Active game disposal during AFTERMATH
+PROFILES [{"preset":"LOW","viewport":[1280,720],"renderSize":[1088,612],"peakCalls":23,"peakTriangles":95162,"peakParticles":240,"peakInstances":267,"stages":[{"stage":"IDLE","frames":30,"medianMs":19.5,"p95Ms":20.7},{"stage":"CHARGE","frames":34,"medianMs":19.8,"p95Ms":20.9},{"stage":"COMPRESSION","frames":22,"medianMs":19.7,"p95Ms":23.8},{"stage":"RELEASE","frames":14,"medianMs":19.9,"p95Ms":20.9},{"stage":"TRAVELING FRONT","frames":18,"medianMs":20.1,"p95Ms":21.1},{"stage":"SUSTAINED BEAM","frames":86,"medianMs":20,"p95Ms":20.7},{"stage":"OVERLOAD","frames":18,"medianMs":20.1,"p95Ms":21.1},{"stage":"PRISMATIC IMPACT","frames":39,"medianMs":20,"p95Ms":20.9},{"stage":"COLLAPSE","frames":45,"medianMs":20,"p95Ms":20.7},{"stage":"AFTERMATH","frames":90,"medianMs":20,"p95Ms":20.8},{"stage":"FADE","frames":90,"medianMs":20,"p95Ms":20.9},{"stage":"COMPLETE","frames":26,"medianMs":20.1,"p95Ms":20.6}],"resources":{"children":13,"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":167,"textures":9,"programs":117,"calls":8}},{"preset":"MEDIUM","viewport":[1280,720],"renderSize":[1280,720],"peakCalls":69,"peakTriangles":296655,"peakParticles":720,"peakInstances":764,"stages":[{"stage":"IDLE","frames":30,"medianMs":20,"p95Ms":20.8},{"stage":"CHARGE","frames":33,"medianMs":20,"p95Ms":20.5},{"stage":"COMPRESSION","frames":19,"medianMs":20,"p95Ms":20.8},{"stage":"RELEASE","frames":13,"medianMs":20.2,"p95Ms":20.9},{"stage":"TRAVELING FRONT","frames":17,"medianMs":20.1,"p95Ms":20.7},{"stage":"SUSTAINED BEAM","frames":87,"medianMs":20,"p95Ms":20.9},{"stage":"OVERLOAD","frames":18,"medianMs":20.1,"p95Ms":20.8},{"stage":"PRISMATIC IMPACT","frames":40,"medianMs":20,"p95Ms":20.9},{"stage":"COLLAPSE","frames":45,"medianMs":20,"p95Ms":20.8},{"stage":"AFTERMATH","frames":90,"medianMs":20,"p95Ms":21},{"stage":"FADE","frames":91,"medianMs":20,"p95Ms":21},{"stage":"COMPLETE","frames":26,"medianMs":19.9,"p95Ms":20.9}],"resources":{"children":13,"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":167,"textures":21,"programs":117,"calls":25}},{"preset":"MAX","viewport":[1280,720],"renderSize":[1280,720],"peakCalls":79,"peakTriangles":426423,"peakParticles":1600,"peakInstances":1676,"stages":[{"stage":"IDLE","frames":30,"medianMs":20,"p95Ms":21},{"stage":"CHARGE","frames":32,"medianMs":20.2,"p95Ms":21.2},{"stage":"COMPRESSION","frames":20,"medianMs":20.1,"p95Ms":21.3},{"stage":"RELEASE","frames":12,"medianMs":20.1,"p95Ms":20.8},{"stage":"TRAVELING FRONT","frames":19,"medianMs":19.8,"p95Ms":23.2},{"stage":"SUSTAINED BEAM","frames":86,"medianMs":20,"p95Ms":20.8},{"stage":"OVERLOAD","frames":19,"medianMs":19.9,"p95Ms":23.3},{"stage":"PRISMATIC IMPACT","frames":39,"medianMs":19.9,"p95Ms":21.1},{"stage":"COLLAPSE","frames":45,"medianMs":19.9,"p95Ms":20.9},{"stage":"AFTERMATH","frames":91,"medianMs":20,"p95Ms":20.8},{"stage":"FADE","frames":90,"medianMs":20,"p95Ms":21},{"stage":"COMPLETE","frames":26,"medianMs":19.9,"p95Ms":21.2}],"resources":{"children":13,"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":167,"textures":21,"programs":117,"calls":31}}]
+BASELINE {"children":13,"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":166,"textures":21,"programs":113,"calls":25}
+FINAL {"children":13,"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":167,"textures":21,"programs":117,"calls":31}
+ALL PHASE 10 BROWSER CHECKS PASSED

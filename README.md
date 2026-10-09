@@ -1,6 +1,18 @@
-# Elemental Sandbox — Phase 09
+# Elemental Sandbox — Phase 10
 
-A browser-based Three.js sandbox: a dark water arena, an animated human male in everyday clothes, **Glacial Eruption** on Q, **Tempest Break** on E, **Heaven's Verdict** on R, **MEGIDDO** on F, **ABYSSAL FLAME** on V, **WORLDREND — Sovereign Void** on X **TEMPEST CATACLYSM — Storm Dragon Ascension** on C and **SANGUINE ECLIPSE — Crimson Dominion** on B. The existing architecture, world, controls, character and HUD remain in place. There are no enemies, health/damage systems, NPCs, inventory or quests. All runtime assets are local.
+A browser-based Three.js sandbox: a dark water arena, an animated human male in everyday clothes, **Glacial Eruption** on Q, **Tempest Break** on E, **Heaven's Verdict** on R, **MEGIDDO** on F, **ABYSSAL FLAME** on V, **WORLDREND — Sovereign Void** on X **TEMPEST CATACLYSM — Storm Dragon Ascension** on C and **SANGUINE ECLIPSE — Crimson Dominion** on B and **SPECTRAL BREAK — Prismatic Annihilation** on N. The existing architecture, world, controls, character and HUD remain in place. There are no enemies, health/damage systems, NPCs, inventory or quests. All runtime assets are local.
+
+## Phase 10: SPECTRAL BREAK — Prismatic Annihilation
+
+Select **N / 9** and left-click once. **Cooldown: 10 s. Maximum range: 85 m from the casting origin. Lifetime: 9 s.** The charge follows the animated Rocketbox right hand; release freezes the origin and the captured forward direction. Ground and valid sky/ray aim work. Movement, camera control and live quality switching continue during the sequence.
+
+A white-cyan nucleus compresses before a brief release flash. The beam progressively extends through the world: a three-dimensional deformed core, cyan body, saturated blue shell, violet/magenta currents, instanced torn dark fractures, axial light packets, long ribbons and incomplete traveling pressure arcs. An irregular open curved shockfront reaches the endpoint, followed by a layered prismatic impact, narrowing/shredding collapse, spray, residual ribbons and local haze. Original procedural GLSL and geometry provide the structure; existing bloom/exposure are preserved.
+
+Real temporary lights illuminate the player and water. The Phase 9 planar reflector sees actual spell geometry; an owned directional pressure channel and impact crests add broken highlights and bounded shared ripple sources. Expiry removes only this spell's disturbances. One pooled visual bundle retains bounded GPU resources until game disposal.
+
+LOW/MEDIUM/MAX use **3/5/7 beam layers**, **3/7/12 long ribbons**, **240/720/1600 GPU particles**, **6/14/24 haze instances** and **1/2/3 temporary lights**. Nine HUD cards retain their desktop size and wrap at narrower widths. No new runtime asset or dependency was added; all eight earlier spells remain intact.
+
+The attachment contained only the written specification: **no reference video was accessible**. Browser review and two actual visual refinement passes were performed. `tsc --noEmit`, production build and **56 tests** pass. [Phase 10 architecture, full file inventory, quality, validation and limitations](docs/phase10-validation.md) and [browser report](docs/phase10-browser-report.txt) contain detailed evidence. `/phase10-review.html` offers stage/range/angle/playback controls; `/phase10-smoke.html` runs browser acceptance, stress and realtime profiling. These pages are development-only.
 
 ## Phase 09: realistic dark water and SANGUINE ECLIPSE — Crimson Dominion
 
