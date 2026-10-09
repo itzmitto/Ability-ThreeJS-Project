@@ -53,6 +53,8 @@ The final [LOW](phase23-low-realtime.txt), [MEDIUM](phase23-medium-realtime.txt)
 
 Manual normal-gameplay actions also selected Frost Lance with Shift+6 and cast with a canvas click. A subsequent normal 6 press selected Worldrend, verified from its aria-pressed state. The local human model stayed visible and animated. Staged normal/side review inspected early progression, full formation, endpoint shell/ring, standing ice and withdrawal; these are generated source-layout samples rather than footage of the inaccessible donor build.
 
+The 26-card HUD fits two rows at 1920×1080 and 2560×1440 without horizontal overflow. Temporary viewport overrides were reset after validation.
+
 Visual evidence: [advancing front](phase23-front.png), [MAX field](phase23-frost-lance-max.png), [endpoint shockwave](phase23-impact.png), [withdrawal](phase23-withdrawal.png), [finished water](phase23-expired.png). The final [26-ability regression](phase23-all-max-regression.txt) covers all previous registrations plus Frost Lance. The original Glacial Eruption source directory has no diff.
 
 The final [MAX stress report](phase23-max-stress.txt) warms two bundles, performs **20 Frost Lance casts**, tests two-field overlap, rejects a third ready-cooldown cast, checks 100 rapid cooldown attempts, Walk/Run/Idle, camera/aim, debug/telemetry and live graphics changes. After twenty casts, the warmed counts return exactly to **106 scene objects, zero temporary lights, five persistent subscriptions, zero active effects/ripples, 29 geometries, 21 textures and 42 programs**. These counts include the small set of other spells used to warm the harness. Full Game disposal returns geometries, textures and subscriptions to zero.
@@ -60,6 +62,8 @@ The final [MAX stress report](phase23-max-stress.txt) warms two bundles, perform
 ## Performance observations
 
 Measured in the available in-app browser at **1280×720**, without GPU timer queries or a native desktop-driver profile. Renderer draw calls/triangles include reflection, shadow and postprocessing passes. No hardware FPS guarantee or VRAM-byte measurement is claimed.
+
+The development harness renders an additional observation pass; these measurements are not a native normal-gameplay benchmark.
 
 | Preset | Peak crystals | Peak live FX particles | Peak draw calls | Peak triangles | p95 RAF interval |
 |---|---:|---:|---:|---:|---:|
