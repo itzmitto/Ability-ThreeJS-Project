@@ -21,6 +21,8 @@ import { AbyssalFlame } from '../abilities/fire/AbyssalFlame';
 import { Worldrend } from '../abilities/void/Worldrend';
 import { TempestCataclysm } from '../abilities/stormDragon/TempestCataclysm';
 import { SpectralBreak } from '../abilities/spectral/SpectralBreak';
+import { ChronoFracture } from '../abilities/chrono/ChronoFracture';
+import { ShadowColossus } from '../abilities/shadowColossus/ShadowColossus';
 import { SeraphicDeluge } from '../abilities/seraphicDeluge/SeraphicDeluge';
 import { PrismaticCathedral } from '../abilities/prismaticCathedral/PrismaticCathedral';
 import { HeavenlyArsenal } from '../abilities/heavenlyArsenal/HeavenlyArsenal';
@@ -123,6 +125,12 @@ export class Game {
     const seraphicDeluge = new SeraphicDeluge();
     this.abilities.registry.register(seraphicDeluge);
     this.abilities.assignSlot(19, seraphicDeluge.id);
+    const shadowColossus = new ShadowColossus();
+    this.abilities.registry.register(shadowColossus);
+    this.abilities.assignSlot(20, shadowColossus.id);
+    const chronoFracture = new ChronoFracture();
+    this.abilities.registry.register(chronoFracture);
+    this.abilities.assignSlot(21, chronoFracture.id);
     this.hud = new HUD(root, this.abilities, this.settings, this.targeting);
     document.addEventListener('visibilitychange', this.visibilityChanged);
   }

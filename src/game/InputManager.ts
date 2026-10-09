@@ -1,6 +1,7 @@
 export class InputManager {
   private held = new Set<string>();
   private pressed = new Set<string>();
+  private pressedWithShift = new Set<string>();
   private deltaX = 0;
   private deltaY = 0;
   private castRequested = false;
@@ -12,7 +13,7 @@ export class InputManager {
     window.addEventListener('keydown', event => {
       if (event.target instanceof HTMLInputElement || event.target instanceof HTMLButtonElement || event.target instanceof HTMLSelectElement) return;
       if (['KeyW', 'KeyA', 'KeyS', 'KeyD', 'Space', 'F3'].includes(event.code)) event.preventDefault();
-      if (!event.repeat) this.pressed.add(event.code);
+      if (!event.repeat) { this.pressed.add(event.code); if (event.shiftKey) this.pressedWithShift.add(event.code); }
       this.held.add(event.code);
     }, options);
     window.addEventListener('keyup', event => this.held.delete(event.code), options);
@@ -44,10 +45,11 @@ export class InputManager {
   }
   isHeld(code: string): boolean { return this.held.has(code); }
   wasPressed(code: string): boolean { return this.pressed.has(code); }
+  wasPressedWithShift(code: string): boolean { return this.pressedWithShift.has(code); }
   get mouseX(): number { return this.deltaX; }
   get mouseY(): number { return this.deltaY; }
   get wantsCast(): boolean { return this.castRequested; }
-  endFrame(): void { this.pressed.clear(); this.deltaX = 0; this.deltaY = 0; this.castRequested = false; }
-  private clear = (): void => { this.held.clear(); this.pressed.clear(); this.deltaX = 0; this.deltaY = 0; this.castRequested = false; this.aiming = false; };
+  endFrame(): void { this.pressed.clear(); this.pressedWithShift.clear(); this.deltaX = 0; this.deltaY = 0; this.castRequested = false; }
+  private clear = (): void => { this.held.clear(); this.pressed.clear(); this.pressedWithShift.clear(); this.deltaX = 0; this.deltaY = 0; this.castRequested = false; this.aiming = false; };
   dispose(): void { this.controller.abort(); if (this.pointerLocked) document.exitPointerLock(); this.clear(); }
 }

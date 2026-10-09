@@ -20,7 +20,12 @@ export class AbilityManager {
     if (index === this.selectedIndex) this.selectedAbility?.select?.();
   }
   handleInput(input: InputManager, makeContext: () => AbilityCastContext): void {
-    for (let i = 0; i < this.slots.length; i++) if (input.wasPressed(this.slots[i].code) || (this.slots[i].number !== null && input.wasPressed(`Digit${this.slots[i].number}`))) this.select(i);
+    const modified = this.slots.findIndex(slot => slot.shift && input.wasPressedWithShift(slot.code));
+    if (modified >= 0) this.select(modified);
+    else for (let i = 0; i < this.slots.length; i++) {
+      const slot = this.slots[i];
+      if (!slot.shift && (input.wasPressed(slot.code) || (slot.number !== null && input.wasPressed(`Digit${slot.number}`)))) this.select(i);
+    }
     if (input.wantsCast && this.selectedAbility && this.getCooldown(this.selectedIndex) === 0) this.cast(makeContext());
   }
   cast(context: AbilityCastContext): boolean {

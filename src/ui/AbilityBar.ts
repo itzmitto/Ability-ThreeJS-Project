@@ -32,7 +32,17 @@ export class AbilityBar {
       button.style.setProperty('--element-color', ability?.color ?? '#8caac4');
       button.setAttribute('aria-label', `${this.abilities.slots[index].key}: ${name}`);
       // Icons are text glyphs; untrusted markup is never inserted into the UI.
-      if (ability?.icon === 'seraphic-deluge') {
+      if (ability?.icon === 'chrono-fracture') {
+        if (this.icons[index].dataset.icon !== ability.icon) {
+          this.icons[index].innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path stroke="#dfc281" d="M26 9A12 12 0 1 0 25 25M16 6v3M6 16h3m7 7v3M23 16h3M16 16V9m0 7-6 4"/><path stroke="#91dcef" d="m25 3-5 9 7 4-6 7 3 6M16 13l2 3-2 2-2-2Z"/></svg>';
+          this.icons[index].dataset.icon = ability.icon;
+        }
+      } else if (ability?.icon === 'shadow-colossus') {
+        if (this.icons[index].dataset.icon !== ability.icon) {
+          this.icons[index].innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path stroke="#b599df" d="M4 29 2 18l2-9 2 1-1 7 2-11 2 1-1 10 3-9 2 1-3 10 4-5 2 2-6 10v4M28 29l2-11-2-9-2 1 1 7-2-11-2 1 1 10-3-9-2 1 3 10-4-5-2 2 6 10v4"/><circle stroke="#9b64d0" cx="16" cy="21" r="3"/><path stroke="#775093" d="M12 29h8"/></svg>';
+          this.icons[index].dataset.icon = ability.icon;
+        }
+      } else if (ability?.icon === 'seraphic-deluge') {
         if (this.icons[index].dataset.icon !== ability.icon) {
           this.icons[index].innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path stroke="#e9ca75" d="M3 9c2-5 24-5 26 0M3 26c5 4 21 4 26 0"/><path stroke="#fff5da" d="m8 7 1 6-1 11-1-11ZM16 3l1 8-1 16-1-16ZM24 7l1 6-1 11-1-11ZM5 13h6m2-2h6m2 2h6"/><path stroke="#dbc078" d="m4 17 1 5m23-5-1 5"/></svg>';
           this.icons[index].dataset.icon = ability.icon;

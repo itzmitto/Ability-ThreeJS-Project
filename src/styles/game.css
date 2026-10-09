@@ -46,3 +46,11 @@
 
 /* Phase 16: twenty abilities fill two ten-card rows on work-laptop displays. */
 @media(min-width:1151px) and (max-width:1900px){.ability-bar{display:grid;grid-template-columns:repeat(10,74px);gap:5px}.ability-slot{width:74px}.selection-label{bottom:263px}}
+
+/* Phase 17: twenty-one cards, with three rows on smaller desktop widths. */
+@media(min-width:1151px) and (max-width:1300px){.ability-bar{grid-template-columns:repeat(7,74px)}.selection-label{bottom:367px}}
+@media(min-width:1301px) and (max-width:2100px){.ability-bar{display:grid;grid-template-columns:repeat(11,74px);gap:5px}.ability-slot{width:74px}.selection-label{bottom:263px}}
+@media(max-width:480px){.selection-label{bottom:590px}}
+
+/* Phase 18: twenty-two cards fit the existing eleven-column desktop rows. */
+@media(min-width:851px) and (max-width:1300px){.ability-bar{display:grid;grid-template-columns:repeat(8,74px);gap:5px}.ability-slot{width:74px}.selection-label{bottom:367px}}
