@@ -27,6 +27,7 @@ export interface AbilityCastContext {
 export interface Ability {
   readonly id: string;
   readonly name: string;
+  readonly subtitle?: string;
   readonly element: string;
   readonly color: string;
   readonly icon?: string;

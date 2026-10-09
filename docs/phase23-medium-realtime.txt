@@ -1,0 +1,22 @@
+PASS Local human model loaded
+PASS Exactly 26 registered abilities
+PASS FROST LANCE: shortcut Shift+6
+PASS FROST LANCE: HUD selection
+PASS FROST LANCE: click cast / cooldown
+PASS FROST LANCE: cooldown rejects another cast
+PASS FROST LANCE: finite geometry / bounded instances
+PASS FROST LANCE: natural completion
+PASS FROST LANCE: scene/light/subscription/water cleanup
+PASS FROST LANCE: WebGL error state
+PASS FROST LANCE: measurement recorded
+PASS GLACIAL ERUPTION: shortcut Q
+PASS GLACIAL ERUPTION: HUD selection
+PASS GLACIAL ERUPTION: click cast / cooldown
+PASS GLACIAL ERUPTION: cooldown rejects another cast
+PASS GLACIAL ERUPTION: finite geometry / bounded instances
+PASS GLACIAL ERUPTION: natural completion
+PASS GLACIAL ERUPTION: scene/light/subscription/water cleanup
+PASS GLACIAL ERUPTION: WebGL error state
+PASS GLACIAL ERUPTION: measurement recorded
+PASS AUDIT ALL CHECKS PASSED
+DATA [{"id":"frost-lance","quality":"MEDIUM","viewport":[1280,720],"calls":58,"triangles":132783,"peakInstances":140,"peakParticles":673,"raf":{"medianMs":6.099999904632568,"p95Ms":6.6000001430511475,"maxMs":10.400000095367432},"update":null,"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":0.5999999046325684,"maxMs":1.2000000476837158},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":9,"textures":21,"programs":19},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":18,"textures":21,"programs":30}},{"id":"glacial-eruption","quality":"MEDIUM","viewport":[1280,720],"calls":45,"triangles":50739,"peakInstances":64,"peakParticles":210,"raf":{"medianMs":6.099999904632568,"p95Ms":6.5,"maxMs":19.199999809265137},"update":null,"renderSubmit":{"medianMs":0.20000004768371582,"p95Ms":0.5,"maxMs":0.7000000476837158},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":18,"textures":21,"programs":30},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":20,"textures":21,"programs":30}}]

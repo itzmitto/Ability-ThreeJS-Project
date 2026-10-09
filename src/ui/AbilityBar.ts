@@ -31,8 +31,14 @@ export class AbilityBar {
       if (this.labels[index].textContent !== name) this.labels[index].textContent = name;
       button.style.setProperty('--element-color', ability?.color ?? '#8caac4');
       button.setAttribute('aria-label', `${this.abilities.slots[index].key}: ${name}`);
+      button.title = ability?.subtitle ?? name;
       // Icons are text glyphs; untrusted markup is never inserted into the UI.
-      if (ability?.icon === 'dragonfire') {
+      if (ability?.icon === 'frost-lance') {
+        if (this.icons[index].dataset.icon !== ability.icon) {
+          this.icons[index].innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path stroke="#f2feff" d="m3 27 2-8 3 5Zm7 0 1-14 5 7-2 7Zm8 0-1-21 6 12-1 9Zm7 0-2-24 6 15-1 9Z"/><path stroke="#79b6dd" d="m3 29 26-1M5 19l1 7m5-13 2 12m4-19 3 20m3-23 3 23"/></svg>';
+          this.icons[index].dataset.icon = ability.icon;
+        }
+      } else if (ability?.icon === 'dragonfire') {
         if (this.icons[index].dataset.icon !== ability.icon) {
           this.icons[index].innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path stroke="#eb6a2f" d="M9 28C-1 23 5 15 8 12c-1 6 6 3 4-3l4-7c1 9 10 11 8 19 6-3 2-8 3-11 6 11 3 17-4 19"/><path stroke="#ffd67a" d="M14 28c-5-4 0-8 2-13 0 5 6 6 4 11m-8 3h10"/></svg>';
           this.icons[index].dataset.icon = ability.icon;

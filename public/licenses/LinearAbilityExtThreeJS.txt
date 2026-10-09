@@ -6,6 +6,11 @@ AbyssFieldMaterial.js concepts and the required simplex/fbm noise helpers are
 copied or substantially adapted in src/abilities/kraken/.
 Converted to TypeScript and integrated with this sandbox.
 
+The supplied older IceAbility.js, IceMaterial.js, settings.ice, createCrystalGeometry
+and required noise helpers are also adapted in src/abilities/frostLance/.
+Reference snapshots: frost-lance-donor-sources/. These user-supplied restored copies
+are not a byte-for-byte verified Git commit. The donor MIT notice below covers this port.
+
 MIT License
 
 Copyright (c) 2026 mohamedachrefelouafi

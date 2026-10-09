@@ -1,0 +1,60 @@
+PASS Local human model loaded
+PASS Exactly 26 registered abilities
+PASS FROST LANCE: shortcut Shift+6
+PASS FROST LANCE: HUD selection
+PASS FROST LANCE: click cast / cooldown
+PASS FROST LANCE: cooldown rejects another cast
+PASS FROST LANCE: finite geometry / bounded instances
+PASS FROST LANCE: natural completion
+PASS FROST LANCE: scene/light/subscription/water cleanup
+PASS FROST LANCE: WebGL error state
+PASS FROST LANCE: measurement recorded
+PASS GLACIAL ERUPTION: shortcut Q
+PASS GLACIAL ERUPTION: HUD selection
+PASS GLACIAL ERUPTION: click cast / cooldown
+PASS GLACIAL ERUPTION: cooldown rejects another cast
+PASS GLACIAL ERUPTION: finite geometry / bounded instances
+PASS GLACIAL ERUPTION: natural completion
+PASS GLACIAL ERUPTION: scene/light/subscription/water cleanup
+PASS GLACIAL ERUPTION: WebGL error state
+PASS GLACIAL ERUPTION: measurement recorded
+PASS Stress cast KRAKEN CROWN
+PASS Stress cast PRISM RAVENSTORM
+PASS Stress cast FROST LANCE
+PASS Stress cast FROST LANCE
+PASS Stress cast FROST LANCE
+PASS Stress cast FROST LANCE
+PASS Stress cast FROST LANCE
+PASS Stress cast FROST LANCE
+PASS Stress cast FROST LANCE
+PASS Stress cast FROST LANCE
+PASS Stress cast FROST LANCE
+PASS Stress cast FROST LANCE
+PASS Stress cast FROST LANCE
+PASS Stress cast FROST LANCE
+PASS Stress cast FROST LANCE
+PASS Stress cast FROST LANCE
+PASS Stress cast FROST LANCE
+PASS Stress cast FROST LANCE
+PASS Stress cast FROST LANCE
+PASS Stress cast FROST LANCE
+PASS Stress cast FROST LANCE
+PASS Stress cast FROST LANCE
+PASS 20 FROST LANCE casts restore warmed GPU/scene baseline
+PASS Controlled two-field Frost Lance overlap
+PASS Ready cooldown still rejects a third live Frost Lance field
+PASS Walk remains active during two effects
+PASS Sprint remains active during two effects
+PASS Idle resumes after movement
+PASS Overlapping effects and shoe ripples expire
+PASS 100 rapid cooldown requests allocate no effects
+PASS P toggles telemetry
+PASS T toggles ground marker
+PASS Camera orbit and targeting remain controllable
+PASS F3 debug overlay updates
+PASS Graphics menu switches live to LOW
+PASS Graphics menu switches live to MEDIUM
+PASS Graphics menu switches live to MAX
+PASS Full disposal releases all GPU resources and subscriptions
+PASS AUDIT ALL CHECKS PASSED
+DATA [{"id":"frost-lance","quality":"MAX","viewport":[1280,720],"calls":58,"triangles":216267,"peakInstances":190,"peakParticles":1276,"raf":{"medianMs":6,"p95Ms":6.599999904632568,"maxMs":10.599999904632568},"update":{"medianMs":0.09999990463256836,"p95Ms":0.2999999523162842,"maxMs":0.7000000476837158},"renderSubmit":{"medianMs":0.5999999046325684,"p95Ms":1,"maxMs":6.8999998569488525},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":9,"textures":21,"programs":19},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":18,"textures":21,"programs":30}},{"id":"glacial-eruption","quality":"MAX","viewport":[1280,720],"calls":32,"triangles":73447,"peakInstances":120,"peakParticles":420,"raf":{"medianMs":6.099999904632568,"p95Ms":10.700000047683716,"maxMs":16.40000009536743},"update":{"medianMs":0,"p95Ms":0.20000004768371582,"maxMs":0.2999999523162842},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":8.5,"maxMs":15.099999904632568},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":18,"textures":21,"programs":30},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":20,"textures":21,"programs":30}},{"stress":"frost-lance","baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":29,"textures":21,"programs":42},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":29,"textures":21,"programs":42}}]

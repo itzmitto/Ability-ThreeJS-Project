@@ -20,9 +20,9 @@ function context(cameraFeedback?: AbilityCastContext['cameraFeedback']): Ability
 function dispose(c: AbilityCastContext) { c.effectManager.dispose(); c.player.dispose(); c.targeting.dispose(); c.quality.dispose(); c.water?.dispose(); }
 test('All numeric and modifier aliases select exactly one slot and reserve P/T', () => {
     const m = new AbilityManager();
-    expect(m.slots).toHaveLength(25);
+    expect(m.slots).toHaveLength(26);
     const input = (code: string, shift: boolean) => ({ wasPressed: (c: string) => c === code, wasPressedWithShift: (c: string) => shift && c === code, wantsCast: false }) as unknown as InputManager;
-    for (let digit = 1; digit <= 5; digit++) {
+    for (let digit = 1; digit <= 6; digit++) {
         m.handleInput(input(`Digit${digit}`, true), () => { throw new Error('Unexpected cast'); });
         expect(m.selectedIndex).toBe(19 + digit);
         m.handleInput(input(`Digit${digit}`, false), () => { throw new Error('Unexpected cast'); });

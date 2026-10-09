@@ -50,8 +50,8 @@ try {
     game.start();
     await frames(12);
     check(game.player.visual.loaded, 'Local human model loaded');
-    check(game.abilities.slots.filter(s => s.abilityId).length === 25, 'Exactly 25 registered abilities');
-    const targets = query.has('kraken') ? [22] : query.has('raven') ? [23] : game.abilities.slots.map((_, i) => i);
+    check(game.abilities.slots.filter(s => s.abilityId).length === 26, 'Exactly 26 registered abilities');
+    const targets = query.has('frost') ? [25, 0] : query.has('kraken') ? [22] : query.has('raven') ? [23] : game.abilities.slots.map((_, i) => i);
     for (const index of targets) {
         clean();
         game.abilities.update(120);
@@ -60,7 +60,7 @@ try {
         await frames(3);
         release(slot.code);
         check(game.abilities.selectedIndex === index, `${ability.name}: shortcut ${slot.key}`);
-        game.abilities.select((index + 1) % 25);
+        game.abilities.select((index + 1) % game.abilities.slots.length);
         root.querySelectorAll<HTMLButtonElement>('.ability-slot')[index].click();
         await frames(3);
         check(game.abilities.selectedIndex === index, `${ability.name}: HUD selection`);
@@ -114,20 +114,31 @@ try {
         } clean(); };
         await run(22);
         await run(23);
+        if (query.has('frost')) {
+            game.abilities.select(25); game.abilities.update(120); game.abilities.cast(context());
+            game.abilities.update(.4); game.abilities.cast(context());
+            for (let step = 0; step < 180 && game.effects.activeCount; step++) {
+                game.effects.update(.1, step * .1); game.renderer.render(); await frame();
+            }
+            clean();
+        }
         const baseline = counts();
-        for (const index of [22, 23]) {
-            for (let cast = 0; cast < 10; cast++)
+        for (const index of (query.has('frost') ? [25] : [22, 23])) {
+            const attempts = query.has('frost') ? 20 : 10;
+            for (let cast = 0; cast < attempts; cast++)
                 await run(index);
             const after = counts();
-            check(['objects', 'lights', 'subscriptions', 'active', 'ripples', 'geometries', 'textures', 'programs'].every(k => baseline[k as keyof typeof baseline] === after[k as keyof typeof after]), `Ten ${game.abilities.selectedAbility?.name} casts restore warmed GPU/scene baseline`);
+            check(['objects', 'lights', 'subscriptions', 'active', 'ripples', 'geometries', 'textures', 'programs'].every(k => baseline[k as keyof typeof baseline] === after[k as keyof typeof after]), `${attempts} ${game.abilities.selectedAbility?.name} casts restore warmed GPU/scene baseline`);
             records.push({ stress: game.abilities.selectedAbility?.id, baseline, after });
         }
         game.abilities.update(120);
-        game.abilities.select(22);
+        game.abilities.select(query.has('frost') ? 25 : 22);
         game.abilities.cast(context());
-        game.abilities.select(23);
+        if (query.has('frost')) game.abilities.update(.4);
+        game.abilities.select(query.has('frost') ? 25 : 23);
         game.abilities.cast(context());
-        check(game.effects.activeCount === 2, 'Controlled Kraken + Ravenstorm overlap');
+        check(game.effects.activeCount === 2, query.has('frost') ? 'Controlled two-field Frost Lance overlap' : 'Controlled Kraken + Ravenstorm overlap');
+        if (query.has('frost')) {game.abilities.update(120); check(!game.abilities.cast(context()), 'Ready cooldown still rejects a third live Frost Lance field');}
         key('KeyW');
         await frames(60);
         check(game.player.visual.animationState === 'Walk', 'Walk remains active during two effects');
@@ -146,7 +157,7 @@ try {
         check(game.player.visual.animationState === 'Idle', 'Idle resumes after movement');
         check(game.effects.activeCount === 0 && game.world.water.interactions.activeCount === 0, 'Overlapping effects and shoe ripples expire');
         game.abilities.update(120);
-        game.abilities.select(22);
+        game.abilities.select(query.has('frost') ? 25 : 22);
         game.abilities.cast(context());
         let blocked = 0;
         for (let i = 0; i < 100; i++)

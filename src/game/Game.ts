@@ -14,6 +14,7 @@ import type { AbilityCastContext } from '../abilities/Ability';
 import { EffectManager } from '../effects/EffectManager';
 import { HUD } from '../ui/HUD';
 import { GlacialEruption } from '../abilities/ice/GlacialEruption';
+import { FrostLance } from '../abilities/frostLance/FrostLance';
 import { TempestBreak } from '../abilities/wind/TempestBreak';
 import { HeavensVerdict } from '../abilities/lightning/HeavensVerdict';
 import { Megiddo } from '../abilities/light/Megiddo';
@@ -143,6 +144,9 @@ export class Game {
     const dragonfire = new Dragonfire();
     this.abilities.registry.register(dragonfire);
     this.abilities.assignSlot(24, dragonfire.id);
+    const frostLance = new FrostLance();
+    this.abilities.registry.register(frostLance);
+    this.abilities.assignSlot(25, frostLance.id);
     this.hud = new HUD(root, this.abilities, this.settings, this.targeting);
     document.addEventListener('visibilitychange', this.visibilityChanged);
   }
