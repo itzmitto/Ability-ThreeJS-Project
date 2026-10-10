@@ -182,7 +182,7 @@ export class Game {
     this.abilities.slots.push({key:'',code:'',number:null,abilityId:tidalSerpent.id});
     const titanFist=new TitanFist();this.abilities.registry.register(titanFist);
     this.abilities.slots.push({key:'',code:'',number:null,abilityId:titanFist.id});
-    const skybreaker=new Skybreaker();this.abilities.registry.register(skybreaker);
+    const skybreaker=new Skybreaker();this.abilities.registry.register(skybreaker);skybreaker.prepare(this.renderer.renderer,this.camera.camera,this.sceneManager.scene);
     this.abilities.slots.push({key:'',code:'',number:null,abilityId:skybreaker.id});
     this.hud = new HUD(root, this.abilities, this.settings, this.targeting, this.input, this.world.water);
     canvas.tabIndex = 0;

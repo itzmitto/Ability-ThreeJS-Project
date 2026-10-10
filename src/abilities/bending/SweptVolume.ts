@@ -27,15 +27,16 @@ export class SweptVolume {
       this.up.set(0,1,0);if(Math.abs(this.tangent.y)>.96)this.up.set(1,0,0);
       this.right.crossVectors(this.tangent,this.up).normalize();this.up.crossVectors(this.right,this.tangent).normalize();
       const r=Math.max(.008,radius(t));
+      const slope=Math.max(-5,Math.min(5,(radius(Math.min(1,t+1/this.segments))-radius(Math.max(0,t-1/this.segments)))/Math.max(.001,this.a.distanceTo(this.b))));
       for(let j=0;j<this.sides;j++){
         const angle=j/this.sides*Math.PI*2,c=Math.cos(angle),s=Math.sin(angle),k=(i*this.sides+j)*3;
         this.a.copy(this.p).addScaledVector(this.right,c*r).addScaledVector(this.up,s*r*ellipse).toArray(this.positions,k);
-        this.a.copy(this.right).multiplyScalar(c).addScaledVector(this.up,s/ellipse).normalize().toArray(this.normals,k);
+        this.a.copy(this.right).multiplyScalar(c).addScaledVector(this.up,s/ellipse).addScaledVector(this.tangent,-slope).normalize().toArray(this.normals,k);
       }
     }
     const cap=(this.segments+1)*this.sides*3;
     this.a.fromArray(this.points,0).toArray(this.positions,cap);this.a.fromArray(this.points,this.segments*3).toArray(this.positions,cap+3);
-    this.b.fromArray(this.points,0).sub(this.a.fromArray(this.points,3)).normalize().toArray(this.normals,cap);
+    this.b.fromArray(this.points,0).sub(this.a.fromArray(this.points,3));if(this.b.lengthSq()<1e-9)this.b.copy(this.tangent).negate();this.b.normalize().toArray(this.normals,cap);
     this.tangent.toArray(this.normals,cap+3);
     (this.geometry.getAttribute('position').array as Float32Array).set(this.positions);
     (this.geometry.getAttribute('normal').array as Float32Array).set(this.normals);

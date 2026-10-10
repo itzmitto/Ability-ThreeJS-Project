@@ -21,7 +21,7 @@ export class SkybreakerEffect implements ManagedEffect{
     this.direction.subVectors(target,this.root.position);this.direction.y=0;this.length=this.direction.length();this.root.quaternion.setFromUnitVectors(new Vector3(0,0,-1),this.direction.normalize());this.inverse.copy(this.root.quaternion).invert();
     this.launched.fill(false);this.hit.fill(false);this.particles.hits.set(-1,-1,-1);
     for(let i=0;i<3;i++){const fan=(i-1)*.105;this.ends[i].set(Math.sin(fan)*this.length,target.y-this.root.position.y+.25,-Math.cos(fan)*this.length);this.origins[i].copy(c.origin).sub(this.root.position).applyQuaternion(this.inverse);this.times[i]=C.release+i*C.interval+this.origins[i].distanceTo(this.ends[i])/C.speed;}
-    this.unsubscribe=c.quality.subscribe(q=>{this.tier=bendingTier(q);this.blades.forEach(b=>{b.a.geometry=this.geometries[this.tier].body;b.b.geometry=this.geometries[this.tier].edge;b.body.uniforms.uDetail.value=this.tier;b.edge.uniforms.uDetail.value=this.tier;});});c.scene.add(this.root);this.update(0,0);
+    this.unsubscribe=c.quality.subscribe(q=>{this.tier=bendingTier(q);this.blades.forEach(b=>{b.a.geometry=this.geometries[this.tier].body;b.b.geometry=this.geometries[this.tier].edge;b.body.uniforms.uDetail.value=this.tier;b.edge.uniforms.uDetail.value=this.tier;b.body.uniforms.uDistortion.value=this.tier===0?0:C.distortion*(this.tier===1?.6:1);b.edge.uniforms.uDistortion.value=this.tier===0?0:C.distortion*.35;});});c.scene.add(this.root);this.update(0,0);
   }
   update(dt:number,_time:number):boolean{
     if(!this.active)return false;this.age+=dt;if(this.age>this.times[2]+C.aftermath)return false;
@@ -40,12 +40,12 @@ export class SkybreakerEffect implements ManagedEffect{
       if(!this.hit[i]&&impact>=0){this.hit[i]=true;const contact=this.scratch.copy(end).applyQuaternion(this.root.quaternion).add(this.root.position);contact.y=this.ctx.water?.getSurfaceHeight(contact.x,contact.z)??0;
         this.splitStart.copy(end).addScaledVector(this.direction.subVectors(end,this.origins[i]).normalize(),-7).applyQuaternion(this.root.quaternion).add(this.root.position);
         this.ctx.water?.addSplit({start:this.splitStart,end:contact,width:i===2?4.5:3,depth:i===2?.55:.22,duration:1.2},this);
-        this.ctx.water?.addRipple({position:contact,strength:i===2?1:.38,duration:1.3,waveSpeed:i===2?6:4,radius:.4,displacementScale:i===2?.7:.3},this);
+        this.ctx.water?.addRipple({position:contact,strength:C.pressure*(i===2?2.4:1),duration:1.3,waveSpeed:i===2?6:4,radius:.4,displacementScale:i===2?.7:.3},this);
         if(i===2)this.ctx.cameraFeedback?.(.036,.11);
       }
     }
     this.particles.update(this.age,this.age-this.times[2],this.length,this.particleCount,ease(this.age/.12)*(1-ease(Math.max(0,this.age-this.times[2])/C.aftermath)));
-    this.root.userData.phase=this.age<C.release?'gather':this.age<C.release+C.interval*2?'sweep':this.hit[2]?'dissipation':'flight';this.root.userData.contacts=this.hit.filter(Boolean).length;return true;
+    this.root.userData.phase=this.age<C.release?'gather':this.age<C.release+C.interval*2?'sweep':this.hit[2]?'dissipation':'flight';this.root.userData.contacts=Number(this.hit[0])+Number(this.hit[1])+Number(this.hit[2]);return true;
   }
   dispose():void{if(!this.active)return;this.active=false;this.unsubscribe?.();this.unsubscribe=undefined;this.ctx.water?.removeOwner(this);this.root.removeFromParent();this.releaseLease?.();this.releaseLease=undefined;}
   destroy():void{this.dispose();this.geometries.forEach(g=>{g.body.dispose();g.edge.dispose();});this.blades.forEach(b=>{b.body.dispose();b.edge.dispose();});this.particles.dispose();this.wakes.forEach(w=>w.dispose());}

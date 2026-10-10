@@ -1,7 +1,7 @@
 import '../src/styles/game.css';
 import { Game } from '../src/game/Game';
 import { InstancedMesh,Mesh,PointLight,Vector3 } from 'three';
-import type { AbilityCastContext } from '../src/abilities/Ability';
+import type { Ability,AbilityCastContext } from '../src/abilities/Ability';
 import type { QualityPreset } from '../src/quality/QualityPreset';
 const root=document.querySelector<HTMLElement>('#app')!, query=new URLSearchParams(location.search), originalFavorites=localStorage.getItem('elemental-favorites'),game=new Game(root),r=game.renderer.renderer;
 const id=query.get('spell')??'tidal-serpent',report=document.createElement('pre');report.id='bending-report';report.style.cssText='position:fixed;left:24px;top:130px;max-height:60vh;overflow:auto;background:#06121ce8;color:#c6ddd7;font:11px monospace;padding:10px;z-index:40';root.append(report);
@@ -15,6 +15,8 @@ const context=(range=24):AbilityCastContext=>{const target=new Vector3(game.play
 try{
   await game.player.visual.ready;game.settings.setPreset((query.get('quality')??'LOW') as QualityPreset);game.start();await frames(12);
   const slots=JSON.stringify(game.abilities.slots.slice(0,32)),ability=game.abilities.registry.get(id)!;check(!!ability,'Registered '+id);check(game.abilities.registry.all.length===Number(query.get('roster')??36),'Expected roster count');
+  for(let i=0;i<600&&(ability as Ability & {prepared?:boolean}).prepared===false;i++)await frame();
+  check((ability as Ability & {prepared?:boolean}).prepared!==false,'Optional idle shader preparation completed');
   click('[data-open-book]');await frames();check(root.querySelectorAll('.spell-card').length===game.abilities.registry.all.length,'Dynamic Spellbook cards');
   const search=root.querySelector<HTMLInputElement>('[aria-label="Search spells"]')!;search.value=ability.subtitle!;search.dispatchEvent(new Event('input'));check(!root.querySelector<HTMLElement>(`[data-spell="${id}"]`)!.closest<HTMLElement>('.spell-card')!.hidden,'Subtitle search');
   root.querySelectorAll<HTMLButtonElement>('[data-favorite]').forEach(b=>{if((b.getAttribute('aria-pressed')==='true')!==(b.dataset.favorite===id))b.click();});click(`[data-spell="${id}"]`);await frames();check(game.effects.activeCount===0,'Equip does not cast');
