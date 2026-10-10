@@ -1,7 +1,12 @@
 import type { Ability } from '../abilities/Ability';
 export function paintSpellIcon(container: HTMLElement, ability: Ability | undefined): void {
       // Icons are text glyphs; untrusted markup is never inserted into the UI.
-      if (ability?.icon === 'sand-reaper') {
+      if (ability?.icon === 'astral-chainstorm') {
+        if(container.dataset.icon!==ability.icon){
+          container.innerHTML='<svg viewBox="0 0 32 32" aria-hidden="true"><g stroke="#c6dce7"><rect x="8" y="2" width="7" height="13" rx="3" transform="rotate(-35 11 9)"/><rect x="16" y="10" width="7" height="13" rx="3" transform="rotate(-35 19 17)"/><rect x="7" y="17" width="7" height="13" rx="3" transform="rotate(35 10 23)"/></g><path stroke="#38d8ff" d="m15 12 3 4-3 4-3-4Zm-6-5 3 3m8 6 2 3"/></svg>';
+          container.dataset.icon=ability.icon;
+        }
+      } else if (ability?.icon === 'sand-reaper') {
         if (container.dataset.icon !== ability.icon) {
           container.innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path stroke="#edc78a" fill="#8f6742" d="M8 2C30 7 30 25 8 30c12-7 13-21 0-28Z"/><path stroke="#ffe7a5" d="M12 6c11 7 12 13 0 21m5-17 3 5-2 6"/><path stroke="#c99b5c" d="m4 11 3-3 2 4-4 2Zm-1 12 4-3 2 4-5 2Z"/></svg>';
           container.dataset.icon = ability.icon;

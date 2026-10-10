@@ -18,6 +18,9 @@ export class WaterInteractionManager {
   private clock = 0;
   capacity = 32;
   emitted = 0;
+  private heightSampler?: (x:number,z:number)=>number;
+  setHeightSampler(sampler:((x:number,z:number)=>number)|undefined):void{this.heightSampler=sampler;}
+  getSurfaceHeight(x:number,z:number):number{const y=this.heightSampler?.(x,z)??0;return Number.isFinite(y)?y:0;}
   private readonly listeners = new Set<(r: WaterRipple) => void>();
   subscribe(listener: (r: WaterRipple) => void): () => void { this.listeners.add(listener); return () => this.listeners.delete(listener); }
   get activeCount(): number {
@@ -88,6 +91,7 @@ export class WaterInteractionManager {
     this.owners[i] = undefined;
   }
   dispose(): void {
+    this.heightSampler=undefined;
     this.listeners.clear();
     for (let i = 0; i < 32; i++) this.clear(i);
   }

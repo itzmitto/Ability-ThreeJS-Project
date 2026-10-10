@@ -1,3 +1,28 @@
+import type { OceanSettings } from './OceanSettings';
+/** Shared spectrum keeps CPU impact sampling and the rendered GPU ocean consistent. */
+export const WATER_SPECTRUM = [[.91,.41,36,.115,1,0],[-.38,.92,22.3,.065,.81,0],[.72,-.69,9.7,.034,1,1],[.3,.954,5.3,.021,.92,1],[-.84,.54,3.1,.012,1.12,1]] as const;
+export function sampleOceanHeight(x:number,z:number,time:number,playerX:number,playerZ:number,c:Readonly<OceanSettings>,waves:number,ripples:Float32Array,shape:Float32Array,capacity:number):number {
+  if(![x,z,time].every(Number.isFinite))return 0;
+  let px=x,pz=z,height=0;const angle=c.direction*Math.PI/180,co=Math.cos(angle),si=Math.sin(angle);
+  // Invert the small horizontal Gerstner displacement rather than sampling the wrong world XZ.
+  for(let iteration=0;iteration<4;iteration++) {
+    let dx=0,dz=0; height=0;
+    const r=Math.hypot(px-playerX,pz-playerZ),t=Math.max(0,Math.min(1,(r-.35)/2.3)),fade=t*t*(3-2*t);
+    for(let i=0;i<Math.min(5,waves);i++) {
+      const w=WATER_SPECTRUM[i],len=Math.hypot(w[0],w[1]),ux=w[0]/len,uz=w[1]/len;
+      const vx=co*ux+si*uz,vz=-si*ux+co*uz,k=6.283/(w[2]*c.wavelength),a=w[3]*c.amplitude;
+      const phase=k*(px*vx+pz*vz)-Math.sqrt(9.81*k)*time*w[4]*(w[5]?c.mediumSpeed:c.swellSpeed);
+      height+=a*Math.sin(phase)*fade;const horizontal=c.steepness*.65*a*Math.cos(phase)*fade;dx+=vx*horizontal;dz+=vz*horizontal;
+    }
+    if(iteration<3){px=x-dx;pz=z-dz;}
+  }
+  for(let i=0;i<Math.min(32,capacity);i++) {
+    const k=i*4,age=time-ripples[k+2],duration=shape[k+2];if(Math.abs(ripples[k+3])<.00001||age<0||age>=duration)continue;
+    const r=Math.hypot(px-ripples[k],pz-ripples[k+1]),v=r-shape[k]*c.rippleSpeed*age-shape[k+3],width=Math.max(shape[k+1]*1.8,.18);
+    height+=Math.max(-.4,Math.min(.4,ripples[k+3]))*c.rippleStrength*.18*Math.sin(v*6.283/Math.max(.15,shape[k+1]))*Math.exp(-v*v/(width*width))*Math.pow(Math.max(0,1-age/duration),2*c.rippleDecay)*Math.exp(-r*.075);
+  }
+  return height;
+}
 /** One coherent Gerstner spectrum, with analytic derivatives and bounded impulse wavelets. */
 export const WATER_WAVES = `
 uniform float uTime,uDetail,uAmplitude,uWavelength,uSteepness,uDirection,uSwellSpeed,uMediumSpeed,uWaveCount;
@@ -27,11 +52,7 @@ void gerstner(vec2 p,vec2 direction,float wavelength,float amplitude,float speed
 }
 void oceanSurface(vec2 p,out vec3 displacement,out vec3 n,out float crest,out vec2 rippleSlope){
  vec3 tx=vec3(1,0,0),tz=vec3(0,0,1);displacement=vec3(0);
- gerstner(p,vec2(.91,.41),36.,.115,uSwellSpeed,displacement,tx,tz);
- gerstner(p,vec2(-.38,.92),22.3,.065,uSwellSpeed*.81,displacement,tx,tz);
- if(uWaveCount>2.5)gerstner(p,vec2(.72,-.69),9.7,.034,uMediumSpeed,displacement,tx,tz);
- if(uWaveCount>3.5)gerstner(p,vec2(.3,.954),5.3,.021,uMediumSpeed*.92,displacement,tx,tz);
- if(uWaveCount>4.5)gerstner(p,vec2(-.84,.54),3.1,.012,uMediumSpeed*1.12,displacement,tx,tz);
+ ${WATER_SPECTRUM.map((w,i)=>`${i>1?`if(uWaveCount>${i+.5})`:''}gerstner(p,vec2(${w[0]},${w[1]}),${w[2].toFixed(3)},${w[3]},${w[5]?'uMediumSpeed':'uSwellSpeed'}*${w[4].toFixed(3)},displacement,tx,tz);`).join('\n')}
  vec2 off=p-uPlayer.xz;float r=length(off),t=clamp((r-.35)/2.3,0.,1.);float fade=t*t*(3.-2.*t);
  vec2 fadeGradient=off/max(.001,r)*6.*t*(1.-t)/2.3;
  vec3 raw=displacement;tx=vec3(1,0,0)+(tx-vec3(1,0,0))*fade+raw*fadeGradient.x;

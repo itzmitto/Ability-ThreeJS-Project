@@ -14,6 +14,7 @@ import type { WaterQuality } from "./water/WaterQualityConfig";
 import { waterSurfaceGeometry } from "./water/WaterSurfaceGeometry";
 import { WATER_VERTEX, WATER_FRAGMENT } from "./water/WaterShader";
 import { WaterContactSpray } from "./water/WaterContactSpray";
+import { sampleOceanHeight } from './water/WaterWaveField';
 export class DarkWater {
   readonly settings: OceanSettings = { ...OCEAN_DEFAULTS };
   readonly interactions = new WaterInteractionManager();
@@ -78,6 +79,7 @@ export class DarkWater {
       }
     });
     this.mesh.frustumCulled = false;
+    this.interactions.setHeightSampler((x,z)=>{const u=this.material.uniforms,p=u.uPlayer.value as Vector3;return sampleOceanHeight(x,z,this.time,p.x,p.z,this.settings,u.uWaveCount.value,this.interactions.data,this.interactions.shape,this.interactions.capacity);});
     this.unsubscribeRipple = this.interactions.subscribe(r => { if (Math.abs(r.strength) >= .18) this.spray.emitImpact(r.position, this.time, Math.abs(r.strength), this.settings.splashDensity * this.q.detail / 3); });
   }
   configure(patch: Partial<OceanSettings>): void { Object.assign(this.settings, validateOcean(patch, this.settings)); this.syncSettings(); }
@@ -115,6 +117,7 @@ export class DarkWater {
     this.material.uniforms.uReflectionMatrix.value.copy(this.reflection.matrix);
   }
   dispose(): void {
+    this.interactions.setHeightSampler(undefined);
     this.unsubscribe();
     this.unsubscribeRipple();
     this.footsteps.dispose();

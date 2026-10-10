@@ -16,6 +16,7 @@ import { HUD } from '../ui/HUD';
 import { GlacialEruption } from '../abilities/ice/GlacialEruption';
 import { FrostLance } from '../abilities/frostLance/FrostLance';
 import { SandReaper } from '../abilities/sandReaper/SandReaper';
+import { AstralChainstorm } from '../abilities/astralChainstorm/AstralChainstorm';
 import { TempestBreak } from '../abilities/wind/TempestBreak';
 import { HeavensVerdict } from '../abilities/lightning/HeavensVerdict';
 import { Megiddo } from '../abilities/light/Megiddo';
@@ -151,6 +152,9 @@ export class Game {
     const sandReaper = new SandReaper();
     this.abilities.registry.register(sandReaper);
     this.abilities.assignSlot(26, sandReaper.id);
+    const chainstorm = new AstralChainstorm();
+    this.abilities.registry.register(chainstorm);
+    this.abilities.slots.push({key:'',code:'',number:null,abilityId:chainstorm.id});
     this.hud = new HUD(root, this.abilities, this.settings, this.targeting, this.input, this.world.water);
     canvas.tabIndex = 0;
     document.addEventListener('visibilitychange', this.visibilityChanged);
