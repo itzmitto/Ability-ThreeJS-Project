@@ -53,3 +53,15 @@ Three to five chains assemble at the animated right hand, launch at 34m/s after 
 Live typed controls are available through `AstralChainstorm.configure()`; link shape rebuilds require idle effects. Timing changes apply to the next cast. The existing F3 Ocean editor is preserved. No new dependency, enemy, damage system or renderer was added.
 
 [Phase 26 modules, rendered screenshots, browser profiles, cleanup tests and limitations](docs/phase26-validation.md).
+
+## Phase 27 — Abyssal Moonfall / Shattered Heaven
+
+Ability **29**, **65m range**, **25s cooldown**, **14s lifetime**. Equip through Tab → Spellbook, search Shattered Heaven, aim and left-click. A 70m-diameter cratered moon assembles overhead, descends, fractures into closed solid sections and strikes the ocean with bounded storm, debris and water effects. No new shortcut is assigned. [Full implementation and actual LOW/MEDIUM/MAX verification](docs/phase27-validation.md).
+
+## Phase 28 — The Drowned King / Thronebreaker
+
+Ability **30**, **SHADOW / DARK**, **70m impact range**, **30s cooldown**, **17s lifetime**. Equip through Tab → Spellbook, search Thronebreaker, aim and left-click; favorites and Quick Wheel also work. No new numeric/Shift shortcut is assigned.
+
+An approximately 85m procedural armored king emerges, assembles a closed 65m runeblade, grips it with articulated two-handed IK, executes a weighted strike, parts the ocean with two temporary water walls, then separates and sinks. LOW/MEDIUM/MAX bound particles at 900/2,400/5,400 and fragments at 48/120/240. One cached effect lease reuses GPU resources; all scene attachments, lights, subscriptions and water disturbances expire. `DrownedKing.configure()` exposes finite typed tuning between casts. Cold first-use shader compilation can still cause a pause.
+
+[Complete file inventory, geometry/material details, rendered evidence, runtime measurements and limitations](docs/phase28-validation.md). With Vite running, `/drowned-king-review.html?quality=LOW` validates real-time playback; substitute MEDIUM/MAX, and add `&stress` for controlled sequential resource checks. `/audit-review.html?slot=29` provides stage/angle review. These are development review pages, not new gameplay systems.
