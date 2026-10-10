@@ -21,6 +21,7 @@ test('Shortest heading crosses the wrap correctly and additive bone passes do no
 });
 test('Upper-body projectile/summon casts preserve locomotion legs, hand transforms and smooth recovery',async()=>{
  const f=await characterFixture();f.motion.ability('ember-comet',new Vector3(0,0,-1));expect(f.motion.castStyle).toBe('projectile');for(let i=0;i<20;i++)f.tick(4.8);
+ const thigh=f.rig.bone('R_Thigh')!.quaternion.clone(),calf=f.rig.bone('R_Calf')!.quaternion.clone();f.motion.update(1/60,4.8,false);expect(f.rig.bone('R_Thigh')!.quaternion.angleTo(thigh)).toBeLessThan(1e-7);expect(f.rig.bone('R_Calf')!.quaternion.angleTo(calf)).toBeLessThan(1e-7);
  const hand=f.rig.bone('R_Hand')!.getWorldPosition(new Vector3());expect(hand.toArray().every(Number.isFinite)).toBeTruthy();expect(hand.y).toBeGreaterThan(.9);expect(hand.distanceTo(f.rig.bone('R_UpperArm')!.getWorldPosition(new Vector3()))).toBeLessThan(.58);
  for(let i=0;i<120;i++)f.tick(4.8);expect(f.motion.castPhase).toBe('READY');expect(f.animation.activeClip).toBe('Run');expect(characterCastStyle('drowned-king')).toBe('summon');f.motion.ability('drowned-king',new Vector3(0,.1,-1));f.tick(0);expect(f.motion.castPhase).toBe('CAST');f.dispose();
 });

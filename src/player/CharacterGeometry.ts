@@ -1,4 +1,4 @@
-import { BoxGeometry, BufferGeometry, Float32BufferAttribute, Mesh, SkinnedMesh, Uint16BufferAttribute, Vector3 } from 'three';
+import { BoxGeometry, BufferGeometry, DoubleSide, Float32BufferAttribute, Mesh, MeshBasicMaterial, Raycaster, SkinnedMesh, Triangle, Uint16BufferAttribute, Vector3 } from 'three';
 import type { Object3D } from 'three';
 import type { CharacterMaterials } from './CharacterMaterials';
 /** Fit selected garment faces over the source; copy exact skin indices/weights, never alter anatomy. */
@@ -12,6 +12,25 @@ export function createGarmentPatch(source:SkinnedMesh,include:(p:Vector3,index:n
       indices.push(skin.getX(v),skin.getY(v),skin.getZ(v),skin.getW(v));weights.push(weight.getX(v),weight.getY(v),weight.getZ(v),weight.getW(v));}
   }
   const out=new BufferGeometry();out.setAttribute('position',new Float32BufferAttribute(vertices,3));out.setAttribute('normal',new Float32BufferAttribute(normals,3));out.setAttribute('skinIndex',new Uint16BufferAttribute(indices,4));out.setAttribute('skinWeight',new Float32BufferAttribute(weights,4));out.computeBoundingBox();out.computeBoundingSphere();return out;
+}
+/** Trace two narrow raised seam strips over the real bind-pose chest; interpolate the skin weights. */
+export function createTorsoSeams(source:SkinnedMesh):BufferGeometry {
+  const material=new MeshBasicMaterial({side:DoubleSide}),surface=new Mesh(source.geometry,material),ray=new Raycaster();
+  const g=source.geometry,p=g.getAttribute('position'),skin=g.getAttribute('skinIndex'),weights=g.getAttribute('skinWeight');
+  const positions:number[]=[],joints:number[]=[],influence:number[]=[],a=new Vector3(),b=new Vector3(),c=new Vector3(),bary=new Vector3(),samples:{p:Vector3;indices:number[];weights:number[]}[]=[];
+  for(const sign of [-1,1]){
+    samples.length=0;
+    for(let row=0;row<=12;row++)for(const edge of [-1,1]){
+      const x=sign*.115+edge*.006,y=1.05+row*.029;ray.set(a.set(x,y,1),b.set(0,0,-1));const hit=ray.intersectObject(surface,false)[0];if(!hit?.face)continue;
+      const face=hit.face;Triangle.getBarycoord(hit.point,a.fromBufferAttribute(p,face.a),b.fromBufferAttribute(p,face.b),c.fromBufferAttribute(p,face.c),bary);
+      const combined=new Map<number,number>();for(let v=0;v<3;v++)for(let k=0;k<4;k++){const index=[face.a,face.b,face.c][v],joint=skin.getComponent(index,k);combined.set(joint,(combined.get(joint)??0)+weights.getComponent(index,k)*bary.getComponent(v));}
+      const sorted=[...combined].sort((u,v)=>v[1]-u[1]).slice(0,4);while(sorted.length<4)sorted.push([0,0]);const total=sorted.reduce((sum,pair)=>sum+pair[1],0);
+      samples.push({p:hit.point.clone().add(new Vector3(0,0,.016)),indices:sorted.map(pair=>pair[0]),weights:sorted.map(pair=>pair[1]/total)});
+    }
+    if(samples.length!==26)continue;
+    for(let row=0;row<12;row++)for(const k of [row*2,row*2+1,row*2+2,row*2+1,row*2+3,row*2+2]){const sample=samples[k];positions.push(...sample.p.toArray());joints.push(...sample.indices);influence.push(...sample.weights);}
+  }
+  material.dispose();const out=new BufferGeometry();out.setAttribute('position',new Float32BufferAttribute(positions,3));out.computeVertexNormals();out.setAttribute('skinIndex',new Uint16BufferAttribute(joints,4));out.setAttribute('skinWeight',new Float32BufferAttribute(influence,4));out.computeBoundingBox();out.computeBoundingSphere();return out;
 }
 export class CharacterGeometry {
   readonly accessories:Mesh[]=[];
@@ -32,8 +51,7 @@ export class CharacterGeometry {
     const skin=body.geometry.getAttribute('skinIndex'),weights=body.geometry.getAttribute('skinWeight');
     patch('Adventurer · forearm wraps',(p,v)=>Math.abs(p.x)>.42&&Math.abs(p.x)<.56&&[0,1,2,3].some(k=>forearms.includes(skin.getComponent(v,k))&&weights.getComponent(v,k)>.4),.007,'leather','#44372b');
     patch('Adventurer · belt',p=>p.y>.955&&p.y<1.015&&Math.abs(p.x)<.22,.018,'leather','#211b16');
-    // Front/back seam strips are real fitted skinned faces, not floating root-attached ornaments.
-    patch('Adventurer · stitched panels',p=>p.y>1.04&&p.y<1.40&&Math.abs(Math.abs(p.x)-.115)<.022,.014,'fabric','#605343');
+    const seams=createTorsoSeams(body);if(seams.getAttribute('position').count){const mesh=new SkinnedMesh(seams,materials.create('fabric','#665743'));mesh.name='Adventurer · raised stitched seams';mesh.position.copy(body.position);mesh.quaternion.copy(body.quaternion);mesh.scale.copy(body.scale);body.parent!.add(mesh);mesh.bind(body.skeleton,body.bindMatrix);mesh.castShadow=true;mesh.receiveShadow=true;mesh.frustumCulled=false;this.accessories.push(mesh);}else seams.dispose();
     // Small real-volume fasteners share a single skinned mesh. Bind-pose vertices inherit nearest body weights.
     const parts:BufferGeometry[]=[];
     for(const y of [1.13,1.23,1.33])parts.push(new BoxGeometry(.04,.011,.012).translate(0,y,.151));

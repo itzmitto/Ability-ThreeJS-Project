@@ -29,3 +29,5 @@ To reproduce, download the listed source files to `.local/model-source/` as `mal
 `Idle.fbx`, `Walk.fbx`, `Run.fbx`, plus original texture names. Run
 `scripts/prepare-character-textures.py` with Python/Pillow, then Blender's
 `--background --python scripts/prepare-character.py`. The completed GLB is included locally.
+
+Phase 30 retains this GLB unchanged. Runtime fitted garment patches, raised seams and fasteners inherit its original skin weights/skeleton; they do not remesh its face or replace anatomical geometry. The three source clips are blended and supplemented by bounded procedural posing and foot contact. No external character or animation asset was added.

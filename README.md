@@ -73,3 +73,12 @@ Ability **31**, **FIRE / MAGMA**, **4s cooldown**, **48m range**, **44m/s** flig
 A hand-charged lobed molten core assembles inside closed faceted volcanic plates, launches with a volumetric turbulent flame tail, then sheds cooling rock shards, embers and steam into three source-owned ocean ripples. The localized warm light/reflection and hot surface overlay fade with the aftermath. Lifetime is roughly **3.2–4.1s**, depending on distance; the first visible impact layers last under a second, while sparse steam/embers linger. LOW/MEDIUM/MAX cap particles at **150/340/700**, shell pieces at **6/8/10** and default impact fragments at **16/30/48**. At most two pooled leases exist; no dynamic shadows, fullscreen distortion or new renderer is introduced.
 
 `EmberComet.configure()` exposes fourteen finite typed controls between casts. [Full geometry, material, file inventory, browser evidence and validation report](docs/phase29-validation.md). With Vite running, `/ember-comet-review.html?quality=LOW` tests real-time casting; substitute MEDIUM/MAX and add `&stress` for twenty controlled sequential cleanup checks. `/audit-review.html?slot=30&age=0.68&range=28` reviews flight stages/angles. Review pages are development-only.
+# Phase 30 — Living Adventurer
+
+The same locally licensed Rocketbox male, 80-bone skeleton and Idle/Walk/Run clips are retained. Fitted skinned leather clothing, boots, wraps, raised seams and bronze fasteners add an adventurer silhouette without replacing the human rig. Skin, fabric, leather and metal use separate PBR responses with bounded bind-space procedural detail.
+
+Locomotion now blends continuously using actual velocity and measured stance travel. Existing 4.8m/s movement naturally reaches Run; Walk remains the slower acceleration blend. Shift retains 8.5m/s sprint with stronger conservative lean and cadence. Upper-body cast styles, open-hand blending, restrained head look and MEDIUM/MAX two-bone water contact run after the mixer without accumulating offsets. LOW keeps the same clips and core animation with simpler shading and no foot IK.
+
+F3 includes character state, weights, calibrated stride, casting recovery and contact diagnostics alongside the existing Ocean Editor. Tuning is centralized in `src/player/CharacterConfig.ts`. No new ability or gameplay shortcut was added; all 31 abilities remain registered.
+
+See [the character audit and validation report](docs/phase30-validation.md) for model limitations, before/after images, performance measurements, tests and the complete file inventory.

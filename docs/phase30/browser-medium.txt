@@ -1,0 +1,53 @@
+PASS Actual model loaded; all 31 abilities preserved
+PASS One original 80-bone skeleton; real skinned adventurer garments
+PASS Idle clip active
+PASS KeyW: camera-relative motion and finite rig
+PASS Deceleration blends to Idle
+PASS KeyS: camera-relative motion and finite rig
+PASS Deceleration blends to Idle
+PASS KeyA: camera-relative motion and finite rig
+PASS Deceleration blends to Idle
+PASS KeyD: camera-relative motion and finite rig
+PASS Deceleration blends to Idle
+PASS KeyW+KeyD: camera-relative motion and finite rig
+PASS Deceleration blends to Idle
+PASS 4.8m/s normal locomotion blends into compatible Run
+PASS Shift sprint retains speed; stronger bounded lean and cadence
+PASS Rapid direction reversal has finite bounded bone rotations
+PASS EMBER COMET: shared origin is exact right-hand bone
+PASS EMBER COMET: existing cast accepted
+PASS EMBER COMET: upper-body cast preserves moving legs and targeting
+PASS EMBER COMET: cast follow-through recovers
+PASS FROST LANCE: shared origin is exact right-hand bone
+PASS FROST LANCE: existing cast accepted
+PASS FROST LANCE: upper-body cast preserves moving legs and targeting
+PASS FROST LANCE: cast follow-through recovers
+PASS SAND REAPER: shared origin is exact right-hand bone
+PASS SAND REAPER: existing cast accepted
+PASS SAND REAPER: upper-body cast preserves moving legs and targeting
+PASS SAND REAPER: cast follow-through recovers
+PASS ASTRAL CHAINSTORM: shared origin is exact right-hand bone
+PASS ASTRAL CHAINSTORM: existing cast accepted
+PASS ASTRAL CHAINSTORM: upper-body cast preserves moving legs and targeting
+PASS ASTRAL CHAINSTORM: cast follow-through recovers
+PASS ABYSSAL MOONFALL: shared origin is exact right-hand bone
+PASS ABYSSAL MOONFALL: existing cast accepted
+PASS ABYSSAL MOONFALL: upper-body cast preserves moving legs and targeting
+PASS ABYSSAL MOONFALL: cast follow-through recovers
+PASS THE DROWNED KING: shared origin is exact right-hand bone
+PASS THE DROWNED KING: existing cast accepted
+PASS THE DROWNED KING: upper-body cast preserves moving legs and targeting
+PASS THE DROWNED KING: cast follow-through recovers
+PASS Camera orbit, head look and targeting remain finite
+PASS F3 character diagnostics and existing Ocean Editor coexist
+PASS LOW: valid character shaders and wave contact
+PASS MEDIUM: valid character shaders and wave contact
+PASS MAX: valid character shaders and wave contact
+PASS LOW: valid character shaders and wave contact
+PASS MEDIUM: valid character shaders and wave contact
+PASS MAX: valid character shaders and wave contact
+PASS 15 live quality switches: no new mixers, skeletons, meshes, materials or GPU resources
+PASS Final WebGL error is zero
+PASS Full character/game teardown releases subscriptions and GPU resources
+PASS FINAL PASS · 0 failures
+DATA [{"preset":"LOW","characterUpdateMs":{"median":0.10000014305114746,"p95":0.20000004768371582,"max":0.2999999523162842},"calls":13,"triangles":13625,"footIK":false},{"preset":"MEDIUM","characterUpdateMs":{"median":0.10000014305114746,"p95":0.20000004768371582,"max":0.2999999523162842},"calls":35,"triangles":40383,"footIK":true},{"preset":"MAX","characterUpdateMs":{"median":0.10000014305114746,"p95":0.20000004768371582,"max":0.3000001907348633},"calls":35,"triangles":73151,"footIK":true},{"quality":"MEDIUM","character":{"bones":80,"meshes":8,"triangles":10359,"skeletons":1,"materials":8,"geometries":46,"textures":21,"programs":63,"subscriptions":6},"sourceSpeeds":{"Walk":1.3404305029677082,"Run":2.534742225428303},"updateMs":{"median":0.19999980926513672,"p95":0.2999999523162842,"max":0.5},"render":{"calls":46,"triangles":84728},"feet":{"left":0.8330603503892686,"right":0.8330603503892686}}]
