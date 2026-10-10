@@ -34,7 +34,7 @@ export class TitanFistEffect implements ManagedEffect{
     if(this.age<C.charge){this.ctx.player.visual.getRightHandWorldPosition(this.hand);this.hand.sub(this.root.position).applyQuaternion(this.inverse);this.start.copy(this.hand);this.start.y+=.28;this.start.z-=.9;this.launch.copy(this.hand).applyQuaternion(this.root.quaternion).add(this.root.position);}
     this.fist.position.copy(this.start).lerp(this.localTarget,flight);this.fist.position.y-=ease((flight-.72)/.28)*.42;this.position.copy(this.fist.position).applyQuaternion(this.root.quaternion).add(this.root.position);this.fist.rotation.set(-.1-.32*ease(flight),0,Math.sin(flight*Math.PI)*.09);this.fist.scale.setScalar(C.scale*(.26+.74*assembly));
     this.fist.visible=t<0;this.shards.forEach(m=>m.visible=t>=0);this.stone.uniforms.uRockAlpha.value=1-ease(Math.max(0,t-.7)/1.1);this.stone.uniforms.uRockTime.value=this.age;
-    if(!this.impacted&&t>=0){this.impacted=true;this.shardOrigin.copy(this.localTarget);this.ctx.cameraFeedback?.(.065,.15);
+    if(!this.impacted&&t>=0){this.impacted=true;this.target.y=this.ctx.water?.getSurfaceHeight(this.target.x,this.target.z)??this.target.y;this.dust.material.uniforms.uSurface.value=this.target.y-this.root.position.y;this.shardOrigin.copy(this.localTarget);this.ctx.cameraFeedback?.(.065,.15);
       this.ctx.water?.addRipple({position:this.target,strength:1.4,duration:1.8,waveSpeed:5.8,radius:1,displacementScale:1.1,attenuation:.04},this);
       this.ctx.water?.addRipple({position:this.target,strength:.55,duration:1.4,waveSpeed:3.2,radius:1.7},this);}
     const counts=this.plateCounts;counts.fill(0);const surface=(this.ctx.water?.getSurfaceHeight(this.root.position.x,this.root.position.z)??0)-this.root.position.y;

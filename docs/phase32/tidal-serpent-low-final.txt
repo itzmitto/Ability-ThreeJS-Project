@@ -1,0 +1,34 @@
+PASS Registered tidal-serpent
+PASS Expected roster count
+PASS Optional idle shader preparation completed
+PASS Dynamic Spellbook cards
+PASS Subtitle search
+PASS Actual element filter
+PASS Actual range/cooldown/ready card
+PASS Equip does not cast
+PASS Favorite and Quick Wheel selection
+PASS Actual left-click cast
+PASS Cooldown starts
+PASS Cooldown rejects duplicate
+PASS Actual live cooldown card
+PASS Realtime authored stages draw/gather/release/splash/return
+PASS Actual animated casting-hand origin
+PASS Visible contact events
+PASS Finite geometry and WebGL NO_ERROR
+PASS Natural completion
+PASS Owned water effects removed
+PROFILE {"id":"tidal-serpent","quality":"LOW","viewport":[1920,1080],"calls":18,"triangles":14857,"particles":180,"instances":0,"rafMedian":6.099999904632568,"rafP95":6.3999998569488525,"rafMax":6.799999952316284}
+PASS 6m aim accepted safely
+PASS Near/clamped-far lifecycle
+PASS 100m aim accepted safely
+PASS Near/clamped-far lifecycle
+PASS Live LOW
+PASS Live MEDIUM
+PASS Live MAX
+PASS Moving cast
+PASS Gesture preserves sprint
+PASS Gesture returns to Idle/READY
+PASS Extended recovery reaches Idle/READY
+PASS Original 32 slots unchanged
+PASS Full game GPU/subscription teardown
+PASS BENDING BROWSER COMPLETE

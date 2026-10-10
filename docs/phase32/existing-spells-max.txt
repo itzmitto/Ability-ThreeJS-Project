@@ -1,0 +1,49 @@
+PASS Local human model loaded
+PASS All 32 previous abilities plus four Bending Arts
+PASS EMBER COMET: shortcut 
+PASS EMBER COMET: HUD selection
+PASS EMBER COMET: click cast / cooldown
+PASS EMBER COMET: cooldown rejects another cast
+PASS EMBER COMET: finite geometry / bounded instances
+PASS EMBER COMET: natural completion
+PASS EMBER COMET: scene/light/subscription/water cleanup
+PASS EMBER COMET: WebGL error state
+PASS EMBER COMET: measurement recorded
+PASS RIFTREAVER: shortcut 
+PASS RIFTREAVER: HUD selection
+PASS RIFTREAVER: click cast / cooldown
+PASS RIFTREAVER: cooldown rejects another cast
+PASS RIFTREAVER: finite geometry / bounded instances
+PASS RIFTREAVER: natural completion
+PASS RIFTREAVER: scene/light/subscription/water cleanup
+PASS RIFTREAVER: WebGL error state
+PASS RIFTREAVER: measurement recorded
+PASS FROST LANCE: shortcut Shift+6
+PASS FROST LANCE: HUD selection
+PASS FROST LANCE: click cast / cooldown
+PASS FROST LANCE: cooldown rejects another cast
+PASS FROST LANCE: finite geometry / bounded instances
+PASS FROST LANCE: natural completion
+PASS FROST LANCE: scene/light/subscription/water cleanup
+PASS FROST LANCE: WebGL error state
+PASS FROST LANCE: measurement recorded
+PASS ASTRAL CHAINSTORM: shortcut 
+PASS ASTRAL CHAINSTORM: HUD selection
+PASS ASTRAL CHAINSTORM: click cast / cooldown
+PASS ASTRAL CHAINSTORM: cooldown rejects another cast
+PASS ASTRAL CHAINSTORM: finite geometry / bounded instances
+PASS ASTRAL CHAINSTORM: natural completion
+PASS ASTRAL CHAINSTORM: scene/light/subscription/water cleanup
+PASS ASTRAL CHAINSTORM: WebGL error state
+PASS ASTRAL CHAINSTORM: measurement recorded
+PASS TIDAL SOVEREIGN: shortcut H
+PASS TIDAL SOVEREIGN: HUD selection
+PASS TIDAL SOVEREIGN: click cast / cooldown
+PASS TIDAL SOVEREIGN: cooldown rejects another cast
+PASS TIDAL SOVEREIGN: finite geometry / bounded instances
+PASS TIDAL SOVEREIGN: natural completion
+PASS TIDAL SOVEREIGN: scene/light/subscription/water cleanup
+PASS TIDAL SOVEREIGN: WebGL error state
+PASS TIDAL SOVEREIGN: measurement recorded
+PASS AUDIT ALL CHECKS PASSED
+DATA [{"id":"ember-comet","quality":"MAX","viewport":[1920,1080],"calls":83,"triangles":95196,"peakInstances":48,"peakParticles":643,"raf":{"medianMs":6,"p95Ms":7.599999904632568,"maxMs":8.899999856948853},"update":{"medianMs":0.09999990463256836,"p95Ms":0.20000004768371582,"maxMs":0.5999999046325684},"renderSubmit":{"medianMs":0.40000009536743164,"p95Ms":0.6000001430511475,"maxMs":2.4000000953674316},"baseline":{"objects":112,"lights":0,"subscriptions":6,"active":0,"ripples":0,"geometries":14,"textures":21,"programs":34},"after":{"objects":112,"lights":0,"subscriptions":6,"active":0,"ripples":0,"geometries":27,"textures":21,"programs":48}},{"id":"riftreaver","quality":"MAX","viewport":[1920,1080],"calls":59,"triangles":80427,"peakInstances":105,"peakParticles":1300,"raf":{"medianMs":6.099999904632568,"p95Ms":6.400000095367432,"maxMs":6.700000047683716},"update":{"medianMs":0.09999990463256836,"p95Ms":0.20000004768371582,"maxMs":0.20000004768371582},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":0.40000009536743164,"maxMs":2.6000001430511475},"baseline":{"objects":112,"lights":0,"subscriptions":6,"active":0,"ripples":0,"geometries":27,"textures":21,"programs":48},"after":{"objects":112,"lights":0,"subscriptions":6,"active":0,"ripples":0,"geometries":38,"textures":21,"programs":54}},{"id":"frost-lance","quality":"MAX","viewport":[1920,1080],"calls":78,"triangles":221676,"peakInstances":190,"peakParticles":1310,"raf":{"medianMs":6.099999904632568,"p95Ms":6.400000095367432,"maxMs":8.399999856948853},"update":{"medianMs":0.09999990463256836,"p95Ms":0.20000004768371582,"maxMs":0.3000001907348633},"renderSubmit":{"medianMs":0.5,"p95Ms":0.7999999523162842,"maxMs":0.9000000953674316},"baseline":{"objects":112,"lights":0,"subscriptions":6,"active":0,"ripples":0,"geometries":38,"textures":21,"programs":54},"after":{"objects":112,"lights":0,"subscriptions":6,"active":0,"ripples":0,"geometries":47,"textures":21,"programs":62}},{"id":"astral-chainstorm","quality":"MAX","viewport":[1920,1080],"calls":45,"triangles":171807,"peakInstances":195,"peakParticles":453,"raf":{"medianMs":6.099999904632568,"p95Ms":6.400000095367432,"maxMs":11.800000190734863},"update":{"medianMs":0.20000004768371582,"p95Ms":0.7999999523162842,"maxMs":0.8000001907348633},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":0.5,"maxMs":9.799999952316284},"baseline":{"objects":112,"lights":0,"subscriptions":6,"active":0,"ripples":0,"geometries":47,"textures":21,"programs":62},"after":{"objects":112,"lights":0,"subscriptions":6,"active":0,"ripples":0,"geometries":53,"textures":21,"programs":75}},{"id":"tidal-sovereign","quality":"MAX","viewport":[1920,1080],"calls":103,"triangles":161552,"peakInstances":696,"peakParticles":696,"raf":{"medianMs":6.099999904632568,"p95Ms":6.699999809265137,"maxMs":7.299999952316284},"update":{"medianMs":0.20000004768371582,"p95Ms":0.2999999523162842,"maxMs":0.3000001907348633},"renderSubmit":{"medianMs":0.3000001907348633,"p95Ms":0.6000001430511475,"maxMs":2.1000001430511475},"baseline":{"objects":112,"lights":0,"subscriptions":6,"active":0,"ripples":0,"geometries":53,"textures":21,"programs":75},"after":{"objects":112,"lights":0,"subscriptions":6,"active":0,"ripples":0,"geometries":53,"textures":21,"programs":75}}]

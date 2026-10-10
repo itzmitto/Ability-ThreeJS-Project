@@ -45,7 +45,7 @@ export class TidalSerpentEffect implements ManagedEffect {
     if(impactAge>=C.aftermath)return false;
     if(this.age<C.charge){this.drawHeight=(this.ctx.water?.getSurfaceHeight(this.root.position.x,this.root.position.z)??0)-this.root.position.y;this.ctx.player.visual.getRightHandWorldPosition(this.hands[0]);this.ctx.player.visual.getLeftHandWorldPosition(this.hands[1]);this.launch.copy(this.hands[0]);for(const h of this.hands)h.sub(this.root.position).applyQuaternion(this.inverse);}
     this.progress=Math.max(.005,ease((this.age-C.charge)/Math.max(.05,this.travel)));
-    if(impactAge>=0&&!this.impacted){this.impacted=true;this.ctx.cameraFeedback?.(.035,.13);this.ctx.water?.addRipple({position:this.target,strength:.95,duration:1.5,waveSpeed:5,radius:.5,displacementScale:.9},this);this.ctx.water?.addRipple({position:this.target,strength:.4,duration:1.2,waveSpeed:3,radius:1.1},this);}
+    if(impactAge>=0&&!this.impacted){this.impacted=true;this.target.y=this.ctx.water?.getSurfaceHeight(this.target.x,this.target.z)??this.target.y;this.drops.material.uniforms.uSurface.value=this.target.y-this.root.position.y;this.ctx.cameraFeedback?.(.035,.13);this.ctx.water?.addRipple({position:this.target,strength:.95,duration:1.5,waveSpeed:5,radius:.5,displacementScale:.9},this);this.ctx.water?.addRipple({position:this.target,strength:.4,duration:1.2,waveSpeed:3,radius:1.1},this);}
     const fade=this.age<C.charge?ease(this.age/.12):1-ease(Math.max(0,impactAge)/1.1);
     this.water.uniforms.uBendFade.value=fade;this.water.uniforms.uBendTime.value=this.age;
     for(let i=0;i<2;i++){this.stream=i;this.side=i?-1:1;this.sweeps[this.tier][i].update(this.path,this.radius,.72);this.meshes[i].visible=fade>.005;}

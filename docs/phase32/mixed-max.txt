@@ -1,0 +1,79 @@
+PASS Registered dancing-inferno
+PASS Expected roster count
+PASS Optional idle shader preparation completed
+PASS Dynamic Spellbook cards
+PASS Subtitle search
+PASS Actual element filter
+PASS Actual range/cooldown/ready card
+PASS Equip does not cast
+PASS Favorite and Quick Wheel selection
+PASS Actual left-click cast
+PASS Cooldown starts
+PASS Cooldown rejects duplicate
+PASS Actual live cooldown card
+PASS Realtime authored stages gather/weave/flow/bloom/steam
+PASS Actual animated casting-hand origin
+PASS Visible contact events
+PASS Finite geometry and WebGL NO_ERROR
+PASS Natural completion
+PASS Owned water effects removed
+PROFILE {"id":"dancing-inferno","quality":"MAX","viewport":[1920,1080],"calls":73,"triangles":108276,"particles":1050,"instances":0,"rafMedian":6,"rafP95":6.5,"rafMax":8.299999952316284}
+PASS 6m aim accepted safely
+PASS Near/clamped-far lifecycle
+PASS 100m aim accepted safely
+PASS Near/clamped-far lifecycle
+PASS Mixed tidal-serpent
+PASS Mixed titan-fist
+PASS Mixed skybreaker
+PASS Mixed dancing-inferno
+PASS Mixed tidal-serpent
+PASS Mixed warmed baseline 1
+PASS Mixed titan-fist
+PASS Mixed warmed baseline 2
+PASS Mixed skybreaker
+PASS Mixed warmed baseline 3
+PASS Mixed dancing-inferno
+PASS Mixed warmed baseline 4
+PASS Mixed tidal-serpent
+PASS Mixed warmed baseline 5
+PASS Mixed titan-fist
+PASS Mixed warmed baseline 6
+PASS Mixed skybreaker
+PASS Mixed warmed baseline 7
+PASS Mixed dancing-inferno
+PASS Mixed warmed baseline 8
+PASS Mixed tidal-serpent
+PASS Mixed warmed baseline 9
+PASS Mixed titan-fist
+PASS Mixed warmed baseline 10
+PASS Mixed skybreaker
+PASS Mixed warmed baseline 11
+PASS Mixed dancing-inferno
+PASS Mixed warmed baseline 12
+PASS Mixed tidal-serpent
+PASS Mixed warmed baseline 13
+PASS Mixed titan-fist
+PASS Mixed warmed baseline 14
+PASS Mixed skybreaker
+PASS Mixed warmed baseline 15
+PASS Mixed dancing-inferno
+PASS Mixed warmed baseline 16
+PASS Mixed tidal-serpent
+PASS Mixed warmed baseline 17
+PASS Mixed titan-fist
+PASS Mixed warmed baseline 18
+PASS Mixed skybreaker
+PASS Mixed warmed baseline 19
+PASS Mixed dancing-inferno
+PASS Mixed warmed baseline 20
+MIXED COUNTS {"before":{"objects":112,"lights":0,"geometries":39,"textures":21,"programs":53,"subs":6,"effects":0,"ripples":0},"after":{"objects":112,"lights":0,"geometries":39,"textures":21,"programs":53,"subs":6,"effects":0,"ripples":0}}
+PASS Live LOW
+PASS Live MEDIUM
+PASS Live MAX
+PASS Moving cast
+PASS Gesture preserves sprint
+PASS Gesture returns to Idle/READY
+PASS Extended recovery reaches Idle/READY
+PASS Original 32 slots unchanged
+PASS Full game GPU/subscription teardown
+PASS BENDING BROWSER COMPLETE

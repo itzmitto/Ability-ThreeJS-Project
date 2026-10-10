@@ -15,6 +15,7 @@ export function acquireBending(manager: EffectManager): (() => void) | null {
 export function bendingTarget(c: AbilityCastContext, range: number): Vector3 | null {
   if (![c.origin.x,c.origin.y,c.origin.z].every(Number.isFinite)) return null;
   const p = c.player.position, source = c.groundTarget ?? c.targetPoint;
+  if (![p.x,p.y,p.z,range].every(Number.isFinite)||range<=.35) return null;
   const target = new Vector3();
   if (source && [source.x,source.y,source.z].every(Number.isFinite)) target.copy(source);
   else { if (!c.cameraForward.toArray().every(Number.isFinite) || c.cameraForward.lengthSq()<1e-8) return null; target.copy(p).addScaledVector(c.cameraForward.clone().normalize(), range); }
