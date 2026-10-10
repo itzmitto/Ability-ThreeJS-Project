@@ -1,3 +1,4 @@
+@import './spellbook.css';
 :root{font-family:Inter,Arial,sans-serif;color:#b7c6d4;background:#03060c;font-synthesis:none;color-scheme:dark;font-size:12px}
 *{box-sizing:border-box}body{margin:0;overflow:hidden}button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:1px solid #b6daf6;outline-offset:4px}[hidden]{display:none!important}
 .world-canvas{display:block;width:100vw;height:100vh;outline:none}.hud{position:fixed;inset:0;pointer-events:none;user-select:none}.hud button,.hud input{pointer-events:auto}

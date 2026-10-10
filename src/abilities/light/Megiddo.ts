@@ -9,7 +9,7 @@ export class Megiddo implements Ability {
   readonly element = "LIGHT";
   readonly color = "#f5dfb1";
   readonly icon = "✧";
-  readonly cooldown = MEGIDDO.cooldown;
+  readonly cooldown = MEGIDDO.cooldown; readonly range = MEGIDDO.range;
   private readonly resources = new MegiddoResources();
   private seed = 39119;
   cast(context: AbilityCastContext): boolean {

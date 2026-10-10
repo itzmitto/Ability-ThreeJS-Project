@@ -21,7 +21,7 @@ export function sandReaperTarget(ctx: AbilityCastContext): Vector3 | null {
 }
 export class SandReaper implements Ability {
   readonly id = 'sand-reaper'; readonly name = 'SAND REAPER'; readonly subtitle = 'DUNE CLEAVER';
-  readonly element = 'SAND / EARTH / STONE'; readonly color = '#edc78a'; readonly icon = 'sand-reaper'; readonly cooldown = SAND_CAST.cooldown;
+  readonly element = 'SAND / EARTH / STONE'; readonly color = '#edc78a'; readonly icon = 'sand-reaper'; readonly cooldown = SAND_CAST.cooldown; readonly range = SAND_CAST.range;
   private readonly controls = { ...SAND_REAPER_DEFAULTS };
   private resources: SandResources | undefined;
   private readonly pool: SandReaperEffect[] = [];

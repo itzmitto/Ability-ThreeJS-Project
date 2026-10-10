@@ -151,7 +151,8 @@ export class Game {
     const sandReaper = new SandReaper();
     this.abilities.registry.register(sandReaper);
     this.abilities.assignSlot(26, sandReaper.id);
-    this.hud = new HUD(root, this.abilities, this.settings, this.targeting);
+    this.hud = new HUD(root, this.abilities, this.settings, this.targeting, this.input, this.world.water);
+    canvas.tabIndex = 0;
     document.addEventListener('visibilitychange', this.visibilityChanged);
   }
   start(): void { if (this.running) return; this.running = true; this.previousTime = performance.now(); this.raf = requestAnimationFrame(this.frame); }

@@ -10,7 +10,7 @@ export class TempestCataclysm implements Ability {
   readonly element = "TRUE DRAGON / STORM";
   readonly color = "#b098ef";
   readonly icon = "storm-dragon";
-  readonly cooldown = CATACLYSM.cooldown;
+  readonly cooldown = CATACLYSM.cooldown; readonly range = CATACLYSM.range;
   private readonly resources = new StormResourcePool();
   cast(context: AbilityCastContext): boolean {
     const target = resolveStormTarget(

@@ -51,7 +51,7 @@ try {
     await frames(12);
     check(game.player.visual.loaded, 'Local human model loaded');
     check(game.abilities.slots.filter(s => s.abilityId).length === 27, 'Exactly 27 registered abilities');
-    const targets = query.has('sand') ? (query.has('only') ? [26] : [26, 25, 0, 1]) : query.has('frost') ? [25, 0] : query.has('kraken') ? [22] : query.has('raven') ? [23] : game.abilities.slots.map((_, i) => i);
+    const targets = query.has('ocean') ? [0, 10, 22, 23, 25, 26, 24] : query.has('sand') ? (query.has('only') ? [26] : [26, 25, 0, 1]) : query.has('frost') ? [25, 0] : query.has('kraken') ? [22] : query.has('raven') ? [23] : game.abilities.slots.map((_, i) => i);
     for (const index of targets) {
         clean();
         game.abilities.update(120);

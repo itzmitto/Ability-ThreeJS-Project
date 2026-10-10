@@ -10,7 +10,7 @@ export class GlacialEruption implements Ability {
   readonly element = 'ICE';
   readonly color = '#9cecff';
   readonly icon = '❄';
-  readonly cooldown = GLACIAL_CONFIG.cooldown;
+  readonly cooldown = GLACIAL_CONFIG.cooldown; readonly range = GLACIAL_CONFIG.range;
   private readonly resources = new IceResources();
   private seed = 8127;
   cast(context: AbilityCastContext): boolean {

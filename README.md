@@ -36,3 +36,10 @@ npm test
 ```
 
 With Vite running, `/audit.html?quality=LOW&frost&realtime` tests Frost Lance and Glacial Eruption at actual playback speed. Substitute MEDIUM/MAX for other presets; `/audit.html?quality=MAX&frost&stress` runs bounded repeated-cast checks. `/audit-review.html?slot=25` provides stage/range/angle controls. These review pages are development-only.
+# Phase 25 — Spellbook and cinematic ocean
+
+**Tab** or the compact HUD's **Spellbook** button opens the registry-driven catalog. Search names, subtitles, elements and tags; filter by element; click to equip (selection never casts). Stars persist ordered favorites locally. Hold **Backquote (`)**, move into a favorite wedge and release to equip, or use the **Quick Wheel** button and click. Arrow keys + Enter also select; Escape cancels. The first eight favorites occupy the wheel. Existing numeric/modifier shortcuts, WASD, Shift sprint, mouse aiming and world left-click casting remain available.
+
+The existing water mesh now uses a coherent GPU Gerstner spectrum with analytic normals, filtered simplex/fbm detail, bounded displaced ripple wavelets, Fresnel/specular response, and the existing clipped planar reflections. Impacts using the existing water API also feed one bounded GPU droplet pool. LOW/MEDIUM/MAX limit waves, mesh density, normals, reflections, lights and disturbances. In development, **F3** exposes the live Ocean VFX editor; production builds omit it.
+
+[Phase 25 complete file inventory, browser evidence, measurements and limitations](docs/phase25-validation.md). No new spell, renderer, dependency, or gameplay system was added.

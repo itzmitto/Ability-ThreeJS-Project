@@ -32,6 +32,9 @@ export interface Ability {
   readonly color: string;
   readonly icon?: string;
   readonly cooldown: number;
+  /** Display metadata, using the same configuration as targeting. */
+  readonly range?: number;
+  readonly tags?: readonly string[];
   select?(): void;
   deselect?(): void;
   /** Return false to reject a cast without starting a cooldown. */

@@ -1,4 +1,6 @@
-import { Mesh, ShaderMaterial, Vector3, Matrix4 } from "three";
+import { Color, Mesh, ShaderMaterial, Vector3, Matrix4 } from "three";
+import { OCEAN_DEFAULTS, validateOcean } from './water/OceanSettings';
+import type { OceanSettings } from './water/OceanSettings';
 import type { Camera, Scene, WebGLRenderer } from "three";
 import type { GraphicsSettings } from "../quality/GraphicsSettings";
 import type { Player } from "../player/Player";
@@ -13,6 +15,7 @@ import { waterSurfaceGeometry } from "./water/WaterSurfaceGeometry";
 import { WATER_VERTEX, WATER_FRAGMENT } from "./water/WaterShader";
 import { WaterContactSpray } from "./water/WaterContactSpray";
 export class DarkWater {
+  readonly settings: OceanSettings = { ...OCEAN_DEFAULTS };
   readonly interactions = new WaterInteractionManager();
   readonly spray = new WaterContactSpray();
   readonly footsteps = new WaterFootstepInteraction(
@@ -36,6 +39,10 @@ export class DarkWater {
       uLightPosition: { value: this.lighting.positions },
       uLightColor: { value: this.lighting.colors },
       uLightCount: { value: 0 },
+      uAmplitude:{value:1},uWavelength:{value:1},uSteepness:{value:.55},uDirection:{value:0},uSwellSpeed:{value:1},uMediumSpeed:{value:1},uWaveCount:{value:4},
+      uRippleStrength:{value:1},uRippleSpeed:{value:1},uRippleDecay:{value:1},uRippleCapacity:{value:20},
+      uMicroIntensity:{value:.65},uNormalScale:{value:1},uRoughness:{value:.22},uReflectionGain:{value:.9},uFresnelGain:{value:1},uSpecularSharpness:{value:1},
+      uFoamIntensity:{value:.3},uFoamThreshold:{value:.035},uDeepColor:{value:new Color()},uSurfaceColor:{value:new Color()},uReflectionTint:{value:new Color()},uFoamColor:{value:new Color()},
     },
     vertexShader: WATER_VERTEX,
     fragmentShader: WATER_FRAGMENT,
@@ -47,6 +54,8 @@ export class DarkWater {
   private q!: WaterQuality;
   private readonly unsubscribe: () => void;
   private segments = 96;
+  private readonly unsubscribeRipple: () => void;
+  private time = 0;
   constructor(
     private readonly scene: Scene,
     quality: GraphicsSettings,
@@ -56,9 +65,8 @@ export class DarkWater {
     scene.add(this.mesh, this.spray.points);
     this.unsubscribe = quality.subscribe((c) => {
       this.q = waterQuality(c);
-      this.interactions.setCapacity(this.q.rippleCapacity);
+      this.syncSettings();
       this.reflection.configure(this.q);
-      this.material.uniforms.uDetail.value = this.q.detail;
       this.material.uniforms.uReflectionSize.value = this.q.reflectionSize;
       if (this.segments !== c.waterSegments) {
         this.mesh.geometry.dispose();
@@ -69,8 +77,19 @@ export class DarkWater {
         this.segments = c.waterSegments;
       }
     });
+    this.mesh.frustumCulled = false;
+    this.unsubscribeRipple = this.interactions.subscribe(r => { if (Math.abs(r.strength) >= .18) this.spray.emitImpact(r.position, this.time, Math.abs(r.strength), this.settings.splashDensity * this.q.detail / 3); });
+  }
+  configure(patch: Partial<OceanSettings>): void { Object.assign(this.settings, validateOcean(patch, this.settings)); this.syncSettings(); }
+  private syncSettings(): void {
+    const c=this.settings,u=this.material.uniforms;
+    for(const [key,name] of Object.entries({amplitude:'uAmplitude',wavelength:'uWavelength',steepness:'uSteepness',direction:'uDirection',swellSpeed:'uSwellSpeed',mediumSpeed:'uMediumSpeed',microIntensity:'uMicroIntensity',normalScale:'uNormalScale',roughness:'uRoughness',reflectionIntensity:'uReflectionGain',fresnelStrength:'uFresnelGain',specularSharpness:'uSpecularSharpness',foamIntensity:'uFoamIntensity',foamThreshold:'uFoamThreshold',rippleStrength:'uRippleStrength',rippleSpeed:'uRippleSpeed',rippleDecay:'uRippleDecay'})) u[name].value=c[key as keyof OceanSettings];
+    for(const [key,name] of Object.entries({deepColor:'uDeepColor',surfaceColor:'uSurfaceColor',reflectionTint:'uReflectionTint',foamColor:'uFoamColor'})) (u[name].value as Color).set(c[key as keyof OceanSettings] as string);
+    const cap=Math.min(this.q.rippleCapacity,c.maxRipples);this.interactions.setCapacity(cap);u.uRippleCapacity.value=cap;
+    u.uDetail.value=Math.min(this.q.detail,c.normalQuality);u.uWaveCount.value=Math.min(this.q.detail===1?2:this.q.detail===2?4:5,c.waveQuality);
   }
   update(time: number, playerPosition: Vector3, player?: Player): void {
+    this.time = time;
     this.interactions.update(time);
     if (player) this.footsteps.update(time, player);
     this.spray.update(time);
@@ -97,6 +116,7 @@ export class DarkWater {
   }
   dispose(): void {
     this.unsubscribe();
+    this.unsubscribeRipple();
     this.footsteps.dispose();
     this.spray.dispose();
     this.interactions.dispose();

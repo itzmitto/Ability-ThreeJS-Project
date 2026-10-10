@@ -9,7 +9,7 @@ export class AbyssalFlame implements Ability {
   readonly element = "BLACK FIRE";
   readonly color = "#df365a";
   readonly icon = "♨";
-  readonly cooldown = ABYSSAL.cooldown;
+  readonly cooldown = ABYSSAL.cooldown; readonly range = ABYSSAL.range;
   private readonly resources = new FireResources();
   private seed = 82731;
   cast(c: AbilityCastContext): boolean {

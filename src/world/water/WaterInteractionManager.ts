@@ -18,6 +18,8 @@ export class WaterInteractionManager {
   private clock = 0;
   capacity = 32;
   emitted = 0;
+  private readonly listeners = new Set<(r: WaterRipple) => void>();
+  subscribe(listener: (r: WaterRipple) => void): () => void { this.listeners.add(listener); return () => this.listeners.delete(listener); }
   get activeCount(): number {
     let n = 0;
     for (let i = 0; i < 32; i++) if (this.handles[i]) n++;
@@ -56,6 +58,7 @@ export class WaterInteractionManager {
     this.handles[slot] = ++this.serial;
     this.owners[slot] = owner;
     this.emitted++;
+    for (const listener of this.listeners) listener(r);
     return this.serial;
   }
   removeDisturbance(handle: WaterHandle): void {
@@ -85,6 +88,7 @@ export class WaterInteractionManager {
     this.owners[i] = undefined;
   }
   dispose(): void {
+    this.listeners.clear();
     for (let i = 0; i < 32; i++) this.clear(i);
   }
 }

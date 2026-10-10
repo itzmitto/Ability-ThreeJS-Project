@@ -25,7 +25,7 @@ export class FrostLance implements Ability {
     readonly element = 'ICE / GLACIAL CRYSTAL';
     readonly color = '#a9e4ff';
     readonly icon = 'frost-lance';
-    readonly cooldown = FROST_LANCE.cooldown;
+    readonly cooldown = FROST_LANCE.cooldown; readonly range = FROST_LANCE.range;
     private active = new Set<FrostLanceEffect>();
     private readonly pool: FrostLanceEffect[] = [];
     get activeCount(): number { return this.active.size; }

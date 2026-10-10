@@ -10,7 +10,7 @@ export class SanguineEclipse implements Ability {
   readonly element = "BLOOD / HEMOMANCY";
   readonly color = "#b63250";
   readonly icon = "blood-eclipse";
-  readonly cooldown = SANGUINE.cooldown;
+  readonly cooldown = SANGUINE.cooldown; readonly range = SANGUINE.range;
   readonly resources = new BloodResourceManager();
   cast(context: AbilityCastContext): boolean {
     const target = resolveBloodTarget(

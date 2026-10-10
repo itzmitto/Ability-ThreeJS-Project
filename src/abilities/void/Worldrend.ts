@@ -10,7 +10,7 @@ export class Worldrend implements Ability {
   readonly element = "SPATIAL / VOID";
   readonly color = "#ad7bff";
   readonly icon = "⫷⫸";
-  readonly cooldown = WORLDREND.cooldown;
+  readonly cooldown = WORLDREND.cooldown; readonly range = WORLDREND.range;
   private readonly resources = new VoidResources();
   private seed = 32971;
   cast(c: AbilityCastContext): boolean {

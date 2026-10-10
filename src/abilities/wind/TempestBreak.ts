@@ -10,7 +10,7 @@ export class TempestBreak implements Ability {
   readonly element = "AIR";
   readonly color = "#c3dfe4";
   readonly icon = "≋";
-  readonly cooldown = TEMPEST.cooldown;
+  readonly cooldown = TEMPEST.cooldown; readonly range = TEMPEST.range;
   private readonly resources = new WindResources();
   cast(context: AbilityCastContext): boolean {
     const target = resolveWindTarget(

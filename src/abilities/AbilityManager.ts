@@ -9,6 +9,13 @@ export class AbilityManager {
   selectedIndex = 0;
   private cooldowns = new Map<string, number>();
   get selectedAbility() { return this.registry.get(this.slots[this.selectedIndex].abilityId); }
+  selectAbility(id: string): void {
+    if (!this.registry.get(id)) return;
+    let index = this.slots.findIndex(slot => slot.abilityId === id);
+    if (index < 0) { index = this.slots.length; this.slots.push({ key: '', code: '', number: null, abilityId: id }); }
+    this.select(index);
+  }
+  getCooldownById(id: string): number { return this.cooldowns.get(id) ?? 0; }
   select(index: number): void {
     if (index < 0 || index >= this.slots.length || index === this.selectedIndex) return;
     this.selectedAbility?.deselect?.(); this.selectedIndex = index; this.selectedAbility?.select?.();

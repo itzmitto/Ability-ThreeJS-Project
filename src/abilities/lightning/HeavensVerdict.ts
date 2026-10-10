@@ -10,7 +10,7 @@ export class HeavensVerdict implements Ability {
   readonly element = "LIGHTNING";
   readonly color = "#a9cbff";
   readonly icon = "ϟ";
-  readonly cooldown = VERDICT.cooldown;
+  readonly cooldown = VERDICT.cooldown; readonly range = VERDICT.range;
   private readonly resources = new VerdictResources();
   private seed = 18207;
   cast(context: AbilityCastContext): boolean {

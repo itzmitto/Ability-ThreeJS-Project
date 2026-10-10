@@ -1,0 +1,67 @@
+PASS Local human model loaded
+PASS Exactly 27 registered abilities
+PASS GLACIAL ERUPTION: shortcut Q
+PASS GLACIAL ERUPTION: HUD selection
+PASS GLACIAL ERUPTION: click cast / cooldown
+PASS GLACIAL ERUPTION: cooldown rejects another cast
+PASS GLACIAL ERUPTION: finite geometry / bounded instances
+PASS GLACIAL ERUPTION: natural completion
+PASS GLACIAL ERUPTION: scene/light/subscription/water cleanup
+PASS GLACIAL ERUPTION: WebGL error state
+PASS GLACIAL ERUPTION: measurement recorded
+PASS TIDAL SOVEREIGN: shortcut H
+PASS TIDAL SOVEREIGN: HUD selection
+PASS TIDAL SOVEREIGN: click cast / cooldown
+PASS TIDAL SOVEREIGN: cooldown rejects another cast
+PASS TIDAL SOVEREIGN: finite geometry / bounded instances
+PASS TIDAL SOVEREIGN: natural completion
+PASS TIDAL SOVEREIGN: scene/light/subscription/water cleanup
+PASS TIDAL SOVEREIGN: WebGL error state
+PASS TIDAL SOVEREIGN: measurement recorded
+PASS KRAKEN CROWN: shortcut Shift+3
+PASS KRAKEN CROWN: HUD selection
+PASS KRAKEN CROWN: click cast / cooldown
+PASS KRAKEN CROWN: cooldown rejects another cast
+PASS KRAKEN CROWN: finite geometry / bounded instances
+PASS KRAKEN CROWN: natural completion
+PASS KRAKEN CROWN: scene/light/subscription/water cleanup
+PASS KRAKEN CROWN: WebGL error state
+PASS KRAKEN CROWN: measurement recorded
+PASS PRISM RAVENSTORM: shortcut Shift+4
+PASS PRISM RAVENSTORM: HUD selection
+PASS PRISM RAVENSTORM: click cast / cooldown
+PASS PRISM RAVENSTORM: cooldown rejects another cast
+PASS PRISM RAVENSTORM: finite geometry / bounded instances
+PASS PRISM RAVENSTORM: natural completion
+PASS PRISM RAVENSTORM: scene/light/subscription/water cleanup
+PASS PRISM RAVENSTORM: WebGL error state
+PASS PRISM RAVENSTORM: measurement recorded
+PASS FROST LANCE: shortcut Shift+6
+PASS FROST LANCE: HUD selection
+PASS FROST LANCE: click cast / cooldown
+PASS FROST LANCE: cooldown rejects another cast
+PASS FROST LANCE: finite geometry / bounded instances
+PASS FROST LANCE: natural completion
+PASS FROST LANCE: scene/light/subscription/water cleanup
+PASS FROST LANCE: WebGL error state
+PASS FROST LANCE: measurement recorded
+PASS SAND REAPER: shortcut Shift+7
+PASS SAND REAPER: HUD selection
+PASS SAND REAPER: click cast / cooldown
+PASS SAND REAPER: cooldown rejects another cast
+PASS SAND REAPER: finite geometry / bounded instances
+PASS SAND REAPER: natural completion
+PASS SAND REAPER: scene/light/subscription/water cleanup
+PASS SAND REAPER: WebGL error state
+PASS SAND REAPER: measurement recorded
+PASS DRAGONFIRE: shortcut Shift+5
+PASS DRAGONFIRE: HUD selection
+PASS DRAGONFIRE: click cast / cooldown
+PASS DRAGONFIRE: cooldown rejects another cast
+PASS DRAGONFIRE: finite geometry / bounded instances
+PASS DRAGONFIRE: natural completion
+PASS DRAGONFIRE: scene/light/subscription/water cleanup
+PASS DRAGONFIRE: WebGL error state
+PASS DRAGONFIRE: measurement recorded
+PASS AUDIT ALL CHECKS PASSED
+DATA [{"id":"glacial-eruption","quality":"LOW","viewport":[1280,720],"calls":15,"triangles":12902,"peakInstances":31,"peakParticles":80,"raf":{"medianMs":6.099999904632568,"p95Ms":7.199999809265137,"maxMs":10.700000047683716},"update":{"medianMs":0,"p95Ms":0.10000014305114746,"maxMs":0.39999985694885254},"renderSubmit":{"medianMs":0.10000014305114746,"p95Ms":5.5,"maxMs":10},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":7,"textures":8,"programs":7},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":9,"textures":8,"programs":9}},{"id":"tidal-sovereign","quality":"LOW","viewport":[1280,720],"calls":35,"triangles":30514,"peakInstances":136,"peakParticles":136,"raf":{"medianMs":6.099999904632568,"p95Ms":8.100000143051147,"maxMs":12.900000095367432},"update":{"medianMs":0.09999990463256836,"p95Ms":0.20000004768371582,"maxMs":0.2999999523162842},"renderSubmit":{"medianMs":0.10000014305114746,"p95Ms":0.40000009536743164,"maxMs":10.299999952316284},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":9,"textures":8,"programs":9},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":10,"textures":8,"programs":10}},{"id":"kraken-crown","quality":"LOW","viewport":[1280,720],"calls":22,"triangles":33642,"peakInstances":216,"peakParticles":189,"raf":{"medianMs":6.099999904632568,"p95Ms":6.3999998569488525,"maxMs":17.299999952316284},"update":{"medianMs":0.09999990463256836,"p95Ms":0.20000004768371582,"maxMs":0.6000001430511475},"renderSubmit":{"medianMs":0.10000014305114746,"p95Ms":0.20000004768371582,"maxMs":16.600000143051147},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":10,"textures":8,"programs":10},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":10,"textures":8,"programs":10}},{"id":"prism-ravenstorm","quality":"LOW","viewport":[1280,720],"calls":17,"triangles":18330,"peakInstances":222,"peakParticles":180,"raf":{"medianMs":6.099999904632568,"p95Ms":6.299999952316284,"maxMs":7.400000095367432},"update":{"medianMs":0.09999990463256836,"p95Ms":0.20000004768371582,"maxMs":0.20000004768371582},"renderSubmit":{"medianMs":0.09999990463256836,"p95Ms":0.20000004768371582,"maxMs":0.2999999523162842},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":10,"textures":8,"programs":10},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":10,"textures":8,"programs":10}},{"id":"frost-lance","quality":"LOW","viewport":[1280,720],"calls":21,"triangles":29764,"peakInstances":80,"peakParticles":294,"raf":{"medianMs":6.099999904632568,"p95Ms":6.300000190734863,"maxMs":8.599999904632568},"update":{"medianMs":0,"p95Ms":0.20000004768371582,"maxMs":0.3000001907348633},"renderSubmit":{"medianMs":0.10000014305114746,"p95Ms":0.2999999523162842,"maxMs":2.299999952316284},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":10,"textures":8,"programs":10},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":19,"textures":8,"programs":16}},{"id":"sand-reaper","quality":"LOW","viewport":[1280,720],"calls":17,"triangles":13008,"peakInstances":24,"peakParticles":418,"raf":{"medianMs":6.099999904632568,"p95Ms":6.400000095367432,"maxMs":8.900000095367432},"update":{"medianMs":0,"p95Ms":0.20000004768371582,"maxMs":0.5},"renderSubmit":{"medianMs":0.09999990463256836,"p95Ms":0.20000004768371582,"maxMs":1.5},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":19,"textures":8,"programs":16},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":28,"textures":8,"programs":22}},{"id":"dragonfire","quality":"LOW","viewport":[1280,720],"calls":19,"triangles":16580,"peakInstances":152,"peakParticles":101,"raf":{"medianMs":6.099999904632568,"p95Ms":6.200000047683716,"maxMs":6.400000095367432},"update":{"medianMs":0.09999990463256836,"p95Ms":0.20000004768371582,"maxMs":0.2999999523162842},"renderSubmit":{"medianMs":0.09999990463256836,"p95Ms":0.20000004768371582,"maxMs":0.20000004768371582},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":28,"textures":8,"programs":22},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":28,"textures":8,"programs":22}}]
