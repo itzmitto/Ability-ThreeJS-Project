@@ -42,8 +42,8 @@ export class AstralChainAnimation {
           const d=tail+(reached-tail)*s;
           this.flight.copy(origin).addScaledVector(direction,d);
           const arch=Math.sin(s*Math.PI),whip=c.whipAmplitude*arch*Math.sin(s*6.283-age*c.whipFrequency+angle);
-          this.flight.addScaledVector(this.side,(chain-(q.chains-1)*.5)*.27*arch+whip);
-          this.flight.y+=arch*(.75+Math.sin(age*2+angle)*.15);
+          this.flight.addScaledVector(this.side,Math.cos(angle)*1.55*arch+whip);
+          this.flight.y+=arch*(1.2+Math.sin(angle)*.85+Math.sin(age*2+angle)*.15);
           const a=angle+s*Math.PI*(2.6+constrict*1.8)+age*c.wrapSpeed;
           const radius=c.wrapRadius*(1-constrict*.49)*(1-s*.28);
           this.radial.copy(this.side).multiplyScalar(Math.cos(a)*radius).addScaledVector(direction,Math.sin(a)*radius);
@@ -66,12 +66,12 @@ export class AstralChainAnimation {
         this.normal.addScaledVector(this.tangent,-this.normal.dot(this.tangent));
         if(this.normal.lengthSq()<.001){this.normal.copy(this.side).addScaledVector(this.tangent,-this.side.dot(this.tangent));if(this.normal.lengthSq()<.001)this.normal.set(0,0,1);}
         this.normal.normalize();this.binormal.crossVectors(this.normal,this.tangent).normalize();
+        if(i===0)this.normals[chain].copy(this.normal);
         this.frame.makeBasis(this.normal,this.tangent,this.binormal);this.dummy.quaternion.setFromRotationMatrix(this.frame);
         this.roll.setFromAxisAngle(Y,i%2*Math.PI*.5+chain*.1);this.dummy.quaternion.multiply(this.roll);
         this.dummy.scale.setScalar(flying?1:.48+assembly*.52);this.dummy.updateMatrix();this.mesh.setMatrixAt(total,this.dummy.matrix);
         this.data.setXYZ(total,i/Math.max(1,count-1),chain,(Math.sin(i*127.1+chain*39.3)*43758.5)%1+.5);total++;
       }
-      this.normals[chain].copy(this.normal);
     }
     this.mesh.count=total;this.mesh.instanceMatrix.needsUpdate=true;this.data.needsUpdate=true;
   }

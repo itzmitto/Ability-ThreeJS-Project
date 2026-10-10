@@ -29,10 +29,11 @@ export function createAstralChainMaterial() {
         vec3 p=vChainLocal;float grain=uTier<.5?snoise(p*9.):fbm3(p*9.);
         float scratches=pow(max(0.,sin(p.y*uScratchScale*13.+snoise(p*4.)*2.)),24.);
         float pits=uTier>1.5?ridged(p*18.,2):grain*.5+.5;
-        vec3 steel=mix(vec3(.015,.026,.037),vec3(.15,.2,.245),clamp(.65+grain*.23-pits*.08,0.,1.));
+        vec3 steel=mix(vec3(.015,.026,.037),vec3(.15,.2,.245),clamp(.65+grain*.12-pits*.06,0.,1.));
         steel+=vec3(.1,.14,.17)*scratches*.18;
-        vec2 rp=vec2(fract(vChainUv.x*8.),fract(vChainUv.y*2.));
-        float rune=runeMask(rp,vChainData.z)*smoothstep(.08,.18,vChainUv.y)*(1.-smoothstep(.85,.95,vChainUv.y));
+        vec2 rp=vec2(fract(vChainUv.x*4.),fract(vChainUv.y*2.));
+        float face=1.-smoothstep(.1,.21,abs(fract(vChainUv.y*2.)-.5));
+        float rune=runeMask(rp,vChainData.z)*face;
         diffuseColor.rgb*=mix(steel,vec3(.006,.023,.035),rune*.65);
         float pulse=exp(-pow(fract(vChainData.x-uTime*uPulseSpeed+vChainData.y*.19)-.5,2.)*150.);
         float sheen=pow(max(0.,dot(normalize(normal),normalize(vec3(-.4,.7,.6)))),8.);
