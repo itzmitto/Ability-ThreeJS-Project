@@ -1,4 +1,4 @@
-import { AnimationMixer, Box3, Group, Mesh, MeshStandardMaterial, Object3D, Vector3 } from 'three';
+import { AnimationMixer, Box3, Group, Mesh, MeshStandardMaterial, Object3D, Quaternion, Vector3 } from 'three';
 import type { AnimationAction, Material, Texture } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
@@ -18,6 +18,18 @@ export class PlayerVisual {
   private chest = new Object3D();
   private leftFoot = new Object3D();
   private rightFoot = new Object3D();
+  private castingArm?: Object3D;
+  private castingForearm?: Object3D;
+  private castRemaining = 0;
+  private castDuration = 0;
+  private poseApplied = false;
+  private readonly armBase = new Quaternion();
+  private readonly armWorld = new Quaternion();
+  private readonly armDelta = new Quaternion();
+  private readonly armParent = new Quaternion();
+  private readonly armPosition = new Vector3();
+  private readonly armDirection = new Vector3();
+  private readonly castDirection = new Vector3();
   constructor() {
     this.rightHand.position.set(-0.28, 1.0, 0); this.leftHand.position.set(0.28, 1.0, 0);
     this.chest.position.set(0, 1.3, 0);
@@ -48,6 +60,8 @@ export class PlayerVisual {
       });
       this.model = model; this.root.add(model);
       this.rightHand = model.getObjectByName('Bip01_R_Hand') ?? model.getObjectByName('Bip01 R Hand') ?? this.rightHand;
+      this.castingArm = model.getObjectByName('Bip01_R_UpperArm') ?? model.getObjectByName('Bip01 R UpperArm');
+      this.castingForearm = model.getObjectByName('Bip01_R_Forearm') ?? model.getObjectByName('Bip01 R Forearm');
       this.leftHand = model.getObjectByName('Bip01_L_Hand') ?? model.getObjectByName('Bip01 L Hand') ?? this.leftHand;
       this.chest = model.getObjectByName('Bip01_Spine2') ?? model.getObjectByName('Bip01 Spine2') ?? this.chest;
       this.leftFoot = model.getObjectByName('Bip01_L_Foot') ?? model.getObjectByName('Bip01 L Foot') ?? this.leftFoot;
@@ -63,6 +77,9 @@ export class PlayerVisual {
   }
   update(_phase: number, speed: number, delta: number): void {
     if (!this.mixer) return;
+    // Restore the previous mixer pose before updating; the additive arm adjustment never accumulates.
+    if (this.poseApplied && this.castingArm) this.castingArm.quaternion.copy(this.armBase);
+    this.poseApplied = false;
     const next = speed < 0.18 ? 'Idle' : speed > 6 ? 'Run' : 'Walk';
     if (next !== this.animationState) {
       const previous = this.actions.get(this.animationState); const action = this.actions.get(next);
@@ -72,6 +89,27 @@ export class PlayerVisual {
     const action = this.actions.get(this.animationState);
     if (action) action.timeScale = next === 'Idle' ? 1 : Math.max(0.65, Math.min(1.6, speed / (next === 'Run' ? 7 : 3.6)));
     this.mixer.update(delta);
+    if (this.castRemaining > 0 && this.castingArm && this.castingForearm && this.castingArm.parent) {
+      this.castRemaining = Math.max(0, this.castRemaining - delta);
+      const elapsed = this.castDuration - this.castRemaining;
+      const weight = Math.min(1, elapsed / .14, this.castRemaining / .2) * .85;
+      this.root.updateWorldMatrix(true, true);
+      this.castingArm.getWorldPosition(this.armPosition);
+      this.castingForearm.getWorldPosition(this.armDirection).sub(this.armPosition).normalize();
+      this.root.getWorldQuaternion(this.armParent);
+      this.castDirection.set(0, .18, -1).normalize().applyQuaternion(this.armParent);
+      this.armDelta.setFromUnitVectors(this.armDirection, this.castDirection);
+      this.castingArm.getWorldQuaternion(this.armWorld).premultiply(this.armDelta);
+      this.castingArm.parent.getWorldQuaternion(this.armParent).invert();
+      this.armWorld.premultiply(this.armParent);
+      this.armBase.copy(this.castingArm.quaternion);
+      this.castingArm.quaternion.slerp(this.armWorld, weight); this.poseApplied = true;
+    }
+  }
+  /** Optional upper-arm overlay; locomotion actions, legs, controller and player yaw remain unchanged. */
+  beginRightHandCast(duration: number): void {
+    if (!Number.isFinite(duration) || duration <= 0) return;
+    this.castRemaining = this.castDuration = Math.min(1.5, duration);
   }
   getRightHandWorldPosition(result = new Vector3()): Vector3 { this.root.updateWorldMatrix(true, true); return this.rightHand.getWorldPosition(result); }
   getLeftHandWorldPosition(result = new Vector3()): Vector3 { this.root.updateWorldMatrix(true, true); return this.leftHand.getWorldPosition(result); }

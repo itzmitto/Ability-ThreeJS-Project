@@ -33,7 +33,12 @@ export class AbilityBar {
       button.setAttribute('aria-label', `${this.abilities.slots[index].key}: ${name}`);
       button.title = ability?.subtitle ?? name;
       // Icons are text glyphs; untrusted markup is never inserted into the UI.
-      if (ability?.icon === 'frost-lance') {
+      if (ability?.icon === 'sand-reaper') {
+        if (this.icons[index].dataset.icon !== ability.icon) {
+          this.icons[index].innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path stroke="#edc78a" fill="#8f6742" d="M8 2C30 7 30 25 8 30c12-7 13-21 0-28Z"/><path stroke="#ffe7a5" d="M12 6c11 7 12 13 0 21m5-17 3 5-2 6"/><path stroke="#c99b5c" d="m4 11 3-3 2 4-4 2Zm-1 12 4-3 2 4-5 2Z"/></svg>';
+          this.icons[index].dataset.icon = ability.icon;
+        }
+      } else if (ability?.icon === 'frost-lance') {
         if (this.icons[index].dataset.icon !== ability.icon) {
           this.icons[index].innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><path stroke="#f2feff" d="m3 27 2-8 3 5Zm7 0 1-14 5 7-2 7Zm8 0-1-21 6 12-1 9Zm7 0-2-24 6 15-1 9Z"/><path stroke="#79b6dd" d="m3 29 26-1M5 19l1 7m5-13 2 12m4-19 3 20m3-23 3 23"/></svg>';
           this.icons[index].dataset.icon = ability.icon;

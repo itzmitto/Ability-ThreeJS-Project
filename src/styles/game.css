@@ -67,7 +67,7 @@
 @media(min-width:481px) and (max-width:850px){.ability-bar{grid-template-columns:repeat(7,64px)}.ability-slot{width:64px}}
 @media(max-width:480px){.selection-label{bottom:680px}}
 /* Preserve the cards while keeping a large equipped catalogue below the player. */
-.hud.has-many-abilities .ability-bar{display:grid;grid-template-columns:repeat(13,74px);gap:4px;bottom:36px}
+.hud.has-many-abilities .ability-bar{display:grid;grid-template-columns:repeat(14,74px);gap:4px;bottom:36px}
 .hud.has-many-abilities .ability-slot{width:74px;height:64px;padding:5px 6px}
 .hud.has-many-abilities .slot-icon{height:23px;font-size:19px}
 .hud.has-many-abilities .slot-icon svg{width:20px;height:20px}

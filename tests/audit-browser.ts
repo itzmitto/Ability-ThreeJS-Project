@@ -50,8 +50,8 @@ try {
     game.start();
     await frames(12);
     check(game.player.visual.loaded, 'Local human model loaded');
-    check(game.abilities.slots.filter(s => s.abilityId).length === 26, 'Exactly 26 registered abilities');
-    const targets = query.has('frost') ? [25, 0] : query.has('kraken') ? [22] : query.has('raven') ? [23] : game.abilities.slots.map((_, i) => i);
+    check(game.abilities.slots.filter(s => s.abilityId).length === 27, 'Exactly 27 registered abilities');
+    const targets = query.has('sand') ? (query.has('only') ? [26] : [26, 25, 0, 1]) : query.has('frost') ? [25, 0] : query.has('kraken') ? [22] : query.has('raven') ? [23] : game.abilities.slots.map((_, i) => i);
     for (const index of targets) {
         clean();
         game.abilities.update(120);
@@ -105,7 +105,40 @@ try {
         records.push({ id: ability.id, quality: game.settings.preset, viewport: [innerWidth, innerHeight], calls, triangles, peakInstances, peakParticles, raf: samples(rafMs), update: samples(updateMs), renderSubmit: samples(renderMs), baseline, after });
         check(true, `${ability.name}: measurement recorded`);
     }
-    if (query.has('stress')) {
+    if (query.has('stress') && query.has('sand')) {
+        const sand = game.abilities.registry.get('sand-reaper')!;
+        // Warm both bounded leases deliberately, after the sequential preset acceptance passes.
+        sand.cast(context()); sand.cast(context());
+        clean();
+        const runSand = async () => {
+            game.abilities.update(120); game.abilities.select(26);
+            check(game.abilities.cast(context()), 'Sand Reaper stress cast');
+            for (let step = 0; step < 150 && game.effects.activeCount; step++) {
+                game.effects.update(.04, step * .04); game.renderer.render(); await frame();
+            }
+            clean();
+        };
+        await runSand();
+        const baseline = counts();
+        for (let cast = 0; cast < 20; cast++) await runSand();
+        const after = counts();
+        check(Object.keys(baseline).every(k => baseline[k as keyof typeof baseline] === after[k as keyof typeof after]), '20 Sand Reaper casts restore warmed scene/GPU/subscription baseline');
+        records.push({ stress: 'sand-reaper', baseline, after });
+        game.abilities.update(120); game.abilities.select(26); game.abilities.cast(context());
+        let blocked = 0;
+        for (let i = 0; i < 100; i++) if (!game.abilities.cast(context())) blocked++;
+        check(blocked === 100 && game.effects.activeCount === 1, '100 Sand Reaper cooldown attempts create no extra effects');
+        key('KeyW'); await frames(45); check(game.player.visual.animationState === 'Walk', 'Cast arm overlay preserves Walk');
+        key('ShiftLeft'); await frames(45); check(game.player.visual.animationState === 'Run', 'Cast arm overlay preserves sprint');
+        release('KeyW'); release('ShiftLeft'); clean(); await frames(150);
+        check(game.player.visual.animationState === 'Idle', 'Idle resumes after cast and locomotion');
+        for (const preset of ['LOW', 'MEDIUM', 'MAX'] as const) {
+            root.querySelector<HTMLButtonElement>(`[data-quality="${preset}"]`)!.click(); await frames(3);
+            check(game.settings.preset === preset, `Graphics menu switches to ${preset}`);
+        }
+        clean(); game.dispose(); disposed = true;
+        check(renderer.info.memory.geometries === 0 && renderer.info.memory.textures === 0 && game.settings.subscriberCount === 0, 'Full Sand Reaper game disposal releases GPU resources');
+    } else if (query.has('stress')) {
         // Warm the same two problematic spells before comparing deliberate renderer caches.
         const run = async (index: number) => { game.abilities.select(index); game.abilities.update(120); check(game.abilities.cast(context()), `Stress cast ${game.abilities.selectedAbility?.name}`); for (let step = 0; step < 180 && game.effects.activeCount; step++) {
             game.effects.update(.1, step * .1);

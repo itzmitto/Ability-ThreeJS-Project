@@ -1,6 +1,18 @@
-# Elemental Sandbox — Phase 23
+# Elemental Sandbox — Phase 24
 
-A browser-based Three.js sandbox with a dark reflective water arena, an animated human male in everyday clothes, and 26 registered elemental/fantasy abilities. The existing architecture, controls, player and HUD remain in place. There are no enemies, health/damage systems, NPCs, inventory or quests. All runtime assets are local.
+A browser-based Three.js sandbox with a dark reflective water arena, an animated human male in everyday clothes, and 27 registered elemental/fantasy abilities. The existing architecture, controls, player and HUD remain in place. There are no enemies, health/damage systems, NPCs, inventory or quests. All runtime assets are local.
+
+## Sand Reaper — Dune Cleaver
+
+Ability **27**, **Shift+7**, or its golden crescent HUD card. Aim with the camera and left-click. Normal **7** still selects Tempest Cataclysm; **Shift+6** remains Frost Lance. Cooldown **6 seconds**, maximum range **42 metres**, flight speed **40 m/s**. Charge/assembly takes **0.62 seconds**, followed by visible quaternion-oriented flight, directional stone fracture, granular sand spray, dust, droplets and owned water ripples. Complete lifetime is roughly **3.5–4.5 seconds** depending on distance.
+
+The weapon is an original, closed procedural BufferGeometry sweep with a six-sided asymmetric cross-section: thick spine, thin cutting edges, tapered sharp tips and deterministic chipped facets. A patched opaque MeshStandardMaterial combines local simplex/fbm stone grain, strata, erosion, sparse mineral seams and ridged detail with animated world-space sand flow. It remains readable with LOW bloom disabled. Four original angular shard geometries feed four bounded InstancedMeshes; sand/dust/droplets use GPU-driven ring buffers. Two lazily created visual bundles reuse geometry/materials between casts and are destroyed at game teardown. No new runtime dependencies.
+
+LOW/MEDIUM/MAX: **16/28/40** arc segments, **24/48/88** impact rocks, **420/1100/2400** sand buffer slots, **24/56/100** dust slots, **28/60/110** droplet slots. The central GraphicsSettings switches LOD, noise detail, particle budgets and lighting live. Tuning is typed in `SandReaperConfig.ts`; `SandReaper.configure(patch)` applies finite, bounded scalar controls live. Shape edits explicitly rebuild cached geometry only when no cast is active. A brief additive right-arm overlay preserves locomotion; it is not a new animation rig.
+
+With Vite running, `/audit.html?sand&only&realtime&quality=LOW` validates a normal-speed cast. Test MEDIUM then MAX; `/audit.html?sand&only&stress&quality=MAX` tests 20 casts, rapid cooldown rejection, locomotion and full disposal. `/audit.html?sand&quality=MAX` also checks Frost Lance, Glacial Eruption and Tempest Break. `/audit-review.html?slot=26` provides stage/range/angle controls. Source attribution is retained in `public/licenses/LinearAbilityExtThreeJS.txt`.
+
+[Phase 24 file inventory, rendered screenshots, validation, measurements and limitations](docs/phase24-validation.md). The upstream simplex noise notice is retained in `public/licenses/WebGLNoise-MIT.txt`.
 
 ## Frost Lance — Original Glacial Eruption
 

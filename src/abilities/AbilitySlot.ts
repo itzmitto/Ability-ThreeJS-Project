@@ -7,5 +7,6 @@ export function createAbilitySlots(): AbilitySlot[] {
   slots.push({ key: 'Shift+4', code: 'Digit4', number: null, shift: true, abilityId: null });
   slots.push({ key: 'Shift+5', code: 'Digit5', number: null, shift: true, abilityId: null });
   slots.push({ key: 'Shift+6', code: 'Digit6', number: null, shift: true, abilityId: null });
+  slots.push({ key: 'Shift+7', code: 'Digit7', number: null, shift: true, abilityId: null });
   return slots;
 }

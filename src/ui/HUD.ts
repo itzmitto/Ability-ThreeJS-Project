@@ -18,7 +18,7 @@ export class HUD {
   constructor(root: HTMLElement, private readonly abilities: AbilityManager, private readonly settings: GraphicsSettings, targeting: TargetingSystem) {
     this.element.className = 'hud';
     this.element.classList.toggle('has-many-abilities', abilities.slots.length > 16);
-    this.element.innerHTML = `<header class="brand"><div class="eyebrow"><span class="brand-mark">◇</span> EXPERIMENTAL ARENA <span class="version">/ 001</span></div><h1>ELEMENTAL <span>SANDBOX</span></h1><p>WASD move <b>·</b> Mouse aim <b>·</b> Q/E/R/F/V/X/C/B/N/G/H/J/K/L/M/U/I/O/Y/Z + Shift+1/2/3/4/5/6 abilities <b>·</b> Click cast</p></header><div class="crosshair" aria-hidden="true"><i></i></div><div class="world-caption"><span class="caption-line"></span>THE STILLWATER<span class="caption-sub">FOUNDATION WORLD</span></div><div class="footer-note">PHASE 23 <span>/</span> ICE + AIR + STORM + LIGHT + FIRE + VOID + TRUE DRAGON + BLOOD + SPECTRAL + EARTH + WATER + GLASS + GRAVITY + NATURE + CRYO + THUNDER + SOLAR + ARSENAL + PRISM + DELUGE + SHADOW + TIME + KRAKEN + RAVENSTORM + DRAGONFIRE + FROST LANCE</div><div class="debug-hint">F3 DEBUG <span>·</span> P TELEMETRY</div>`;
+    this.element.innerHTML = `<header class="brand"><div class="eyebrow"><span class="brand-mark">◇</span> EXPERIMENTAL ARENA <span class="version">/ 001</span></div><h1>ELEMENTAL <span>SANDBOX</span></h1><p>WASD move <b>·</b> Mouse aim <b>·</b> Q/E/R/F/V/X/C/B/N/G/H/J/K/L/M/U/I/O/Y/Z + Shift+1/2/3/4/5/6/7 abilities <b>·</b> Click cast</p></header><div class="crosshair" aria-hidden="true"><i></i></div><div class="world-caption"><span class="caption-line"></span>THE STILLWATER<span class="caption-sub">FOUNDATION WORLD</span></div><div class="footer-note">PHASE 24 <span>/</span> ICE + AIR + STORM + LIGHT + FIRE + VOID + TRUE DRAGON + BLOOD + SPECTRAL + EARTH + WATER + GLASS + GRAVITY + NATURE + CRYO + THUNDER + SOLAR + ARSENAL + PRISM + DELUGE + SHADOW + TIME + KRAKEN + RAVENSTORM + DRAGONFIRE + FROST LANCE + SAND REAPER</div><div class="debug-hint">F3 DEBUG <span>·</span> P TELEMETRY</div>`;
     this.abilityBar = new AbilityBar(abilities);
     this.graphics = new GraphicsMenu(settings, this.performance, targeting);
     this.debug.className = 'debug-panel'; this.debug.hidden = true;
@@ -30,7 +30,7 @@ export class HUD {
   update(pointerLocked: boolean): void {
     this.abilityBar.update();
     this.inputHint.hidden = pointerLocked;
-    const subtitle = this.abilities.selectedAbility?.id === 'frost-lance' ? ' · ORIGINAL GLACIAL ERUPTION' : '';
+    const subtitle = this.abilities.selectedAbility?.subtitle ? ' · ' + this.abilities.selectedAbility.subtitle : '';
     const text = `${String(this.abilities.selectedIndex + 1).padStart(2, '0')} / ${this.abilities.selectedAbility?.name ?? 'EMPTY SLOT'}${subtitle}`;
     if (this.selected.textContent !== text) this.selected.textContent = text;
   }

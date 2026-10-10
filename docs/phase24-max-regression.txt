@@ -1,0 +1,40 @@
+PASS Local human model loaded
+PASS Exactly 27 registered abilities
+PASS SAND REAPER: shortcut Shift+7
+PASS SAND REAPER: HUD selection
+PASS SAND REAPER: click cast / cooldown
+PASS SAND REAPER: cooldown rejects another cast
+PASS SAND REAPER: finite geometry / bounded instances
+PASS SAND REAPER: natural completion
+PASS SAND REAPER: scene/light/subscription/water cleanup
+PASS SAND REAPER: WebGL error state
+PASS SAND REAPER: measurement recorded
+PASS FROST LANCE: shortcut Shift+6
+PASS FROST LANCE: HUD selection
+PASS FROST LANCE: click cast / cooldown
+PASS FROST LANCE: cooldown rejects another cast
+PASS FROST LANCE: finite geometry / bounded instances
+PASS FROST LANCE: natural completion
+PASS FROST LANCE: scene/light/subscription/water cleanup
+PASS FROST LANCE: WebGL error state
+PASS FROST LANCE: measurement recorded
+PASS GLACIAL ERUPTION: shortcut Q
+PASS GLACIAL ERUPTION: HUD selection
+PASS GLACIAL ERUPTION: click cast / cooldown
+PASS GLACIAL ERUPTION: cooldown rejects another cast
+PASS GLACIAL ERUPTION: finite geometry / bounded instances
+PASS GLACIAL ERUPTION: natural completion
+PASS GLACIAL ERUPTION: scene/light/subscription/water cleanup
+PASS GLACIAL ERUPTION: WebGL error state
+PASS GLACIAL ERUPTION: measurement recorded
+PASS TEMPEST BREAK: shortcut E
+PASS TEMPEST BREAK: HUD selection
+PASS TEMPEST BREAK: click cast / cooldown
+PASS TEMPEST BREAK: cooldown rejects another cast
+PASS TEMPEST BREAK: finite geometry / bounded instances
+PASS TEMPEST BREAK: natural completion
+PASS TEMPEST BREAK: scene/light/subscription/water cleanup
+PASS TEMPEST BREAK: WebGL error state
+PASS TEMPEST BREAK: measurement recorded
+PASS AUDIT ALL CHECKS PASSED
+DATA [{"id":"sand-reaper","quality":"MAX","viewport":[1280,720],"calls":47,"triangles":90715,"peakInstances":88,"peakParticles":2328,"raf":{"medianMs":6,"p95Ms":11.700000047683716,"maxMs":13.299999952316284},"update":{"medianMs":0,"p95Ms":0.20000004768371582,"maxMs":1.5999999046325684},"renderSubmit":{"medianMs":0.3000001907348633,"p95Ms":3.9000000953674316,"maxMs":5.200000047683716},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":9,"textures":21,"programs":19},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":18,"textures":21,"programs":30}},{"id":"frost-lance","quality":"MAX","viewport":[1280,720],"calls":40,"triangles":144757,"peakInstances":190,"peakParticles":1286,"raf":{"medianMs":6.099999904632568,"p95Ms":6.400000095367432,"maxMs":11},"update":{"medianMs":0.09999990463256836,"p95Ms":0.20000004768371582,"maxMs":0.5},"renderSubmit":{"medianMs":0.20000004768371582,"p95Ms":0.5,"maxMs":9.099999904632568},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":18,"textures":21,"programs":30},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":27,"textures":21,"programs":38}},{"id":"glacial-eruption","quality":"MAX","viewport":[1280,720],"calls":45,"triangles":86995,"peakInstances":120,"peakParticles":420,"raf":{"medianMs":6.099999904632568,"p95Ms":9.199999809265137,"maxMs":14},"update":{"medianMs":0,"p95Ms":0.10000014305114746,"maxMs":0.2999999523162842},"renderSubmit":{"medianMs":0.39999985694885254,"p95Ms":7.5,"maxMs":13.300000190734863},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":27,"textures":21,"programs":38},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":29,"textures":21,"programs":38}},{"id":"tempest-break","quality":"MAX","viewport":[1280,720],"calls":35,"triangles":72571,"peakInstances":54,"peakParticles":740,"raf":{"medianMs":6,"p95Ms":6.400000095367432,"maxMs":8.700000047683716},"update":{"medianMs":0,"p95Ms":0.10000014305114746,"maxMs":0.20000004768371582},"renderSubmit":{"medianMs":0.20000004768371582,"p95Ms":4.200000047683716,"maxMs":8},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":29,"textures":21,"programs":38},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":39,"textures":21,"programs":47}}]

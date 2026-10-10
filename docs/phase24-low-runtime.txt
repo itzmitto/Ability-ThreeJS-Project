@@ -1,0 +1,40 @@
+PASS Local human model loaded
+PASS Exactly 27 registered abilities
+PASS SAND REAPER: shortcut Shift+7
+PASS SAND REAPER: HUD selection
+PASS SAND REAPER: click cast / cooldown
+PASS SAND REAPER: cooldown rejects another cast
+PASS SAND REAPER: finite geometry / bounded instances
+PASS SAND REAPER: natural completion
+PASS SAND REAPER: scene/light/subscription/water cleanup
+PASS SAND REAPER: WebGL error state
+PASS SAND REAPER: measurement recorded
+PASS FROST LANCE: shortcut Shift+6
+PASS FROST LANCE: HUD selection
+PASS FROST LANCE: click cast / cooldown
+PASS FROST LANCE: cooldown rejects another cast
+PASS FROST LANCE: finite geometry / bounded instances
+PASS FROST LANCE: natural completion
+PASS FROST LANCE: scene/light/subscription/water cleanup
+PASS FROST LANCE: WebGL error state
+PASS FROST LANCE: measurement recorded
+PASS GLACIAL ERUPTION: shortcut Q
+PASS GLACIAL ERUPTION: HUD selection
+PASS GLACIAL ERUPTION: click cast / cooldown
+PASS GLACIAL ERUPTION: cooldown rejects another cast
+PASS GLACIAL ERUPTION: finite geometry / bounded instances
+PASS GLACIAL ERUPTION: natural completion
+PASS GLACIAL ERUPTION: scene/light/subscription/water cleanup
+PASS GLACIAL ERUPTION: WebGL error state
+PASS GLACIAL ERUPTION: measurement recorded
+PASS TEMPEST BREAK: shortcut E
+PASS TEMPEST BREAK: HUD selection
+PASS TEMPEST BREAK: click cast / cooldown
+PASS TEMPEST BREAK: cooldown rejects another cast
+PASS TEMPEST BREAK: finite geometry / bounded instances
+PASS TEMPEST BREAK: natural completion
+PASS TEMPEST BREAK: scene/light/subscription/water cleanup
+PASS TEMPEST BREAK: WebGL error state
+PASS TEMPEST BREAK: measurement recorded
+PASS AUDIT ALL CHECKS PASSED
+DATA [{"id":"sand-reaper","quality":"LOW","viewport":[1280,720],"calls":16,"triangles":13058,"peakInstances":24,"peakParticles":437,"raf":{"medianMs":6.099999904632568,"p95Ms":6.300000190734863,"maxMs":8.200000047683716},"update":null,"renderSubmit":{"medianMs":0.09999990463256836,"p95Ms":0.20000004768371582,"maxMs":0.39999985694885254},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":8,"textures":8,"programs":8},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":17,"textures":8,"programs":14}},{"id":"frost-lance","quality":"LOW","viewport":[1280,720],"calls":20,"triangles":29750,"peakInstances":80,"peakParticles":287,"raf":{"medianMs":6.099999904632568,"p95Ms":6.300000190734863,"maxMs":12.100000143051147},"update":null,"renderSubmit":{"medianMs":0.10000014305114746,"p95Ms":0.20000004768371582,"maxMs":0.40000009536743164},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":17,"textures":8,"programs":14},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":26,"textures":8,"programs":20}},{"id":"glacial-eruption","quality":"LOW","viewport":[1280,720],"calls":15,"triangles":12902,"peakInstances":31,"peakParticles":80,"raf":{"medianMs":6.099999904632568,"p95Ms":6.299999952316284,"maxMs":19},"update":null,"renderSubmit":{"medianMs":0.09999990463256836,"p95Ms":0.20000004768371582,"maxMs":0.39999985694885254},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":26,"textures":8,"programs":20},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":28,"textures":8,"programs":22}},{"id":"tempest-break","quality":"LOW","viewport":[1280,720],"calls":18,"triangles":12812,"peakInstances":17,"peakParticles":150,"raf":{"medianMs":6.099999904632568,"p95Ms":6.299999952316284,"maxMs":9.700000047683716},"update":null,"renderSubmit":{"medianMs":0.09999990463256836,"p95Ms":0.20000004768371582,"maxMs":0.20000004768371582},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":28,"textures":8,"programs":22},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":38,"textures":8,"programs":31}}]

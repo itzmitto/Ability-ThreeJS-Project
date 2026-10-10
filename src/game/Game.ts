@@ -15,6 +15,7 @@ import { EffectManager } from '../effects/EffectManager';
 import { HUD } from '../ui/HUD';
 import { GlacialEruption } from '../abilities/ice/GlacialEruption';
 import { FrostLance } from '../abilities/frostLance/FrostLance';
+import { SandReaper } from '../abilities/sandReaper/SandReaper';
 import { TempestBreak } from '../abilities/wind/TempestBreak';
 import { HeavensVerdict } from '../abilities/lightning/HeavensVerdict';
 import { Megiddo } from '../abilities/light/Megiddo';
@@ -147,6 +148,9 @@ export class Game {
     const frostLance = new FrostLance();
     this.abilities.registry.register(frostLance);
     this.abilities.assignSlot(25, frostLance.id);
+    const sandReaper = new SandReaper();
+    this.abilities.registry.register(sandReaper);
+    this.abilities.assignSlot(26, sandReaper.id);
     this.hud = new HUD(root, this.abilities, this.settings, this.targeting);
     document.addEventListener('visibilitychange', this.visibilityChanged);
   }

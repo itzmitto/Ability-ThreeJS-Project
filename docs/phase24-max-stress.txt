@@ -1,0 +1,43 @@
+PASS Local human model loaded
+PASS Exactly 27 registered abilities
+PASS SAND REAPER: shortcut Shift+7
+PASS SAND REAPER: HUD selection
+PASS SAND REAPER: click cast / cooldown
+PASS SAND REAPER: cooldown rejects another cast
+PASS SAND REAPER: finite geometry / bounded instances
+PASS SAND REAPER: natural completion
+PASS SAND REAPER: scene/light/subscription/water cleanup
+PASS SAND REAPER: WebGL error state
+PASS SAND REAPER: measurement recorded
+PASS Sand Reaper stress cast
+PASS Sand Reaper stress cast
+PASS Sand Reaper stress cast
+PASS Sand Reaper stress cast
+PASS Sand Reaper stress cast
+PASS Sand Reaper stress cast
+PASS Sand Reaper stress cast
+PASS Sand Reaper stress cast
+PASS Sand Reaper stress cast
+PASS Sand Reaper stress cast
+PASS Sand Reaper stress cast
+PASS Sand Reaper stress cast
+PASS Sand Reaper stress cast
+PASS Sand Reaper stress cast
+PASS Sand Reaper stress cast
+PASS Sand Reaper stress cast
+PASS Sand Reaper stress cast
+PASS Sand Reaper stress cast
+PASS Sand Reaper stress cast
+PASS Sand Reaper stress cast
+PASS Sand Reaper stress cast
+PASS 20 Sand Reaper casts restore warmed scene/GPU/subscription baseline
+PASS 100 Sand Reaper cooldown attempts create no extra effects
+PASS Cast arm overlay preserves Walk
+PASS Cast arm overlay preserves sprint
+PASS Idle resumes after cast and locomotion
+PASS Graphics menu switches to LOW
+PASS Graphics menu switches to MEDIUM
+PASS Graphics menu switches to MAX
+PASS Full Sand Reaper game disposal releases GPU resources
+PASS AUDIT ALL CHECKS PASSED
+DATA [{"id":"sand-reaper","quality":"MAX","viewport":[1280,720],"calls":47,"triangles":90715,"peakInstances":88,"peakParticles":2328,"raf":{"medianMs":6.099999904632568,"p95Ms":12.099999904632568,"maxMs":12.099999904632568},"update":{"medianMs":0,"p95Ms":0.20000004768371582,"maxMs":0.7000000476837158},"renderSubmit":{"medianMs":0.3000001907348633,"p95Ms":3.5999999046325684,"maxMs":5.200000047683716},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":9,"textures":21,"programs":19},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":18,"textures":21,"programs":30}},{"stress":"sand-reaper","baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":18,"textures":21,"programs":30},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":18,"textures":21,"programs":30}}]

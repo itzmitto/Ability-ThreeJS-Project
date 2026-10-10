@@ -11,6 +11,11 @@ and required noise helpers are also adapted in src/abilities/frostLance/.
 Reference snapshots: frost-lance-donor-sources/. These user-supplied restored copies
 are not a byte-for-byte verified Git commit. The donor MIT notice below covers this port.
 
+Sand Reaper reuses the attributed FrostLanceNoise simplex/fbm/ridged utility.
+Its crescent geometry, stone material, timeline and particle motion are original code
+in src/abilities/sandReaper/, inspired by procedural VFX engineering in
+https://github.com/sandaoliu1234/threejs-ability-sandbox . No donor engine is imported.
+
 MIT License
 
 Copyright (c) 2026 mohamedachrefelouafi
