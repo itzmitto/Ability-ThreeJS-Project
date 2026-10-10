@@ -39,6 +39,7 @@ export class AbilityManager {
     const ability = this.selectedAbility;
     if (!ability || this.getCooldown(this.selectedIndex) > 0) return false;
     if (ability.cast(context) === false) return false;
+    context.player.visual.onAbilityCast(ability.id,context.direction);
     this.cooldowns.set(ability.id, Math.max(0, ability.cooldown)); return true;
   }
   getCooldown(index: number): number { return this.cooldowns.get(this.slots[index]?.abilityId ?? '') ?? 0; }

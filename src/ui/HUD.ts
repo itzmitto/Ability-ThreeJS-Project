@@ -48,6 +48,8 @@ export class HUD {
     if (this.debug.hidden) return;
     const format = (vector: { x: number; y: number; z: number }): string => `${vector.x.toFixed(2)}, ${vector.y.toFixed(2)}, ${vector.z.toFixed(2)}`;
     this.debug.textContent = `FOUNDATION DEBUG\nPlayer    ${format(player.position)}\nCamera    ${format(camera.camera.position)}\nAim       ${format(targeting.aimDirection)}\nTarget    ${format(targeting.targetPoint)}\nGround    ${targeting.hasGroundTarget ? 'HIT' : 'OUT OF RANGE / SKY'}\nRange     ${targeting.maxDistance} m\nSlot      ${this.abilities.selectedIndex + 1} / ${this.abilities.selectedAbility?.id ?? 'empty'}\nQuality   ${this.settings.preset}`;
+    const a=player.visual.animation,f=player.visual.feet,m=player.visual.motion;
+    if(a)this.debug.textContent+=`\n\nCHARACTER ANIMATION\nState     ${a.state} / ${a.activeClip}\nSpeed     ${a.speed.toFixed(2)} m/s · ${a.cadence.toFixed(2)} cycles/s\nBlend     I ${a.weights.Idle.toFixed(2)} W ${a.weights.Walk.toFixed(2)} R ${a.weights.Run.toFixed(2)}\nStride    W ${a.sourceSpeeds.Walk.toFixed(2)} R ${a.sourceSpeeds.Run.toFixed(2)} m/s\nCast      ${m?.castStyle} / ${m?.castPhase}\nHeading   ${player.object.rotation.y.toFixed(2)} rad\nFoot IK   ${f?.enabled?'ON':'OFF'} · L ${f?.contacts.left.toFixed(2)} R ${f?.contacts.right.toFixed(2)}`;
   }
   dispose(): void { this.oceanEditor?.dispose(); this.spellSelection.dispose(); this.abilityBar.dispose(); this.graphics.dispose(); this.element.remove(); }
 }

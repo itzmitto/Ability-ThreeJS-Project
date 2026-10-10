@@ -30,7 +30,7 @@ export class PlayerController {
     }
     const speed = this.player.velocity.length();
     this.gaitTime += speed * delta * 1.65;
-    this.player.visual.update(this.gaitTime, speed, delta);
+    this.player.visual.update(this.gaitTime, speed, delta, sprint);
     this.player.position.x = MathUtils.clamp(this.player.position.x, -2400, 2400);
     this.player.position.z = MathUtils.clamp(this.player.position.z, -2400, 2400);
   }

@@ -65,6 +65,7 @@ export class Game {
   private raf = 0;
   private running = false;
   private uiElapsed = 0;
+  private readonly characterAim=new Vector3();
   constructor(root: HTMLElement) {
     const canvas = document.createElement('canvas');
     this.input = new InputManager(canvas);
@@ -72,6 +73,7 @@ export class Game {
     this.renderer = new RendererManager(root, this.sceneManager.scene, this.camera.camera, this.settings, canvas);
     this.playerController = new PlayerController(this.player, this.input);
     this.world = new World(this.sceneManager.scene, this.settings);
+    this.player.visual.configureEnvironment(this.settings,(x,z)=>this.world.water.interactions.getSurfaceHeight(x,z));
     this.renderer.beforeRender=()=>this.world.water.prepareReflection(this.renderer.renderer,this.camera.camera);
     this.targeting = new TargetingSystem(this.sceneManager.scene);
     const glacial = new GlacialEruption();
@@ -177,6 +179,7 @@ export class Game {
     const rawDelta = (now - this.previousTime) / 1000;
     const delta = Math.min(rawDelta, 0.05);
     this.previousTime = now; this.elapsed += delta;
+    this.player.visual.setAimDirection(this.camera.camera.getWorldDirection(this.characterAim));
     this.playerController.update(delta, this.camera.yaw);
     this.camera.update(delta, this.player.position);
     this.targeting.update(this.camera.camera, this.player.position);
