@@ -1,6 +1,25 @@
-# Elemental Sandbox — Phase 31
+# Elemental Sandbox — Phase 32
 
-A browser-based Three.js sandbox with a dark reflective ocean, a rigged human male adventurer, and 32 registered elemental/fantasy abilities. The existing architecture, controls and HUD remain in place. There are no enemies, health/damage systems, NPCs, inventory or quests. All runtime assets are local.
+A browser-based Three.js sandbox with a dark reflective ocean, a rigged human male adventurer, and 36 registered elemental/fantasy abilities. The existing architecture, controls and HUD remain in place. There are no enemies, health/damage systems, NPCs, inventory or quests. All runtime assets are local.
+
+## The Four Elements — Bending Arts
+
+Four original martial-arts-inspired abilities join the existing roster:
+
+| # | Spell | Element | Cooldown | Range |
+|---|---|---|---|---|
+| 33 | TIDAL SERPENT — CURRENT LASH | WATER | 3s | 28m |
+| 34 | TITAN FIST — SEISMIC STRIKE | EARTH / STONE | 5s | 25m |
+| 35 | SKYBREAKER — VACUUM CRESCENT | AIR / WIND | 2.5s | 36m |
+| 36 | DANCING INFERNO — FLAME WEAVER | FIRE | 3.5s | 30m |
+
+Use **Tab → search “bending” → equip**, then left-click. Favorites and the existing backquote Quick Wheel work without new number bindings. WASD, Shift sprint, mouse aiming, F3 and all preceding shortcuts remain unchanged.
+
+Water uses two reflective, deforming elliptical liquid volumes; earth assembles an instanced faceted fist with four knuckles and a thumb; air releases three transparent solid pressure crescents; fire weaves broad, turbulent layered flame volumes. Each has a distinct material, GPU particle trajectory, impact and owned ocean reaction. Typed configuration modules control appearance and budgets. Three concurrent new bending effects are admitted across these four abilities, with at most two reusable bundles per ability.
+
+Run `/bending-browser.html?spell=tidal-serpent&quality=LOW&stress` for actual game acceptance and ten warmed repeated casts. Replace the ID with `titan-fist`, `skybreaker` or `dancing-inferno`, then test MEDIUM and MAX. `/audit.html?bending&quality=MAX` checks Ember Comet, Riftreaver, Frost Lance, Astral Chainstorm and Tidal Sovereign. Frozen angle/stage review uses `/audit-review.html?slot=32` through `slot=35`.
+
+[Phase 32 architecture, file inventory, browser records, measurements and limitations](docs/phase32-validation.md).
 
 ## Sand Reaper — Dune Cleaver
 

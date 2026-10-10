@@ -11,11 +11,11 @@ export class SkybreakerEffect implements ManagedEffect{
   readonly root=new Group();active=false;private ctx!:AbilityCastContext;private age=0;private tier=0;private releaseLease?:()=>void;private unsubscribe?:()=>void;
   private readonly geometries=createPressureBlades();private readonly particles=new AirDroplets();private readonly wakes=[0,1,2].map(()=>new AirWaterWake());
   private readonly blades=[0,1,2].map(()=>{const body=pressureMaterial(),edge=pressureMaterial(true),group=new Group(),a=new Mesh(this.geometries[0].body,body),b=new Mesh(this.geometries[0].edge,edge);a.frustumCulled=b.frustumCulled=false;group.add(a,b);return {group,body,edge,a,b};});
-  readonly target=new Vector3();private readonly origins=[new Vector3(),new Vector3(),new Vector3()];private readonly ends=[new Vector3(),new Vector3(),new Vector3()];
+  readonly target=new Vector3();readonly launch=new Vector3();private readonly origins=[new Vector3(),new Vector3(),new Vector3()];private readonly ends=[new Vector3(),new Vector3(),new Vector3()];
   private readonly times=new Float32Array(3);private readonly launched=[false,false,false];private readonly hit=[false,false,false];
   private readonly inverse=new Quaternion();private readonly scratch=new Vector3();private readonly direction=new Vector3();private readonly splitStart=new Vector3();private length=1;
   get particleCount():number{return this.active?SKY_BUDGETS[this.tier].particles:0;}get instanceCount():number{return 0;}
-  constructor(){this.root.name='Skybreaker · three pressure crescents';this.root.userData.bendingId='skybreaker';this.blades.forEach(b=>this.root.add(b.group));this.wakes.forEach(w=>this.root.add(w.mesh));this.root.add(this.particles.mesh);}
+  constructor(){this.root.name='Skybreaker · three pressure crescents';this.root.userData.bendingId='skybreaker';this.root.userData.castOrigin=this.launch;this.blades.forEach(b=>this.root.add(b.group));this.wakes.forEach(w=>this.root.add(w.mesh));this.root.add(this.particles.mesh);}
   activate(c:AbilityCastContext,target:Vector3,release:()=>void):void{
     this.ctx=c;this.target.copy(target);this.age=0;this.active=true;this.releaseLease=release;this.root.position.copy(c.player.position);
     this.direction.subVectors(target,this.root.position);this.direction.y=0;this.length=this.direction.length();this.root.quaternion.setFromUnitVectors(new Vector3(0,0,-1),this.direction.normalize());this.inverse.copy(this.root.quaternion).invert();
@@ -27,7 +27,7 @@ export class SkybreakerEffect implements ManagedEffect{
     if(!this.active)return false;this.age+=dt;if(this.age>this.times[2]+C.aftermath)return false;
     for(let i=0;i<3;i++){
       const release=C.release+i*C.interval,b=this.blades[i],end=this.ends[i];
-      if(!this.launched[i]){this.ctx.player.visual.getRightHandWorldPosition(this.origins[i]);this.origins[i].sub(this.root.position).applyQuaternion(this.inverse);if(this.age>=release){this.launched[i]=true;this.times[i]=release+this.origins[i].distanceTo(end)/C.speed;this.ctx.cameraFeedback?.(.013,.055);}}
+      if(!this.launched[i]){this.ctx.player.visual.getRightHandWorldPosition(this.origins[i]);if(i===0)this.launch.copy(this.origins[i]);this.origins[i].sub(this.root.position).applyQuaternion(this.inverse);if(this.age>=release){this.launched[i]=true;this.times[i]=release+this.origins[i].distanceTo(end)/C.speed;this.ctx.cameraFeedback?.(.013,.055);}}
       const flight=(this.age-release)/Math.max(.01,this.times[i]-release),impact=this.age-this.times[i];
       b.group.position.copy(this.origins[i]).lerp(end,Math.max(0,Math.min(1,flight)));b.group.position.y+=Math.sin(Math.max(0,Math.min(1,flight))*Math.PI)*.65;
       b.group.quaternion.setFromUnitVectors(this.scratch.set(0,0,-1),this.direction.subVectors(end,this.origins[i]).normalize());b.group.rotateZ(Math.PI/2+(i===0?-.2:i===1?.23:0));

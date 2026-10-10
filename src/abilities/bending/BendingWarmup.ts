@@ -13,6 +13,6 @@ export class BendingWarmup{
       this.prototypes.push(o instanceof InstancedMesh?new InstancedMesh(o.geometry,m,1):o instanceof Points?new Points(o.geometry,m):new Mesh(o.geometry,m));
     });this.schedule();
   }
-  private schedule():void{if(this.disposed||this.index>=this.prototypes.length)return;this.callback=window.requestIdleCallback(()=>{this.callback=0;if(this.disposed)return;const p=this.prototypes[this.index++];this.scene.add(p);this.renderer.compile(this.scene,this.camera,this.target);this.scene.remove(p);this.schedule();},{timeout:2000});}
+  private schedule():void{if(this.disposed||this.index>=this.prototypes.length)return;this.callback=window.requestIdleCallback(()=>{this.callback=0;if(this.disposed)return;const p=this.prototypes[this.index++];this.scene.add(p);try{this.renderer.compile(this.scene,this.camera,this.target);}finally{this.scene.remove(p);}this.schedule();},{timeout:2000});}
   dispose():void{if(this.disposed)return;this.disposed=true;if(this.callback&&typeof window!=='undefined')window.cancelIdleCallback(this.callback);this.scene.clear();this.prototypes.forEach(o=>{if(o instanceof InstancedMesh)o.dispose();});this.prototypes.length=0;}
 }

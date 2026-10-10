@@ -18,8 +18,8 @@ export class InfernoImpact{
   private readonly radius=(t:number)=>.64*Math.sin(t*Math.PI)*(.8+.2*Math.sin(t*26-this.age*12));
   constructor(){this.meshes.forEach(m=>{m.frustumCulled=false;this.root.add(m);});this.surfaceMesh.rotation.x=-Math.PI/2;this.surfaceMesh.position.y=.035;this.surfaceMesh.renderOrder=1;this.root.add(this.surfaceMesh);this.root.visible=false;}
   update(age:number,tier:number):void{
-    this.age=Math.max(0,age);this.root.visible=age>=0;const q=INFERNO_BUDGETS[tier],alpha=(1-ease(this.age/1.6))*ease(this.age/.09);
-    for(let i=0;i<3;i++){this.layer=i;const m=this.meshes[i],material=this.materials[i];m.geometry=this.sweeps[tier][i].geometry;m.visible=i<q.layers&&age>=0;material.uniforms.uTime.value=this.age;material.uniforms.uAlpha.value=alpha;material.uniforms.uDetail.value=tier;this.sweeps[tier][i].update(this.path,this.radius,.22);}
+    this.age=Math.max(0,age);this.root.visible=age>=0;if(age<0)return;const q=INFERNO_BUDGETS[tier],alpha=(1-ease(this.age/1.6))*ease(this.age/.09);
+    for(let i=0;i<3;i++){this.layer=i;const m=this.meshes[i],material=this.materials[i];m.geometry=this.sweeps[tier][i].geometry;m.visible=i<q.layers&&alpha>.003;material.uniforms.uTime.value=this.age;material.uniforms.uAlpha.value=alpha;material.uniforms.uDetail.value=tier;if(m.visible)this.sweeps[tier][i].update(this.path,this.radius,.22);}
     this.surface.uniforms.uAge.value=this.age;this.surface.uniforms.uAlpha.value=C.reflection*(1-ease(this.age/2.));
   }
   dispose():void{this.sweeps.flat().forEach(s=>s.dispose());this.materials.forEach(m=>m.dispose());this.plane.dispose();this.surface.dispose();}

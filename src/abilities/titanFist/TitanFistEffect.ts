@@ -19,7 +19,7 @@ export class TitanFistEffect implements ManagedEffect{
   get arrival():number{return C.charge+this.travel;}
   get particleCount():number{return this.active?TITAN_BUDGETS[this.tier].particles:0;}
   get instanceCount():number{return this.active?(this.impacted?TITAN_BUDGETS[this.tier].fragments:FIST_PLATES.length):0;}
-  constructor(){this.root.name='Titan Fist · assembled basalt punch';this.root.userData.bendingId='titan-fist';this.fist.name='Volumetric fist · four knuckles and thumb';this.root.add(this.fist,this.dust.mesh);this.plates.forEach(m=>this.fist.add(m));this.shards.forEach(m=>this.root.add(m));[...this.plates,...this.shards].forEach(m=>{m.instanceMatrix.setUsage(DynamicDrawUsage);m.frustumCulled=false;});}
+  constructor(){this.root.name='Titan Fist · assembled basalt punch';this.root.userData.bendingId='titan-fist';this.root.userData.castOrigin=this.launch;this.fist.name='Volumetric fist · four knuckles and thumb';this.root.add(this.fist,this.dust.mesh);this.plates.forEach(m=>this.fist.add(m));this.shards.forEach(m=>this.root.add(m));[...this.plates,...this.shards].forEach(m=>{m.instanceMatrix.setUsage(DynamicDrawUsage);m.frustumCulled=false;});}
   activate(c:AbilityCastContext,target:Vector3,release:()=>void):void{
     this.ctx=c;this.target.copy(target);this.releaseLease=release;this.age=0;this.active=true;this.impacted=false;this.root.position.copy(c.player.position);
     this.direction.subVectors(target,this.root.position);this.direction.y=0;this.length=this.direction.length();this.root.quaternion.setFromUnitVectors(new Vector3(0,0,-1),this.direction.normalize());this.inverse.copy(this.root.quaternion).invert();

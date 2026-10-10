@@ -31,7 +31,7 @@ export class TidalSerpentEffect implements ManagedEffect {
   get arrival():number{return C.charge+this.travel;}
   get particleCount():number{return this.active?TIDAL_BUDGETS[this.tier].particles:0;}
   get instanceCount():number{return 0;}
-  constructor(){this.root.name='Tidal Serpent · crossing liquid volumes';this.root.userData.bendingId='tidal-serpent';this.meshes.forEach((m,i)=>{m.name=i?'Left liquid whip':'Right liquid whip';m.frustumCulled=false;this.root.add(m);});this.root.add(this.drops.mesh);}
+  constructor(){this.root.name='Tidal Serpent · crossing liquid volumes';this.root.userData.bendingId='tidal-serpent';this.root.userData.castOrigin=this.launch;this.meshes.forEach((m,i)=>{m.name=i?'Left liquid whip':'Right liquid whip';m.frustumCulled=false;this.root.add(m);});this.root.add(this.drops.mesh);}
   activate(ctx:AbilityCastContext,target:Vector3,release:()=>void):void{
     this.ctx=ctx;this.releaseLease=release;this.age=0;this.impacted=false;this.active=true;this.target.copy(target);
     this.launch.copy(ctx.origin);this.root.position.copy(ctx.player.position);this.direction.subVectors(target,this.root.position);this.direction.y=0;this.length=this.direction.length();this.travel=this.length/C.speed;
@@ -43,13 +43,13 @@ export class TidalSerpentEffect implements ManagedEffect {
   update(dt:number,_time:number):boolean{
     if(!this.active)return false;this.age+=dt;const impactAge=this.age-this.arrival;
     if(impactAge>=C.aftermath)return false;
-    if(this.age<C.charge){this.drawHeight=(this.ctx.water?.getSurfaceHeight(this.root.position.x,this.root.position.z)??0)-this.root.position.y;this.ctx.player.visual.getRightHandWorldPosition(this.hands[0]);this.ctx.player.visual.getLeftHandWorldPosition(this.hands[1]);for(const h of this.hands)h.sub(this.root.position).applyQuaternion(this.inverse);}
-    this.progress=ease((this.age-C.charge)/Math.max(.05,this.travel));
+    if(this.age<C.charge){this.drawHeight=(this.ctx.water?.getSurfaceHeight(this.root.position.x,this.root.position.z)??0)-this.root.position.y;this.ctx.player.visual.getRightHandWorldPosition(this.hands[0]);this.ctx.player.visual.getLeftHandWorldPosition(this.hands[1]);this.launch.copy(this.hands[0]);for(const h of this.hands)h.sub(this.root.position).applyQuaternion(this.inverse);}
+    this.progress=Math.max(.005,ease((this.age-C.charge)/Math.max(.05,this.travel)));
     if(impactAge>=0&&!this.impacted){this.impacted=true;this.ctx.cameraFeedback?.(.035,.13);this.ctx.water?.addRipple({position:this.target,strength:.95,duration:1.5,waveSpeed:5,radius:.5,displacementScale:.9},this);this.ctx.water?.addRipple({position:this.target,strength:.4,duration:1.2,waveSpeed:3,radius:1.1},this);}
     const fade=this.age<C.charge?ease(this.age/.12):1-ease(Math.max(0,impactAge)/1.1);
     this.water.uniforms.uBendFade.value=fade;this.water.uniforms.uBendTime.value=this.age;
     for(let i=0;i<2;i++){this.stream=i;this.side=i?-1:1;this.sweeps[this.tier][i].update(this.path,this.radius,.72);this.meshes[i].visible=fade>.005;}
-    this.drops.update(this.age,impactAge,this.length,this.particleCount,ease(this.age/.3)*(1-ease(Math.max(0,impactAge)/C.aftermath)));
+    this.drops.update(this.age,impactAge,this.length,this.particleCount,ease(this.age/.3)*(1-ease(Math.max(0,impactAge)/C.aftermath)),this.age<C.charge?0:this.progress);
     this.root.userData.phase=this.age<.22?'draw':this.age<C.charge?'gather':impactAge<0?'release':impactAge<.35?'splash':'return';this.root.userData.contacts=this.impacted?1:0;return true;
   }
   dispose():void{if(!this.active)return;this.active=false;this.unsubscribe?.();this.unsubscribe=undefined;this.ctx.water?.removeOwner(this);this.root.removeFromParent();this.releaseLease?.();this.releaseLease=undefined;}
