@@ -23,6 +23,8 @@ export interface AbilityCastContext {
   readonly water?:WaterInteractionManager;
   /** Optional decoupled, bounded camera response supplied by the game. */
   readonly cameraFeedback?: (strength: number, duration: number) => void;
+  /** Optional short-lived upward framing request; camera input and targeting stay live. */
+  readonly skyFraming?: (angle: number, duration: number) => void;
 }
 export interface Ability {
   readonly id: string;

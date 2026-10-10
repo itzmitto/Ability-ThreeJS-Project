@@ -17,6 +17,7 @@ import { GlacialEruption } from '../abilities/ice/GlacialEruption';
 import { FrostLance } from '../abilities/frostLance/FrostLance';
 import { SandReaper } from '../abilities/sandReaper/SandReaper';
 import { AstralChainstorm } from '../abilities/astralChainstorm/AstralChainstorm';
+import { AbyssalMoonfall } from '../abilities/abyssalMoonfall/AbyssalMoonfall';
 import { TempestBreak } from '../abilities/wind/TempestBreak';
 import { HeavensVerdict } from '../abilities/lightning/HeavensVerdict';
 import { Megiddo } from '../abilities/light/Megiddo';
@@ -155,6 +156,9 @@ export class Game {
     const chainstorm = new AstralChainstorm();
     this.abilities.registry.register(chainstorm);
     this.abilities.slots.push({key:'',code:'',number:null,abilityId:chainstorm.id});
+    const moonfall = new AbyssalMoonfall();
+    this.abilities.registry.register(moonfall);
+    this.abilities.slots.push({key:'',code:'',number:null,abilityId:moonfall.id});
     this.hud = new HUD(root, this.abilities, this.settings, this.targeting, this.input, this.world.water);
     canvas.tabIndex = 0;
     document.addEventListener('visibilitychange', this.visibilityChanged);
@@ -194,6 +198,7 @@ export class Game {
     groundTarget: this.targeting.getGroundTarget()?.clone() ?? null,
     targeting: this.targeting, effectManager: this.effects, quality: this.settings, time: this.elapsed,
     cameraFeedback: this.camera.addFeedback,
+    skyFraming: this.camera.requestSkyFraming,
     water: this.world.water.interactions,
   });
   private visibilityChanged = (): void => {

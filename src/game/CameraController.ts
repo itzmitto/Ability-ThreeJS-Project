@@ -13,6 +13,9 @@ export class CameraController {
   private feedbackTime = 0;
   private feedbackDuration = 0;
   private feedbackStrength = 0;
+  private framingTime=0;
+  private framingTarget=0;
+  private framingAngle=0;
   constructor(private readonly input: InputManager, private readonly quality: GraphicsSettings, position: Vector3) {
     this.focus.copy(position).y += GAME_CONFIG.camera.height;
     this.update(0, position, true);
@@ -31,6 +34,9 @@ export class CameraController {
     this.offset.y = Math.max(0.3, this.offset.y);
     this.camera.position.lerp(this.offset, blend);
     this.camera.lookAt(this.focus);
+    this.framingTime=Math.max(0,this.framingTime-delta);
+    this.framingAngle=MathUtils.lerp(this.framingAngle,this.framingTime>0?this.framingTarget:0,1-Math.exp(-delta*4));
+    this.camera.rotateX(this.framingAngle);
     if (this.feedbackTime > 0) {
       this.feedbackTime = Math.max(0, this.feedbackTime - delta);
       const envelope = this.feedbackTime / this.feedbackDuration;
@@ -45,4 +51,8 @@ export class CameraController {
     this.feedbackDuration = Math.max(0.01, Math.min(0.2, duration)); this.feedbackTime = this.feedbackDuration;
   };
   dispose(): void { window.removeEventListener('resize', this.resize); }
+  requestSkyFraming = (angle:number,duration:number):void => {
+    if(!Number.isFinite(angle)||!Number.isFinite(duration))return;
+    this.framingTarget=MathUtils.clamp(angle,0,.14);this.framingTime=MathUtils.clamp(duration,0,.15);
+  };
 }

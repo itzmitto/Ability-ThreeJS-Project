@@ -4,6 +4,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 /** Controller supplies speed; model loading, bones and animation remain here. */
 export class PlayerVisual {
+  private castElevation=.18;
   readonly root = new Group();
   readonly ready: Promise<void>;
   loaded = false;
@@ -97,7 +98,7 @@ export class PlayerVisual {
       this.castingArm.getWorldPosition(this.armPosition);
       this.castingForearm.getWorldPosition(this.armDirection).sub(this.armPosition).normalize();
       this.root.getWorldQuaternion(this.armParent);
-      this.castDirection.set(0, .18, -1).normalize().applyQuaternion(this.armParent);
+      this.castDirection.set(0, this.castElevation, -1).normalize().applyQuaternion(this.armParent);
       this.armDelta.setFromUnitVectors(this.armDirection, this.castDirection);
       this.castingArm.getWorldQuaternion(this.armWorld).premultiply(this.armDelta);
       this.castingArm.parent.getWorldQuaternion(this.armParent).invert();
@@ -107,9 +108,10 @@ export class PlayerVisual {
     }
   }
   /** Optional upper-arm overlay; locomotion actions, legs, controller and player yaw remain unchanged. */
-  beginRightHandCast(duration: number): void {
+  beginRightHandCast(duration: number, elevation=.18): void {
     if (!Number.isFinite(duration) || duration <= 0) return;
     this.castRemaining = this.castDuration = Math.min(1.5, duration);
+    this.castElevation=Number.isFinite(elevation)?Math.max(.18,Math.min(1.5,elevation)):.18;
   }
   getRightHandWorldPosition(result = new Vector3()): Vector3 { this.root.updateWorldMatrix(true, true); return this.rightHand.getWorldPosition(result); }
   getLeftHandWorldPosition(result = new Vector3()): Vector3 { this.root.updateWorldMatrix(true, true); return this.leftHand.getWorldPosition(result); }

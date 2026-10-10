@@ -6,12 +6,16 @@ export interface WaterRipple {
   waveSpeed: number;
   wavelength?: number;
   radius?: number;
+  /** Optional bounded large-impact amplitude and spatial falloff; ordinary ripples retain their defaults. */
+  displacementScale?: number;
+  attenuation?: number;
 }
 export type WaterHandle = number;
 /** Fixed uniform buffer. Generation handles prevent old owners removing recycled slots. */
 export class WaterInteractionManager {
   readonly data = new Float32Array(32 * 4);
   readonly shape = new Float32Array(32 * 4);
+  readonly extent = new Float32Array(32 * 2);
   private readonly handles = new Int32Array(32);
   private readonly owners: (object | undefined)[] = new Array(32);
   private serial = 0;
@@ -58,6 +62,8 @@ export class WaterInteractionManager {
     this.shape[k + 1] = r.wavelength ?? 0.4;
     this.shape[k + 2] = r.duration;
     this.shape[k + 3] = r.radius ?? 0.15;
+    this.extent[slot*2] = Number.isFinite(r.displacementScale) ? Math.max(.18,Math.min(2.4,r.displacementScale!)) : .18;
+    this.extent[slot*2+1] = Number.isFinite(r.attenuation) ? Math.max(.012,Math.min(.1,r.attenuation!)) : .075;
     this.handles[slot] = ++this.serial;
     this.owners[slot] = owner;
     this.emitted++;
@@ -88,6 +94,7 @@ export class WaterInteractionManager {
   private clear(i: number): void {
     this.handles[i] = 0;
     this.data[i * 4 + 3] = 0;
+    this.extent[i*2]=this.extent[i*2+1]=0;
     this.owners[i] = undefined;
   }
   dispose(): void {

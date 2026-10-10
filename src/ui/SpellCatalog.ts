@@ -1,8 +1,9 @@
 import type { Ability } from '../abilities/Ability';
-export const SPELL_CATEGORIES = ['ALL', 'FIRE', 'ICE / SNOW', 'LIGHTNING', 'WATER', 'EARTH / SAND', 'WIND / STORM', 'LIGHT / HOLY', 'SHADOW / DARK', 'BLOOD', 'TIME / GRAVITY', 'ARCANE / METAL', 'OTHER'] as const;
+export const SPELL_CATEGORIES = ['ALL', 'FIRE', 'ICE / SNOW', 'LIGHTNING', 'WATER', 'EARTH / SAND', 'WIND / STORM', 'LIGHT / HOLY', 'SHADOW / DARK', 'BLOOD', 'TIME / GRAVITY', 'ARCANE / METAL', 'CELESTIAL / VOID', 'OTHER'] as const;
 export type SpellCategory = typeof SPELL_CATEGORIES[number];
 export function spellCategory(a: Ability): SpellCategory {
   const e = a.element.toUpperCase();
+  if(e==='CELESTIAL / VOID')return 'CELESTIAL / VOID';
   if (/FIRE/.test(e)) return 'FIRE';
   if (/ICE|FROST|CRYO|SNOW/.test(e)) return 'ICE / SNOW';
   if (/LIGHTNING|ELECTRIC/.test(e)) return 'LIGHTNING';

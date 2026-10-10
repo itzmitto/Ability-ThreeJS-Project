@@ -14,11 +14,12 @@ select.value = String(index);
 panel.append(select);
 const status = document.createElement('span');
 status.id = 'review-status';
-const context = (): AbilityCastContext => { const target = new Vector3(0, 0, -range); return { player: game.player, scene: game.sceneManager.scene, camera: game.camera.camera, origin: game.player.visual.getRightHandWorldPosition(), direction: target.clone().sub(game.player.visual.getRightHandWorldPosition()).normalize(), targetPoint: target, groundTarget: target, playerForward: game.player.getForward().clone(), cameraForward: game.targeting.aimDirection.clone(), targeting: game.targeting, effectManager: game.effects, quality: game.settings, time: clock, water: game.world.water.interactions, cameraFeedback: game.camera.addFeedback }; };
+const context = (): AbilityCastContext => { const target = new Vector3(0, 0, -range); return { player: game.player, scene: game.sceneManager.scene, camera: game.camera.camera, origin: game.player.visual.getRightHandWorldPosition(), direction: target.clone().sub(game.player.visual.getRightHandWorldPosition()).normalize(), targetPoint: target, groundTarget: target, playerForward: game.player.getForward().clone(), cameraForward: game.targeting.aimDirection.clone(), targeting: game.targeting, effectManager: game.effects, quality: game.settings, time: clock, water: game.world.water.interactions, cameraFeedback: game.camera.addFeedback,skyFraming:game.camera.requestSkyFraming }; };
 const stage = () => { game.effects.update(120, clock); game.abilities.update(120); game.abilities.select(index); game.abilities.cast(context()); for (let t = 0; t < age;) {
     const dt = Math.min(.025, age - t);
     game.player.visual.update(0, 0, dt);
     game.effects.update(dt, clock + t);
+    game.camera.update(dt,game.player.position);
     t += dt;
 } game.hud.update(false); status.textContent = `${game.abilities.selectedAbility?.name} · ${age.toFixed(2)}s · ${range}m`; };
 select.onchange = () => { index = Number(select.value); playing = false; stage(); select.blur(); };

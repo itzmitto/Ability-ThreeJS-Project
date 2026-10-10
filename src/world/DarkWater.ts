@@ -33,6 +33,7 @@ export class DarkWater {
       uFogDensity: { value: GAME_CONFIG.world.fogDensity },
       uRipples: { value: this.interactions.data },
       uRippleShape: { value: this.interactions.shape },
+      uRippleExtent: { value: this.interactions.extent },
       uReflection: { value: this.reflection.texture },
       uReflectionMatrix: { value: new Matrix4() },
       uReflect: { value: 0 },
@@ -79,7 +80,7 @@ export class DarkWater {
       }
     });
     this.mesh.frustumCulled = false;
-    this.interactions.setHeightSampler((x,z)=>{const u=this.material.uniforms,p=u.uPlayer.value as Vector3;return sampleOceanHeight(x,z,this.time,p.x,p.z,this.settings,u.uWaveCount.value,this.interactions.data,this.interactions.shape,this.interactions.capacity);});
+    this.interactions.setHeightSampler((x,z)=>{const u=this.material.uniforms,p=u.uPlayer.value as Vector3;return sampleOceanHeight(x,z,this.time,p.x,p.z,this.settings,u.uWaveCount.value,this.interactions.data,this.interactions.shape,this.interactions.capacity,this.interactions.extent);});
     this.unsubscribeRipple = this.interactions.subscribe(r => { if (Math.abs(r.strength) >= .18) this.spray.emitImpact(r.position, this.time, Math.abs(r.strength), this.settings.splashDensity * this.q.detail / 3); });
   }
   configure(patch: Partial<OceanSettings>): void { Object.assign(this.settings, validateOcean(patch, this.settings)); this.syncSettings(); }

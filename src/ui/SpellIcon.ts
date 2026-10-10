@@ -1,7 +1,12 @@
 import type { Ability } from '../abilities/Ability';
 export function paintSpellIcon(container: HTMLElement, ability: Ability | undefined): void {
       // Icons are text glyphs; untrusted markup is never inserted into the UI.
-      if (ability?.icon === 'astral-chainstorm') {
+      if (ability?.icon === 'abyssal-moonfall') {
+        if(container.dataset.icon!==ability.icon){
+          container.innerHTML='<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="14" r="8" fill="#12101d" stroke="#b7b7cf"/><g stroke="#827caa"><ellipse cx="16" cy="14" rx="14" ry="5" transform="rotate(-25 16 14)"/><ellipse cx="16" cy="14" rx="12" ry="7" transform="rotate(55 16 14)"/><ellipse cx="16" cy="14" rx="11" ry="10" transform="rotate(12 16 14)"/></g><path stroke="#d8c6ff" d="m15 6 3 5-4 4 3 7m1-11 5 3m-9 1-5 2m11 8 4 1-3 5-3-2Z"/></svg>';
+          container.dataset.icon=ability.icon;
+        }
+      } else if (ability?.icon === 'astral-chainstorm') {
         if(container.dataset.icon!==ability.icon){
           container.innerHTML='<svg viewBox="0 0 32 32" aria-hidden="true"><g stroke="#c6dce7"><rect x="8" y="2" width="7" height="13" rx="3" transform="rotate(-35 11 9)"/><rect x="16" y="10" width="7" height="13" rx="3" transform="rotate(-35 19 17)"/><rect x="7" y="17" width="7" height="13" rx="3" transform="rotate(35 10 23)"/></g><path stroke="#38d8ff" d="m15 12 3 4-3 4-3-4Zm-6-5 3 3m8 6 2 3"/></svg>';
           container.dataset.icon=ability.icon;
