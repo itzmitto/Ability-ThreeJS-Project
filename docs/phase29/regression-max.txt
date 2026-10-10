@@ -1,0 +1,94 @@
+PASS Local human model loaded
+PASS All 30 previous abilities plus Ember Comet
+PASS GLACIAL ERUPTION: shortcut Q
+PASS GLACIAL ERUPTION: HUD selection
+PASS GLACIAL ERUPTION: click cast / cooldown
+PASS GLACIAL ERUPTION: cooldown rejects another cast
+PASS GLACIAL ERUPTION: finite geometry / bounded instances
+PASS GLACIAL ERUPTION: natural completion
+PASS GLACIAL ERUPTION: scene/light/subscription/water cleanup
+PASS GLACIAL ERUPTION: WebGL error state
+PASS GLACIAL ERUPTION: measurement recorded
+PASS TIDAL SOVEREIGN: shortcut H
+PASS TIDAL SOVEREIGN: HUD selection
+PASS TIDAL SOVEREIGN: click cast / cooldown
+PASS TIDAL SOVEREIGN: cooldown rejects another cast
+PASS TIDAL SOVEREIGN: finite geometry / bounded instances
+PASS TIDAL SOVEREIGN: natural completion
+PASS TIDAL SOVEREIGN: scene/light/subscription/water cleanup
+PASS TIDAL SOVEREIGN: WebGL error state
+PASS TIDAL SOVEREIGN: measurement recorded
+PASS KRAKEN CROWN: shortcut Shift+3
+PASS KRAKEN CROWN: HUD selection
+PASS KRAKEN CROWN: click cast / cooldown
+PASS KRAKEN CROWN: cooldown rejects another cast
+PASS KRAKEN CROWN: finite geometry / bounded instances
+PASS KRAKEN CROWN: natural completion
+PASS KRAKEN CROWN: scene/light/subscription/water cleanup
+PASS KRAKEN CROWN: WebGL error state
+PASS KRAKEN CROWN: measurement recorded
+PASS PRISM RAVENSTORM: shortcut Shift+4
+PASS PRISM RAVENSTORM: HUD selection
+PASS PRISM RAVENSTORM: click cast / cooldown
+PASS PRISM RAVENSTORM: cooldown rejects another cast
+PASS PRISM RAVENSTORM: finite geometry / bounded instances
+PASS PRISM RAVENSTORM: natural completion
+PASS PRISM RAVENSTORM: scene/light/subscription/water cleanup
+PASS PRISM RAVENSTORM: WebGL error state
+PASS PRISM RAVENSTORM: measurement recorded
+PASS FROST LANCE: shortcut Shift+6
+PASS FROST LANCE: HUD selection
+PASS FROST LANCE: click cast / cooldown
+PASS FROST LANCE: cooldown rejects another cast
+PASS FROST LANCE: finite geometry / bounded instances
+PASS FROST LANCE: natural completion
+PASS FROST LANCE: scene/light/subscription/water cleanup
+PASS FROST LANCE: WebGL error state
+PASS FROST LANCE: measurement recorded
+PASS SAND REAPER: shortcut Shift+7
+PASS SAND REAPER: HUD selection
+PASS SAND REAPER: click cast / cooldown
+PASS SAND REAPER: cooldown rejects another cast
+PASS SAND REAPER: finite geometry / bounded instances
+PASS SAND REAPER: natural completion
+PASS SAND REAPER: scene/light/subscription/water cleanup
+PASS SAND REAPER: WebGL error state
+PASS SAND REAPER: measurement recorded
+PASS DRAGONFIRE: shortcut Shift+5
+PASS DRAGONFIRE: HUD selection
+PASS DRAGONFIRE: click cast / cooldown
+PASS DRAGONFIRE: cooldown rejects another cast
+PASS DRAGONFIRE: finite geometry / bounded instances
+PASS DRAGONFIRE: natural completion
+PASS DRAGONFIRE: scene/light/subscription/water cleanup
+PASS DRAGONFIRE: WebGL error state
+PASS DRAGONFIRE: measurement recorded
+PASS ASTRAL CHAINSTORM: shortcut 
+PASS ASTRAL CHAINSTORM: HUD selection
+PASS ASTRAL CHAINSTORM: click cast / cooldown
+PASS ASTRAL CHAINSTORM: cooldown rejects another cast
+PASS ASTRAL CHAINSTORM: finite geometry / bounded instances
+PASS ASTRAL CHAINSTORM: natural completion
+PASS ASTRAL CHAINSTORM: scene/light/subscription/water cleanup
+PASS ASTRAL CHAINSTORM: WebGL error state
+PASS ASTRAL CHAINSTORM: measurement recorded
+PASS ABYSSAL MOONFALL: shortcut 
+PASS ABYSSAL MOONFALL: HUD selection
+PASS ABYSSAL MOONFALL: click cast / cooldown
+PASS ABYSSAL MOONFALL: cooldown rejects another cast
+PASS ABYSSAL MOONFALL: finite geometry / bounded instances
+PASS ABYSSAL MOONFALL: natural completion
+PASS ABYSSAL MOONFALL: scene/light/subscription/water cleanup
+PASS ABYSSAL MOONFALL: WebGL error state
+PASS ABYSSAL MOONFALL: measurement recorded
+PASS THE DROWNED KING: shortcut 
+PASS THE DROWNED KING: HUD selection
+PASS THE DROWNED KING: click cast / cooldown
+PASS THE DROWNED KING: cooldown rejects another cast
+PASS THE DROWNED KING: finite geometry / bounded instances
+PASS THE DROWNED KING: natural completion
+PASS THE DROWNED KING: scene/light/subscription/water cleanup
+PASS THE DROWNED KING: WebGL error state
+PASS THE DROWNED KING: measurement recorded
+PASS AUDIT ALL CHECKS PASSED
+DATA [{"id":"glacial-eruption","quality":"MAX","viewport":[1280,720],"calls":45,"triangles":86995,"peakInstances":120,"peakParticles":420,"raf":{"medianMs":6.099999904632568,"p95Ms":8.299999952316284,"maxMs":13.400000095367432},"update":{"medianMs":0,"p95Ms":0.19999980926513672,"maxMs":0.20000004768371582},"renderSubmit":{"medianMs":0.5,"p95Ms":7.400000095367432,"maxMs":12.599999904632568},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":8,"textures":21,"programs":18},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":10,"textures":21,"programs":21}},{"id":"tidal-sovereign","quality":"MAX","viewport":[1280,720],"calls":52,"triangles":108141,"peakInstances":696,"peakParticles":696,"raf":{"medianMs":6.099999904632568,"p95Ms":6.5,"maxMs":7.3999998569488525},"update":{"medianMs":0.20000004768371582,"p95Ms":0.40000009536743164,"maxMs":0.5},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":0.5999999046325684,"maxMs":2.3999998569488525},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":10,"textures":21,"programs":21},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":11,"textures":21,"programs":22}},{"id":"kraken-crown","quality":"MAX","viewport":[1280,720],"calls":59,"triangles":254387,"peakInstances":1030,"peakParticles":950,"raf":{"medianMs":6.099999904632568,"p95Ms":6.400000095367432,"maxMs":6.900000095367432},"update":{"medianMs":0.2999999523162842,"p95Ms":0.40000009536743164,"maxMs":0.5},"renderSubmit":{"medianMs":0.40000009536743164,"p95Ms":0.6999998092651367,"maxMs":1.7000000476837158},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":11,"textures":21,"programs":22},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":11,"textures":21,"programs":22}},{"id":"prism-ravenstorm","quality":"MAX","viewport":[1280,720],"calls":36,"triangles":91247,"peakInstances":820,"peakParticles":640,"raf":{"medianMs":6.099999904632568,"p95Ms":6.400000095367432,"maxMs":6.599999904632568},"update":{"medianMs":0.20000004768371582,"p95Ms":0.40000009536743164,"maxMs":0.5},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":0.40000009536743164,"maxMs":0.5},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":11,"textures":21,"programs":22},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":11,"textures":21,"programs":22}},{"id":"frost-lance","quality":"MAX","viewport":[1280,720],"calls":60,"triangles":216135,"peakInstances":190,"peakParticles":1242,"raf":{"medianMs":6,"p95Ms":6.400000095367432,"maxMs":6.6000001430511475},"update":{"medianMs":0.09999990463256836,"p95Ms":0.20000004768371582,"maxMs":0.40000009536743164},"renderSubmit":{"medianMs":0.5999999046325684,"p95Ms":0.9000000953674316,"maxMs":2.799999952316284},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":11,"textures":21,"programs":22},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":20,"textures":21,"programs":30}},{"id":"sand-reaper","quality":"MAX","viewport":[1280,720],"calls":34,"triangles":75291,"peakInstances":88,"peakParticles":2325,"raf":{"medianMs":6,"p95Ms":6.5,"maxMs":7.699999809265137},"update":{"medianMs":0,"p95Ms":0.20000004768371582,"maxMs":0.8000001907348633},"renderSubmit":{"medianMs":0.2999999523162842,"p95Ms":2.1000001430511475,"maxMs":3},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":20,"textures":21,"programs":30},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":29,"textures":21,"programs":37}},{"id":"dragonfire","quality":"MAX","viewport":[1280,720],"calls":53,"triangles":100235,"peakInstances":387,"peakParticles":272,"raf":{"medianMs":6.099999904632568,"p95Ms":6.400000095367432,"maxMs":16.799999952316284},"update":{"medianMs":0.10000014305114746,"p95Ms":0.3000001907348633,"maxMs":0.39999985694885254},"renderSubmit":{"medianMs":0.39999985694885254,"p95Ms":0.6000001430511475,"maxMs":15.600000143051147},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":29,"textures":21,"programs":37},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":29,"textures":21,"programs":40}},{"id":"astral-chainstorm","quality":"MAX","viewport":[1280,720],"calls":33,"triangles":168361,"peakInstances":195,"peakParticles":454,"raf":{"medianMs":6,"p95Ms":6.6000001430511475,"maxMs":12.900000095367432},"update":{"medianMs":0.20000004768371582,"p95Ms":0.5,"maxMs":0.5999999046325684},"renderSubmit":{"medianMs":0.20000004768371582,"p95Ms":0.40000009536743164,"maxMs":11.300000190734863},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":29,"textures":21,"programs":40},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":35,"textures":21,"programs":46}},{"id":"abyssal-moonfall","quality":"MAX","viewport":[1280,720],"calls":63,"triangles":121607,"peakInstances":238,"peakParticles":5400,"raf":{"medianMs":6.099999904632568,"p95Ms":6.5,"maxMs":19.299999952316284},"update":{"medianMs":0.10000014305114746,"p95Ms":0.2999999523162842,"maxMs":0.3000001907348633},"renderSubmit":{"medianMs":0.40000009536743164,"p95Ms":0.7000000476837158,"maxMs":14.600000143051147},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":35,"textures":21,"programs":46},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":46,"textures":21,"programs":55}},{"id":"drowned-king","quality":"MAX","viewport":[1280,720],"calls":51,"triangles":91259,"peakInstances":309,"peakParticles":5400,"raf":{"medianMs":6,"p95Ms":6.599999904632568,"maxMs":23.100000143051147},"update":{"medianMs":0.20000004768371582,"p95Ms":0.2999999523162842,"maxMs":0.40000009536743164},"renderSubmit":{"medianMs":0.39999985694885254,"p95Ms":0.5,"maxMs":21.700000047683716},"baseline":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":46,"textures":21,"programs":55},"after":{"objects":106,"lights":0,"subscriptions":5,"active":0,"ripples":0,"geometries":66,"textures":21,"programs":65}}]

@@ -26,7 +26,7 @@ export function validateCometConfig(patch: Partial<CometConfig>, base: Readonly<
 }
 export function cometQuality(q: Readonly<QualityConfig>, c: Readonly<CometConfig>) {
   const detail = q.waterDetail - 1;
-  return { detail, shell: Math.min(c.shellPieceCount, [5, 8, 12][detail]),
+  return { detail, shell: Math.min(c.shellPieceCount, [6, 8, 12][detail]),
     fragments: Math.min(c.fragmentCount, [16, 30, 60][detail]),
     glowParticles: [108, 260, 520][detail], vaporParticles: [42, 80, 180][detail],
     tailLayers: [2, 3, 4][detail], light: detail > 0 };

@@ -24,7 +24,7 @@ export class EmberCometEffect implements ManagedEffect {
     this.core = new Mesh(resources.cores[this.quality.detail], createCometCoreMaterial()); this.core.frustumCulled = false; this.projectile.add(this.core);
     this.shell = [0, 1, 2].map(i => { const m = new InstancedMesh(resources.plates[this.quality.detail][i], this.rock.material, 4); m.frustumCulled = false; m.instanceMatrix.setUsage(DynamicDrawUsage); this.projectile.add(m); return m; });
     this.particles = new EmberCometParticles(resources); this.trail = new EmberCometTrail(resources); this.impact = new EmberCometImpact(resources);
-    this.root.name = 'Ember Comet · pooled projectile'; this.root.add(this.projectile, this.particles.root, this.trail.root, this.impact.root, this.light);
+    this.root.name = 'Ember Comet · pooled projectile'; this.projectile.name = 'Comet projectile'; this.root.add(this.projectile, this.particles.root, this.trail.root, this.impact.root, this.light);
   }
   activate(ctx: AbilityCastContext, target: Vector3): void {
     this.context = ctx; this.target.copy(target); this.origin.copy(ctx.origin); this.position.copy(ctx.origin); this.previous.copy(ctx.origin);
@@ -80,18 +80,21 @@ export class EmberCometEffect implements ManagedEffect {
       if (this.travel >= this.distance || (this.travel > 1 && this.position.y <= waterY + .04)) this.hit();
     }
     this.projectile.position.copy(this.position); this.projectile.quaternion.copy(this.orientation);
-    this.projectile.scale.setScalar(c.projectileRadius * (.15 + charge * .85)); this.core.scale.setScalar(.72); this.updateShell(charge);
+    this.projectile.scale.setScalar(c.projectileRadius * (.15 + charge * .85)); this.core.scale.setScalar(.65); this.updateShell(charge);
     const material = this.core.material as ReturnType<typeof createCometCoreMaterial>;
     material.uniforms.uTime.value = this.age; material.uniforms.uGlow.value = c.coreGlow; material.uniforms.uDetail.value = q.detail;
     this.rock.uniforms.uCometTime.value = this.age; this.rock.uniforms.uCrackGlow.value = c.shellCrackGlow * (.4 + charge * .6); this.rock.uniforms.uHeat.value = 1; this.rock.uniforms.uDetail.value = q.detail;
     const impactAge = this.impactTime < 0 ? -1 : this.age - this.impactTime;
     if (impactAge >= 0) { this.phase = impactAge < .7 ? 'impact' : 'aftermath'; this.target.y = this.context.water?.getSurfaceHeight(this.target.x, this.target.z) ?? this.target.y; }
-    this.trail.update(this.age, this.position, this.orientation, this.travel, impactAge < 0 ? 1 : Math.max(0, 1 - impactAge / .18), q, c);
+    if (this.launchTime < 0) this.trail.charge(this.age, this.position, this.orientation, charge);
+    else this.trail.update(this.age, this.position, this.orientation, this.travel, impactAge < 0 ? 1 : Math.max(0, 1 - impactAge / .18), q, c);
     this.impact.update(impactAge, this.age, this.target, q, c);
-    // Size is bounded and calculated from the actual renderer viewport through the camera's projection matrix.
+    // Bounded screen-size scale follows the viewport and central pixel-ratio preset.
     const pixels = typeof window === 'undefined' ? 450 : Math.min(1000, window.innerHeight * .65 * this.context.quality.config.pixelRatio);
     this.particles.update(this.age, pixels, q, c);
-    this.light.position.copy(impactAge < 0 ? this.position : this.target); if (impactAge >= 0) this.light.position.y += .8;
+    this.light.position.copy(impactAge < 0 ? this.position : this.target);
+    if (impactAge >= 0) this.light.position.y += .8;
+    else { this.light.position.addScaledVector(this.direction, -1.2); this.light.position.y += 1; }
     this.light.intensity = impactAge < 0 ? (this.launchTime < 0 ? charge * 1.8 : 2.8) : c.impactFlash * 10 * Math.exp(-impactAge * 7);
     this.root.userData.phase = this.phase;
     return impactAge < COMET_CAST.residual;

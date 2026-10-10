@@ -38,10 +38,10 @@ export function createCometCoreMaterial(): ShaderMaterial {
     fragmentShader: `varying vec3 vLocal,vNormal,vView;uniform float uTime,uGlow,uDetail;${frostNoise}
       void main(){vec3 p=vLocal*3.+vec3(0.,-uTime*1.8,uTime*.4);
       float turbulence=uDetail<.5?snoise(p):fbm3(p);float face=clamp(dot(normalize(vNormal),normalize(vView)),0.,1.);
-      float heat=clamp(face*.8+turbulence*.24+.16,0.,1.);
+      float heat=clamp(face*.72+turbulence*.24+.13,0.,1.);
       vec3 col=mix(vec3(.65,.022,.002),vec3(1.3,.27,.012),smoothstep(.1,.5,heat));
       col=mix(col,vec3(1.65,.88,.18),smoothstep(.5,.86,heat));
-      col=mix(col,vec3(1.85,1.54,.9),smoothstep(.9,1.,heat));
+      col=mix(col,vec3(1.85,1.54,.9),smoothstep(.96,1.,heat));
       gl_FragColor=vec4(col*uGlow,1.);
       #include <tonemapping_fragment>
       #include <colorspace_fragment>
@@ -49,11 +49,14 @@ export function createCometCoreMaterial(): ShaderMaterial {
 }
 export function createCometFlameMaterial(): ShaderMaterial {
   return new ShaderMaterial({ transparent: true, depthWrite: false, side: DoubleSide, blending: AdditiveBlending,
-    uniforms: { uTime: { value: 0 }, uAlpha: { value: 1 }, uLayer: { value: 0 }, uDetail: { value: 0 } },
-    vertexShader: `varying vec2 vUv;varying vec3 vLocal;uniform float uTime,uLayer;
+    uniforms: { uTime: { value: 0 }, uAlpha: { value: 1 }, uLayer: { value: 0 }, uDetail: { value: 0 }, uChargeMode: { value: 0 } },
+    vertexShader: `varying vec2 vUv;varying vec3 vLocal;uniform float uTime,uLayer,uChargeMode;
       void main(){vUv=uv;vec3 p=position;float t=uv.y;
       float swirl=t*9.-uTime*15.+uLayer*2.;p.xy+=vec2(sin(swirl),cos(swirl*.83))*.14*sin(t*3.14159);
-      float a=t*5.+uLayer;mat2 rot=mat2(cos(a),-sin(a),sin(a),cos(a));p.xy=rot*p.xy;vLocal=p;
+      float a=t*5.+uLayer;mat2 rot=mat2(cos(a),-sin(a),sin(a),cos(a));p.xy=rot*p.xy;
+      if(uChargeMode>.5){float orbit=t*7.8+uTime*18.+uLayer*3.14159;float radius=.7*(1.-t*.75);
+        p=vec3(cos(orbit)*radius,sin(orbit)*radius,t*.18)+vec3(p.xy*.055,0.);}
+      vLocal=p;
       gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.);}`,
     fragmentShader: `varying vec2 vUv;varying vec3 vLocal;uniform float uTime,uAlpha,uLayer,uDetail;${frostNoise}
       void main(){float t=vUv.y;vec3 p=vec3(vLocal.xy*4.,t*7.-uTime*5.+uLayer*3.);

@@ -1,0 +1,41 @@
+PASS 30 originals plus ability #31
+PASS Spellbook displays 31 abilities
+PASS Search ember finds Ember Comet
+PASS Search comet finds Ember Comet
+PASS Search fire finds Ember Comet
+PASS Search infernal finds Ember Comet
+PASS FIRE category finds Ember Comet
+PASS Actual range and cooldown metadata visible
+PASS Spellbook equips unbound #31 without casting
+PASS Favorited Comet appears in Quick Wheel
+PASS Wheel selects through existing manager
+PASS World left click casts and begins four-second cooldown
+PASS 100 rapid attempts are rejected during cooldown
+PASS Finite meshes and bounded instance transforms
+PASS Charge follows animated right hand
+PASS All five visible stages observed in real-time playback
+PASS Real-time projectile naturally expires
+PASS Impact submits exactly three owned ocean disturbances
+PASS Water disturbances fully removed
+PASS WebGL NO_ERROR
+PROFILE {"preset":"MEDIUM","peakParticles":322,"peakInstances":30,"peakCalls":61,"peakTriangles":54979,"rafMedian":6.099999904632568,"rafP95":6.5,"rafMax":11.900000095367432}
+PASS 8m input: safe cast
+PASS 8m input: impact buffers finite
+PASS 8m input: projectile reaches actual water impact
+PASS 28m input: safe cast
+PASS 28m input: impact buffers finite
+PASS 28m input: projectile reaches actual water impact
+PASS 100m input: safe cast
+PASS 100m input: impact buffers finite
+PASS 100m input: projectile reaches actual water impact
+PASS WASD / Walk works
+PASS Shift / Run works
+PASS Idle returns
+PASS Mouse camera and targeting remain live
+PASS F3 Ocean Editor remains available
+PASS Live LOW quality works
+PASS Live MEDIUM quality works
+PASS Live MAX quality works
+PASS All 30 original slots and shortcuts remain unchanged
+PASS Full teardown releases GPU resources/subscriptions
+PASS EMBER COMET BROWSER COMPLETE

@@ -25,7 +25,7 @@ export function createCometPlate(detail: number, variant: number): BufferGeometr
     const back = skin === 1; vertices.push([0, 0, 1.02 - Number(back) * .17]);
     for (let ring = 0; ring < 2; ring++) for (let i = 0; i < sides; i++) {
       const a = i / sides * Math.PI * 2 + variant * .13;
-      const r = (ring ? .55 : .28) * (.86 + cometSeed(i + variant * 13) * .22);
+      const r = (ring ? .65 : .33) * (.86 + cometSeed(i + variant * 13) * .22);
       const x = Math.cos(a) * r, y = Math.sin(a) * r * (.8 + variant * .07);
       vertices.push([x, y, Math.sqrt(1 - x * x - y * y) + cometSeed(i * 3 + ring + variant * 7) * .055 - Number(back) * .17]);
     }

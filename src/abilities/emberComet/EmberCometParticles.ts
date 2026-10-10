@@ -32,7 +32,7 @@ class CometEmitter {
         ${vapor ? `float n=snoise(vec3(p*3.+vSeed*15.,uTime*.7));
           float flow=snoise(vWorld*.8+vec3(0.,uTime*.4,0.));
           alpha=exp(-dot(p,p)*3.)*(1.-smoothstep(.55,1.,dot(p,p)))*smoothstep(-.65,.5,n+flow*.2);
-          color=mix(vec3(.12,.09,.075),vec3(.62,.65,.64),vKind);alpha*=mix(.24,.42,vKind);`
+          color=mix(vec3(.12,.09,.075),vec3(.40,.43,.42),vKind);alpha*=mix(.16,.14,vKind);`
         : `float streak=abs(p.x+p.y*.24)*mix(1.,4.,vKind)+abs(p.y)*.65;
           alpha=1.-smoothstep(.3,.85,streak);color=mix(vec3(1.1,.11,.003),vec3(1.6,1.,.28),vSeed);`}
         alpha*=vAlpha;if(alpha<.003)discard;gl_FragColor=vec4(color,alpha);
@@ -100,6 +100,7 @@ export class EmberCometParticles {
     const steam = Math.min(q.vaporParticles, Math.round(q.vaporParticles * .75 * c.steamAmount));
     for (let i = 0; i < steam; i++) {
       const seed = cometSeed(this.serial++), a = i * 2.39996; this.p.copy(p); this.p.y += .15;
+      this.p.x += Math.cos(a) * (.25 + seed * .9); this.p.z += Math.sin(a) * (.25 + seed * .9);
       this.v.set(Math.cos(a) * (1 + seed * 3), 1 + seed * 2, Math.sin(a) * (1 + seed * 3));
       this.vapor.emit(t + seed * .12, this.p, this.v, .65 + seed * .65, 1 + seed * 1.5, i % 4 ? 1 : 0, seed);
     }

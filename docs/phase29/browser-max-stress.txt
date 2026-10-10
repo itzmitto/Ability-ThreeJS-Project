@@ -1,0 +1,82 @@
+PASS 30 originals plus ability #31
+PASS Spellbook displays 31 abilities
+PASS Search ember finds Ember Comet
+PASS Search comet finds Ember Comet
+PASS Search fire finds Ember Comet
+PASS Search infernal finds Ember Comet
+PASS FIRE category finds Ember Comet
+PASS Actual range and cooldown metadata visible
+PASS Spellbook equips unbound #31 without casting
+PASS Favorited Comet appears in Quick Wheel
+PASS Wheel selects through existing manager
+PASS World left click casts and begins four-second cooldown
+PASS 100 rapid attempts are rejected during cooldown
+PASS Finite meshes and bounded instance transforms
+PASS Charge follows animated right hand
+PASS All five visible stages observed in real-time playback
+PASS Real-time projectile naturally expires
+PASS Impact submits exactly three owned ocean disturbances
+PASS Water disturbances fully removed
+PASS WebGL NO_ERROR
+PROFILE {"preset":"MAX","peakParticles":664,"peakInstances":48,"peakCalls":65,"peakTriangles":90027,"rafMedian":6.099999904632568,"rafP95":6.5,"rafMax":9.699999809265137}
+PASS 8m input: safe cast
+PASS 8m input: impact buffers finite
+PASS 8m input: projectile reaches actual water impact
+PASS 28m input: safe cast
+PASS 28m input: impact buffers finite
+PASS 28m input: projectile reaches actual water impact
+PASS 100m input: safe cast
+PASS 100m input: impact buffers finite
+PASS 100m input: projectile reaches actual water impact
+PASS Sequential cast 1
+PASS Cast 1 restores warmed scene/GPU/subscription baseline
+PASS Sequential cast 2
+PASS Cast 2 restores warmed scene/GPU/subscription baseline
+PASS Sequential cast 3
+PASS Cast 3 restores warmed scene/GPU/subscription baseline
+PASS Sequential cast 4
+PASS Cast 4 restores warmed scene/GPU/subscription baseline
+PASS Sequential cast 5
+PASS Cast 5 restores warmed scene/GPU/subscription baseline
+PASS Sequential cast 6
+PASS Cast 6 restores warmed scene/GPU/subscription baseline
+PASS Sequential cast 7
+PASS Cast 7 restores warmed scene/GPU/subscription baseline
+PASS Sequential cast 8
+PASS Cast 8 restores warmed scene/GPU/subscription baseline
+PASS Sequential cast 9
+PASS Cast 9 restores warmed scene/GPU/subscription baseline
+PASS Sequential cast 10
+PASS Cast 10 restores warmed scene/GPU/subscription baseline
+PASS Sequential cast 11
+PASS Cast 11 restores warmed scene/GPU/subscription baseline
+PASS Sequential cast 12
+PASS Cast 12 restores warmed scene/GPU/subscription baseline
+PASS Sequential cast 13
+PASS Cast 13 restores warmed scene/GPU/subscription baseline
+PASS Sequential cast 14
+PASS Cast 14 restores warmed scene/GPU/subscription baseline
+PASS Sequential cast 15
+PASS Cast 15 restores warmed scene/GPU/subscription baseline
+PASS Sequential cast 16
+PASS Cast 16 restores warmed scene/GPU/subscription baseline
+PASS Sequential cast 17
+PASS Cast 17 restores warmed scene/GPU/subscription baseline
+PASS Sequential cast 18
+PASS Cast 18 restores warmed scene/GPU/subscription baseline
+PASS Sequential cast 19
+PASS Cast 19 restores warmed scene/GPU/subscription baseline
+PASS Sequential cast 20
+PASS Cast 20 restores warmed scene/GPU/subscription baseline
+COUNTS {"baseline":{"objects":106,"lights":0,"geometries":21,"textures":21,"programs":28,"subscriptions":5,"particles":0,"effects":0,"ripples":0},"after":{"objects":106,"lights":0,"geometries":21,"textures":21,"programs":28,"subscriptions":5,"particles":0,"effects":0,"ripples":0}}
+PASS WASD / Walk works
+PASS Shift / Run works
+PASS Idle returns
+PASS Mouse camera and targeting remain live
+PASS F3 Ocean Editor remains available
+PASS Live LOW quality works
+PASS Live MEDIUM quality works
+PASS Live MAX quality works
+PASS All 30 original slots and shortcuts remain unchanged
+PASS Full teardown releases GPU resources/subscriptions
+PASS EMBER COMET BROWSER COMPLETE

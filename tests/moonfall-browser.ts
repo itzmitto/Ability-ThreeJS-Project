@@ -15,7 +15,7 @@ const finite=()=>{let valid=true;game.sceneManager.scene.traverse(o=>{valid&&=[.
 try {
   await game.player.visual.ready;game.settings.setPreset((query.get('quality')??'LOW') as 'LOW'|'MEDIUM'|'MAX');game.start();await frames(12);
   const oldSlots=game.abilities.slots.slice(0,28).map(s=>({key:s.key,code:s.code,number:s.number,shift:s.shift,abilityId:s.abilityId}));
-  check(game.abilities.registry.all.length===30,'29 original abilities and Drowned King');click('[data-open-book]');await frames();check(root.querySelectorAll('.spell-card').length===30,'Spellbook displays all 30 abilities');
+  check(game.abilities.registry.all.length===31,'30 original abilities plus Ember Comet');click('[data-open-book]');await frames();check(root.querySelectorAll('.spell-card').length===31,'Spellbook displays all 31 abilities');
   const search=root.querySelector<HTMLInputElement>('[aria-label="Search spells"]')!;
   for(const term of ['moon','abyssal','celestial','void','shattered heaven']){search.value=term;search.dispatchEvent(new Event('input'));check(!root.querySelector<HTMLElement>('[data-spell="abyssal-moonfall"]')!.closest<HTMLElement>('.spell-card')!.hidden,`Search ${term} finds Moonfall`);}
   const star=root.querySelector<HTMLButtonElement>('[data-favorite="abyssal-moonfall"]')!,saved=star.getAttribute('aria-pressed')==='true';if(!saved)star.click();
