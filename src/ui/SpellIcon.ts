@@ -1,7 +1,9 @@
 import type { Ability } from '../abilities/Ability';
 export function paintSpellIcon(container: HTMLElement, ability: Ability | undefined): void {
       // Icons are text glyphs; untrusted markup is never inserted into the UI.
-      if (ability?.icon === 'drowned-king') {
+      if (ability?.icon === 'ember-comet') {
+        if(container.dataset.icon!==ability.icon){container.innerHTML='<svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#ac310b" stroke="#ff8a25" d="M23 28C5 26 5 14 2 3c7 7 6 11 12 11-2-6-4-8-3-12 9 7 9 13 13 15Z"/><path fill="#33211a" stroke="#ffa643" d="m16 16 7-3 6 5 1 7-6 5-8-3-4-5Z"/><path fill="#ffd878" d="m18 17 5 2 4-1-2 6-4 3-4-4Z"/><path stroke="#ffefb0" d="m23 15-2 5-6 2m6-2 4 5"/></svg>';container.dataset.icon=ability.icon;}
+      } else if (ability?.icon === 'drowned-king') {
         if(container.dataset.icon!==ability.icon){container.innerHTML='<svg viewBox="0 0 32 32" aria-hidden="true"><path stroke="#92a8ae" fill="#121d22" d="m6 10 2-6 3 4 3-6 3 6 4-5 2 7-2 5v9l-7 5-7-5v-9Zm3 5 5-2 5 2v8l-5 3-5-3Z"/><path stroke="#78e1cb" d="m10 17 4 1 4-1"/><path stroke="#bed3d5" d="m26 5-2 17 2 5 2-5-2-17Zm-4 16h8"/></svg>';container.dataset.icon=ability.icon;}
       } else if (ability?.icon === 'abyssal-moonfall') {
         if(container.dataset.icon!==ability.icon){
