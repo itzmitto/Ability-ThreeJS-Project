@@ -20,6 +20,7 @@ import { AstralChainstorm } from '../abilities/astralChainstorm/AstralChainstorm
 import { AbyssalMoonfall } from '../abilities/abyssalMoonfall/AbyssalMoonfall';
 import { DrownedKing } from '../abilities/drownedKing/DrownedKing';
 import { Riftreaver } from '../abilities/riftreaver/Riftreaver';
+import { TidalSerpent } from '../abilities/tidalSerpent/TidalSerpent';
 import { EmberComet } from '../abilities/emberComet/EmberComet';
 import { TempestBreak } from '../abilities/wind/TempestBreak';
 import { HeavensVerdict } from '../abilities/lightning/HeavensVerdict';
@@ -174,6 +175,9 @@ export class Game {
     this.abilities.registry.register(riftreaver);
     riftreaver.prepare(this.renderer.renderer,this.camera.camera,this.sceneManager.scene,this.settings);
     this.abilities.slots.push({key:'',code:'',number:null,abilityId:riftreaver.id});
+    const tidalSerpent=new TidalSerpent();
+    this.abilities.registry.register(tidalSerpent);
+    this.abilities.slots.push({key:'',code:'',number:null,abilityId:tidalSerpent.id});
     this.hud = new HUD(root, this.abilities, this.settings, this.targeting, this.input, this.world.water);
     canvas.tabIndex = 0;
     document.addEventListener('visibilitychange', this.visibilityChanged);

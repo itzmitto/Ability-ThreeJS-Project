@@ -11,16 +11,18 @@ export class CharacterMotion {
   private heading=0;private turn=0;private speed=0;private lean=0;private headYaw=0;private headPitch=0;
   private readonly aim=new Vector3(0,0,-1);private aimed=false;
   private explicitCast=false;private spatialCut=false;private cutProgress=0;
+  private bending:'water'|'earth'|'air'|'fire'|null=null;private bendProgress=0;
   private readonly axis=new Vector3();private readonly point=new Vector3();private readonly target=new Vector3();
   private readonly solver=new TwoBoneCorrection();
   constructor(private readonly rig:CharacterRig,private readonly root:Object3D){}
   begin(duration:number,elevation=.18):void {if(!Number.isFinite(duration)||duration<=0)return;this.duration=this.remaining=Math.min(1.5,duration);this.elevation=Number.isFinite(elevation)?MathUtils.clamp(elevation,.18,1.5):.18;this.explicitCast=true;}
   ability(id:string,direction:Vector3):void {
     this.castStyle=characterCastStyle(id);this.spatialCut=id==='riftreaver';
+    this.bending=id==='tidal-serpent'?'water':id==='titan-fist'?'earth':id==='skybreaker'?'air':id==='dancing-inferno'?'fire':null;
     if(direction.toArray().every(Number.isFinite)&&direction.lengthSq()>.001){this.aim.copy(direction).normalize();this.aimed=true;}
     // An ability's existing explicit pose wins. Otherwise each accepted cast starts its own gesture,
     // even when another slot's previous pose is still recovering.
-    if(!this.explicitCast)this.begin(this.castStyle==='summon'?1.3:this.castStyle==='heavy'?.9:.55,this.castStyle==='summon'?1.1:.18);
+    if(!this.explicitCast)this.begin(this.bending?this.bending==='air'?.7:1.05:this.castStyle==='summon'?1.3:this.castStyle==='heavy'?.9:.55,this.castStyle==='summon'?1.1:.18);
     this.explicitCast=false;
   }
   setAim(direction:Vector3):void {if(Number.isFinite(direction.x)&&Number.isFinite(direction.y)&&Number.isFinite(direction.z)&&direction.lengthSq()>.001){this.aim.copy(direction).normalize();this.aimed=true;}}
@@ -39,9 +41,10 @@ export class CharacterMotion {
     if(this.remaining<=0)return;
     const elapsed=this.duration-this.remaining,weight=MathUtils.smoothstep(Math.min(1,elapsed/C.castAttack,this.remaining/C.castRecovery),0,1)*.92;
     this.cutProgress=MathUtils.smoothstep(elapsed/.3,0,1);
+    this.bendProgress=MathUtils.smoothstep(elapsed/(this.bending==='air'?.32:.55),0,1);
     if(this.spatialCut&&spine){this.axis.set(0,1,0);this.rig.rotateWorld(spine,this.axis,(.04-.08*this.cutProgress)*weight);}
     this.arm('R',yaw,weight,this.spatialCut?.38-.3*this.cutProgress:this.elevation);
-    if(this.castStyle==='summon')this.arm('L',yaw,weight*.65,this.elevation*.9);
+    if(this.castStyle==='summon'||this.bending==='water'||this.bending==='fire')this.arm('L',yaw,weight*(this.bending?.95:.65),this.elevation*.9);
   }
   private arm(side:'L'|'R',yaw:number,weight:number,elevation:number):void {
     const upper=this.rig.bone(`${side}_UpperArm`),lower=this.rig.bone(`${side}_Forearm`),hand=this.rig.bone(`${side}_Hand`);if(!upper||!lower||!hand)return;
@@ -49,6 +52,14 @@ export class CharacterMotion {
     upper.getWorldPosition(this.point);this.axis.set(-Math.sin(castYaw),elevation,-Math.cos(castYaw)).normalize();
     // Leave elbow flexion and a small lateral clearance from the chest.
     this.target.copy(this.point).addScaledVector(this.axis,this.spatialCut?.35+.14*this.cutProgress:.49).addScaledVector(this.axis.set(Math.cos(yaw),0,-Math.sin(yaw)),this.spatialCut?.13-.23*this.cutProgress:side==='R'?.025:-.025);
+    if(this.bending){const p=this.bendProgress,sign=side==='R'?1:-1;
+      this.axis.set(-Math.sin(castYaw),0,-Math.cos(castYaw));
+      const extension=this.bending==='earth'?.12+.44*p:this.bending==='fire'?.2+.35*p:.35+.14*p;
+      this.target.copy(this.point).addScaledVector(this.axis,extension);
+      this.axis.set(Math.cos(yaw),0,-Math.sin(yaw));
+      const lateral=this.bending==='water'?sign*(.14+Math.sin(p*Math.PI*2)*.1):this.bending==='air'?.2-.4*p:sign*.09;
+      this.target.addScaledVector(this.axis,lateral);this.target.y+=this.bending==='water'?.12+Math.cos(p*Math.PI*2)*.06:this.bending==='earth'?.04:this.bending==='fire'?.13:.2-.22*p;
+    }
     this.solver.solve(upper,lower,hand,this.target,weight);
     this.rig.openHand(side,weight*.55);
   }
