@@ -8,9 +8,11 @@ export function tidalWaterMaterial(){
       .replace('#include <color_fragment>',`#include <color_fragment>
       float ripple=bendFbm(vLiquid*5.+vec3(0.,uBendTime*1.3,-uBendTime*2.),uBendDetail);
       float rim=pow(clamp(1.-abs(dot(normalize(vNormal),normalize(vViewPosition))),0.,1.),3.);
-      diffuseColor.rgb=mix(vec3(.025,.105,.14),vec3(.3,.57,.65),clamp(.24+ripple*.16+rim*.62,0.,1.));
-      diffuseColor.a*=uBendFade*(.57+rim*.4);`)
+      float sheen=pow(clamp(.5+.5*snoise(vLiquid*vec3(9.,12.,4.)+vec3(0.,uBendTime,0.)),0.,1.),10.);
+      diffuseColor.rgb=mix(vec3(.035,.13,.18),vec3(.48,.72,.78),clamp(.18+ripple*.24+rim*.7+sheen*.2,0.,1.));
+      diffuseColor.a*=uBendFade*(.49+rim*.48);`)
       .replace('#include <roughnessmap_fragment>','#include <roughnessmap_fragment>\nroughnessFactor=clamp(.13+ripple*.08,.07,.3);')
-      .replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\ntotalEmissiveRadiance+=vec3(.12,.24,.29)*rim*.42;');
+      .replace('#include <normal_fragment_maps>','#include <normal_fragment_maps>\nnormal=normalize(normal+vec3(ripple*.055,-ripple*.035,ripple*.025));')
+      .replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\ntotalEmissiveRadiance+=vec3(.026,.062,.075)+vec3(.25,.4,.44)*rim*.35+vec3(.28,.36,.4)*sheen*.18;');
   };material.customProgramCacheKey=()=> 'tidal-liquid-v1';return {material,uniforms};
 }

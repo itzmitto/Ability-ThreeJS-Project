@@ -1,7 +1,11 @@
 import type { Ability } from '../abilities/Ability';
 export function paintSpellIcon(container: HTMLElement, ability: Ability | undefined): void {
       // Icons are text glyphs; untrusted markup is never inserted into the UI.
-      if (ability?.icon === 'tidal-serpent') {
+      if (ability?.icon === 'skybreaker') {
+        if(container.dataset.icon!==ability.icon){container.innerHTML='<svg viewBox="0 0 32 32" aria-hidden="true"><path fill="none" stroke="#d0d8d1" stroke-width="1.5" d="M5 3c23 0 23 13 1 14 14-3 13-8-1-14Zm-3 9c21 1 22 12 1 13m8-5c16 1 18 10 2 11"/><path stroke="#70817b" d="m2 5 4 1m15 8 6-2m-1 13 5-2"/></svg>';container.dataset.icon=ability.icon;}
+      } else if (ability?.icon === 'titan-fist') {
+        if(container.dataset.icon!==ability.icon){container.innerHTML='<svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#343e3a" stroke="#b4c2b9" d="m6 11 1-6 5-1 3 1 5-1 5 2 1 12-4 8H11l-5-8Zm-3 5 5-2 4 5-3 4-6-3Z"/><path fill="none" stroke="#7e9689" d="m12 5 1 8m7-8-1 8m-11 1 15 1m-9 2 4 4-1 7"/></svg>';container.dataset.icon=ability.icon;}
+      } else if (ability?.icon === 'tidal-serpent') {
         if(container.dataset.icon!==ability.icon){container.innerHTML='<svg viewBox="0 0 32 32" aria-hidden="true"><path fill="none" stroke="#a2c4d3" stroke-width="2" d="M3 27C25 29 28 19 16 14S5 3 21 3M29 26C8 25 5 16 18 11S29 3 12 2"/><path fill="#496a7b" d="m2 21 3 5-4 2m25-12 3 4-4 1"/></svg>';container.dataset.icon=ability.icon;}
       } else if (ability?.icon === 'riftreaver') {
         if(container.dataset.icon!==ability.icon){container.innerHTML='<svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#080610" stroke="#b698fa" stroke-width="1.4" d="m18 1-8 8 3 4-7 7 5 2-2 9 14-11-3-4 6-6-6-2Z"/><path stroke="#f1e7ff" d="m16 5-3 7 3 3-5 7m12-14-4 7"/><path stroke="#9670df" d="m2 10 7 3m14 10 7-3m-12 9 9-3"/></svg>';container.dataset.icon=ability.icon;}

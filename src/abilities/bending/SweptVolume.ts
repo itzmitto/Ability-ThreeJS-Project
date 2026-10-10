@@ -11,9 +11,9 @@ export class SweptVolume {
     this.points=new Float32Array((segments+1)*3);
     this.positions=new Float32Array(((segments+1)*sides+2)*3);this.normals=new Float32Array(this.positions.length);
     const indices:number[]=[],uv:number[]=[];
-    for(let i=0;i<=segments;i++)for(let j=0;j<sides;j++){uv.push(i/segments,j/sides);if(i<segments){const k=i*sides+j,n=i*sides+(j+1)%sides;indices.push(k,n,k+sides,n,n+sides,k+sides);}}
+    for(let i=0;i<=segments;i++)for(let j=0;j<sides;j++){uv.push(i/segments,j/sides);if(i<segments){const k=i*sides+j,n=i*sides+(j+1)%sides;indices.push(k,k+sides,n,n,k+sides,n+sides);}}
     const cap=(segments+1)*sides;uv.push(0,.5,1,.5);
-    for(let j=0;j<sides;j++){indices.push(cap,(j+1)%sides,j);indices.push(cap+1,segments*sides+j,segments*sides+(j+1)%sides);}
+    for(let j=0;j<sides;j++){indices.push(cap,j,(j+1)%sides);indices.push(cap+1,segments*sides+(j+1)%sides,segments*sides+j);}
     this.geometry.setAttribute('position',new Float32BufferAttribute(this.positions,3).setUsage(DynamicDrawUsage));
     this.geometry.setAttribute('normal',new Float32BufferAttribute(this.normals,3).setUsage(DynamicDrawUsage));
     this.geometry.setAttribute('uv',new Float32BufferAttribute(uv,2));this.geometry.setIndex(indices);

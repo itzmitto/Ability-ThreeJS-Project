@@ -15,11 +15,11 @@ export class TidalSerpentEffect implements ManagedEffect {
   private readonly meshes=[new Mesh(this.sweeps[0][0].geometry,this.water.material),new Mesh(this.sweeps[0][1].geometry,this.water.material)];
   readonly target=new Vector3();readonly launch=new Vector3();private readonly hands=[new Vector3(),new Vector3()];
   private readonly direction=new Vector3();private readonly localTarget=new Vector3();private readonly inverse=new Quaternion();
-  private side=1;private progress=0;private travel=0;private length=1;private stream=0;
+  private side=1;private progress=0;private travel=0;private length=1;private stream=0;private drawHeight=0;
   private readonly path=(t:number,out:Vector3)=>{
     const h=this.hands[this.stream],s=this.side;
     if(this.age<C.charge){const grow=ease(this.age/.25),a=t*Math.PI*2+this.age*7;
-      out.set(h.x+Math.sin(a)*.32*grow,h.y-(1-t)*(h.y+.05)*grow, h.z+Math.cos(a)*.32*grow);return;}
+      out.set(h.x+Math.sin(a)*.32*grow,this.drawHeight+(h.y-this.drawHeight)*t*grow, h.z+Math.cos(a)*.32*grow);return;}
     const f=t*this.progress,bulge=Math.sin(f*Math.PI);
     out.copy(h).lerp(this.localTarget,f);
     out.x+=s*bulge*C.curvature*Math.cos(f*Math.PI*2+this.age*2.5);
@@ -43,7 +43,7 @@ export class TidalSerpentEffect implements ManagedEffect {
   update(dt:number,_time:number):boolean{
     if(!this.active)return false;this.age+=dt;const impactAge=this.age-this.arrival;
     if(impactAge>=C.aftermath)return false;
-    if(this.age<C.charge){this.ctx.player.visual.getRightHandWorldPosition(this.hands[0]);this.ctx.player.visual.getLeftHandWorldPosition(this.hands[1]);for(const h of this.hands)h.sub(this.root.position).applyQuaternion(this.inverse);}
+    if(this.age<C.charge){this.drawHeight=(this.ctx.water?.getSurfaceHeight(this.root.position.x,this.root.position.z)??0)-this.root.position.y;this.ctx.player.visual.getRightHandWorldPosition(this.hands[0]);this.ctx.player.visual.getLeftHandWorldPosition(this.hands[1]);for(const h of this.hands)h.sub(this.root.position).applyQuaternion(this.inverse);}
     this.progress=ease((this.age-C.charge)/Math.max(.05,this.travel));
     if(impactAge>=0&&!this.impacted){this.impacted=true;this.ctx.cameraFeedback?.(.035,.13);this.ctx.water?.addRipple({position:this.target,strength:.95,duration:1.5,waveSpeed:5,radius:.5,displacementScale:.9},this);this.ctx.water?.addRipple({position:this.target,strength:.4,duration:1.2,waveSpeed:3,radius:1.1},this);}
     const fade=this.age<C.charge?ease(this.age/.12):1-ease(Math.max(0,impactAge)/1.1);
