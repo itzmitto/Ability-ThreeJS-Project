@@ -39,10 +39,12 @@ export class CharacterGeometry {
     for(const y of [1.13,1.23,1.33])parts.push(new BoxGeometry(.04,.011,.012).translate(0,y,.151));
     parts.push(new BoxGeometry(.06,.008,.018).translate(0,.989,.162),new BoxGeometry(.06,.008,.018).translate(0,1.024,.162),new BoxGeometry(.008,.035,.018).translate(-.026,1.006,.162),new BoxGeometry(.008,.035,.018).translate(.026,1.006,.162));
     const positions:number[]=[],normals:number[]=[],joint:number[]=[],jointWeights:number[]=[],point=new Vector3(),p=new Vector3(),base=body.geometry.getAttribute('position'),n=body.geometry.getAttribute('normal');
-    for(const part of parts){const g=part.toNonIndexed(),a=g.getAttribute('position'),normal=g.getAttribute('normal');
-      for(let v=0;v<a.count;v++){point.fromBufferAttribute(a,v);let nearest=0,distance=Infinity;for(let k=0;k<base.count;k++){const d=p.fromBufferAttribute(base,k).distanceToSquared(point);if(d<distance){nearest=k;distance=d;}}
-        // Project onto the existing chest/waist, then retain the designed fastener thickness.
-        const front=base.getZ(nearest)+Math.max(0,n.getZ(nearest))*.019;positions.push(point.x,point.y,Math.max(point.z,front));normals.push(normal.getX(v),normal.getY(v),normal.getZ(v));
+    for(const part of parts){const g=part.toNonIndexed(),a=g.getAttribute('position'),normal=g.getAttribute('normal');part.computeBoundingBox();part.boundingBox!.getCenter(point);
+      let nearest=0,distance=Infinity;for(let k=0;k<base.count;k++){const d=p.fromBufferAttribute(base,k).distanceToSquared(point);if(d<distance){nearest=k;distance=d;}}
+      const frontOffset=base.getZ(nearest)+Math.max(0,n.getZ(nearest))*.025-point.z;
+      for(let v=0;v<a.count;v++){point.fromBufferAttribute(a,v);
+        // Translate each complete solid to the chest/waist; never flatten its thickness.
+        positions.push(point.x,point.y,point.z+frontOffset);normals.push(normal.getX(v),normal.getY(v),normal.getZ(v));
         for(let k=0;k<4;k++){joint.push(skin.getComponent(nearest,k));jointWeights.push(weights.getComponent(nearest,k));}}
       g.dispose();part.dispose();}
     const fasteners=new BufferGeometry();fasteners.setAttribute('position',new Float32BufferAttribute(positions,3));fasteners.setAttribute('normal',new Float32BufferAttribute(normals,3));fasteners.setAttribute('skinIndex',new Uint16BufferAttribute(joint,4));fasteners.setAttribute('skinWeight',new Float32BufferAttribute(jointWeights,4));fasteners.computeBoundingBox();fasteners.computeBoundingSphere();

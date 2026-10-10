@@ -22,8 +22,8 @@ export class TwoBoneCorrection {
   private rotate(bone:Object3D,from:Vector3,to:Vector3,weight:number):void {
     if(from.lengthSq()<1e-9||to.lengthSq()<1e-9)return;
     this.delta.identity().slerp(this.rotation.setFromUnitVectors(from.normalize(),to.normalize()),MathUtils.clamp(weight,0,1));
-    bone.getWorldQuaternion(this.rotation).premultiply(this.delta);bone.parent!.getWorldQuaternion(this.parent).invert();
-    bone.quaternion.copy(this.parent.multiply(this.rotation));bone.updateWorldMatrix(false,true);
+    bone.getWorldQuaternion(this.rotation).normalize().premultiply(this.delta);bone.parent!.getWorldQuaternion(this.parent).normalize().invert();
+    bone.quaternion.copy(this.parent.multiply(this.rotation)).normalize();bone.updateWorldMatrix(false,true);
   }
 }
 interface Leg {upper:Object3D;lower:Object3D;foot:Object3D;weight:number;planted:boolean;plant:Vector3;previous:Vector3;}

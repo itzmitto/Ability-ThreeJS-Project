@@ -27,7 +27,7 @@ try {
   assert(game.player.visual.animationState === 'Idle', 'Idle animation');
   const hand = game.player.visual.getRightHandWorldPosition(); const chest = game.player.visual.getChestWorldPosition();
   assert(hand.distanceTo(chest) > 0.2 && hand.y > 0.5 && hand.y < 1.7, 'Real hand and chest bone attachments');
-  key('KeyW', true); await delay(500); assert(game.player.visual.animationState === 'Walk', 'W movement uses Walk animation');
+  key('KeyW', true); await delay(500); assert(game.player.visual.animationState === 'Run', '4.8m/s movement blends into Run animation');
   key('ShiftLeft', true); await delay(500); assert(game.player.visual.animationState === 'Run' && game.player.velocity.length() > 7, 'Shift sprint uses Run animation');
   key('KeyW', false); key('ShiftLeft', false); await delay(650);
   assert(game.player.visual.animationState === 'Idle' && game.player.velocity.length() < 0.1, 'Deceleration returns to Idle');

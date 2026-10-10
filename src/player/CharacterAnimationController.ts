@@ -26,8 +26,9 @@ export class CharacterAnimationController {
     const samples:{y:number;z:number}[]=[],point=new Vector3(),n=48,duration=action.getClip().duration;
     for(let i=0;i<n;i++){action.time=i/n*duration;this.mixer.update(0);this.model.updateWorldMatrix(true,true);foot.getWorldPosition(point);samples.push({y:point.y,z:point.z});}
     const minimum=Math.min(...samples.map(p=>p.y)),velocities:number[]=[];
-    for(let i=1;i<n;i++){const a=samples[i-1],b=samples[i];if(a.y<minimum+.055&&b.y<minimum+.055&&b.z>a.z)velocities.push((b.z-a.z)/(duration/n));}
-    velocities.sort((a,b)=>a-b);const measured=velocities[Math.floor(velocities.length/2)]??this.sourceSpeeds[name];
+    for(let i=1;i<n;i++){const a=samples[i-1],b=samples[i];if(a.y<minimum+.10&&b.y<minimum+.10&&b.z>a.z)velocities.push((b.z-a.z)/(duration/n));}
+    // Late/early contact slows before toe-off; use the central, faster stance samples.
+    velocities.sort((a,b)=>a-b);const measured=velocities[Math.floor(velocities.length*.75)]??this.sourceSpeeds[name];
     return {speed:MathUtils.clamp(measured,name==='Walk'?.9:2.2,name==='Walk'?2.7:5),leftContact:samples.findIndex(p=>p.y===minimum)/n};
   }
   update(delta:number,speed:number,sprint=false):void {

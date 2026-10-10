@@ -59,7 +59,7 @@ try{
     lines.push('COUNTS '+JSON.stringify({baseline,after:counts()}));
   }
   // Regression inputs use real Game frames and the existing player/camera architecture.
-  const start=game.player.position.clone();key('KeyW');await frames(60);check(game.player.visual.animationState==='Walk'&&game.player.position.distanceTo(start)>.1,'WASD / Walk works');key('ShiftLeft');await frames(60);check(game.player.visual.animationState==='Run','Shift / Run works');key('KeyW','keyup');key('ShiftLeft','keyup');await frames(180);check(game.player.visual.animationState==='Idle','Idle returns');
+  const start=game.player.position.clone();key('KeyW');await frames(60);check(game.player.visual.animationState==='Run'&&game.player.position.distanceTo(start)>.1,'WASD / velocity-blended Run works');key('ShiftLeft');await frames(60);check(game.player.visual.animationState==='Run','Shift / Run works');key('KeyW','keyup');key('ShiftLeft','keyup');await frames(180);check(game.player.visual.animationState==='Idle','Idle returns');
   const aim=game.targeting.aimDirection.clone();renderer.domElement.dispatchEvent(new MouseEvent('mousemove',{buttons:2,movementX:20,movementY:8,bubbles:true}));await frames(12);check(!aim.equals(game.targeting.aimDirection),'Mouse camera and targeting remain live');
   key('F3');await frames();key('F3','keyup');check(!root.querySelector<HTMLElement>('.ocean-editor')!.hidden,'F3 Ocean Editor remains available');key('F3');await frames();key('F3','keyup');
   for(const preset of ['LOW','MEDIUM','MAX'] as const){click(`[data-quality="${preset}"]`);await frames(3);check(game.settings.preset===preset&&renderer.getContext().getError()===0,`Live ${preset} quality works`);}

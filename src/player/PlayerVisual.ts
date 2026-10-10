@@ -118,6 +118,8 @@ export class PlayerVisual {
     if(this.disposed)return;this.disposed = true;this.unsubscribe?.();this.unsubscribe=undefined;this.surface=undefined;
     this.animation?.dispose();this.clothing?.dispose();this.materials.dispose();
     if (this.model) this.releaseModel(this.model);
-    this.animation=undefined;this.motion=undefined;this.feet=undefined;this.rig=undefined;this.root.removeFromParent();
+    this.model=undefined;this.clothing=undefined;this.loaded=false;
+    this.animation=undefined;this.motion=undefined;this.feet=undefined;this.rig=undefined;
+    this.root.clear();this.rightHand=this.leftHand=this.chest=this.leftFoot=this.rightFoot=this.root;this.root.removeFromParent();
   }
 }

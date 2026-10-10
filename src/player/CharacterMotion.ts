@@ -32,15 +32,17 @@ export class CharacterMotion {
     this.remaining=Math.max(0,this.remaining-delta);
     this.castPhase=this.remaining<=0?'READY':this.remaining<C.castRecovery?'RECOVER':'CAST';
     if(this.remaining<=0)return;
-    const elapsed=this.duration-this.remaining,weight=Math.min(1,elapsed/C.castAttack,this.remaining/C.castRecovery)*.92;
+    const elapsed=this.duration-this.remaining,weight=MathUtils.smoothstep(Math.min(1,elapsed/C.castAttack,this.remaining/C.castRecovery),0,1)*.92;
     this.arm('R',yaw,weight,this.elevation);
     if(this.castStyle==='summon')this.arm('L',yaw,weight*.65,this.elevation*.9);
   }
   private arm(side:'L'|'R',yaw:number,weight:number,elevation:number):void {
     const upper=this.rig.bone(`${side}_UpperArm`),lower=this.rig.bone(`${side}_Forearm`),hand=this.rig.bone(`${side}_Hand`);if(!upper||!lower||!hand)return;
-    upper.getWorldPosition(this.point);this.axis.set(-Math.sin(yaw),elevation,-Math.cos(yaw)).normalize();
+    const castYaw=yaw+(this.aimed?MathUtils.clamp(shortestHeadingDifference(Math.atan2(-this.aim.x,-this.aim.z),yaw),-.6,.6):0);
+    upper.getWorldPosition(this.point);this.axis.set(-Math.sin(castYaw),elevation,-Math.cos(castYaw)).normalize();
     // Leave elbow flexion and a small lateral clearance from the chest.
     this.target.copy(this.point).addScaledVector(this.axis,.49).addScaledVector(this.axis.set(Math.cos(yaw),0,-Math.sin(yaw)),side==='R'?.025:-.025);
     this.solver.solve(upper,lower,hand,this.target,weight);
+    this.rig.openHand(side,weight*.55);
   }
 }
