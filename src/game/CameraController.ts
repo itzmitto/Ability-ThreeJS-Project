@@ -16,6 +16,8 @@ export class CameraController {
   private framingTime=0;
   private framingTarget=0;
   private framingAngle=0;
+  private framingFovTarget=0;
+  private framingFov=0;
   constructor(private readonly input: InputManager, private readonly quality: GraphicsSettings, position: Vector3) {
     this.focus.copy(position).y += GAME_CONFIG.camera.height;
     this.update(0, position, true);
@@ -37,6 +39,8 @@ export class CameraController {
     this.framingTime=Math.max(0,this.framingTime-delta);
     this.framingAngle=MathUtils.lerp(this.framingAngle,this.framingTime>0?this.framingTarget:0,1-Math.exp(-delta*4));
     this.camera.rotateX(this.framingAngle);
+    this.framingFov=MathUtils.lerp(this.framingFov,this.framingTime>0?this.framingFovTarget:0,1-Math.exp(-delta*4));
+    const fov=52+this.framingFov;if(Math.abs(this.camera.fov-fov)>.001){this.camera.fov=fov;this.camera.updateProjectionMatrix();}
     if (this.feedbackTime > 0) {
       this.feedbackTime = Math.max(0, this.feedbackTime - delta);
       const envelope = this.feedbackTime / this.feedbackDuration;
@@ -51,8 +55,9 @@ export class CameraController {
     this.feedbackDuration = Math.max(0.01, Math.min(0.2, duration)); this.feedbackTime = this.feedbackDuration;
   };
   dispose(): void { window.removeEventListener('resize', this.resize); }
-  requestSkyFraming = (angle:number,duration:number):void => {
+  requestSkyFraming = (angle:number,duration:number,fovOffset=0):void => {
     if(!Number.isFinite(angle)||!Number.isFinite(duration))return;
     this.framingTarget=MathUtils.clamp(angle,0,.14);this.framingTime=MathUtils.clamp(duration,0,.15);
+    this.framingFovTarget=Number.isFinite(fovOffset)?MathUtils.clamp(fovOffset,0,8):0;
   };
 }

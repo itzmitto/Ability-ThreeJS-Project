@@ -4,6 +4,7 @@ export type SpellCategory = typeof SPELL_CATEGORIES[number];
 export function spellCategory(a: Ability): SpellCategory {
   const e = a.element.toUpperCase();
   if(e==='CELESTIAL / VOID')return 'CELESTIAL / VOID';
+  if(e==='ABYSSAL / CURSED METAL / DARK WATER')return 'SHADOW / DARK';
   if (/FIRE/.test(e)) return 'FIRE';
   if (/ICE|FROST|CRYO|SNOW/.test(e)) return 'ICE / SNOW';
   if (/LIGHTNING|ELECTRIC/.test(e)) return 'LIGHTNING';

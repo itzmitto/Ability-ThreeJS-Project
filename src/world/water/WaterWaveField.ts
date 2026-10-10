@@ -1,7 +1,7 @@
 import type { OceanSettings } from './OceanSettings';
 /** Shared spectrum keeps CPU impact sampling and the rendered GPU ocean consistent. */
 export const WATER_SPECTRUM = [[.91,.41,36,.115,1,0],[-.38,.92,22.3,.065,.81,0],[.72,-.69,9.7,.034,1,1],[.3,.954,5.3,.021,.92,1],[-.84,.54,3.1,.012,1.12,1]] as const;
-export function sampleOceanHeight(x:number,z:number,time:number,playerX:number,playerZ:number,c:Readonly<OceanSettings>,waves:number,ripples:Float32Array,shape:Float32Array,capacity:number,extent?:Float32Array):number {
+export function sampleOceanHeight(x:number,z:number,time:number,playerX:number,playerZ:number,c:Readonly<OceanSettings>,waves:number,ripples:Float32Array,shape:Float32Array,capacity:number,extent?:Float32Array,splits?:Float32Array,splitShape?:Float32Array):number {
   if(![x,z,time].every(Number.isFinite))return 0;
   let px=x,pz=z,height=0;const angle=c.direction*Math.PI/180,co=Math.cos(angle),si=Math.sin(angle);
   // Invert the small horizontal Gerstner displacement rather than sampling the wrong world XZ.
@@ -22,13 +22,24 @@ export function sampleOceanHeight(x:number,z:number,time:number,playerX:number,p
     const gain=extent?.[i*2]||.18,attenuation=extent?.[i*2+1]||.075;
     height+=Math.max(-.4,Math.min(.4,ripples[k+3]))*c.rippleStrength*gain*Math.sin(v*6.283/Math.max(.15,shape[k+1]))*Math.exp(-v*v/(width*width))*Math.pow(Math.max(0,1-age/duration),2*c.rippleDecay)*Math.exp(-r*attenuation);
   }
+  if(splits&&splitShape)height+=sampleSplitHeight(px,pz,time,splits,splitShape);
   return Number.isFinite(height)?height:0;
+}
+export function sampleSplitHeight(x:number,z:number,time:number,data:Float32Array,shape:Float32Array):number{
+  let height=0;for(let i=0;i<4;i++){const k=i*4,age=time-shape[k],life=shape[k+1],depth=shape[k+3];if(!depth||age<0||age>=life)continue;
+    const dx=data[k+2]-data[k],dz=data[k+3]-data[k+1],lengthSq=dx*dx+dz*dz;if(lengthSq<1)continue;
+    const u=Math.max(0,Math.min(1,((x-data[k])*dx+(z-data[k+1])*dz)/lengthSq)),d=Math.hypot(x-data[k]-dx*u,z-data[k+1]-dz*u),w=shape[k+2];
+    const t=Math.max(0,Math.min(1,(d-w*.2)/(w*.8))),cut=1-t*t*(3-2*t);
+    const ends=Math.min(1,u/.08)*Math.min(1,(1-u)/.08),envelope=Math.sin(age/life*Math.PI);
+    height+=depth*envelope*ends*(-cut+.8*Math.exp(-(((d-w*1.1)/(w*.6))**2)));
+  }return Number.isFinite(height)?height:0;
 }
 /** One coherent Gerstner spectrum, with analytic derivatives and bounded impulse wavelets. */
 export const WATER_WAVES = `
 uniform float uTime,uDetail,uAmplitude,uWavelength,uSteepness,uDirection,uSwellSpeed,uMediumSpeed,uWaveCount;
 uniform float uRippleStrength,uRippleSpeed,uRippleDecay;uniform int uRippleCapacity;
 uniform vec3 uPlayer;uniform vec4 uRipples[32],uRippleShape[32];uniform vec2 uRippleExtent[32];
+uniform vec4 uSplits[4],uSplitShape[4];
 vec3 rippleSurface(vec2 p){vec3 result=vec3(0.);
  for(int i=0;i<32;i++){
   if(i>=uRippleCapacity)break;if(abs(uRipples[i].w)<.00001)continue;
@@ -42,6 +53,15 @@ vec3 rippleSurface(vec2 p){vec3 result=vec3(0.);
   float h=a*sin(x*k)*pulse*damping;
   float slope=a*pulse*damping*(cos(x*k)*k-sin(x*k)*(2.*x/(width*width)+spatialDecay));
   result+=vec3(h,offset/max(r,.03)*slope);
+ }
+ for(int i=0;i<4;i++){
+  vec4 s=uSplitShape[i];float age=uTime-s.x;if(s.w<=0.||age<0.||age>=s.y)continue;
+  vec2 delta=uSplits[i].zw-uSplits[i].xy;float lengthSq=dot(delta,delta);if(lengthSq<1.)continue;
+  float u=clamp(dot(p-uSplits[i].xy,delta)/lengthSq,0.,1.);vec2 offset=p-uSplits[i].xy-delta*u;float d=length(offset),w=s.z;
+  float a=clamp((d-w*.2)/(w*.8),0.,1.),cut=1.-a*a*(3.-2.*a);
+  float crest=exp(-pow((d-w*1.1)/(w*.6),2.));float envelope=sin(age/s.y*3.14159)*min(1.,u/.08)*min(1.,(1.-u)/.08)*s.w;
+  float h=envelope*(-cut+.8*crest);float slope=envelope*(6.*a*(1.-a)/(w*.8)-1.6*crest*(d-w*1.1)/(w*w*.36));
+  result+=vec3(h,offset/max(d,.01)*slope);
  }return result;}
 void gerstner(vec2 p,vec2 direction,float wavelength,float amplitude,float speed,inout vec3 displacement,inout vec3 tx,inout vec3 tz){
  float angle=radians(uDirection);vec2 d=mat2(cos(angle),-sin(angle),sin(angle),cos(angle))*normalize(direction);

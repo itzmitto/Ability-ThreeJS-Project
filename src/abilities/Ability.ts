@@ -24,7 +24,7 @@ export interface AbilityCastContext {
   /** Optional decoupled, bounded camera response supplied by the game. */
   readonly cameraFeedback?: (strength: number, duration: number) => void;
   /** Optional short-lived upward framing request; camera input and targeting stay live. */
-  readonly skyFraming?: (angle: number, duration: number) => void;
+  readonly skyFraming?: (angle: number, duration: number, fovOffset?:number) => void;
 }
 export interface Ability {
   readonly id: string;

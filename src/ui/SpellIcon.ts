@@ -1,7 +1,9 @@
 import type { Ability } from '../abilities/Ability';
 export function paintSpellIcon(container: HTMLElement, ability: Ability | undefined): void {
       // Icons are text glyphs; untrusted markup is never inserted into the UI.
-      if (ability?.icon === 'abyssal-moonfall') {
+      if (ability?.icon === 'drowned-king') {
+        if(container.dataset.icon!==ability.icon){container.innerHTML='<svg viewBox="0 0 32 32" aria-hidden="true"><path stroke="#92a8ae" fill="#121d22" d="m6 10 2-6 3 4 3-6 3 6 4-5 2 7-2 5v9l-7 5-7-5v-9Zm3 5 5-2 5 2v8l-5 3-5-3Z"/><path stroke="#78e1cb" d="m10 17 4 1 4-1"/><path stroke="#bed3d5" d="m26 5-2 17 2 5 2-5-2-17Zm-4 16h8"/></svg>';container.dataset.icon=ability.icon;}
+      } else if (ability?.icon === 'abyssal-moonfall') {
         if(container.dataset.icon!==ability.icon){
           container.innerHTML='<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="14" r="8" fill="#12101d" stroke="#b7b7cf"/><g stroke="#827caa"><ellipse cx="16" cy="14" rx="14" ry="5" transform="rotate(-25 16 14)"/><ellipse cx="16" cy="14" rx="12" ry="7" transform="rotate(55 16 14)"/><ellipse cx="16" cy="14" rx="11" ry="10" transform="rotate(12 16 14)"/></g><path stroke="#d8c6ff" d="m15 6 3 5-4 4 3 7m1-11 5 3m-9 1-5 2m11 8 4 1-3 5-3-2Z"/></svg>';
           container.dataset.icon=ability.icon;

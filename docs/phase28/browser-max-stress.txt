@@ -1,0 +1,40 @@
+PASS 29 original abilities and Drowned King
+PASS Spellbook displays all 30 abilities
+PASS Search drowned finds Drowned King
+PASS Search king finds Drowned King
+PASS Search abyssal finds Drowned King
+PASS Search knight finds Drowned King
+PASS Search thronebreaker finds Drowned King
+PASS Spellbook equips #30 without casting or new shortcut
+PASS Favorited Drowned King is selectable in Quick Wheel
+PASS Wheel commits via shared selection manager
+PASS Left click starts ultimate and 30s cooldown
+PASS Cooldown blocks 100 rapid attempts
+PASS Finite bounded geometry/instance transforms throughout all phases
+PASS All eight major phases observed in real-time playback
+PASS Real-time ultimate naturally expires
+PASS Impact submits bounded ocean disturbances
+PASS Owned water disturbances removed after completion
+PASS WebGL NO_ERROR
+PROFILE {"preset":"MAX","peakParticles":5400,"peakInstances":309,"peakCalls":81,"peakTriangles":122259,"rafMedian":6.099999904632568,"rafP95":6.700000047683716,"rafMax":910}
+PASS Sequential controlled cast 1
+PASS Cast 1 finishes before next cast
+PASS Cast 1 restores warmed resource baseline
+PASS Sequential controlled cast 2
+PASS Cast 2 finishes before next cast
+PASS Cast 2 restores warmed resource baseline
+PASS Sequential controlled cast 3
+PASS Cast 3 finishes before next cast
+PASS Cast 3 restores warmed resource baseline
+COUNTS {"baseline":{"objects":106,"lights":0,"materials":7,"geometries":29,"textures":21,"programs":32,"subscriptions":5,"particles":0,"effects":0,"ripples":0},"after":{"objects":106,"lights":0,"materials":7,"geometries":29,"textures":21,"programs":32,"subscriptions":5,"particles":0,"effects":0,"ripples":0}}
+PASS WASD / Walk still works
+PASS Shift / Run still works
+PASS Idle returns
+PASS Mouse camera and targeting remain live after framing expires
+PASS F3 Ocean Editor retained
+PASS Graphics menu LOW works
+PASS Graphics menu MEDIUM works
+PASS Graphics menu MAX works
+PASS Original 29 slots remain unchanged
+PASS Full game disposal releases GPU resources/subscriptions
+PASS DROWNED KING BROWSER COMPLETE

@@ -18,6 +18,7 @@ import { FrostLance } from '../abilities/frostLance/FrostLance';
 import { SandReaper } from '../abilities/sandReaper/SandReaper';
 import { AstralChainstorm } from '../abilities/astralChainstorm/AstralChainstorm';
 import { AbyssalMoonfall } from '../abilities/abyssalMoonfall/AbyssalMoonfall';
+import { DrownedKing } from '../abilities/drownedKing/DrownedKing';
 import { TempestBreak } from '../abilities/wind/TempestBreak';
 import { HeavensVerdict } from '../abilities/lightning/HeavensVerdict';
 import { Megiddo } from '../abilities/light/Megiddo';
@@ -159,6 +160,9 @@ export class Game {
     const moonfall = new AbyssalMoonfall();
     this.abilities.registry.register(moonfall);
     this.abilities.slots.push({key:'',code:'',number:null,abilityId:moonfall.id});
+    const drownedKing=new DrownedKing();
+    this.abilities.registry.register(drownedKing);
+    this.abilities.slots.push({key:'',code:'',number:null,abilityId:drownedKing.id});
     this.hud = new HUD(root, this.abilities, this.settings, this.targeting, this.input, this.world.water);
     canvas.tabIndex = 0;
     document.addEventListener('visibilitychange', this.visibilityChanged);
