@@ -49,6 +49,7 @@ if (query.has('side')) {
     game.camera.pitch = .1;
     game.camera.update(0, game.player.position, true);
 }
+if(query.has('elevated')){game.camera.camera.position.set(15,18,3);game.camera.camera.lookAt(0,7,-range);game.camera.camera.updateMatrixWorld();}
 let raf = 0;
 const frame = (now: number) => { const dt = Math.min(.05, (now - previous) / 1000); previous = now; clock += dt; game.player.visual.update(0, 0, playing ? dt : 0); if (playing) {
     age += dt;

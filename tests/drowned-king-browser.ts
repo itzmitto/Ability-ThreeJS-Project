@@ -15,7 +15,7 @@ const finite=()=>{let valid=true;game.sceneManager.scene.traverse(o=>{valid&&=[.
 try {
   await game.player.visual.ready;game.settings.setPreset((query.get('quality')??'LOW') as 'LOW'|'MEDIUM'|'MAX');game.start();await frames(12);
   const oldSlots=game.abilities.slots.slice(0,29).map(s=>({key:s.key,code:s.code,number:s.number,shift:s.shift,abilityId:s.abilityId}));
-  check(game.abilities.registry.all.length===31,'30 original abilities plus Ember Comet');click('[data-open-book]');await frames();check(root.querySelectorAll('.spell-card').length===31,'Spellbook displays all 31 abilities');
+  check(game.abilities.registry.all.length===32,'31 previous abilities plus Riftreaver');click('[data-open-book]');await frames();check(root.querySelectorAll('.spell-card').length===32,'Spellbook displays all 32 abilities');
   const search=root.querySelector<HTMLInputElement>('[aria-label="Search spells"]')!;
   for(const term of ['drowned','king','abyssal','knight','thronebreaker']){search.value=term;search.dispatchEvent(new Event('input'));check(!root.querySelector<HTMLElement>('[data-spell="drowned-king"]')!.closest<HTMLElement>('.spell-card')!.hidden,`Search ${term} finds Drowned King`);}
   const star=root.querySelector<HTMLButtonElement>('[data-favorite="drowned-king"]')!,saved=star.getAttribute('aria-pressed')==='true';if(!saved)star.click();

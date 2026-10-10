@@ -1,11 +1,15 @@
-import { MathUtils, Vector3 } from 'three';
+import { MathUtils, Quaternion, Vector3 } from 'three';
 import type { InputManager } from '../game/InputManager';
 import { GAME_CONFIG } from '../game/config';
 import type { Player } from './Player';
+import { shortestHeadingDifference } from './CharacterConfig';
 
 export class PlayerController {
   private readonly desired = new Vector3();
   private readonly up = new Vector3(0, 1, 0);
+  private readonly targetRotation=new Quaternion();
+  private readonly turnRotation=new Quaternion();
+  private readonly facing=new Vector3();
   private gaitTime = 0;
   constructor(private readonly player: Player, private readonly input: Pick<InputManager, 'isHeld'>) {}
   update(delta: number, cameraYaw: number): void {
@@ -25,8 +29,12 @@ export class PlayerController {
     this.player.velocity.lerp(this.desired, 1 - decay);
     if (moving) {
       const angle = Math.atan2(-this.desired.x, -this.desired.z);
-      const difference = Math.atan2(Math.sin(angle - this.player.object.rotation.y), Math.cos(angle - this.player.object.rotation.y));
-      this.player.object.rotation.y += difference * (1 - Math.exp(-config.turnSpeed * delta));
+      const previous=this.player.object.rotation.y,difference=shortestHeadingDifference(angle,previous);
+      this.targetRotation.setFromAxisAngle(this.up,previous+difference);
+      this.turnRotation.copy(this.player.object.quaternion).slerp(this.targetRotation,1-Math.exp(-config.turnSpeed*delta)).normalize();
+      this.facing.set(0,0,-1).applyQuaternion(this.turnRotation);
+      // Preserve the controller's unwrapped heading while using shortest-path quaternion damping.
+      this.player.object.rotation.y=previous+shortestHeadingDifference(Math.atan2(-this.facing.x,-this.facing.z),previous);
     }
     const speed = this.player.velocity.length();
     this.gaitTime += speed * delta * 1.65;

@@ -1,0 +1,58 @@
+PASS Local human model loaded
+PASS All 30 previous abilities plus Ember Comet
+PASS EMBER COMET: shortcut 
+PASS EMBER COMET: HUD selection
+PASS EMBER COMET: click cast / cooldown
+PASS EMBER COMET: cooldown rejects another cast
+PASS EMBER COMET: finite geometry / bounded instances
+PASS EMBER COMET: natural completion
+PASS EMBER COMET: scene/light/subscription/water cleanup
+PASS EMBER COMET: WebGL error state
+PASS EMBER COMET: measurement recorded
+PASS FROST LANCE: shortcut Shift+6
+PASS FROST LANCE: HUD selection
+PASS FROST LANCE: click cast / cooldown
+PASS FROST LANCE: cooldown rejects another cast
+PASS FROST LANCE: finite geometry / bounded instances
+PASS FROST LANCE: natural completion
+PASS FROST LANCE: scene/light/subscription/water cleanup
+PASS FROST LANCE: WebGL error state
+PASS FROST LANCE: measurement recorded
+PASS SAND REAPER: shortcut Shift+7
+PASS SAND REAPER: HUD selection
+PASS SAND REAPER: click cast / cooldown
+PASS SAND REAPER: cooldown rejects another cast
+PASS SAND REAPER: finite geometry / bounded instances
+PASS SAND REAPER: natural completion
+PASS SAND REAPER: scene/light/subscription/water cleanup
+PASS SAND REAPER: WebGL error state
+PASS SAND REAPER: measurement recorded
+PASS ASTRAL CHAINSTORM: shortcut 
+PASS ASTRAL CHAINSTORM: HUD selection
+PASS ASTRAL CHAINSTORM: click cast / cooldown
+PASS ASTRAL CHAINSTORM: cooldown rejects another cast
+PASS ASTRAL CHAINSTORM: finite geometry / bounded instances
+PASS ASTRAL CHAINSTORM: natural completion
+PASS ASTRAL CHAINSTORM: scene/light/subscription/water cleanup
+PASS ASTRAL CHAINSTORM: WebGL error state
+PASS ASTRAL CHAINSTORM: measurement recorded
+PASS ABYSSAL MOONFALL: shortcut 
+PASS ABYSSAL MOONFALL: HUD selection
+PASS ABYSSAL MOONFALL: click cast / cooldown
+PASS ABYSSAL MOONFALL: cooldown rejects another cast
+PASS ABYSSAL MOONFALL: finite geometry / bounded instances
+PASS ABYSSAL MOONFALL: natural completion
+PASS ABYSSAL MOONFALL: scene/light/subscription/water cleanup
+PASS ABYSSAL MOONFALL: WebGL error state
+PASS ABYSSAL MOONFALL: measurement recorded
+PASS THE DROWNED KING: shortcut 
+PASS THE DROWNED KING: HUD selection
+PASS THE DROWNED KING: click cast / cooldown
+PASS THE DROWNED KING: cooldown rejects another cast
+PASS THE DROWNED KING: finite geometry / bounded instances
+PASS THE DROWNED KING: natural completion
+PASS THE DROWNED KING: scene/light/subscription/water cleanup
+PASS THE DROWNED KING: WebGL error state
+PASS THE DROWNED KING: measurement recorded
+PASS AUDIT ALL CHECKS PASSED
+DATA [{"id":"ember-comet","quality":"LOW","viewport":[411,595],"calls":27,"triangles":16595,"peakInstances":16,"peakParticles":140,"raf":{"medianMs":6.099999904632568,"p95Ms":6.299999952316284,"maxMs":7.900000095367432},"update":{"medianMs":0,"p95Ms":0.2999999523162842,"maxMs":0.39999985694885254},"renderSubmit":{"medianMs":0.20000004768371582,"p95Ms":0.40000009536743164,"maxMs":2.1000001430511475},"baseline":{"objects":112,"lights":0,"subscriptions":6,"active":0,"ripples":0,"geometries":13,"textures":8,"programs":11},"after":{"objects":112,"lights":0,"subscriptions":6,"active":0,"ripples":0,"geometries":26,"textures":8,"programs":18}},{"id":"frost-lance","quality":"LOW","viewport":[411,595],"calls":27,"triangles":31477,"peakInstances":80,"peakParticles":291,"raf":{"medianMs":6.099999904632568,"p95Ms":6.799999952316284,"maxMs":9.700000047683716},"update":{"medianMs":0,"p95Ms":0.20000004768371582,"maxMs":0.39999985694885254},"renderSubmit":{"medianMs":0.20000004768371582,"p95Ms":0.39999985694885254,"maxMs":2.1000001430511475},"baseline":{"objects":112,"lights":0,"subscriptions":6,"active":0,"ripples":0,"geometries":26,"textures":8,"programs":18},"after":{"objects":112,"lights":0,"subscriptions":6,"active":0,"ripples":0,"geometries":35,"textures":8,"programs":24}},{"id":"sand-reaper","quality":"LOW","viewport":[411,595],"calls":23,"triangles":14731,"peakInstances":24,"peakParticles":421,"raf":{"medianMs":6.099999904632568,"p95Ms":6.300000190734863,"maxMs":6.3999998569488525},"update":{"medianMs":0,"p95Ms":0.10000014305114746,"maxMs":0.5},"renderSubmit":{"medianMs":0.10000014305114746,"p95Ms":0.20000004768371582,"maxMs":4.300000190734863},"baseline":{"objects":112,"lights":0,"subscriptions":6,"active":0,"ripples":0,"geometries":35,"textures":8,"programs":24},"after":{"objects":112,"lights":0,"subscriptions":6,"active":0,"ripples":0,"geometries":44,"textures":8,"programs":30}},{"id":"astral-chainstorm","quality":"LOW","viewport":[411,595],"calls":22,"triangles":38633,"peakInstances":93,"peakParticles":130,"raf":{"medianMs":6.099999904632568,"p95Ms":7.6000001430511475,"maxMs":10.399999856948853},"update":{"medianMs":0.20000004768371582,"p95Ms":0.40000009536743164,"maxMs":0.5},"renderSubmit":{"medianMs":0.10000014305114746,"p95Ms":0.3000001907348633,"maxMs":9.100000143051147},"baseline":{"objects":112,"lights":0,"subscriptions":6,"active":0,"ripples":0,"geometries":44,"textures":8,"programs":30},"after":{"objects":112,"lights":0,"subscriptions":6,"active":0,"ripples":0,"geometries":50,"textures":8,"programs":36}},{"id":"abyssal-moonfall","quality":"LOW","viewport":[411,595],"calls":31,"triangles":19579,"peakInstances":86,"peakParticles":900,"raf":{"medianMs":6.099999904632568,"p95Ms":6.300000190734863,"maxMs":12.799999952316284},"update":{"medianMs":0.09999990463256836,"p95Ms":0.20000004768371582,"maxMs":0.20000004768371582},"renderSubmit":{"medianMs":0.19999980926513672,"p95Ms":0.2999999523162842,"maxMs":12},"baseline":{"objects":112,"lights":0,"subscriptions":6,"active":0,"ripples":0,"geometries":50,"textures":8,"programs":36},"after":{"objects":112,"lights":0,"subscriptions":6,"active":0,"ripples":0,"geometries":61,"textures":8,"programs":45}},{"id":"drowned-king","quality":"LOW","viewport":[411,595],"calls":40,"triangles":24763,"peakInstances":117,"peakParticles":900,"raf":{"medianMs":6.099999904632568,"p95Ms":6.400000095367432,"maxMs":17.90000009536743},"update":{"medianMs":0.09999990463256836,"p95Ms":0.20000004768371582,"maxMs":0.20000004768371582},"renderSubmit":{"medianMs":0.20000004768371582,"p95Ms":0.3000001907348633,"maxMs":17},"baseline":{"objects":112,"lights":0,"subscriptions":6,"active":0,"ripples":0,"geometries":61,"textures":8,"programs":45},"after":{"objects":112,"lights":0,"subscriptions":6,"active":0,"ripples":0,"geometries":81,"textures":8,"programs":55}}]

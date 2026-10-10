@@ -15,8 +15,8 @@ const finite=()=>{let valid=true;game.sceneManager.scene.traverse(o=>{valid&&=[.
 let savedFavorite=false;
 try{
   await game.player.visual.ready;game.settings.setPreset((query.get('quality')??'LOW') as 'LOW'|'MEDIUM'|'MAX');game.start();await frames(12);
-  const oldSlots=game.abilities.slots.slice(0,30).map(s=>({...s}));check(game.abilities.registry.all.length===31,'30 originals plus ability #31');
-  click('[data-open-book]');await frames();check(root.querySelectorAll('.spell-card').length===31,'Spellbook displays 31 abilities');
+  const oldSlots=game.abilities.slots.slice(0,30).map(s=>({...s}));check(game.abilities.registry.all.length===32,'31 previous abilities plus Riftreaver');
+  click('[data-open-book]');await frames();check(root.querySelectorAll('.spell-card').length===32,'Spellbook displays 32 abilities');
   const search=root.querySelector<HTMLInputElement>('[aria-label="Search spells"]')!;
   for(const term of ['ember','comet','fire','infernal']){search.value=term;search.dispatchEvent(new Event('input'));check(!root.querySelector<HTMLElement>('[data-spell="ember-comet"]')!.closest<HTMLElement>('.spell-card')!.hidden,`Search ${term} finds Ember Comet`);}
   click('[data-category="FIRE"]');check(!root.querySelector<HTMLElement>('[data-spell="ember-comet"]')!.closest<HTMLElement>('.spell-card')!.hidden,'FIRE category finds Ember Comet');

@@ -1,6 +1,6 @@
-# Elemental Sandbox — Phase 24
+# Elemental Sandbox — Phase 31
 
-A browser-based Three.js sandbox with a dark reflective water arena, an animated human male in everyday clothes, and 27 registered elemental/fantasy abilities. The existing architecture, controls, player and HUD remain in place. There are no enemies, health/damage systems, NPCs, inventory or quests. All runtime assets are local.
+A browser-based Three.js sandbox with a dark reflective ocean, a rigged human male adventurer, and 32 registered elemental/fantasy abilities. The existing architecture, controls and HUD remain in place. There are no enemies, health/damage systems, NPCs, inventory or quests. All runtime assets are local.
 
 ## Sand Reaper — Dune Cleaver
 
@@ -73,7 +73,7 @@ Ability **31**, **FIRE / MAGMA**, **4s cooldown**, **48m range**, **44m/s** flig
 A hand-charged lobed molten core assembles inside closed faceted volcanic plates, launches with a volumetric turbulent flame tail, then sheds cooling rock shards, embers and steam into three source-owned ocean ripples. The localized warm light/reflection and hot surface overlay fade with the aftermath. Lifetime is roughly **3.2–4.1s**, depending on distance; the first visible impact layers last under a second, while sparse steam/embers linger. LOW/MEDIUM/MAX cap particles at **150/340/700**, shell pieces at **6/8/10** and default impact fragments at **16/30/48**. At most two pooled leases exist; no dynamic shadows, fullscreen distortion or new renderer is introduced.
 
 `EmberComet.configure()` exposes fourteen finite typed controls between casts. [Full geometry, material, file inventory, browser evidence and validation report](docs/phase29-validation.md). With Vite running, `/ember-comet-review.html?quality=LOW` tests real-time casting; substitute MEDIUM/MAX and add `&stress` for twenty controlled sequential cleanup checks. `/audit-review.html?slot=30&age=0.68&range=28` reviews flight stages/angles. Review pages are development-only.
-# Phase 30 — Living Adventurer
+## Phase 30 — Living Adventurer
 
 The same locally licensed Rocketbox male, 80-bone skeleton and Idle/Walk/Run clips are retained. Fitted skinned leather clothing, boots, wraps, raised seams and bronze fasteners add an adventurer silhouette without replacing the human rig. Skin, fabric, leather and metal use separate PBR responses with bounded bind-space procedural detail.
 
@@ -82,3 +82,14 @@ Locomotion now blends continuously using actual velocity and measured stance tra
 F3 includes character state, weights, calibrated stride, casting recovery and contact diagnostics alongside the existing Ocean Editor. Tuning is centralized in `src/player/CharacterConfig.ts`. No new ability or gameplay shortcut was added; all 31 abilities remain registered.
 
 See [the character audit and validation report](docs/phase30-validation.md) for model limitations, before/after images, performance measurements, tests and the complete file inventory.
+
+
+## Riftreaver — Scar of Reality (Phase 31)
+
+Ability **32**, ID **riftreaver**, **VOID / DIMENSIONAL**. Select in **Tab → Spellbook**, Favorites or Quick Wheel, then **left-click**. Cooldown **10s**, range **55m**, hand-fired incision speed **55m/s**, lifetime approximately **5.85–6.7s**. No new numeric shortcut. All 31 preceding spells and Phase 30 character improvements are preserved.
+
+The cast opens an **18m jagged volumetric tear** with a recessed procedural black-indigo interior, faceted obsidian borders, instanced floating shards and three distinct sequential solid slashes. Borders and debris converge before a sharp implosion, water cuts/ripples, droplets and a short aftermath. The interior uses procedural depth/distortion, not a second rendered world or scene-color refraction.
+
+LOW/MEDIUM/MAX use **30/60/105 shards**, **280/680/1300 GPU particle slots**, **24/40/60 boundary intervals** and **1/2/3 noise octaves**. Two bounded reusable bundles own materials and temporary effects; shared geometry is cached, water owners/subscriptions are removed on expiry and all GPU resources are disposed at teardown. Tiny detached prototypes prepare shader programs one per cancellable idle callback.
+
+Typed tuning: `src/abilities/riftreaver/RiftreaverConfig.ts`; `Riftreaver.configure(patch)` safely applies changes between casts. Browser QA: `/riftreaver-browser.html?quality=LOW`, then MEDIUM/MAX; add `&stress` for 20 casts. Visual stage review: `/audit-review.html?slot=31&age=2.55&range=28&quality=MEDIUM` (side/elevated/low views available). Full technical report and evidence: [Phase 31 validation](docs/phase31-validation.md).

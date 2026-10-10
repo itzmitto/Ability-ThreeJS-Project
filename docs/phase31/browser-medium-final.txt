@@ -1,0 +1,37 @@
+PASS 31 old abilities preserved; Riftreaver is #32
+PASS Spellbook automatically includes all 32
+PASS Search rift
+PASS Search scar
+PASS Search reality
+PASS Search void
+PASS Search dimensional
+PASS Existing VOID category
+PASS Range/cooldown metadata
+PASS Book equip does not cast
+PASS Favorites feed Quick Wheel
+PASS Wheel equips Riftreaver
+PASS Left-click casts with authoritative cooldown
+PASS 100 rapid attempts rejected
+PASS All eight phases observed in actual realtime playback
+PASS Incision follows real animated right hand
+PASS Three sequential slash contacts observed
+PASS Finite geometry/instances and WebGL NO_ERROR
+PASS Natural realtime completion
+PASS Ocean owners released
+PROFILE {"quality":"MEDIUM","viewport":[1920,1080],"peakCalls":85,"peakTriangles":60864,"peakParticles":680,"peakInstances":60,"rafMedian":6.099999904632568,"rafP95":6.400000095367432,"rafMax":8.800000190734863}
+PASS 8m input accepted
+PASS 8m input: travel/open/implode/cleanup
+PASS 28m input accepted
+PASS 28m input: travel/open/implode/cleanup
+PASS 100m input accepted
+PASS 100m input: travel/open/implode/cleanup
+PASS WASD velocity-blended locomotion
+PASS Cast while moving
+PASS Upper-body spatial slash preserves locomotion
+PASS Sprint remains live
+PASS Idle and gesture recovery
+PASS Camera/targeting responds to mouse
+PASS F3 ocean/character diagnostics
+PASS Original 31 slots/shortcuts unchanged
+PASS Complete game teardown frees GPU resources and subscriptions
+PASS RIFTREAVER BROWSER COMPLETE

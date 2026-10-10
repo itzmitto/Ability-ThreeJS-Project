@@ -2,6 +2,10 @@ import '../src/styles/game.css';
 import { Game } from '../src/game/Game';
 import { PointLight } from 'three';
 import { OCEAN_DEFAULTS } from '../src/world/water/OceanSettings';
+const originalFavorites = localStorage.getItem('elemental-favorites');
+const restoreFavorites = () => { if (originalFavorites === null) localStorage.removeItem('elemental-favorites'); else localStorage.setItem('elemental-favorites', originalFavorites); };
+// Isolate wheel expectations from the user's ordered favorites; restore exact storage on completion/navigation.
+localStorage.setItem('elemental-favorites', JSON.stringify(['glacial-eruption']));
 const root = document.querySelector<HTMLElement>('#app')!, game = new Game(root);
 const report = document.createElement('pre'); report.id = 'phase25-report';
 report.style.cssText = 'position:fixed;left:24px;top:145px;background:#06101ade;color:#c1d5e4;font:10px monospace;max-height:45vh;overflow:auto;z-index:40;pointer-events:none'; root.append(report);
@@ -14,7 +18,7 @@ const key = (code: string, type = 'keydown', shiftKey = false) => window.dispatc
 const click = (selector: string) => root.querySelector<HTMLElement>(selector)!.click();
 const counts = () => { let objects = 0, lights = 0; game.sceneManager.scene.traverse(o => {objects++; if (o instanceof PointLight) lights++;}); const r = game.renderer.renderer; return {objects, lights, geometries:r.info.memory.geometries, textures:r.info.memory.textures, subscriptions:game.settings.subscriberCount}; };
 await game.player.visual.ready; game.settings.setPreset('LOW'); game.start(); await frames(12);
-check(game.abilities.registry.all.length === 31, 'All 30 original abilities plus Ember Comet');
+check(game.abilities.registry.all.length === 32, 'All 31 original abilities plus Riftreaver');
 check(game.abilities.registry.all.every(a => Number.isFinite(a.range)), 'Every card uses actual range metadata');
 check(getComputedStyle(root.querySelector('.ability-bar')!).display === 'none', 'Old 27-card wall hidden');
 key('Tab'); key('Tab','keyup'); await frames();
@@ -86,5 +90,5 @@ for(let i=0;i<15;i++){game.settings.setPreset(i%2?'LOW':'MAX');game.world.water.
 game.settings.setPreset('MAX'); game.world.water.configure(OCEAN_DEFAULTS); await frames(12);
 const after=counts(); check(JSON.stringify(baseline)===JSON.stringify(after),'15 live quality/parameter changes: scene, lights, GPU geometries/textures, subscriptions stable');
 output.push('COUNTS '+JSON.stringify({baseline,after})); check(game.effects.activeCount===0,'UI never creates unintended effects');
-report.dataset.complete='true'; report.textContent=output.join('\n');
-window.addEventListener('pagehide',()=>game.dispose());
+restoreFavorites(); report.dataset.complete='true'; report.textContent=output.join('\n');
+window.addEventListener('pagehide',()=>{ restoreFavorites(); game.dispose(); });

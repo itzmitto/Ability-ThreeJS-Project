@@ -1,0 +1,78 @@
+PASS 31 old abilities preserved; Riftreaver is #32
+PASS Spellbook automatically includes all 32
+PASS Search rift
+PASS Search scar
+PASS Search reality
+PASS Search void
+PASS Search dimensional
+PASS Existing VOID category
+PASS Range/cooldown metadata
+PASS Book equip does not cast
+PASS Favorites feed Quick Wheel
+PASS Wheel equips Riftreaver
+PASS Left-click casts with authoritative cooldown
+PASS 100 rapid attempts rejected
+PASS All eight phases observed in actual realtime playback
+PASS Incision follows real animated right hand
+PASS Three sequential slash contacts observed
+PASS Finite geometry/instances and WebGL NO_ERROR
+PASS Natural realtime completion
+PASS Ocean owners released
+PROFILE {"quality":"LOW","viewport":[1920,1080],"peakCalls":30,"peakTriangles":16377,"peakParticles":280,"peakInstances":30,"rafMedian":6.099999904632568,"rafP95":6.3999998569488525,"rafMax":9.200000047683716}
+PASS 8m input accepted
+PASS 8m input: travel/open/implode/cleanup
+PASS 28m input accepted
+PASS 28m input: travel/open/implode/cleanup
+PASS 100m input accepted
+PASS 100m input: travel/open/implode/cleanup
+PASS Cast 1
+PASS Cast 1: warmed scene/GPU/subscription baseline
+PASS Cast 2
+PASS Cast 2: warmed scene/GPU/subscription baseline
+PASS Cast 3
+PASS Cast 3: warmed scene/GPU/subscription baseline
+PASS Cast 4
+PASS Cast 4: warmed scene/GPU/subscription baseline
+PASS Cast 5
+PASS Cast 5: warmed scene/GPU/subscription baseline
+PASS Cast 6
+PASS Cast 6: warmed scene/GPU/subscription baseline
+PASS Cast 7
+PASS Cast 7: warmed scene/GPU/subscription baseline
+PASS Cast 8
+PASS Cast 8: warmed scene/GPU/subscription baseline
+PASS Cast 9
+PASS Cast 9: warmed scene/GPU/subscription baseline
+PASS Cast 10
+PASS Cast 10: warmed scene/GPU/subscription baseline
+PASS Cast 11
+PASS Cast 11: warmed scene/GPU/subscription baseline
+PASS Cast 12
+PASS Cast 12: warmed scene/GPU/subscription baseline
+PASS Cast 13
+PASS Cast 13: warmed scene/GPU/subscription baseline
+PASS Cast 14
+PASS Cast 14: warmed scene/GPU/subscription baseline
+PASS Cast 15
+PASS Cast 15: warmed scene/GPU/subscription baseline
+PASS Cast 16
+PASS Cast 16: warmed scene/GPU/subscription baseline
+PASS Cast 17
+PASS Cast 17: warmed scene/GPU/subscription baseline
+PASS Cast 18
+PASS Cast 18: warmed scene/GPU/subscription baseline
+PASS Cast 19
+PASS Cast 19: warmed scene/GPU/subscription baseline
+PASS Cast 20
+PASS Cast 20: warmed scene/GPU/subscription baseline
+COUNTS {"baseline":{"objects":112,"lights":0,"geometries":25,"textures":8,"programs":18,"subscriptions":6,"particles":0,"instances":0,"effects":0,"ripples":0},"after":{"objects":112,"lights":0,"geometries":25,"textures":8,"programs":18,"subscriptions":6,"particles":0,"instances":0,"effects":0,"ripples":0}}
+PASS WASD velocity-blended locomotion
+PASS Cast while moving
+PASS Upper-body spatial slash preserves locomotion
+PASS Sprint remains live
+PASS Idle and gesture recovery
+PASS Camera/targeting responds to mouse
+PASS F3 ocean/character diagnostics
+PASS Original 31 slots/shortcuts unchanged
+PASS Complete game teardown frees GPU resources and subscriptions
+PASS RIFTREAVER BROWSER COMPLETE

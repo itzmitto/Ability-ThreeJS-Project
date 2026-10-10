@@ -23,7 +23,8 @@ test('Upper-body projectile/summon casts preserve locomotion legs, hand transfor
  const f=await characterFixture();f.motion.ability('ember-comet',new Vector3(0,0,-1));expect(f.motion.castStyle).toBe('projectile');for(let i=0;i<20;i++)f.tick(4.8);
  const thigh=f.rig.bone('R_Thigh')!.quaternion.clone(),calf=f.rig.bone('R_Calf')!.quaternion.clone();f.motion.update(1/60,4.8,false);expect(f.rig.bone('R_Thigh')!.quaternion.angleTo(thigh)).toBeLessThan(1e-7);expect(f.rig.bone('R_Calf')!.quaternion.angleTo(calf)).toBeLessThan(1e-7);
  const hand=f.rig.bone('R_Hand')!.getWorldPosition(new Vector3());expect(hand.toArray().every(Number.isFinite)).toBeTruthy();expect(hand.y).toBeGreaterThan(.9);expect(hand.distanceTo(f.rig.bone('R_UpperArm')!.getWorldPosition(new Vector3()))).toBeLessThan(.58);
- for(let i=0;i<120;i++)f.tick(4.8);expect(f.motion.castPhase).toBe('READY');expect(f.animation.activeClip).toBe('Run');expect(characterCastStyle('drowned-king')).toBe('summon');f.motion.ability('drowned-king',new Vector3(0,.1,-1));f.tick(0);expect(f.motion.castPhase).toBe('CAST');f.dispose();
+ for(let i=0;i<120;i++)f.tick(4.8);expect(f.motion.castPhase).toBe('READY');expect(f.animation.activeClip).toBe('Run');expect(characterCastStyle('drowned-king')).toBe('summon');f.motion.ability('drowned-king',new Vector3(0,.1,-1));f.tick(0);expect(f.motion.castPhase).toBe('CAST');
+ f.motion.begin(1.4,1.1);f.motion.ability('ember-comet',new Vector3(0,0,-1));for(let i=0;i<40;i++)f.tick(0);expect(f.motion.castPhase).toBe('CAST');f.motion.ability('glacial-eruption',new Vector3(0,0,-1));for(let i=0;i<60;i++)f.tick(0);expect(f.motion.castPhase).toBe('READY');f.dispose();
 });
 test('Restrained two-bone contact correction stays within reach across changing wave heights',async()=>{
  const f=await characterFixture(),before=new Vector3(),after=new Vector3();for(let i=0;i<120;i++){f.tick(i<60?0:1.8);const foot=f.rig.bone('L_Foot')!;foot.getWorldPosition(before);f.feet.update(1/60,i<60?0:1.8,()=>Math.sin(i*.05)*.025,0);foot.getWorldPosition(after);expect(before.distanceTo(after)).toBeLessThan(CHARACTER_CONFIG.footCorrection+.035);for(const bone of f.rig.bones.values())expect(bone.quaternion.toArray().every(Number.isFinite)).toBeTruthy();}
@@ -31,4 +32,17 @@ test('Restrained two-bone contact correction stays within reach across changing 
 });
 test('Character quality subscriptions and teardown are bounded and idempotent even before async loading',()=>{
  const settings=new GraphicsSettings(),player=new Player(new Scene());player.visual.configureEnvironment(settings,()=>.1);expect(settings.subscriberCount).toBe(1);player.visual.configureEnvironment(settings,()=>.2);expect(settings.subscriberCount).toBe(1);player.dispose();player.dispose();expect(settings.subscriberCount).toBe(0);settings.dispose();
+});
+
+test('Riftreaver diagonal cutting gesture uses real hand bones while leaving locomotion legs untouched and recovering',async()=>{
+ const f=await characterFixture();for(let i=0;i<90;i++)f.tick(4.8);
+ f.motion.ability('riftreaver',new Vector3(.2,0,-1));const positions:Vector3[]=[];
+ for(let i=0;i<18;i++){
+   f.rig.restore();f.animation.update(1/60,4.8,false);f.rig.capture();f.root.updateWorldMatrix(true,true);
+   const thigh=f.rig.bone('R_Thigh')!.quaternion.clone(),calf=f.rig.bone('R_Calf')!.quaternion.clone();
+   f.motion.update(1/60,4.8,false);expect(f.rig.bone('R_Thigh')!.quaternion.angleTo(thigh)).toBeLessThan(1e-7);expect(f.rig.bone('R_Calf')!.quaternion.angleTo(calf)).toBeLessThan(1e-7);
+   positions.push(f.rig.bone('R_Hand')!.getWorldPosition(new Vector3()));
+ }
+ expect(positions.every(v=>v.toArray().every(Number.isFinite))).toBe(true);expect(positions[5].distanceTo(positions[16])).toBeGreaterThan(.04);
+ for(let i=0;i<90;i++)f.tick(4.8);expect(f.motion.castPhase).toBe('READY');expect(f.animation.activeClip).toBe('Run');f.dispose();
 });
