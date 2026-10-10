@@ -46,6 +46,7 @@ test('Impact spray is bounded across simultaneous impacts and expires without re
   const geometry = spray.geometry, origins = geometry.getAttribute('aOrigin');
   for (let i = 0; i < 100; i++) spray.emitImpact(point, 0, .8, 2);
   spray.update(.1); expect(spray.count).toBeLessThanOrEqual(128); expect(spray.count).toBeGreaterThan(0);
+  expect(origins.getX(0)).toBe(2);expect(origins.getZ(0)).toBe(-8);expect(geometry.getAttribute('aMotion').getY(0)).toBeGreaterThan(0);
   expect(geometry.getAttribute('position').count).toBe(256);
   for (let frame = 1; frame < 20; frame++) spray.emitImpact(point, frame * .1, .6, 1);
   spray.update(2); expect(spray.count).toBeLessThanOrEqual(256);

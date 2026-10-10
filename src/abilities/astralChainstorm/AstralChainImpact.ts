@@ -1,4 +1,4 @@
-import { AdditiveBlending, Color, Mesh, PlaneGeometry, ShaderMaterial, Vector3 } from 'three';
+import { AdditiveBlending, BufferGeometry, Color, Float32BufferAttribute, Mesh, MeshBasicMaterial, PlaneGeometry, ShaderMaterial, Vector3, DoubleSide } from 'three';
 /** Surface fracture strokes and separated pressure crests; never a filled explosion disk. */
 export class AstralChainImpact {
   readonly material=new ShaderMaterial({transparent:true,depthWrite:false,blending:AdditiveBlending,
@@ -16,7 +16,26 @@ export class AstralChainImpact {
       #include <colorspace_fragment>
     }`});
   readonly mesh=new Mesh(new PlaneGeometry(18,18),this.material);
-  constructor(){this.mesh.rotation.x=-Math.PI/2;this.mesh.visible=false;this.mesh.renderOrder=3;}
-  update(age:number,p:Vector3,gain:number):void{this.mesh.visible=age>=0&&age<1.5;this.mesh.position.copy(p);this.mesh.position.y+=.045;this.material.uniforms.uAge.value=age;this.material.uniforms.uGain.value=gain;}
-  dispose():void{this.mesh.removeFromParent();this.mesh.geometry.dispose();this.material.dispose();}
+  private readonly flareMaterial=new MeshBasicMaterial({color:'#c8f9ff',transparent:true,depthWrite:false,blending:AdditiveBlending,side:DoubleSide});
+  readonly fractures:Mesh;
+  constructor(){
+    this.mesh.rotation.x=-Math.PI/2;this.mesh.visible=false;this.mesh.renderOrder=3;
+    const vertices:number[]=[];
+    for(let branch=0;branch<7;branch++){
+      const angle=branch/7*Math.PI*2,dx=Math.cos(angle),dz=Math.sin(angle);
+      for(let j=0;j<4;j++){
+        const r=j*.42,y=j*.68+(j%2)*.25,r2=(j+1)*.42,y2=(j+1)*.68+((j+1)%2)*.25,w=.085*(1-j/5);
+        const a=[dx*r-dz*w,y,dz*r+dx*w],b=[dx*r+dz*w,y,dz*r-dx*w],c=[dx*r2-dz*w*.6,y2,dz*r2+dx*w*.6],d=[dx*r2+dz*w*.6,y2,dz*r2-dx*w*.6];
+        vertices.push(...a,...b,...c,...b,...d,...c);
+      }
+    }
+    const g=new BufferGeometry();g.setAttribute('position',new Float32BufferAttribute(vertices,3));g.computeBoundingSphere();
+    this.fractures=new Mesh(g,this.flareMaterial);this.fractures.visible=false;this.fractures.renderOrder=4;
+  }
+  update(age:number,p:Vector3,gain:number):void{
+    this.mesh.visible=age>=0&&age<1.5;this.mesh.position.copy(p);this.mesh.position.y+=.09;this.material.uniforms.uAge.value=age;this.material.uniforms.uGain.value=gain;
+    this.fractures.visible=age>=0&&age<.6;this.fractures.position.copy(p);this.fractures.position.y+=.04;
+    this.fractures.scale.setScalar(Math.min(1,Math.max(.05,age*12)));this.flareMaterial.opacity=Math.exp(-Math.max(0,age)*7)*gain;
+  }
+  dispose():void{this.mesh.removeFromParent();this.mesh.geometry.dispose();this.material.dispose();this.fractures.removeFromParent();this.fractures.geometry.dispose();this.flareMaterial.dispose();}
 }

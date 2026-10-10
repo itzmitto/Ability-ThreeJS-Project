@@ -1,0 +1,31 @@
+PASS All 27 original abilities plus Astral Chainstorm
+PASS Every card uses actual range metadata
+PASS Old 27-card wall hidden
+PASS Tab opens Spellbook
+PASS Search receives focus
+PASS Overlay blocks selection shortcuts and world casting
+PASS Subtitle search finds Sand Reaper
+PASS Water category includes original water abilities
+PASS Equip closes overlay without casting
+PASS Canvas focus restored
+PASS Held wheel release with no intent preserves selection
+PASS Wheel center dead zone never changes selection
+PASS Mouse wedge selection commits safely on key release
+PASS Wheel keyboard confirmation shares AbilityManager selection
+PASS More than eight favorites yields exactly eight bounded wheel entries
+PASS Wheel Escape/cancel path never casts
+PASS World click casts equipped spell and starts authoritative cooldown
+PASS Spellbook shows live cooldown while effect is active
+PASS Selecting another spell preserves the running effect
+PASS WASD movement works after overlay close
+PASS Shift sprint remains usable
+PASS Camera targeting remains finite
+PASS F3 exposes DEV ocean editor
+PASS Editor updates live shader uniform
+PASS LOW: no WebGL errors
+PASS MEDIUM: no WebGL errors
+PASS MAX: no WebGL errors
+QUALITY [{"preset":"LOW","waves":2,"ripples":8,"vertices":1089},{"preset":"MEDIUM","waves":4,"ripples":20,"vertices":9409},{"preset":"MAX","waves":5,"ripples":32,"vertices":25921}]
+PASS 15 live quality/parameter changes: scene, lights, GPU geometries/textures, subscriptions stable
+COUNTS {"baseline":{"objects":106,"lights":0,"geometries":10,"textures":21,"subscriptions":5},"after":{"objects":106,"lights":0,"geometries":10,"textures":21,"subscriptions":5}}
+PASS UI never creates unintended effects

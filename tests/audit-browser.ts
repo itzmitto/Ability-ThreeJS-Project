@@ -50,13 +50,13 @@ try {
     game.start();
     await frames(12);
     check(game.player.visual.loaded, 'Local human model loaded');
-    check(game.abilities.slots.filter(s => s.abilityId).length === 27, 'Exactly 27 registered abilities');
-    const targets = query.has('ocean') ? [0, 10, 22, 23, 25, 26, 24] : query.has('sand') ? (query.has('only') ? [26] : [26, 25, 0, 1]) : query.has('frost') ? [25, 0] : query.has('kraken') ? [22] : query.has('raven') ? [23] : game.abilities.slots.map((_, i) => i);
+    check(game.abilities.registry.all.length === 28 && game.abilities.slots.filter(s => s.abilityId).length === 28, 'All 27 previous abilities plus Astral Chainstorm');
+    const targets = query.has('chain') ? [27] : query.has('ocean') ? [0, 10, 22, 23, 25, 26, 24] : query.has('sand') ? (query.has('only') ? [26] : [26, 25, 0, 1]) : query.has('frost') ? [25, 0] : query.has('kraken') ? [22] : query.has('raven') ? [23] : game.abilities.slots.map((_, i) => i);
     for (const index of targets) {
         clean();
         game.abilities.update(120);
         const baseline = counts(), slot = game.abilities.slots[index], ability = game.abilities.registry.get(slot.abilityId)!;
-        key(slot.code, !!slot.shift);
+        if(slot.code)key(slot.code, !!slot.shift);else game.abilities.selectAbility(ability.id);
         await frames(3);
         release(slot.code);
         check(game.abilities.selectedIndex === index, `${ability.name}: shortcut ${slot.key}`);

@@ -7,8 +7,8 @@ export function astralChainTarget(ctx:AbilityCastContext):Vector3|null {
   const source=ctx.groundTarget??ctx.targetPoint,target=new Vector3();
   if(source&&source.toArray().every(Number.isFinite))target.copy(source);
   else{const d=ctx.cameraForward;if(!d.toArray().every(Number.isFinite)||d.lengthSq()<1e-8)return null;target.copy(ctx.origin).addScaledVector(d.clone().normalize(),CHAIN_CAST.range);}
-  const delta=target.clone().sub(ctx.origin);if(delta.lengthSq()<.0025)return null;
-  if(delta.length()>CHAIN_CAST.range)target.copy(ctx.origin).addScaledVector(delta.normalize(),CHAIN_CAST.range);
+  const delta=target.clone().sub(ctx.origin),distance=delta.length();if(!Number.isFinite(distance)||distance<.05)return null;
+  if(distance>CHAIN_CAST.range)target.copy(ctx.origin).addScaledVector(delta.normalize(),CHAIN_CAST.range);
   target.y=ctx.water?.getSurfaceHeight(target.x,target.z)??0;return target;
 }
 export class AstralChainstorm implements Ability {

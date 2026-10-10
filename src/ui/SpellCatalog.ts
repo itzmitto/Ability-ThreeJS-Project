@@ -1,5 +1,5 @@
 import type { Ability } from '../abilities/Ability';
-export const SPELL_CATEGORIES = ['ALL', 'FIRE', 'ICE / SNOW', 'LIGHTNING', 'WATER', 'EARTH / SAND', 'WIND / STORM', 'LIGHT / HOLY', 'SHADOW / DARK', 'BLOOD', 'TIME / GRAVITY', 'OTHER'] as const;
+export const SPELL_CATEGORIES = ['ALL', 'FIRE', 'ICE / SNOW', 'LIGHTNING', 'WATER', 'EARTH / SAND', 'WIND / STORM', 'LIGHT / HOLY', 'SHADOW / DARK', 'BLOOD', 'TIME / GRAVITY', 'ARCANE / METAL', 'OTHER'] as const;
 export type SpellCategory = typeof SPELL_CATEGORIES[number];
 export function spellCategory(a: Ability): SpellCategory {
   const e = a.element.toUpperCase();
@@ -13,6 +13,7 @@ export function spellCategory(a: Ability): SpellCategory {
   if (/SHADOW|DARK|VOID|ABYSS|SPATIAL/.test(e)) return 'SHADOW / DARK';
   if (/BLOOD/.test(e)) return 'BLOOD';
   if (/TIME|GRAVITY|COSMIC/.test(e)) return 'TIME / GRAVITY';
+  if (/ARCANE|METAL|RUNE/.test(e)) return 'ARCANE / METAL';
   return 'OTHER';
 }
 export function matchesSpell(a: Ability, search: string, category: SpellCategory): boolean {

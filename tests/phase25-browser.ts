@@ -14,7 +14,7 @@ const key = (code: string, type = 'keydown', shiftKey = false) => window.dispatc
 const click = (selector: string) => root.querySelector<HTMLElement>(selector)!.click();
 const counts = () => { let objects = 0, lights = 0; game.sceneManager.scene.traverse(o => {objects++; if (o instanceof PointLight) lights++;}); const r = game.renderer.renderer; return {objects, lights, geometries:r.info.memory.geometries, textures:r.info.memory.textures, subscriptions:game.settings.subscriberCount}; };
 await game.player.visual.ready; game.settings.setPreset('LOW'); game.start(); await frames(12);
-check(game.abilities.registry.all.length === 27, 'All 27 original abilities, no new spell');
+check(game.abilities.registry.all.length === 28, 'All 27 original abilities plus Astral Chainstorm');
 check(game.abilities.registry.all.every(a => Number.isFinite(a.range)), 'Every card uses actual range metadata');
 check(getComputedStyle(root.querySelector('.ability-bar')!).display === 'none', 'Old 27-card wall hidden');
 key('Tab'); key('Tab','keyup'); await frames();

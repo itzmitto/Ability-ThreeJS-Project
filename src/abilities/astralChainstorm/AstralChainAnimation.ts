@@ -1,6 +1,6 @@
 import { InstancedMesh, Matrix4, Object3D, Quaternion, Vector3, InstancedBufferAttribute, DynamicDrawUsage } from 'three';
 import type { BufferGeometry, Material } from 'three';
-import { ease, clamp01 } from '../elemental/ElementalVisuals';
+import { ease, clamp01, hash } from '../elemental/ElementalVisuals';
 import type { AstralChainstormConfig, ChainQuality } from './AstralChainstormConfig';
 
 const Y=new Vector3(0,1,0);
@@ -35,9 +35,9 @@ export class AstralChainAnimation {
         const s=j/128;
         if(!flying){
           const a=angle+s*Math.PI*3.2-age*2;
-          points[j].copy(origin).addScaledVector(this.side,Math.cos(a)*(.27+s*.22));
-          points[j].y+=Math.sin(a)*(.25+s*.16)+s*.55;
-          points[j].addScaledVector(direction,s*assembly*2.2);
+          points[j].copy(origin).addScaledVector(this.side,Math.cos(a)*(.16+s*.12));
+          points[j].y+=Math.sin(a)*(.15+s*.12)+s*.2;
+          points[j].addScaledVector(direction,s*assembly*1.2);
         }else{
           const d=tail+(reached-tail)*s;
           this.flight.copy(origin).addScaledVector(direction,d);
@@ -56,7 +56,7 @@ export class AstralChainAnimation {
       const length=arc[128],count=Math.min(q.links,Math.max(0,Math.floor(length*(flying?1:assembly)/step)+1));
       let cursor=1;this.normal.copy(this.normals[chain]);
       for(let i=0;i<count;i++) {
-        const along=count===1?length*.5:i*step;
+        const along=flying?Math.max(0,length-(count-1)*step)+i*step:i*step;
         while(cursor<128&&arc[cursor]<along)cursor++;
         const f=clamp01((along-arc[cursor-1])/Math.max(.00001,arc[cursor]-arc[cursor-1]));
         this.dummy.position.copy(points[cursor-1]).lerp(points[cursor],f);
@@ -68,9 +68,10 @@ export class AstralChainAnimation {
         this.normal.normalize();this.binormal.crossVectors(this.normal,this.tangent).normalize();
         if(i===0)this.normals[chain].copy(this.normal);
         this.frame.makeBasis(this.normal,this.tangent,this.binormal);this.dummy.quaternion.setFromRotationMatrix(this.frame);
-        this.roll.setFromAxisAngle(Y,i%2*Math.PI*.5+chain*.1);this.dummy.quaternion.multiply(this.roll);
-        this.dummy.scale.setScalar(flying?1:.48+assembly*.52);this.dummy.updateMatrix();this.mesh.setMatrixAt(total,this.dummy.matrix);
-        this.data.setXYZ(total,i/Math.max(1,count-1),chain,(Math.sin(i*127.1+chain*39.3)*43758.5)%1+.5);total++;
+        const linkIdentity=flying?count-1-i:i;
+        this.roll.setFromAxisAngle(Y,linkIdentity%2*Math.PI*.5+chain*.1);this.dummy.quaternion.multiply(this.roll);
+        this.dummy.scale.setScalar(flying?1:.28+assembly*.42);this.dummy.updateMatrix();this.mesh.setMatrixAt(total,this.dummy.matrix);
+        this.data.setXYZ(total,i/Math.max(1,count-1),chain,hash(linkIdentity+chain*43));total++;
       }
     }
     this.mesh.count=total;this.mesh.instanceMatrix.needsUpdate=true;this.data.needsUpdate=true;

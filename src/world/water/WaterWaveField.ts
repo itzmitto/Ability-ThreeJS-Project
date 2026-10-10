@@ -21,7 +21,7 @@ export function sampleOceanHeight(x:number,z:number,time:number,playerX:number,p
     const r=Math.hypot(px-ripples[k],pz-ripples[k+1]),v=r-shape[k]*c.rippleSpeed*age-shape[k+3],width=Math.max(shape[k+1]*1.8,.18);
     height+=Math.max(-.4,Math.min(.4,ripples[k+3]))*c.rippleStrength*.18*Math.sin(v*6.283/Math.max(.15,shape[k+1]))*Math.exp(-v*v/(width*width))*Math.pow(Math.max(0,1-age/duration),2*c.rippleDecay)*Math.exp(-r*.075);
   }
-  return height;
+  return Number.isFinite(height)?height:0;
 }
 /** One coherent Gerstner spectrum, with analytic derivatives and bounded impulse wavelets. */
 export const WATER_WAVES = `

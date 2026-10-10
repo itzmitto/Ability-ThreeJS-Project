@@ -1,4 +1,4 @@
-import { BufferGeometry, Float32BufferAttribute, Points, ShaderMaterial, Vector3 } from 'three';
+import { BufferAttribute, BufferGeometry, Float32BufferAttribute, Points, ShaderMaterial, Vector3, DynamicDrawUsage } from 'three';
 /** Shared shoe/contact/impact spray: fixed ring buffers, analytic GPU gravity and three droplet scales. */
 export class WaterContactSpray {
   private readonly origins = new Float32Array(256 * 4);
@@ -23,13 +23,13 @@ export class WaterContactSpray {
   constructor(){
     for(let i=0;i<256;i++)this.origins[i*4+3]=-100;
     this.geometry.setAttribute('position',new Float32BufferAttribute(new Float32Array(256*3),3));
-    this.geometry.setAttribute('aOrigin',new Float32BufferAttribute(this.origins,4));
-    this.geometry.setAttribute('aMotion',new Float32BufferAttribute(this.motions,4));
-    this.geometry.setAttribute('aSize',new Float32BufferAttribute(this.sizes,1));
+    this.geometry.setAttribute('aOrigin',new BufferAttribute(this.origins,4).setUsage(DynamicDrawUsage));
+    this.geometry.setAttribute('aMotion',new BufferAttribute(this.motions,4).setUsage(DynamicDrawUsage));
+    this.geometry.setAttribute('aSize',new BufferAttribute(this.sizes,1).setUsage(DynamicDrawUsage));
     this.points.frustumCulled=false;this.points.visible=false;
   }
   private particle(p:Readonly<Vector3>,time:number,vx:number,vy:number,vz:number,life:number,size:number):void{
-    const i=this.cursor++%256,k=i*4;this.origins[k]=p.x;this.origins[k+1]=.04;this.origins[k+2]=p.z;this.origins[k+3]=time;
+    const i=this.cursor++%256,k=i*4;this.origins[k]=p.x;this.origins[k+1]=(Number.isFinite(p.y)?p.y:0)+.04;this.origins[k+2]=p.z;this.origins[k+3]=time;
     this.motions[k]=vx;this.motions[k+1]=vy;this.motions[k+2]=vz;this.motions[k+3]=life;this.sizes[i]=size;
   }
   emit(position:Vector3,time:number,count:number):void{

@@ -20,11 +20,12 @@ export function validatedChainConfig(patch:Partial<AstralChainstormConfig>, curr
     const v=patch[key];if(!limits[key]||typeof v!=='number'||!Number.isFinite(v))throw new RangeError(`Invalid chain control ${key}`);
     c[key]=Math.max(limits[key][0],Math.min(limits[key][1],v));
   }
+  c.linkThickness=Math.min(c.linkThickness,c.linkLength*.1);
   c.chainCount=Math.round(c.chainCount);c.linksPerChain=Math.round(c.linksPerChain);c.fragmentCount=Math.round(c.fragmentCount);return c;
 }
 export function chainQuality(q:Readonly<QualityConfig>,c:Readonly<AstralChainstormConfig>) {
   const tier=q.waterDetail-1;
   return {tier,chains:Math.min(c.chainCount,[3,4,5][tier]),links:Math.min(c.linksPerChain,[26,34,40][tier]),
-    sparks:Math.min(900,Math.round([130,350,750][tier]*c.sparkDensity)),fragments:Math.min(c.fragmentCount,[24,48,80][tier]),light:tier>0};
+    sparks:Math.min(900,q.effectParticleBudget,Math.round([130,350,750][tier]*c.sparkDensity)),fragments:Math.min(c.fragmentCount,[24,48,80][tier]),light:tier>0};
 }
 export type ChainQuality = ReturnType<typeof chainQuality>;

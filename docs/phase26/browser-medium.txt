@@ -1,0 +1,24 @@
+PASS Exactly 28 registered spells; old shortcuts preserved
+PASS Spellbook dynamically displays 28 cards
+PASS Subtitle search finds Runebreaker
+PASS Favorite state works
+PASS Spellbook equips ability 28 without casting
+PASS Chainstorm appears in favorite wheel
+PASS Wheel selects through shared AbilityManager
+PASS World left-click casts / 8s cooldown starts
+PASS 100 cooldown attempts allocate no extra effects
+PASS Instanced link/shard matrices finite and bounded
+PASS Peak links 112 respect quality ceiling
+PASS All seven choreography phases observed
+PASS Final slam emitted owned ocean disturbances
+PASS Natural visual completion
+PASS Water ripples and spray expire
+PASS WebGL NO_ERROR
+PASS Walk remains functional
+PASS Shift sprint remains functional
+PASS Idle resumes
+PASS Camera and targeting remain controllable
+PASS F3 ocean editor preserved
+PROFILE {"quality":"MEDIUM","peakLinks":112,"peakParticles":350,"peakCalls":47,"rafMedian":6,"rafP95":6.6000001430511475}
+PASS Game teardown releases GPU resources and subscriptions
+PASS BROWSER CHECKS COMPLETE

@@ -3,7 +3,7 @@ import type { AstralChainstormConfig } from './AstralChainstormConfig';
 /** Closed oval sweep. Long axis +Y; alternating links roll around that axis. */
 export function createAstralChainLinkGeometry(c:Readonly<AstralChainstormConfig>,segments=32):BufferGeometry {
   const positions:number[]=[],uv:number[]=[],indices:number[]=[];const cross=8;
-  const b=c.linkLength*.5-c.linkThickness,a=c.linkLength*.19;
+  const b=c.linkLength*.5-c.linkThickness,a=c.linkLength*.22;
   for(let i=0;i<=segments;i++) {
     const t=(i%segments)/segments*Math.PI*2,ct=Math.cos(t),st=Math.sin(t);
     const nx=b*ct,ny=a*st,len=Math.hypot(nx,ny);

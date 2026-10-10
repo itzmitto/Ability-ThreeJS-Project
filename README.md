@@ -43,3 +43,13 @@ With Vite running, `/audit.html?quality=LOW&frost&realtime` tests Frost Lance an
 The existing water mesh now uses a coherent GPU Gerstner spectrum with analytic normals, filtered simplex/fbm detail, bounded displaced ripple wavelets, Fresnel/specular response, and the existing clipped planar reflections. Impacts using the existing water API also feed one bounded GPU droplet pool. LOW/MEDIUM/MAX limit waves, mesh density, normals, reflections, lights and disturbances. In development, **F3** exposes the live Ocean VFX editor; production builds omit it.
 
 [Phase 25 complete file inventory, browser evidence, measurements and limitations](docs/phase25-validation.md). No new spell, renderer, dependency, or gameplay system was added.
+
+## Phase 26 — Astral Chainstorm / Runebreaker
+
+Ability **28**, **ARCANE / METAL**, **8s cooldown**, **38m range**. Open **Tab → Spellbook**, search **Runebreaker**, click to equip, aim, then left-click. Favorites and Quick Wheel work normally; no new keyboard shortcut is required or assigned.
+
+Three to five chains assemble at the animated right hand, launch at 34m/s after acceleration, wrap the target, constrict, and strike the sampled ocean surface. The real closed 3D links use alternating instanced orientations, opaque forged-steel shading, engraved procedural glyphs and traveling cyan pulses. LOW/MEDIUM/MAX cap links at 78/136/200 and steel debris at 24/48/80. Bounded GPU sparks, dissolving rune fragments, angular discharge, source-owned water impulses and existing spray complete the impact. Approximate lifetime is 3.6–4.7s depending on distance.
+
+Live typed controls are available through `AstralChainstorm.configure()`; link shape rebuilds require idle effects. Timing changes apply to the next cast. The existing F3 Ocean editor is preserved. No new dependency, enemy, damage system or renderer was added.
+
+[Phase 26 modules, rendered screenshots, browser profiles, cleanup tests and limitations](docs/phase26-validation.md).
