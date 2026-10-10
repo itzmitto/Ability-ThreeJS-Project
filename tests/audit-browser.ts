@@ -50,8 +50,8 @@ try {
     game.start();
     await frames(12);
     check(game.player.visual.loaded, 'Local human model loaded');
-    check(game.abilities.registry.all.length === 32 && game.abilities.slots.filter(s => s.abilityId).length === 32, 'All 31 previous abilities plus Riftreaver');
-    const targets = query.has('rift') ? [31] : query.has('character') ? [30,25,26,27,28,29] : query.has('chain') ? [27] : query.has('ocean') ? [0, 10, 22, 23, 25, 26, 24, 27, 28, 29] : query.has('sand') ? (query.has('only') ? [26] : [26, 25, 0, 1]) : query.has('frost') ? [25, 0] : query.has('kraken') ? [22] : query.has('raven') ? [23] : game.abilities.slots.map((_, i) => i);
+    check(game.abilities.registry.all.length === 36 && game.abilities.slots.filter(s => s.abilityId).length === 36, 'All 32 previous abilities plus four Bending Arts');
+    const targets = query.has('bending') ? [30,31,25,27,10] : query.has('rift') ? [31] : query.has('character') ? [30,25,26,27,28,29] : query.has('chain') ? [27] : query.has('ocean') ? [0, 10, 22, 23, 25, 26, 24, 27, 28, 29] : query.has('sand') ? (query.has('only') ? [26] : [26, 25, 0, 1]) : query.has('frost') ? [25, 0] : query.has('kraken') ? [22] : query.has('raven') ? [23] : game.abilities.slots.map((_, i) => i);
     for (const index of targets) {
         clean();
         game.abilities.update(120);

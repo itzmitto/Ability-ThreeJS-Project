@@ -16,8 +16,8 @@ const counts=()=>{let objects=0,lights=0;game.sceneManager.scene.traverse(o=>{ob
 const finite=()=>{let valid=true;game.sceneManager.scene.traverse(o=>{valid&&=[...o.position.toArray(),...o.quaternion.toArray(),...o.scale.toArray()].every(Number.isFinite);if(o instanceof InstancedMesh)valid&&=o.count<=o.instanceMatrix.count&&Array.from(o.instanceMatrix.array).every(Number.isFinite);if(o instanceof Mesh)valid&&=Array.from(o.geometry.getAttribute('position').array).every(Number.isFinite);});return valid;};
 try{
   await game.player.visual.ready;game.settings.setPreset((query.get('quality')??'LOW') as QualityPreset);game.start();await frames(15);
-  const oldSlots=JSON.stringify(game.abilities.slots.slice(0,31));check(game.abilities.registry.all.length===32,'31 old abilities preserved; Riftreaver is #32');
-  click('[data-open-book]');await frames();check(root.querySelectorAll('.spell-card').length===32,'Spellbook automatically includes all 32');
+  const oldSlots=JSON.stringify(game.abilities.slots.slice(0,31));check(game.abilities.registry.all.length===36,'Original roster preserved; Riftreaver remains #32 in 36 abilities');
+  click('[data-open-book]');await frames();check(root.querySelectorAll('.spell-card').length===36,'Spellbook automatically includes all 36');
   const search=root.querySelector<HTMLInputElement>('[aria-label="Search spells"]')!;
   for(const term of ['rift','scar','reality','void','dimensional']){search.value=term;search.dispatchEvent(new Event('input'));check(!root.querySelector<HTMLElement>('[data-spell="riftreaver"]')!.closest<HTMLElement>('.spell-card')!.hidden,`Search ${term}`);}
   click('[data-category="SHADOW / DARK"]');check(!root.querySelector<HTMLElement>('[data-spell="riftreaver"]')!.closest<HTMLElement>('.spell-card')!.hidden,'Existing VOID category');

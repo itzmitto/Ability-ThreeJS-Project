@@ -23,6 +23,7 @@ import { Riftreaver } from '../abilities/riftreaver/Riftreaver';
 import { TidalSerpent } from '../abilities/tidalSerpent/TidalSerpent';
 import { TitanFist } from '../abilities/titanFist/TitanFist';
 import { Skybreaker } from '../abilities/skybreaker/Skybreaker';
+import { DancingInferno } from '../abilities/dancingInferno/DancingInferno';
 import { EmberComet } from '../abilities/emberComet/EmberComet';
 import { TempestBreak } from '../abilities/wind/TempestBreak';
 import { HeavensVerdict } from '../abilities/lightning/HeavensVerdict';
@@ -184,6 +185,8 @@ export class Game {
     this.abilities.slots.push({key:'',code:'',number:null,abilityId:titanFist.id});
     const skybreaker=new Skybreaker();this.abilities.registry.register(skybreaker);skybreaker.prepare(this.renderer.renderer,this.camera.camera,this.sceneManager.scene);
     this.abilities.slots.push({key:'',code:'',number:null,abilityId:skybreaker.id});
+    const dancingInferno=new DancingInferno();this.abilities.registry.register(dancingInferno);dancingInferno.prepare(this.renderer.renderer,this.camera.camera,this.sceneManager.scene);
+    this.abilities.slots.push({key:'',code:'',number:null,abilityId:dancingInferno.id});
     this.hud = new HUD(root, this.abilities, this.settings, this.targeting, this.input, this.world.water);
     canvas.tabIndex = 0;
     document.addEventListener('visibilitychange', this.visibilityChanged);

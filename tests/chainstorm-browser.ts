@@ -13,8 +13,8 @@ const context=():AbilityCastContext=>{const target=new Vector3(game.player.posit
 const clean=()=>{game.effects.update(120,120);game.abilities.update(120);game.world.water.update(120,game.player.position);game.renderer.render();};
 try{
 await game.player.visual.ready;game.settings.setPreset((query.get('quality')??'LOW') as 'LOW'|'MEDIUM'|'MAX');game.start();await frames(12);
-check(game.abilities.registry.all.length===32,'Exactly 32 registered spells; old shortcuts preserved');
-click('[data-open-book]');await frames();check(root.querySelectorAll('.spell-card').length===32,'Spellbook dynamically displays 32 cards');
+check(game.abilities.registry.all.length===36,'Exactly 36 registered spells; old shortcuts preserved');
+click('[data-open-book]');await frames();check(root.querySelectorAll('.spell-card').length===36,'Spellbook dynamically displays 36 cards');
 const search=root.querySelector<HTMLInputElement>('[aria-label="Search spells"]')!;search.value='runebreaker';search.dispatchEvent(new Event('input'));check(root.querySelectorAll('.spell-card:not([hidden])').length===1,'Subtitle search finds Runebreaker');
 const star=root.querySelector<HTMLButtonElement>('[data-favorite="astral-chainstorm"]')!,wasFavorite=star.getAttribute('aria-pressed')==='true';if(!wasFavorite)star.click();check(star.getAttribute('aria-pressed')==='true','Favorite state works');
 click('[data-spell="astral-chainstorm"]');await frames();check(game.abilities.selectedIndex===27&&game.effects.activeCount===0,'Spellbook equips ability 28 without casting');

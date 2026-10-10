@@ -46,3 +46,24 @@ test('Riftreaver diagonal cutting gesture uses real hand bones while leaving loc
  expect(positions.every(v=>v.toArray().every(Number.isFinite))).toBe(true);expect(positions[5].distanceTo(positions[16])).toBeGreaterThan(.04);
  for(let i=0;i<90;i++)f.tick(4.8);expect(f.motion.castPhase).toBe('READY');expect(f.animation.activeClip).toBe('Run');f.dispose();
 });
+
+test('Four bending gestures move the intended arms, keep both locomotion legs intact, and restore normalized bones',async()=>{
+ const f=await characterFixture();
+ for(const id of ['tidal-serpent','titan-fist','skybreaker','dancing-inferno']){
+  for(let i=0;i<90;i++)f.tick(4.8,1/60,true);
+  f.motion.ability(id,new Vector3(.15,0,-1));let rightCorrection=0,leftCorrection=0;
+  for(let i=0;i<40;i++){
+   f.rig.restore();f.animation.update(1/60,4.8,true);f.rig.capture();f.root.updateWorldMatrix(true,true);
+   const names=['R_Thigh','R_Calf','L_Thigh','L_Calf'],legs=names.map(n=>f.rig.bone(n)!.quaternion.clone());
+   const r=f.rig.bone('R_Hand')!.getWorldPosition(new Vector3()),l=f.rig.bone('L_Hand')!.getWorldPosition(new Vector3());
+   f.motion.update(1/60,4.8,true);
+   names.forEach((n,j)=>expect(f.rig.bone(n)!.quaternion.angleTo(legs[j])).toBeLessThan(1e-7));
+   rightCorrection=Math.max(rightCorrection,r.distanceTo(f.rig.bone('R_Hand')!.getWorldPosition(new Vector3())));
+   leftCorrection=Math.max(leftCorrection,l.distanceTo(f.rig.bone('L_Hand')!.getWorldPosition(new Vector3())));
+   for(const b of f.rig.bones.values()){expect([...b.position.toArray(),...b.quaternion.toArray()].every(Number.isFinite)).toBe(true);expect(b.quaternion.length()).toBeCloseTo(1,5);}
+  }
+  expect(rightCorrection).toBeGreaterThan(.04);if(id==='tidal-serpent'||id==='dancing-inferno')expect(leftCorrection).toBeGreaterThan(.04);
+  for(let i=0;i<100;i++)f.tick(4.8,1/60,true);expect(f.motion.castPhase).toBe('READY');expect(f.animation.activeClip).toBe('Run');
+ }
+ f.dispose();
+});

@@ -1,7 +1,9 @@
 import type { Ability } from '../abilities/Ability';
 export function paintSpellIcon(container: HTMLElement, ability: Ability | undefined): void {
       // Icons are text glyphs; untrusted markup is never inserted into the UI.
-      if (ability?.icon === 'skybreaker') {
+      if (ability?.icon === 'dancing-inferno') {
+        if(container.dataset.icon!==ability.icon){container.innerHTML='<svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#cb3a0c" stroke="#ffb34c" d="M5 29C-1 14 19 15 10 2c19 13-5 18 1 27ZM22 30C34 20 11 14 24 3c-1 9 15 18 4 26Z"/><path fill="none" stroke="#ffdf87" d="M9 28C7 19 22 16 16 9m6 20c6-8-11-11-4-20"/></svg>';container.dataset.icon=ability.icon;}
+      } else if (ability?.icon === 'skybreaker') {
         if(container.dataset.icon!==ability.icon){container.innerHTML='<svg viewBox="0 0 32 32" aria-hidden="true"><path fill="none" stroke="#d0d8d1" stroke-width="1.5" d="M5 3c23 0 23 13 1 14 14-3 13-8-1-14Zm-3 9c21 1 22 12 1 13m8-5c16 1 18 10 2 11"/><path stroke="#70817b" d="m2 5 4 1m15 8 6-2m-1 13 5-2"/></svg>';container.dataset.icon=ability.icon;}
       } else if (ability?.icon === 'titan-fist') {
         if(container.dataset.icon!==ability.icon){container.innerHTML='<svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#343e3a" stroke="#b4c2b9" d="m6 11 1-6 5-1 3 1 5-1 5 2 1 12-4 8H11l-5-8Zm-3 5 5-2 4 5-3 4-6-3Z"/><path fill="none" stroke="#7e9689" d="m12 5 1 8m7-8-1 8m-11 1 15 1m-9 2 4 4-1 7"/></svg>';container.dataset.icon=ability.icon;}

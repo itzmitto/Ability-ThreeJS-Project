@@ -13,6 +13,6 @@ export function titanRockMaterial(){
       .replace('#include <roughnessmap_fragment>','#include <roughnessmap_fragment>\nroughnessFactor=clamp(.86+grain*.1,.7,.98);')
       .replace('#include <emissivemap_fragment>',`#include <emissivemap_fragment>
       float rim=pow(clamp(1.-abs(dot(normal,normalize(vViewPosition))),0.,1.),4.);
-      totalEmissiveRadiance+=vec3(.59,.68,.53)*mineral*uRockGlow+vec3(.075,.079,.062)*(rim+.25);`);
+      totalEmissiveRadiance+=vec3(.59,.68,.53)*mineral*uRockGlow*(.94+.06*sin(uRockTime*2.))+vec3(.075,.079,.062)*(rim+.25);`);
   };material.customProgramCacheKey=()=> 'titan-basalt-v1';return {material,uniforms};
 }
